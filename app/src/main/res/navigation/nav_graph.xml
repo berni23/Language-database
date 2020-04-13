@@ -8,21 +8,24 @@
     <fragment
         android:id="@+id/FirstFragment"
         android:name="com.berni.android.prototype1lanbase.ui.FirstFragment"
-        android:label="@string/first_fragment_label"
+        android:label="First Fragment"
         tools:layout="@layout/fragment_first">
 
         <action
-            android:id="@+id/action_FirstFragment_to_SecondFragment"
-            app:destination="@id/SecondFragment" />
+            android:id="@+id/actionAddCat"
+            app:destination="@id/FragmentCategory" />
     </fragment>
     <fragment
-        android:id="@+id/SecondFragment"
+        android:id="@+id/FragmentCategory"
         android:name="com.berni.android.prototype1lanbase.ui.SecondFragment"
-        android:label="@string/second_fragment_label"
+        android:label="category"
         tools:layout="@layout/fragment_second">
 
         <action
-            android:id="@+id/action_SecondFragment_to_FirstFragment"
+            android:id="@+id/actionSaveCat"
             app:destination="@id/FirstFragment" />
+        <argument
+            android:name="Cat"
+            app:nullable="true" />
     </fragment>
 </navigation>
