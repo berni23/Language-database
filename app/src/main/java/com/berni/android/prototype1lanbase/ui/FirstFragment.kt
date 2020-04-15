@@ -6,33 +6,44 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.NavigationUI
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.berni.android.prototype1lanbase.R
+import com.berni.android.prototype1lanbase.db.Cat
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kotlinx.android.synthetic.main.fragment_first.*
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
 import org.kodein.di.KodeinAware
-import org.kodein.di.android.closestKodein
+import org.kodein.di.android.x.closestKodein
 import org.kodein.di.generic.instance
 
 /**
  * A simple [Fragment] subclass as the default destination in the navigation.
  */
-class FirstFragment : BaseFragment(),KodeinAware {
+class FirstFragment : BaseFragment(),KodeinAware,View.OnClickListener{
+
+    lateinit var navController: NavController
+
+
+
+////-------------------------------------------------
+
 
     override val kodein by closestKodein()
 
+
     private val viewModelFactory: ViewModelFactory by instance()
     private lateinit var viewModel: MainViewModel
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_first, container, false)
     }
@@ -40,47 +51,39 @@ class FirstFragment : BaseFragment(),KodeinAware {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        view.findViewById<Button>(R.id.btn_add).setOnClickListener {
-            findNavController().navigate(R.id.actionAddCat)
-        }
-    }
+        navController = Navigation.findNavController(view)
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+        view.findViewById<FloatingActionButton>(R.id.btn_add).setOnClickListener(this)
 
-        val viewModel = ViewModelProvider(this, viewModelFactory).get(MainViewModel::class.java)
+
+        viewModel = ViewModelProvider(this, viewModelFactory).get(MainViewModel::class.java)
 
         recycler_view_cats.setHasFixedSize(true)
         recycler_view_cats.layoutManager =
             StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
 
+        viewModel.allCats.observe(viewLifecycleOwner  , Observer<List<Cat>> {
 
-        launch {
+            recycler_view_cats.adapter = CatAdapter(it)
+        })
 
-            val Cats = viewModel.AllCats
-            //        recycler_view_notes.adapter = NotesAdapter(notes)
+    }
+
+    override fun onClick(v: View?) {
+
+
+        when(v!!.id) {
+
+            R.id.FragmentCategory -> navController.navigate(R.id.actionAddCat)
+
 
         }
 
     }
+
 }
 
 
-
-
-
-
-
- //   private fun bindUI()  = GlobalScope.launch{
-  //      val currentWeather  = viewModel.weather.await() // we want to await because it is deferred
-
-  //      currentWeather.observe(this@CurrentWeatherFragment,Observer {
-
-   //         if(it==null) return@Observer
-   //         textView.text = it.toString()
-
-   //     })
-   // }
-//}
+//org.kodein.di.Kodein$NotFoundException: No binding found for bind<Cat>() with ?<FirstFragment>().? { ? }
 
 

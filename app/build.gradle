@@ -2,13 +2,14 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
+apply plugin: 'kotlinx-serialization'
 
 android {
     compileSdkVersion 29
 
     defaultConfig {
         applicationId "com.berni.android.prototype1lanbase"
-        minSdkVersion 26
+        minSdkVersion 25
         targetSdkVersion 29
         versionCode 1
         versionName "1.0"
@@ -40,6 +41,8 @@ dependencies {
 
     implementation "androidx.room:room-runtime:$room_version"
     kapt "androidx.room:room-compiler:$room_version" // For Kotlin use kapt instead of annotationProcessor
+
+
     // optional - Kotlin Extensions and Coroutines support for Room
     implementation "androidx.room:room-ktx:$room_version"
     implementation fileTree(dir: 'libs', include: ['*.jar'])
@@ -64,4 +67,5 @@ dependencies {
 
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.0.0-RC1'
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.0.0-RC1"
+
 }

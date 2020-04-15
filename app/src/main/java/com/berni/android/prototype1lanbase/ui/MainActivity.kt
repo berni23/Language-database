@@ -8,21 +8,13 @@ import com.berni.android.prototype1lanbase.R
 
 class MainActivity : AppCompatActivity() {
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
 
-        override fun onCreate(savedInstanceState: Bundle?) {
-            super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
 
-            setContentView(R.layout.activity_main)
-
-            val navController = Navigation.findNavController(this,R.id.nav_host_fragment)
-            NavigationUI.setupActionBarWithNavController(this,navController)
-
-        }
-
-        override fun onSupportNavigateUp(): Boolean {
-            return NavigationUI.navigateUp(
-                Navigation.findNavController(this,R.id.nav_host_fragment),null)
-        }
     }
+}
+
 
 

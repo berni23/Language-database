@@ -24,8 +24,6 @@
         <action
             android:id="@+id/actionSaveCat"
             app:destination="@id/FirstFragment" />
-        <argument
-            android:name="Cat"
-            app:nullable="true" />
     </fragment>
 </navigation>
+

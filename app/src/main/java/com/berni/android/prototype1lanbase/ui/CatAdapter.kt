@@ -3,6 +3,7 @@ package com.berni.android.prototype1lanbase.ui
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.LiveData
 import androidx.navigation.Navigation
 import androidx.navigation.Navigation.findNavController
 import androidx.navigation.fragment.findNavController
@@ -20,7 +21,7 @@ class CatAdapter(private val cats: List<Cat>) : RecyclerView.Adapter<CatAdapter.
         )
     }
 
-    override fun getItemCount() = cats.size
+    override fun getItemCount() = cats.size?:0
 
     override fun onBindViewHolder(holder: CatViewHolder, position: Int) {
         holder.view.text_view_title.text = cats[position].catName
@@ -28,14 +29,13 @@ class CatAdapter(private val cats: List<Cat>) : RecyclerView.Adapter<CatAdapter.
 
         holder.view.setOnClickListener {
 
-         //   holder.view.text_view_title.text = cats[position].catName
-        //    holder.view.text_view_note.text = cats[position].catDate
+            holder.view.text_view_title.text = cats[position].catName
+            holder.view.text_view_note.text = cats[position].catDate
 
                  Navigation.findNavController(it).navigate(R.id.actionAddCat)
         }}
 
 
         class CatViewHolder(val view: View) : RecyclerView.ViewHolder(view)
-
 
 }

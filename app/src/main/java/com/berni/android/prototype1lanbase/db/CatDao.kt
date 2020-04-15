@@ -20,7 +20,7 @@ interface CatDao {
     @Insert
     suspend fun addWord(word: Word )
 
-    @Query( "SELECT* FROM Cat ORDER BY catId DESC")
+    @Query( "SELECT* FROM Cat ORDER BY catName DESC")
     fun getAllCats() : LiveData<List<Cat>>
 
     @Query("SELECT* FROM Word ORDER BY wordId DESC")
