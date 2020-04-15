@@ -23,25 +23,19 @@ import java.util.*
  */
 class SecondFragment : BaseFragment(),KodeinAware {
 
-
    override val kodein by closestKodein()
-
-
-   // override val kodein: Kodein
-    //    get() = kodein
-   // private var catExists: Cat? = null
 
     private val viewModelFactory: ViewModelFactory by instance()
     private lateinit var viewModel: MainViewModel
 
-    private lateinit var categoryName: String
+  //  private lateinit var categoryName: String
+
+    var categoryName: String = "default"
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
-        catName_editText.isEnabled = true
 
         setHasOptionsMenu(true)
         // Inflate the layout for this fragment
@@ -51,9 +45,11 @@ class SecondFragment : BaseFragment(),KodeinAware {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        catName_editText!!.isEnabled = true
+
         btn_saveCat.setOnClickListener {
 
-            categoryName = catName_editText.text.toString().trim()
+            categoryName = catName_editText!!.text.toString().trim()
             val currentDate: String = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(Date())
 
             if (categoryName.isEmpty()) {
@@ -102,11 +98,10 @@ class SecondFragment : BaseFragment(),KodeinAware {
 
             launch{
 
-                val word = Word(categoryName,theWord,translation1,null)}
+                val word = Word(categoryName!!,theWord,translation1,null)}
 
             //catName.hint = catName.text
             //catName.text = null
-
 
             //findNavController().navigate(R.id.actionSaveCat)
 

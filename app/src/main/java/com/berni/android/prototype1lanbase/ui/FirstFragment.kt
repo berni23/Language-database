@@ -39,17 +39,28 @@ class FirstFragment : BaseFragment(),KodeinAware,View.OnClickListener{
     private val viewModelFactory: ViewModelFactory by instance()
     private lateinit var viewModel: MainViewModel
 
+
+
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
 
         // Inflate the layout for this fragment
+
         return inflater.inflate(R.layout.fragment_first, container, false)
+
+
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        recycler_view_cats.setHasFixedSize(true)
+         recycler_view_cats.layoutManager =
+           StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
+
 
         navController = Navigation.findNavController(view)
 
@@ -58,9 +69,9 @@ class FirstFragment : BaseFragment(),KodeinAware,View.OnClickListener{
 
         viewModel = ViewModelProvider(this, viewModelFactory).get(MainViewModel::class.java)
 
-        recycler_view_cats.setHasFixedSize(true)
-        recycler_view_cats.layoutManager =
-            StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
+        //recycler_view_cats.setHasFixedSize(true)
+       // recycler_view_cats.layoutManager =
+        //    StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
 
         viewModel.allCats.observe(viewLifecycleOwner  , Observer<List<Cat>> {
 
@@ -71,10 +82,9 @@ class FirstFragment : BaseFragment(),KodeinAware,View.OnClickListener{
 
     override fun onClick(v: View?) {
 
-
         when(v!!.id) {
 
-            R.id.FragmentCategory -> navController.navigate(R.id.actionAddCat)
+            R.id.btn_add -> navController.navigate(R.id.actionAddCat)
 
 
         }
