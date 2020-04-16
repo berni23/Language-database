@@ -27,10 +27,16 @@ class SecondFragment : BaseFragment(),KodeinAware {
 
     private val viewModelFactory: ViewModelFactory by instance()
     private lateinit var viewModel: MainViewModel
+    lateinit var categoryName: String
 
-  //  private lateinit var categoryName: String
+    var newCategoryName: String? = null
 
-    var categoryName: String = "default"
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        categoryName = arguments?.getString("categoryName").toString()
+    }
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -45,14 +51,24 @@ class SecondFragment : BaseFragment(),KodeinAware {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        catName_editText!!.isEnabled = true
+
+        // just let the user write a category name if they are creating a new one, not if
+        //  using an already created one
+
+         if (categoryName!="null") {
+
+             catName_editText.setText(categoryName)
+             catName_editText!!.isEnabled = false
+             btn_saveCat.isEnabled= false  }
+
+         else {catName_editText.isEnabled = true}
 
         btn_saveCat.setOnClickListener {
 
-            categoryName = catName_editText!!.text.toString().trim()
+            newCategoryName = catName_editText!!.text.toString().trim()
             val currentDate: String = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(Date())
 
-            if (categoryName.isEmpty()) {
+            if (newCategoryName!!.isEmpty()) {
 
                 catName_editText.error = "category required"
                 catName_editText.requestFocus()
@@ -66,7 +82,7 @@ class SecondFragment : BaseFragment(),KodeinAware {
 
             launch{
 
-                val cat  = Cat(categoryName,currentDate)
+                val cat  = Cat(newCategoryName!!,currentDate)
                 viewModel.addCat(cat)
 
             }
@@ -98,14 +114,15 @@ class SecondFragment : BaseFragment(),KodeinAware {
 
             launch{
 
-                val word = Word(categoryName!!,theWord,translation1,null)}
+                val word = Word(categoryName,theWord,translation1,null)
+                viewModel.addWord(word)
+
+            }
 
             //catName.hint = catName.text
             //catName.text = null
-
             //findNavController().navigate(R.id.actionSaveCat)
 
         }
     }
-
 }

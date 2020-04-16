@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import androidx.core.os.bundleOf
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
@@ -28,30 +29,21 @@ class FirstFragment : BaseFragment(),KodeinAware,View.OnClickListener{
 
     lateinit var navController: NavController
 
-
-
-////-------------------------------------------------
-
+     var categoryName : String? = null  // category name corresponding to category Id that will be passed as a bundle to Second fragment
 
     override val kodein by closestKodein()
-
 
     private val viewModelFactory: ViewModelFactory by instance()
     private lateinit var viewModel: MainViewModel
 
-
-
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
+
     ): View? {
 
         // Inflate the layout for this fragment
-
         return inflater.inflate(R.layout.fragment_first, container, false)
-
-
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -66,12 +58,15 @@ class FirstFragment : BaseFragment(),KodeinAware,View.OnClickListener{
 
         view.findViewById<FloatingActionButton>(R.id.btn_add).setOnClickListener(this)
 
+        //val bundle = bundleOf("categoryName" to categoryName)
+
+      //  navController.navigate(
+
+      //     R.id.actionAddCat,
+       //     bundle)
+
 
         viewModel = ViewModelProvider(this, viewModelFactory).get(MainViewModel::class.java)
-
-        //recycler_view_cats.setHasFixedSize(true)
-       // recycler_view_cats.layoutManager =
-        //    StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
 
         viewModel.allCats.observe(viewLifecycleOwner  , Observer<List<Cat>> {
 
@@ -80,15 +75,22 @@ class FirstFragment : BaseFragment(),KodeinAware,View.OnClickListener{
 
     }
 
+
     override fun onClick(v: View?) {
+
+        // Can be done easier , but this is more general if we have more actions to link with floating buttons.
 
         when(v!!.id) {
 
-            R.id.btn_add -> navController.navigate(R.id.actionAddCat)
+            R.id.btn_add -> {
 
+                val bundle = bundleOf("categoryName" to categoryName)
+
+                navController.navigate(R.id.actionAddCat,bundle)
+
+            }
 
         }
-
     }
 
 }
