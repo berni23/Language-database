@@ -29,6 +29,10 @@ data class Cat(
 @Entity
 data class Word (
 
+    // word id made out of catName + wordName . Function in Tools.kt
+
+    @PrimaryKey(autoGenerate = false)
+    val wordId: String,
     @ColumnInfo(name  = "catParent")
     val catParent: String?,
     @ColumnInfo(name  = "wordName")
@@ -38,20 +42,21 @@ data class Word (
     @ColumnInfo(name  = "example")
     val ex1: String?
 
-):Serializable{
+
+)
+
+    /*:Serializable{
     @PrimaryKey(autoGenerate = true)
     var wordId: Int = 0}
 
+    @Entity(primaryKeys = ["catId","wordId"])
+    data class CatWordCrossRef (
+
+       val catId:Int,
+       val wordId: Int)
 
 
-
-//@Entity(primaryKeys = ["catId","wordId"])
-//data class CatWordCrossRef (
-
- //   val catId:Int,
-//    val wordId: Int)
-
-
+         */
 
 
 

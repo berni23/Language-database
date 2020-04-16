@@ -81,28 +81,10 @@
         android:focusable="true"
         android:src="@drawable/ic_check_black_24dp"
         android:tint="@android:color/white"
-        android:layout_marginRight="50dp"
+        android:layout_marginEnd="50dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/catName_editText"
         app:layout_constraintTop_toTopOf="parent" />
-
-
-   <!-- <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/btn_saveCat"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:clickable="true"
-        android:src="@drawable/ic_check_black_24dp"
-        android:tint="@android:color/white"
-        app:layout_constraintHorizontal_bias="3.0"
-        app:layout_constraintVertical_bias="1.25"
-        app:layout_constraintBottom_toTopOf="@id/btn_save"
-        app:layout_constraintStart_toEndOf="@id/catName_editText"
-        app:layout_constraintTop_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>-->
-
-
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

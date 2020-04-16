@@ -10,6 +10,7 @@ import androidx.navigation.NavController
 import com.berni.android.prototype1lanbase.R
 import com.berni.android.prototype1lanbase.db.Cat
 import com.berni.android.prototype1lanbase.db.Word
+import com.berni.android.prototype1lanbase.wordId
 import kotlinx.android.synthetic.main.fragment_second.*
 import kotlinx.coroutines.launch
 import org.kodein.di.KodeinAware
@@ -23,7 +24,7 @@ import java.util.*
  */
 class SecondFragment : BaseFragment(),KodeinAware {
 
-   override val kodein by closestKodein()
+    override val kodein by closestKodein()
 
     private val viewModelFactory: ViewModelFactory by instance()
     private lateinit var viewModel: MainViewModel
@@ -96,7 +97,6 @@ class SecondFragment : BaseFragment(),KodeinAware {
             val theWord = word_editText.text.toString().trim()
             val translation1 = trans1.text.toString().trim()
 
-
             if (categoryName.isEmpty()) {
 
                 catName_editText.error = "category required"
@@ -114,7 +114,7 @@ class SecondFragment : BaseFragment(),KodeinAware {
 
             launch{
 
-                val word = Word(categoryName,theWord,translation1,null)
+                val word = Word(wordId(categoryName,theWord),categoryName,theWord,translation1,null)
                 viewModel.addWord(word)
 
             }
