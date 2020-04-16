@@ -1,20 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.SecondFragment">
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.SecondFragment">
 
     <EditText
-
         android:id="@+id/catName_editText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:autofillHints="category"
-        android:hint="category"
+        android:hint = "category"
         android:inputType="text"
         android:maxLines="1"
+        android:autofillHints="category"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -28,39 +27,35 @@
         android:id="@+id/word_editText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
-        android:autofillHints="word"
-        android:drawableStart="@drawable/ic_item"
-        android:hint="Word"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:hint="word"
         android:inputType="text"
         android:maxLines="1"
+        android:autofillHints="word"
+        android:layout_marginTop ="50dp"
+        android:drawableStart="@drawable/ic_item"
+        app:layout_constraintVertical_bias="0.0"
         app:layout_constraintBottom_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/catName_editText"
-        app:layout_constraintVertical_bias="0.0" />
-
-        <!--
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        -->
-
+        app:layout_constraintTop_toBottomOf="@id/catName_editText" />
 
     <EditText
 
         android:id="@+id/trans1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:hint="translation"
         android:autofillHints="translation"
         android:drawableStart="@drawable/ic_item"
-        android:hint="Translation"
         android:inputType="text"
         android:maxLines="1"
+        app:layout_constraintVertical_bias="0.1"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/word_editText"
-        app:layout_constraintVertical_bias="0" />
-
+        app:layout_constraintTop_toBottomOf="@id/word_editText"/>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/btn_save"
@@ -69,28 +64,52 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
         android:clickable="true"
-        android:focusable="true"
         android:src="@drawable/ic_check_black_24dp"
         android:tint="@android:color/white"
         app:layout_constraintBottom_toBottomOf="@id/trans1"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/trans1"
-        app:layout_constraintTop_toBottomOf="@id/word_editText" />
+        app:layout_constraintTop_toBottomOf="@id/word_editText"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:focusable="true" />
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
+
+   <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/btn_saveCat"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
         android:clickable="true"
         android:focusable="true"
         android:src="@drawable/ic_check_black_24dp"
         android:tint="@android:color/white"
-        app:layout_constraintEnd_toEndOf="@id/catName_editText"
-        app:layout_constraintStart_toTopof="parent"
-        app:layout_constraint_toBottomOf="parent" />
+        android:layout_marginRight="50dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/catName_editText"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+   <!-- <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/btn_saveCat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:src="@drawable/ic_check_black_24dp"
+        android:tint="@android:color/white"
+        app:layout_constraintHorizontal_bias="3.0"
+        app:layout_constraintVertical_bias="1.25"
+        app:layout_constraintBottom_toTopOf="@id/btn_save"
+        app:layout_constraintStart_toEndOf="@id/catName_editText"
+        app:layout_constraintTop_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>-->
+
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
+
+
 
 
