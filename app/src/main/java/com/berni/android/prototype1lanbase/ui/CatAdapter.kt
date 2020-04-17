@@ -3,6 +3,7 @@ package com.berni.android.prototype1lanbase.ui
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.navigation.Navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.berni.android.prototype1lanbase.R
@@ -30,10 +31,17 @@ class CatAdapter(private val cats: List<Cat>) : RecyclerView.Adapter<CatAdapter.
             //val action = Firs.actionAddNote()
            // action.categoryName = cats[position].catName
 
+
+            val bundle = bundleOf("categoryName" to cats[position].catName)
+
+
+
             holder.view.text_view_title.text = cats[position].catName
             holder.view.text_view_note.text = cats[position].catDate
 
-            findNavController(it).navigate(R.id.actionAddCat)
+            findNavController(it).navigate(R.id.actionAddCat,bundle)
+
+
         }}
 
 

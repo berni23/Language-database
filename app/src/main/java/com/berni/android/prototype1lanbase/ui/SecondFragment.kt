@@ -95,7 +95,7 @@ class SecondFragment : BaseFragment(),KodeinAware {
         btn_save.setOnClickListener {
 
             val theWord = word_editText.text.toString().trim()
-            val translation1 = trans1.text.toString().trim()
+            val translation1 = trans1_editText.text.toString().trim()
 
             if (categoryName.isEmpty()) {
 
@@ -111,6 +111,15 @@ class SecondFragment : BaseFragment(),KodeinAware {
                 return@setOnClickListener
 
             }
+
+            if (translation1.isEmpty()) {
+
+                trans1_editText.error = "translation required"
+                trans1_editText.requestFocus()
+                return@setOnClickListener
+
+            }
+
 
             launch{
 

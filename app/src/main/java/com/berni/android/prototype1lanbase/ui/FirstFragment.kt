@@ -29,8 +29,6 @@ class FirstFragment : BaseFragment(),KodeinAware,View.OnClickListener{
 
     lateinit var navController: NavController
 
-     var categoryName : String? = null  // category name corresponding to category Id that will be passed as a bundle to Second fragment
-
     override val kodein by closestKodein()
 
     private val viewModelFactory: ViewModelFactory by instance()
@@ -53,17 +51,9 @@ class FirstFragment : BaseFragment(),KodeinAware,View.OnClickListener{
          recycler_view_cats.layoutManager =
            StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
 
-
         navController = Navigation.findNavController(view)
 
         view.findViewById<FloatingActionButton>(R.id.btn_add).setOnClickListener(this)
-
-        //val bundle = bundleOf("categoryName" to categoryName)
-
-      //  navController.navigate(
-
-      //     R.id.actionAddCat,
-       //     bundle)
 
 
         viewModel = ViewModelProvider(this, viewModelFactory).get(MainViewModel::class.java)
@@ -71,6 +61,7 @@ class FirstFragment : BaseFragment(),KodeinAware,View.OnClickListener{
         viewModel.allCats.observe(viewLifecycleOwner  , Observer<List<Cat>> {
 
             recycler_view_cats.adapter = CatAdapter(it)
+
         })
 
     }
@@ -84,9 +75,7 @@ class FirstFragment : BaseFragment(),KodeinAware,View.OnClickListener{
 
             R.id.btn_add -> {
 
-                val bundle = bundleOf("categoryName" to categoryName)
-
-                navController.navigate(R.id.actionAddCat,bundle)
+                navController.navigate(R.id.actionAddCat)
 
             }
 

@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".ui.SecondFragment">
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.SecondFragment">
 
     <EditText
         android:id="@+id/catName_editText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint = "category"
+        android:autofillHints="category"
+        android:hint="category"
         android:inputType="text"
         android:maxLines="1"
-        android:autofillHints="category"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -23,57 +23,23 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0" />
 
-    <EditText
-        android:id="@+id/word_editText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        android:hint="word"
-        android:inputType="text"
-        android:maxLines="1"
-        android:autofillHints="word"
-        android:layout_marginTop ="50dp"
-        android:drawableStart="@drawable/ic_item"
-        app:layout_constraintVertical_bias="0.0"
-        app:layout_constraintBottom_toTopOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/catName_editText" />
 
-    <EditText
-
-        android:id="@+id/trans1"
-        android:layout_width="wrap_content"
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/HguideBtn"
+        android:layout_width="1dp"
         android:layout_height="wrap_content"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        android:hint="translation"
-        android:autofillHints="translation"
-        android:drawableStart="@drawable/ic_item"
-        android:inputType="text"
-        android:maxLines="1"
-        app:layout_constraintVertical_bias="0.1"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/word_editText"/>
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent = '0.05' />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/VguideBtn"
+        android:layout_width="1dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent = '0.9' />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/btn_save"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:clickable="true"
-        android:src="@drawable/ic_check_black_24dp"
-        android:tint="@android:color/white"
-        app:layout_constraintBottom_toBottomOf="@id/trans1"
-        app:layout_constraintStart_toEndOf="@id/trans1"
-        app:layout_constraintTop_toBottomOf="@id/word_editText"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:focusable="true" />
 
-
-   <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/btn_saveCat"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -81,10 +47,80 @@
         android:focusable="true"
         android:src="@drawable/ic_check_black_24dp"
         android:tint="@android:color/white"
-        android:layout_marginEnd="50dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/catName_editText"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@id/HguideBtn"
+        app:layout_constraintBottom_toBottomOf="@id/HguideBtn"
+        app:layout_constraintEnd_toEndOf="@id/VguideBtn"
+        app:layout_constraintStart_toStartOf="@id/VguideBtn"
+        />
+
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/btn_save"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="250dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:src="@drawable/ic_check_black_24dp"
+        android:tint="@android:color/white"
+        app:layout_constraintBottom_toBottomOf="@id/btn_saveCat"
+        app:layout_constraintEnd_toEndOf="@id/btn_saveCat"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@id/VguideBtn"
+        app:layout_constraintTop_toTopOf="@id/HguideBtn"
+        app:layout_constraintVertical_bias="0.3" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/HguideWord"
+        android:layout_width="1dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent = '0.3' />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/VguideWord"
+        android:layout_width="1dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.25" />
+
+
+    <EditText
+        android:id="@+id/word_editText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:autofillHints="word"
+        android:drawableStart="@drawable/ic_item"
+        android:hint="word"
+        android:inputType="text"
+        android:maxLines="1"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        app:layout_constraintTop_toTopOf="@id/HguideWord"
+        app:layout_constraintBottom_toBottomOf="@id/HguideWord"
+        app:layout_constraintEnd_toEndOf="@id/VguideWord"
+        app:layout_constraintStart_toStartOf="@id/VguideWord" />
+
+
+    <EditText
+
+        android:id="@+id/trans1_editText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:autofillHints="translation"
+        android:drawableStart="@drawable/ic_item"
+        android:hint="translation"
+        android:inputType="text"
+        android:maxLines="1"
+        android:layout_marginTop="100dp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        app:layout_constraintTop_toTopOf="@id/HguideWord"
+        app:layout_constraintBottom_toBottomOf="@id/word_editText"
+        app:layout_constraintEnd_toEndOf="@id/word_editText"
+        app:layout_constraintStart_toStartOf="@id/VguideWord"  />
+
+
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 
