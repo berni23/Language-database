@@ -16,7 +16,7 @@
 
             <TextView
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Headline"
-                tools:text="My First Note"
+                tools:text="category"
                 android:layout_marginBottom="10dp"
                 android:id="@+id/text_view_title"
                 android:layout_width="wrap_content"
@@ -24,9 +24,9 @@
 
             <TextView
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
-                tools:text="Note Description"
+                tools:text="date"
                 android:layout_below="@id/text_view_title"
-                android:id="@+id/text_view_note"
+                android:id="@+id/text_view_date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
 

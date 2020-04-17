@@ -1,5 +1,6 @@
 package com.berni.android.prototype1lanbase.ui
 
+import android.content.Context
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.Navigation
@@ -14,6 +15,9 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
 
-    }
+        fun getAppContext(): Context {
+            return getApplicationContext()
+        }}
 
-}
+
+    }

@@ -7,7 +7,6 @@ import androidx.room.*
 @Dao
 interface CatDao {
 
-
    //TODO  Emit  toast 'on conflict'
 
     @Insert(onConflict = OnConflictStrategy.IGNORE )

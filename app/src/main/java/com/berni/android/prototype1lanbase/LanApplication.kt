@@ -47,12 +47,10 @@ class LanApplication() : Application(), KodeinAware {
         // initialize timezone library. Best place to do so in onCreate method
 
 
-        this.context = getApplicationContext();
+        //this.context = getApplicationContext()
     }
 
 
-  //  fun getAppContext(): Context {
-   //     return context}
 }
 
 

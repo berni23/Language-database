@@ -35,9 +35,8 @@ class SecondFragment : BaseFragment(),KodeinAware {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        categoryName = arguments?.getString("categoryName").toString()
+        categoryName = arguments!!.getString("categoryName").toString()
     }
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -45,7 +44,7 @@ class SecondFragment : BaseFragment(),KodeinAware {
     ): View? {
 
         setHasOptionsMenu(true)
-        // Inflate the layout for this fragment
+
         return inflater.inflate(R.layout.fragment_second, container, false)
     }
 
@@ -53,56 +52,10 @@ class SecondFragment : BaseFragment(),KodeinAware {
         super.onViewCreated(view, savedInstanceState)
 
 
-        // just let the user write a category name if they are creating a new one, not if
-        //  using an already created one
-
-         if (categoryName!="null") {
-
-             catName_editText.setText(categoryName)
-             catName_editText!!.isEnabled = false
-             btn_saveCat.isEnabled= false  }
-
-         else {catName_editText.isEnabled = true}
-
-        btn_saveCat.setOnClickListener {
-
-            newCategoryName = catName_editText!!.text.toString().trim()
-            val currentDate: String = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(Date())
-
-            if (newCategoryName!!.isEmpty()) {
-
-                catName_editText.error = "category required"
-                catName_editText.requestFocus()
-                return@setOnClickListener
-            }
-
-            catName_editText.isEnabled = false
-            btn_saveCat.isEnabled = false
-
-            viewModel = ViewModelProvider(this, viewModelFactory).get(MainViewModel::class.java)
-
-            launch{
-
-                val cat  = Cat(newCategoryName!!,currentDate)
-                viewModel.addCat(cat)
-
-            }
-
-            catName_editText.isEnabled = false
-
-        }
-
         btn_save.setOnClickListener {
 
             val theWord = word_editText.text.toString().trim()
             val translation1 = trans1_editText.text.toString().trim()
-
-            if (categoryName.isEmpty()) {
-
-                catName_editText.error = "category required"
-                catName_editText.requestFocus()
-                return@setOnClickListener
-            }
 
             if (theWord.isEmpty()) {
 
@@ -120,17 +73,12 @@ class SecondFragment : BaseFragment(),KodeinAware {
 
             }
 
-
             launch{
 
                 val word = Word(wordId(categoryName,theWord),categoryName,theWord,translation1,null)
                 viewModel.addWord(word)
 
             }
-
-            //catName.hint = catName.text
-            //catName.text = null
-            //findNavController().navigate(R.id.actionSaveCat)
 
         }
     }

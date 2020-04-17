@@ -22,8 +22,9 @@ class CatAdapter(private val cats: List<Cat>) : RecyclerView.Adapter<CatAdapter.
     override fun getItemCount() = cats.size?:0
 
     override fun onBindViewHolder(holder: CatViewHolder, position: Int) {
+
         holder.view.text_view_title.text = cats[position].catName
-        holder.view.text_view_note.text = cats[position].catDate
+        holder.view.text_view_date.text = cats[position].catDate
 
         holder.view.setOnClickListener {
 
@@ -31,16 +32,12 @@ class CatAdapter(private val cats: List<Cat>) : RecyclerView.Adapter<CatAdapter.
             //val action = Firs.actionAddNote()
            // action.categoryName = cats[position].catName
 
-
             val bundle = bundleOf("categoryName" to cats[position].catName)
 
-
-
             holder.view.text_view_title.text = cats[position].catName
-            holder.view.text_view_note.text = cats[position].catDate
+            holder.view.text_view_date.text = cats[position].catDate
 
             findNavController(it).navigate(R.id.actionAddCat,bundle)
-
 
         }}
 
