@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:windowSoftInputMode="adjustResize"
     tools:context=".ui.SecondFragment">
 
     <EditText
@@ -26,28 +27,28 @@
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/HguideBtn"
-        android:layout_width="1dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent = '0.05' />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/VguideBtn"
-        android:layout_width="1dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_percent = '0.8' />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/HguideWord"
-        android:layout_width="1dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent = '0.3' />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/VguideWord"
-        android:layout_width="1dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.3" />
