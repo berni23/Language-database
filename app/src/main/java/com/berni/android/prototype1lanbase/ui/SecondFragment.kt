@@ -35,7 +35,8 @@ class SecondFragment : BaseFragment(),KodeinAware {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        categoryName = arguments!!.getString("categoryName").toString()
+        categoryName = arguments?.getString("categoryName").toString()
+
     }
 
     override fun onCreateView(
@@ -51,11 +52,15 @@ class SecondFragment : BaseFragment(),KodeinAware {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        catName_editText.text = categoryName
+
 
         btn_save.setOnClickListener {
 
             val theWord = word_editText.text.toString().trim()
             val translation1 = trans1_editText.text.toString().trim()
+
+
 
             if (theWord.isEmpty()) {
 

@@ -7,11 +7,12 @@
     android:windowSoftInputMode="adjustResize"
     tools:context=".ui.SecondFragment">
 
-    <EditText
+    <TextView
         android:id="@+id/catName_editText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:autofillHints="category"
+        android:text = "category"
         android:hint="category"
         android:inputType="text"
         android:maxLines="1"
