@@ -36,39 +36,7 @@
         android:layout_width="1dp"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent = '0.9' />
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-
-        android:id="@+id/btn_saveCat"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:clickable="true"
-        android:focusable="true"
-        android:src="@drawable/ic_check_black_24dp"
-        android:tint="@android:color/white"
-        app:layout_constraintTop_toTopOf="@id/HguideBtn"
-        app:layout_constraintBottom_toBottomOf="@id/HguideBtn"
-        app:layout_constraintEnd_toEndOf="@id/VguideBtn"
-        app:layout_constraintStart_toStartOf="@id/VguideBtn"
-        />
-
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/btn_save"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="250dp"
-        android:clickable="true"
-        android:focusable="true"
-        android:src="@drawable/ic_check_black_24dp"
-        android:tint="@android:color/white"
-        app:layout_constraintBottom_toBottomOf="@id/btn_saveCat"
-        app:layout_constraintEnd_toEndOf="@id/btn_saveCat"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="@id/VguideBtn"
-        app:layout_constraintTop_toTopOf="@id/HguideBtn"
-        app:layout_constraintVertical_bias="0.3" />
+        app:layout_constraintGuide_percent = '0.8' />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/HguideWord"
@@ -82,7 +50,38 @@
         android:layout_width="1dp"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.25" />
+        app:layout_constraintGuide_percent="0.3" />
+
+
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+
+        android:id="@+id/btn_saveCat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:focusable="true"
+        android:src="@drawable/ic_check_black_24dp"
+        android:tint="@android:color/white"
+        app:layout_constraintTop_toTopOf="@id/HguideBtn"
+        app:layout_constraintBottom_toBottomOf="@id/HguideBtn"
+        app:layout_constraintEnd_toEndOf="@id/VguideBtn"
+        app:layout_constraintStart_toStartOf="@id/VguideBtn" />
+
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/btn_save"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:focusable="true"
+        android:src="@drawable/ic_check_black_24dp"
+        android:tint="@android:color/white"
+
+        app:layout_constraintTop_toTopOf="@id/HguideWord"
+        app:layout_constraintBottom_toBottomOf="@id/HguideWord"
+        app:layout_constraintEnd_toEndOf="@id/VguideBtn"
+        app:layout_constraintStart_toStartOf="@id/VguideBtn" />
 
 
     <EditText
@@ -117,7 +116,6 @@
         app:layout_constraintBottom_toBottomOf="@id/word_editText"
         app:layout_constraintEnd_toEndOf="@id/word_editText"
         app:layout_constraintStart_toStartOf="@id/VguideWord"  />
-
 
 
 
