@@ -9,7 +9,8 @@ import androidx.room.RoomDatabase
 
 
 @Database(entities = arrayOf(Word::class,Cat::class),version = 1, exportSchema = false)
-//@Database(entities = arrayOf(CatWords::class),version=1)
+
+
 abstract class LanDataBase : RoomDatabase() {
 
 

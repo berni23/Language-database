@@ -1,23 +1,20 @@
 package com.berni.android.prototype1lanbase.db
 
 import androidx.lifecycle.LiveData
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.Query
-import androidx.room.Transaction
+import androidx.room.*
 
 
 @Dao
 interface CatDao {
 
-    @Transaction
-    @Query("SELECT * FROM Cat")
-    fun getCatWithWords(): LiveData<List<CatWords>>
 
-    @Insert
+   //TODO  Emit  toast 'on conflict'
+
+    @Insert(onConflict = OnConflictStrategy.IGNORE )
     suspend fun addCat(cat: Cat)
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.IGNORE )
+
     suspend fun addWord(word: Word )
 
     @Query( "SELECT* FROM Cat ORDER BY catName DESC")
@@ -27,4 +24,3 @@ interface CatDao {
     fun getAllWords () : LiveData<List<Word>>
 
 }
-
