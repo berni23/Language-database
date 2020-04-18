@@ -12,7 +12,7 @@ import org.kodein.di.KodeinAware
 
 class ViewModelFactory(private val Repos: Repository): ViewModelProvider.NewInstanceFactory()  {
 
-    @Suppress("UNCHECKED_CASTS")
+    @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         return MainViewModel(Repos) as T
     }

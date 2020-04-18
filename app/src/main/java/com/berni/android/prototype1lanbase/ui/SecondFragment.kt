@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
@@ -11,6 +12,7 @@ import com.berni.android.prototype1lanbase.R
 import com.berni.android.prototype1lanbase.db.Cat
 import com.berni.android.prototype1lanbase.db.Word
 import com.berni.android.prototype1lanbase.wordId
+import kotlinx.android.synthetic.main.fragment_first.*
 import kotlinx.android.synthetic.main.fragment_second.*
 import kotlinx.coroutines.launch
 import org.kodein.di.KodeinAware
@@ -26,7 +28,7 @@ class SecondFragment : BaseFragment(),KodeinAware {
 
     override val kodein by closestKodein()
 
-    private val viewModelFactory: ViewModelFactory by instance()
+    private val viewModelFactory: ViewModelFactory by instance<ViewModelFactory>()
     private lateinit var viewModel: MainViewModel
     lateinit var categoryName: String
 
@@ -52,14 +54,14 @@ class SecondFragment : BaseFragment(),KodeinAware {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        catName_editText.text = categoryName
+        viewModel = ViewModelProvider(this, viewModelFactory).get(MainViewModel::class.java)
 
+        catName_editText.text = categoryName
 
         btn_save.setOnClickListener {
 
             val theWord = word_editText.text.toString().trim()
             val translation1 = trans1_editText.text.toString().trim()
-
 
 
             if (theWord.isEmpty()) {
@@ -84,6 +86,13 @@ class SecondFragment : BaseFragment(),KodeinAware {
                 viewModel.addWord(word)
 
             }
+
+            Toast.makeText(context, "word successfully added", Toast.LENGTH_SHORT).show()
+
+            word_editText.text.clear()
+            trans1_editText.text.clear()
+
+
 
         }
     }

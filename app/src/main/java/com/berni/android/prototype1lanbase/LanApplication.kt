@@ -7,6 +7,7 @@ import com.berni.android.prototype1lanbase.db.LanDataBase
 import com.berni.android.prototype1lanbase.db.Repository
 import com.berni.android.prototype1lanbase.db.Word
 import com.berni.android.prototype1lanbase.ui.FirstFragment
+import com.berni.android.prototype1lanbase.ui.MainViewModel
 import com.berni.android.prototype1lanbase.ui.ViewModelFactory
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware

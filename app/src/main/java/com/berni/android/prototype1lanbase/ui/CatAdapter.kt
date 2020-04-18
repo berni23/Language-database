@@ -41,7 +41,5 @@ class CatAdapter(private val cats: List<Cat>) : RecyclerView.Adapter<CatAdapter.
 
         }}
 
-
         class CatViewHolder(val view: View) : RecyclerView.ViewHolder(view)
-
 }
