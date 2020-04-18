@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.View.inflate
 import android.widget.Button
 import android.widget.PopupWindow
+import android.widget.Toast
 import androidx.appcompat.widget.PopupMenu
 import androidx.core.view.isInvisible
 import androidx.core.widget.PopupWindowCompat
@@ -80,6 +81,8 @@ class FirstFragment : BaseFragment(),KodeinAware {
                 editText_newCat.requestFocus()
                 return@setOnClickListener
             }
+
+            Toast.makeText(context, "category successfully created", Toast.LENGTH_SHORT).show()
 
            // viewModel = ViewModelProvider(this, viewModelFactory).get(MainViewModel::class.java)
 

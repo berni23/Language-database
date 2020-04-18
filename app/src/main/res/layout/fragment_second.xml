@@ -12,7 +12,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:autofillHints="category"
-        android:text = "category"
         android:hint="category"
         android:inputType="text"
         android:maxLines="1"
@@ -25,27 +24,19 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0" />
 
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/HguideBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent = '0.05' />
-
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/VguideBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent = '0.8' />
+        app:layout_constraintGuide_percent='0.8' />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/HguideWord"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent = '0.3' />
+        app:layout_constraintGuide_percent='0.3' />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/VguideWord"
@@ -62,12 +53,26 @@
         android:clickable="true"
         android:focusable="true"
         android:src="@drawable/ic_check_black_24dp"
-        android:tint="@android:color/white"
-
-        app:layout_constraintTop_toTopOf="@id/HguideWord"
+        app:backgroundTint="@color/colorButton2"
         app:layout_constraintBottom_toBottomOf="@id/HguideWord"
         app:layout_constraintEnd_toEndOf="@id/VguideBtn"
-        app:layout_constraintStart_toStartOf="@id/VguideBtn" />
+        app:layout_constraintStart_toStartOf="@id/VguideBtn"
+        app:layout_constraintTop_toTopOf="@id/HguideWord" />
+
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/btn_displayWords"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="650dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:src="@drawable/ic_sort_black_24dp"
+        app:backgroundTint="@color/colorButton2"
+        app:layout_constraintBottom_toBottomOf="@id/HguideWord"
+        app:layout_constraintEnd_toEndOf="@id/VguideBtn"
+        app:layout_constraintStart_toStartOf="@id/VguideBtn"
+        app:layout_constraintTop_toBottomOf="@id/btn_save" />
 
 
     <EditText
@@ -80,10 +85,10 @@
         android:inputType="text"
         android:maxLines="1"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        app:layout_constraintTop_toTopOf="@id/HguideWord"
         app:layout_constraintBottom_toBottomOf="@id/HguideWord"
         app:layout_constraintEnd_toEndOf="@id/VguideWord"
-        app:layout_constraintStart_toStartOf="@id/VguideWord" />
+        app:layout_constraintStart_toStartOf="@id/VguideWord"
+        app:layout_constraintTop_toTopOf="@id/HguideWord" />
 
 
     <EditText
@@ -91,19 +96,17 @@
         android:id="@+id/trans1_editText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"
         android:autofillHints="translation"
         android:drawableStart="@drawable/ic_item"
         android:hint="translation"
         android:inputType="text"
         android:maxLines="1"
-        android:layout_marginTop="100dp"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        app:layout_constraintTop_toTopOf="@id/HguideWord"
         app:layout_constraintBottom_toBottomOf="@id/word_editText"
         app:layout_constraintEnd_toEndOf="@id/word_editText"
-        app:layout_constraintStart_toStartOf="@id/VguideWord"  />
-
-
+        app:layout_constraintStart_toStartOf="@id/VguideWord"
+        app:layout_constraintTop_toTopOf="@id/HguideWord" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
