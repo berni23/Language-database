@@ -7,9 +7,6 @@ import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
-import androidx.navigation.NavController
-import androidx.navigation.Navigation
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.berni.android.prototype1lanbase.R
 import com.berni.android.prototype1lanbase.db.Cat
@@ -28,7 +25,8 @@ import java.util.*
 class FirstFragment : BaseFragment(),KodeinAware {
 
 
-    lateinit var navController: NavController
+    //lateinit var navController: NavController
+
     var newCatName: String? = null
 
     override val kodein by closestKodein()
@@ -51,7 +49,7 @@ class FirstFragment : BaseFragment(),KodeinAware {
         recycler_view_cats.setHasFixedSize(true)
         recycler_view_cats.layoutManager =  StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
 
-        navController = Navigation.findNavController(view)
+       // navController = Navigation.findNavController(view)
 
         viewModel = ViewModelProvider(this, viewModelFactory).get(MainViewModel::class.java)
 

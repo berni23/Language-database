@@ -58,7 +58,7 @@ class SecondFragment : BaseFragment(),KodeinAware {
 
         viewModel = ViewModelProvider(this, viewModelFactory).get(MainViewModel::class.java)
 
-        catName_editText.text = categoryName
+        catName_textView.text = categoryName
 
         btn_save.setOnClickListener {
 

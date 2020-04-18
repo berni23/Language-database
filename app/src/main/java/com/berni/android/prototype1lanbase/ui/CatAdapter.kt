@@ -28,14 +28,7 @@ class CatAdapter(private val cats: List<Cat>) : RecyclerView.Adapter<CatAdapter.
 
         holder.view.setOnClickListener {
 
-           // val action = FirstFragmentDirections.actionAddNote()
-            //val action = Firs.actionAddNote()
-           // action.categoryName = cats[position].catName
-
             val bundle = bundleOf("categoryName" to cats[position].catName)
-
-            holder.view.text_view_title.text = cats[position].catName
-            holder.view.text_view_date.text = cats[position].catDate
 
             findNavController(it).navigate(R.id.actionAddCat,bundle)
 

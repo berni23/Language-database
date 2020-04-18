@@ -8,21 +8,18 @@
     tools:context=".ui.SecondFragment">
 
     <TextView
-        android:id="@+id/catName_editText"
-        android:layout_width="match_parent"
+        android:id="@+id/catName_textView"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:autofillHints="category"
         android:hint="category"
-        android:inputType="text"
         android:maxLines="1"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+        android:layout_marginStart="40dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.03" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/VguideBtn"
