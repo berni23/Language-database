@@ -25,6 +25,9 @@
 
           app:nullable="true"
           android:defaultValue="@null"/>
+        <action
+            android:id="@+id/actionWordsList"
+            app:destination="@id/wordsListFragment" />
 
         <!-- app:argType = String -->
 
@@ -36,7 +39,17 @@
 
             -->
 
-
     </fragment>
+    <fragment
+        android:id="@+id/wordsListFragment"
+        android:name="com.berni.android.prototype1lanbase.ui.WordsListFragment"
+        android:label="fragment_words_list"
+        tools:layout="@layout/fragment_words_list" />
+
+
+    <argument android:name = "categoryName"
+        app:nullable="true"
+        android:defaultValue="@null"/>
+
 </navigation>
 

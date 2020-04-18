@@ -5,9 +5,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
+import androidx.navigation.Navigation
 import com.berni.android.prototype1lanbase.R
 import com.berni.android.prototype1lanbase.db.Cat
 import com.berni.android.prototype1lanbase.db.Word
@@ -92,8 +94,14 @@ class SecondFragment : BaseFragment(),KodeinAware {
             word_editText.text.clear()
             trans1_editText.text.clear()
 
+        }
 
 
+        btn_displayWords.setOnClickListener{
+
+            val bundle = bundleOf("categoryName" to categoryName)
+
+            Navigation.findNavController(it).navigate(R.id.actionWordsList,bundle)
         }
     }
 }

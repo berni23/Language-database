@@ -22,4 +22,7 @@ interface CatDao {
     @Query("SELECT* FROM Word ORDER BY wordId DESC")
     fun getAllWords () : LiveData<List<Word>>
 
+    @Query("SELECT* FROM Word WHERE catParent LIKE :category")
+    fun wordsInCat(category: String) : List<Word>
+
 }
