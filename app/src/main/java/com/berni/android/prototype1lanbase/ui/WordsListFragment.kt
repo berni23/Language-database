@@ -1,24 +1,17 @@
 package com.berni.android.prototype1lanbase.ui
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.NavController
-import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-
 import com.berni.android.prototype1lanbase.R
-import com.berni.android.prototype1lanbase.db.Cat
 import com.berni.android.prototype1lanbase.db.Word
-import kotlinx.android.synthetic.main.fragment_first.*
 import kotlinx.android.synthetic.main.fragment_words_list.*
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.closestKodein
@@ -64,7 +57,7 @@ class WordsListFragment : BaseFragment(), KodeinAware {
 
         // navController = Navigation.findNavController(view)xt
 
-        catName2_textView.setText(categoryName)
+        catName2_textView.text = categoryName
 
         viewModel = ViewModelProvider(this, viewModelFactory).get(MainViewModel::class.java)
 

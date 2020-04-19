@@ -1,9 +1,6 @@
 package com.berni.android.prototype1lanbase.db
 
 import androidx.room.*
-import java.io.Serializable
-
-
 
 data class CatWords(
 

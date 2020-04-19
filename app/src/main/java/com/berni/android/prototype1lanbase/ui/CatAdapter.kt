@@ -10,7 +10,6 @@ import com.berni.android.prototype1lanbase.R
 import com.berni.android.prototype1lanbase.db.Cat
 import kotlinx.android.synthetic.main.adapter_cat.view.*
 
-
 class CatAdapter(private val cats: List<Cat>) : RecyclerView.Adapter<CatAdapter.CatViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CatViewHolder {
@@ -19,7 +18,7 @@ class CatAdapter(private val cats: List<Cat>) : RecyclerView.Adapter<CatAdapter.
         )
     }
 
-    override fun getItemCount() = cats.size?:0
+    override fun getItemCount() = cats.size
 
     override fun onBindViewHolder(holder: CatViewHolder, position: Int) {
 

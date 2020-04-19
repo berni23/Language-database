@@ -6,13 +6,10 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 
 
-
-
-@Database(entities = arrayOf(Word::class,Cat::class),version = 1, exportSchema = false)
+@Database(entities = [Word::class, Cat::class],version = 1, exportSchema = false)
 
 
 abstract class LanDataBase : RoomDatabase() {
-
 
     abstract fun catDao(): CatDao
 
@@ -37,11 +34,6 @@ abstract class LanDataBase : RoomDatabase() {
                 )
                     .build()
 
-            fun getInstance(catDao: CatDao): CatDao {
-
-                return catDao
-
-            }
+            //fun getInstance(catDao: CatDao): CatDao { return catDao }
         }
-
 }

@@ -10,10 +10,10 @@ import kotlinx.android.synthetic.main.adapter_word.view.*
 
 
 // WordInCat
+
 class WordAdapter(private val words: List<Word>): RecyclerView.Adapter<WordAdapter.WordViewHolder>()
 
 {
-
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): WordViewHolder {
 
@@ -22,7 +22,7 @@ class WordAdapter(private val words: List<Word>): RecyclerView.Adapter<WordAdapt
         }
 
 
-    override fun getItemCount() = words.size?:0
+    override fun getItemCount() = words.size
 
     override fun onBindViewHolder(holder: WordViewHolder, position: Int) {
 

@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
 import android.widget.Toast
-import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
@@ -17,17 +16,16 @@ import org.kodein.di.android.x.closestKodein
 import org.kodein.di.generic.instance
 import java.text.SimpleDateFormat
 import java.util.*
-//import com.berni.android.prototype1lanbase.databinding.ActivityMainBinding
+
 
 /**
  * A simple [Fragment] subclass as the default destination in the navigation.
  */
 class FirstFragment : BaseFragment(),KodeinAware {
 
-
     //lateinit var navController: NavController
 
-    var newCatName: String? = null
+    private var newCatName: String? = null
 
     override val kodein by closestKodein()
 
@@ -55,19 +53,19 @@ class FirstFragment : BaseFragment(),KodeinAware {
 
         viewModel.allCats.observe(viewLifecycleOwner, Observer<List<Cat>> { recycler_view_cats.adapter = CatAdapter(it) })
 
-        btn_add.setOnClickListener() {
+        btn_add.setOnClickListener {
 
             editText_newCat.text.clear()
             newCatName = null
-            recycler_view_newCat.setVisibility(View.VISIBLE)
+            recycler_view_newCat.visibility = View.VISIBLE
              }
 
-        btnCancel.setOnClickListener() { recycler_view_newCat.setVisibility(View.GONE) }
+        btnCancel.setOnClickListener { recycler_view_newCat.visibility = View.GONE }
 
-        btnCreate.setOnClickListener() {
+        btnCreate.setOnClickListener {
 
             //TODO( window disappears on screen rotated. probably fixed with creation of viewmodel or using a binding method)
-            recycler_view_newCat.setVisibility(View.VISIBLE)
+            recycler_view_newCat.visibility = View.VISIBLE
 
             newCatName = editText_newCat.text.toString().trim()
             val currentDate: String = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(Date())
@@ -88,24 +86,11 @@ class FirstFragment : BaseFragment(),KodeinAware {
 
             }
 
-            recycler_view_newCat.setVisibility(View.GONE)
-            Toast.makeText(context, "category ${newCatName} successfully created", Toast.LENGTH_SHORT).show()
+            recycler_view_newCat.visibility = View.GONE
+            Toast.makeText(context, "category $newCatName successfully created", Toast.LENGTH_SHORT).show()
             editText_newCat.text.clear()
 
         }
-
-        /*   btn_add.setOnClickListener() {
-
-            val window = PopupWindow(getActivity()!!.getApplicationContext())
-            val windowView = layoutInflater.inflate(R.layout.new_cat,null)
-
-            window.contentView = windowView
-            // LayoutInflater.from(context).inflate(R.layout.adapter_cat, parent, false)
-
-            window.showAtLocation(view, Gravity.CENTER, 0, 0)
-
-
-    } }*/
 
     }}
 
