@@ -26,7 +26,6 @@ class FirstFragment : BaseFragment(),KodeinAware {
     //lateinit var navController: NavController
 
     private var newCatName: String? = null
-
     override val kodein by closestKodein()
 
     private val viewModelFactory: ViewModelFactory by instance<ViewModelFactory>()

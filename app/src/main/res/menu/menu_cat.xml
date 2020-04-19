@@ -1,0 +1,18 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.berni.android.prototype1lanbase.ui.MainActivity"
+    android:id="@+id/menu_longClick">
+
+    <item
+        android:id ="@id/delete"
+        android:orderInCategory="100"
+        android:title="delete"
+        app:showAsAction="never" />
+
+    <item
+    android:id ="@id/rename"
+    android:orderInCategory="100"
+    android:title="rename"
+    app:showAsAction="never" />
+</menu>
