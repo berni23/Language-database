@@ -2,7 +2,10 @@ package com.berni.android.prototype1lanbase.ui
 
 import android.view.*
 import android.view.ContextMenu.ContextMenuInfo
-import android.widget.AdapterView
+import android.view.KeyEvent.ACTION_DOWN
+import android.view.KeyEvent.KEYCODE_ENTER
+import android.view.inputmethod.EditorInfo
+import android.widget.TextView.OnEditorActionListener
 import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.navigation.Navigation.findNavController
@@ -22,7 +25,6 @@ class CatAdapter(private val cats: List<Cat>) : RecyclerView.Adapter<CatAdapter.
         )
     }
 
-
     override fun onCreateContextMenu(menu: ContextMenu, v: View?, menuInfo: ContextMenuInfo?) {
 
         MenuInflater(v?.context).inflate(R.menu.menu_cat, menu)
@@ -35,8 +37,11 @@ class CatAdapter(private val cats: List<Cat>) : RecyclerView.Adapter<CatAdapter.
     override fun onBindViewHolder(holder: CatViewHolder, position: Int) {
 
         holder.view.setOnCreateContextMenuListener(this)
-        holder.view.text_view_title.text = cats[position].catName
+        holder.view.text_view_title.setText(cats[position].catName)
         holder.view.text_view_date.text = cats[position].catDate
+
+       // holder.view.text_view_title.setImeActionLabel("Custom text", KeyEvent.KEYCODE_ENTER)
+
 
 
         holder.view.setOnClickListener {
@@ -49,9 +54,6 @@ class CatAdapter(private val cats: List<Cat>) : RecyclerView.Adapter<CatAdapter.
 
         holder.view.setOnCreateContextMenuListener { menu: ContextMenu?, v: View?, menuInfo: ContextMenuInfo? ->
 
-            val info = menuInfo as AdapterView.AdapterContextMenuInfo
-
-
             menu?.add("delete")?.setOnMenuItemClickListener {
                 Toast.makeText(v?.context, "deleting..", Toast.LENGTH_SHORT).show()
                 true
@@ -59,6 +61,10 @@ class CatAdapter(private val cats: List<Cat>) : RecyclerView.Adapter<CatAdapter.
 
 
             menu?.add("rename")?.setOnMenuItemClickListener {
+
+                holder.view.text_view_title.setFocusable(true)
+                holder.view.text_view_title.isFocusableInTouchMode = true
+
                 Toast.makeText(v?.context, "renaming..", Toast.LENGTH_SHORT).show()
                 true
             }
