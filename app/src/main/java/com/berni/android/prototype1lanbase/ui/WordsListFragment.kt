@@ -41,14 +41,12 @@ class WordsListFragment : BaseFragment(), KodeinAware {
         return inflater.inflate(R.layout.fragment_words_list, container, false)
     }
 
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         //recycler_view_words.setHasFixedSize(true)
 
-        recycler_view_words.layoutManager =
-            LinearLayoutManager(context, RecyclerView.VERTICAL, false)
+        recycler_view_words.layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
 
         // navController = Navigation.findNavController(view)xt
 
@@ -70,18 +68,25 @@ class WordsListFragment : BaseFragment(), KodeinAware {
 
         override fun onOptionsItemSelected(item: MenuItem): Boolean {
 
-            var SortedAlpha: List<Word>? = null
+            var sortedAlpha: List<Word>? = null
+            var sortedLastAdded: List<Word>? = null
 
         when (item.itemId) {
 
             R.id.alphabetically -> {
 
-                runBlocking(Dispatchers.Default){SortedAlpha = viewModel.wordsInCatAlphabetic(categoryName)}
+                runBlocking(Dispatchers.Default){sortedAlpha = viewModel.wordsInCatAlphabetic(categoryName)}
 
-                    recycler_view_words.adapter = WordAdapter(SortedAlpha!!)
+                    recycler_view_words.adapter = WordAdapter(sortedAlpha!!)
+
                     Toast.makeText(context, "sorting by alphabetic order..", Toast.LENGTH_SHORT).show()}
 
-            R.id.last_added ->  {Toast.makeText(context, "sorting by last added..", Toast.LENGTH_SHORT).show() }
+            R.id.last_added ->  {
+
+               runBlocking(Dispatchers.Default){sortedLastAdded = viewModel.wordsInCat(categoryName)}
+                    recycler_view_words.adapter = WordAdapter(sortedLastAdded!!)
+
+                Toast.makeText(context, "sorting by last added..", Toast.LENGTH_SHORT).show() }
         }
 
         return super.onOptionsItemSelected(item)

@@ -28,7 +28,6 @@ class WordAdapter(private val words: List<Word>): RecyclerView.Adapter<WordAdapt
 
     override fun onBindViewHolder(holder: WordViewHolder, position: Int) {
 
-
         holder.view.text_view_word.text = words.get(position).wordName
 
     }

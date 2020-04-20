@@ -17,7 +17,6 @@ interface CatDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE )
     suspend fun addWord(word: Word )
 
-
     //get
 
     @Query( "SELECT* FROM Cat ORDER BY catName DESC")
