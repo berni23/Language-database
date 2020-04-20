@@ -21,6 +21,8 @@ class MainViewModel(private val repos: Repository ) : ViewModel(){
 
     suspend fun wordsInCat(currentCatName:String) = repos.wordsInCat(currentCatName)
 
+    fun wordsInCatAlphabetic(currentCatName: String) = repos.wordsInCatAlphabetic(currentCatName)
+
     val allCats: LiveData<List<Cat>> =     repos.getAllCats()
     val allWords: LiveData<List<Word>> =   repos.getAllWords()
 

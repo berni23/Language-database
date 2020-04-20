@@ -25,11 +25,7 @@ class CatAdapter(private val cats: List<Cat>, val viewModel: MainViewModel,
     View.OnCreateContextMenuListener, CoroutineScope {
 
 
-    var deleteCat : Cat? = null
-
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CatViewHolder {
-
 
         return CatViewHolder(
             LayoutInflater.from(parent.context).inflate(R.layout.adapter_cat, parent, false)
@@ -51,7 +47,6 @@ class CatAdapter(private val cats: List<Cat>, val viewModel: MainViewModel,
         holder.view.text_view_title.setText(cats[position].catName)
         holder.view.text_view_date.text = cats[position].catDate
 
-
         // holder.view.text_view_title.setImeActionLabel("Custom text", KeyEvent.KEYCODE_ENTER)
 
         holder.view.setOnClickListener {
@@ -64,7 +59,6 @@ class CatAdapter(private val cats: List<Cat>, val viewModel: MainViewModel,
         holder.view.setOnCreateContextMenuListener { menu: ContextMenu?, v: View?, menuInfo: ContextMenuInfo? ->
 
             menu?.add("delete")?.setOnMenuItemClickListener {
-
 
                 //ViewModelProvider(this, viewModelFactory).get(MainViewModel::class.java)
 
@@ -80,9 +74,8 @@ class CatAdapter(private val cats: List<Cat>, val viewModel: MainViewModel,
                             viewModel.deleteWordsInCat(cats[position].catName)
                             viewModel.deleteCat(cats[position])
 
-
-
                         }
+
                         Toast.makeText(v?.context, "deleting confirmed..", Toast.LENGTH_SHORT).show()
 
                     }
@@ -90,7 +83,6 @@ class CatAdapter(private val cats: List<Cat>, val viewModel: MainViewModel,
                     setNegativeButton("No") { _, _ ->
 
                     }}.create().show()
-
 
 
                 true
@@ -110,12 +102,6 @@ class CatAdapter(private val cats: List<Cat>, val viewModel: MainViewModel,
 
     }
 
-    suspend fun deleteWordsAndCat() : Cat? {
-
-        return deleteCat
-
-
-    }
 
     class CatViewHolder(val view: View) : RecyclerView.ViewHolder(view)
 

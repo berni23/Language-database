@@ -7,12 +7,15 @@ import androidx.recyclerview.widget.RecyclerView
 import com.berni.android.prototype1lanbase.R
 import com.berni.android.prototype1lanbase.db.Word
 import kotlinx.android.synthetic.main.adapter_word.view.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlin.coroutines.CoroutineContext
 
 
 // WordInCat
 
 class WordAdapter(private val words: List<Word>): RecyclerView.Adapter<WordAdapter.WordViewHolder>()
-
 {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): WordViewHolder {
@@ -21,11 +24,12 @@ class WordAdapter(private val words: List<Word>): RecyclerView.Adapter<WordAdapt
 
         }
 
-    override fun getItemCount() = words.size
+    override fun getItemCount() = words.size?:0
 
     override fun onBindViewHolder(holder: WordViewHolder, position: Int) {
 
-        holder.view.text_view_word.text = words[position].wordName
+
+        holder.view.text_view_word.text = words.get(position).wordName
 
     }
 

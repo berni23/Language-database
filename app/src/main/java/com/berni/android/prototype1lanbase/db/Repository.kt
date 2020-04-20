@@ -7,7 +7,7 @@ import androidx.room.Room
 
 class Repository(private val catDao: CatDao, val cat: Cat, val word: Word) {
 
-        suspend fun addCat(cat: Cat)        { catDao.addCat(cat)  }
+        suspend fun addCat(cat: Cat)        {catDao.addCat(cat)  }
 
         suspend fun addWord(word: Word)     { catDao.addWord(word) }
 
@@ -15,11 +15,15 @@ class Repository(private val catDao: CatDao, val cat: Cat, val word: Word) {
 
         fun getAllWords (): LiveData<List<Word>> {return  catDao.getAllWords() }
 
-        fun wordsInCat(currentCatName: String) : LiveData<List<Word>> {return catDao.wordsInCat(currentCatName)}
+        suspend fun wordsInCat(currentCatName: String) : List<Word> {return catDao.wordsInCat(currentCatName)}
+
+         fun wordsInCatAlphabetic(currentCatName: String) : List<Word> { return catDao.wordsInCatAlphabetic(currentCatName)}
 
         fun deleteWordsInCat(currentCatName: String)  {catDao.deleteWordsInCat(currentCatName)}
 
         fun deleteCat(currentCat:Cat) {catDao.deleteCat(currentCat)}
+
+
 
     companion object {
 
