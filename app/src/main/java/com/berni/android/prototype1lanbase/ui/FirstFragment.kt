@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.berni.android.prototype1lanbase.R
 import com.berni.android.prototype1lanbase.db.Cat
 import kotlinx.android.synthetic.main.fragment_first.*
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.closestKodein
@@ -50,7 +51,13 @@ class FirstFragment : BaseFragment(),KodeinAware {
 
         viewModel = ViewModelProvider(this, viewModelFactory).get(MainViewModel::class.java)
 
-        viewModel.allCats.observe(viewLifecycleOwner, Observer<List<Cat>> { recycler_view_cats.adapter = CatAdapter(it) })
+        viewModel.allCats.observe(viewLifecycleOwner, Observer<List<Cat>> {
+
+
+            launch{recycler_view_cats.adapter = CatAdapter(it,viewModel,this.coroutineContext)}
+
+           })
+
 
         btn_add.setOnClickListener {
 
@@ -91,5 +98,5 @@ class FirstFragment : BaseFragment(),KodeinAware {
 
         }
 
-    }}
 
+    }}

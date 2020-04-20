@@ -9,12 +9,16 @@ interface CatDao {
 
    //TODO  Emit  toast 'on conflict'
 
+    //insert
+
     @Insert(onConflict = OnConflictStrategy.IGNORE )
     suspend fun addCat(cat: Cat)
 
     @Insert(onConflict = OnConflictStrategy.IGNORE )
-
     suspend fun addWord(word: Word )
+
+
+    //get
 
     @Query( "SELECT* FROM Cat ORDER BY catName DESC")
     fun getAllCats() : LiveData<List<Cat>>
@@ -25,4 +29,12 @@ interface CatDao {
     @Query("SELECT* FROM Word WHERE catParent LIKE :category")
     fun wordsInCat(category: String) : LiveData<List<Word>>
 
+
+    // delete
+
+    @Query("DELETE FROM Word WHERE catParent LIKE :category")
+    fun deleteWordsInCat(category: String)
+
+    @Delete
+    fun deleteCat(cat: Cat)
 }

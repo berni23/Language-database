@@ -21,7 +21,6 @@ class WordAdapter(private val words: List<Word>): RecyclerView.Adapter<WordAdapt
 
         }
 
-
     override fun getItemCount() = words.size
 
     override fun onBindViewHolder(holder: WordViewHolder, position: Int) {

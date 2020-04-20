@@ -17,6 +17,9 @@ class Repository(private val catDao: CatDao, val cat: Cat, val word: Word) {
 
         fun wordsInCat(currentCatName: String) : LiveData<List<Word>> {return catDao.wordsInCat(currentCatName)}
 
+        fun deleteWordsInCat(currentCatName: String)  {catDao.deleteWordsInCat(currentCatName)}
+
+        fun deleteCat(currentCat:Cat) {catDao.deleteCat(currentCat)}
 
     companion object {
 
