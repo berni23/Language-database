@@ -2,6 +2,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.berni.android.prototype1lanbase.ui.WordsListFragment"
+    android:src  = "@drawable/ic_item"
     android:title="@string/action_sortBy">
 
     <item
