@@ -45,8 +45,7 @@ class FirstFragment : BaseFragment(),KodeinAware {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
-        (activity as AppCompatActivity).supportActionBar?.title = " Language Database"
+        //title = " Language Database"
 
         recycler_view_cats.setHasFixedSize(true)
         recycler_view_cats.layoutManager =  StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
@@ -60,7 +59,6 @@ class FirstFragment : BaseFragment(),KodeinAware {
             launch{recycler_view_cats.adapter = CatAdapter(it,viewModel,this.coroutineContext)}
 
            })
-
 
         btn_add.setOnClickListener {
 

@@ -27,7 +27,7 @@ class SecondFragment : BaseFragment(),KodeinAware {
 
     private val viewModelFactory: ViewModelFactory by instance<ViewModelFactory>()
     private lateinit var viewModel: MainViewModel
-    lateinit var categoryName: String
+     private lateinit var categoryName: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,18 +49,16 @@ class SecondFragment : BaseFragment(),KodeinAware {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
         (activity as AppCompatActivity).supportActionBar?.title = categoryName
 
         viewModel = ViewModelProvider(this, viewModelFactory).get(MainViewModel::class.java)
 
-        catName_textView.text = categoryName
+        //catName_textView.text = categoryName
 
         btn_save.setOnClickListener {
 
             val theWord = word_editText.text.toString().trim()
             val translation1 = trans1_editText.text.toString().trim()
-
 
             if (theWord.isEmpty()) {
 
@@ -91,7 +89,6 @@ class SecondFragment : BaseFragment(),KodeinAware {
             trans1_editText.text.clear()
 
         }
-
 
         btn_displayWords.setOnClickListener{
 

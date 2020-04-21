@@ -15,4 +15,12 @@
 
     <include layout="@layout/content_main" />
 
+
+    <include
+        android:id = "@+id/toolbar"
+        layout = "@layout/toolbar"/>
+
+
+
+
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -13,14 +13,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:autofillHints="category"
-        android:hint="category"
+        android:hint="40"
         android:maxLines="1"
+        android:textSize="15sp"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
         android:layout_marginStart="40dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.03"
+        app:layout_constraintVertical_bias="0.15"
       />
 
 
@@ -51,6 +52,9 @@
 
 
     </androidx.recyclerview.widget.RecyclerView>
+
+
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
