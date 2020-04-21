@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
@@ -44,6 +45,9 @@ class FirstFragment : BaseFragment(),KodeinAware {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+
+        (activity as AppCompatActivity).supportActionBar?.title = " Language Database"
+
         recycler_view_cats.setHasFixedSize(true)
         recycler_view_cats.layoutManager =  StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
 
@@ -52,7 +56,6 @@ class FirstFragment : BaseFragment(),KodeinAware {
         viewModel = ViewModelProvider(this, viewModelFactory).get(MainViewModel::class.java)
 
         viewModel.allCats.observe(viewLifecycleOwner, Observer<List<Cat>> {
-
 
             launch{recycler_view_cats.adapter = CatAdapter(it,viewModel,this.coroutineContext)}
 
