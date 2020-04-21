@@ -31,4 +31,13 @@
    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
+
+<style name="MyActionButtonOverflow" parent="android:style/Widget.Holo.Light.ActionButton.Overflow">
+    <item name="android:src">@drawable/ic_item</item>
+    <item name="android:background">?android:attr/actionBarItemBackground</item>
+    <item name="android:contentDescription">"Lala"</item>
+</style>
+
+
+
 </resources>

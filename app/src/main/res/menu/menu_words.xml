@@ -2,17 +2,43 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.berni.android.prototype1lanbase.ui.WordsListFragment"
-    android:src  = "@drawable/ic_item"
     android:title="@string/action_sortBy">
 
     <item
-        android:id="@+id/last_added"
+        android:id="@+id/item_sort"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        android:icon="@drawable/ic_filter"
         android:orderInCategory="1"
         android:title="@string/last_added"
-        app:showAsAction="never" />
-    <item
-        android:id="@+id/alphabetically"
-        android:orderInCategory="2"
-        android:title="@string/alphabetically"
-        app:showAsAction="never" />
+        app:showAsAction="always">
+
+        <menu>
+
+            <item
+                android:id="@+id/last_added"
+                android:orderInCategory="2"
+                android:title="@string/last_added"
+                app:showAsAction="never" />
+            <item
+                android:id="@+id/alphabetically"
+                android:orderInCategory="1"
+                android:title="@string/alphabetically"
+                app:showAsAction="never" />
+
+        </menu>
+
+    </item>
+
+
+
 </menu>
+
+
+
+
+    <!--
+    <style name="MyActionButtonOverflow" parent="android:style/Widget.Holo.Light.ActionButton.Overflow">
+        <item name="android:src">@drawable/ic_item</item>
+        <item name="android:background">?android:attr/actionBarItemBackground</item>
+        <item name="android:contentDescription">"Lala"</item>
+    </style>-->

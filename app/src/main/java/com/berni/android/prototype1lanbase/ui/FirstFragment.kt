@@ -10,6 +10,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.berni.android.prototype1lanbase.R
 import com.berni.android.prototype1lanbase.db.Cat
+import kotlinx.android.synthetic.*
 import kotlinx.android.synthetic.main.fragment_first.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -35,10 +36,13 @@ class FirstFragment : BaseFragment(),KodeinAware {
 
     override fun onCreateView(
 
+
+
     inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
 
     ): View? {
+
 
         return inflater.inflate(R.layout.fragment_first, container, false)  }
 
@@ -98,6 +102,4 @@ class FirstFragment : BaseFragment(),KodeinAware {
             editText_newCat.text.clear()
 
         }
-
-
     }}

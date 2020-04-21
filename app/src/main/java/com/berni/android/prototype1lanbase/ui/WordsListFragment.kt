@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.*
 import android.widget.Adapter
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -16,6 +17,7 @@ import kotlinx.coroutines.*
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.closestKodein
 import org.kodein.di.generic.instance
+import kotlinx.android.synthetic.*
 
 /**
  * A simple [Fragment] subclass.
@@ -65,14 +67,23 @@ class WordsListFragment : BaseFragment(), KodeinAware {
         }
 
         numWords_textView.text = numWords.toString()
-        
+    }
+
+    override fun onCreateContextMenu(menu: ContextMenu, v: View, menuInfo: ContextMenu.ContextMenuInfo?) {
+
+        super.onCreateContextMenu(menu, v, menuInfo)
+
+        MenuInflater(v.context).inflate(R.menu.menu_cat, menu)
 
     }
+
 
         override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
 
                super.onCreateOptionsMenu(menu, inflater)
                inflater.inflate(R.menu.menu_words, menu)
+
+            // menu.setIcon(ContextCompat.getDrawable(context!!, R.drawable.ic_add_black_24dp));
 
     }
 
@@ -83,6 +94,7 @@ class WordsListFragment : BaseFragment(), KodeinAware {
 
         when (item.itemId) {
 
+
             R.id.alphabetically -> {
 
                 runBlocking(Dispatchers.Default){sortedAlpha = viewModel.wordsInCatAlphabetic(categoryName)}
@@ -90,6 +102,8 @@ class WordsListFragment : BaseFragment(), KodeinAware {
                     recycler_view_words.adapter = WordAdapter(sortedAlpha!!)
 
                     Toast.makeText(context, "sorting by alphabetic order..", Toast.LENGTH_SHORT).show()}
+
+
 
             R.id.last_added ->  {
 

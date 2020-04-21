@@ -51,6 +51,7 @@ class SecondFragment : BaseFragment(),KodeinAware {
 
         (activity as AppCompatActivity).supportActionBar?.title = categoryName
 
+
         viewModel = ViewModelProvider(this, viewModelFactory).get(MainViewModel::class.java)
 
         //catName_textView.text = categoryName

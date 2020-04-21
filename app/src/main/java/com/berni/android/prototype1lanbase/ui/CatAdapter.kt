@@ -40,7 +40,6 @@ class CatAdapter(private val cats: List<Cat>, val viewModel: MainViewModel,
 
     override fun getItemCount() = cats.size
 
-
     override fun onBindViewHolder(holder: CatViewHolder, position: Int) {
 
         holder.view.setOnCreateContextMenuListener(this)
@@ -60,12 +59,9 @@ class CatAdapter(private val cats: List<Cat>, val viewModel: MainViewModel,
 
             menu?.add("delete")?.setOnMenuItemClickListener {
 
-                //ViewModelProvider(this, viewModelFactory).get(MainViewModel::class.java)
-
                 AlertDialog.Builder(v?.context).apply {
                     setTitle("Are you sure?")
                     setMessage("You cannot undo this operation")
-
 
                     setPositiveButton("Yes") { _, _ ->
 
@@ -84,7 +80,6 @@ class CatAdapter(private val cats: List<Cat>, val viewModel: MainViewModel,
 
                     }}.create().show()
 
-
                 true
 
             }
@@ -102,9 +97,7 @@ class CatAdapter(private val cats: List<Cat>, val viewModel: MainViewModel,
 
     }
 
-
     class CatViewHolder(val view: View) : RecyclerView.ViewHolder(view)
-
 }
 
 

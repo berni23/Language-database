@@ -16,7 +16,7 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(findViewById(R.id.toolbar))
 
         supportActionBar?.title = " Language Database"
-        
+
 
     }
 }
