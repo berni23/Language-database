@@ -9,7 +9,7 @@
 
 
     <TextView
-        android:id="@+id/catName2_textView"
+        android:id="@+id/numWords_textView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:autofillHints="category"

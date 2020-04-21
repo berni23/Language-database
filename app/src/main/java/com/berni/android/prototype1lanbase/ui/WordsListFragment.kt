@@ -2,6 +2,7 @@ package com.berni.android.prototype1lanbase.ui
 
 import android.os.Bundle
 import android.view.*
+import android.widget.Adapter
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -23,6 +24,10 @@ class WordsListFragment : BaseFragment(), KodeinAware {
 
     //lateinit var navController: NavController
     lateinit var categoryName: String
+
+    var adapter : WordAdapter? = null
+
+    var numWords: Int? = null
 
     override val kodein by closestKodein()
 
@@ -50,14 +55,19 @@ class WordsListFragment : BaseFragment(), KodeinAware {
 
         // navController = Navigation.findNavController(view)xt
 
-        catName2_textView.text = categoryName
-
         viewModel = ViewModelProvider(this, viewModelFactory).get(MainViewModel::class.java)
 
-        launch(Dispatchers.Default){
-            recycler_view_words.adapter = WordAdapter( viewModel.wordsInCat(categoryName)) }
+        runBlocking(Dispatchers.Default){
+            adapter = WordAdapter( viewModel.wordsInCat(categoryName))
+            recycler_view_words.adapter =adapter
+            numWords = adapter!!.itemCount
 
         }
+
+        numWords_textView.text = numWords.toString()
+        
+
+    }
 
         override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
 
