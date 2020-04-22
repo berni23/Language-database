@@ -1,5 +1,6 @@
 package com.berni.android.prototype1lanbase.ui
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -22,9 +23,12 @@ class WordAdapter(private val words: List<Word>): RecyclerView.Adapter<WordAdapt
 
     override fun getItemCount() = words.size?:0
 
+    @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: WordViewHolder, position: Int) {
 
-        holder.view.text_view_word.text = words.get(position).wordName
+        holder.view.text_view_word.text = " ${words.get(position).wordName} "  // adding space at the beginning and at the end to avoid text cut
+
+        holder.view.text_view_translation.text = " ${words.get(position).trans1} "
 
     }
 
