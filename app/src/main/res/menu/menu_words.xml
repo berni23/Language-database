@@ -1,17 +1,25 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="com.berni.android.prototype1lanbase.ui.WordsListFragment"
-    android:title="@string/action_sortBy">
+    tools:context="com.berni.android.prototype1lanbase.ui.WordsListFragment">
+
+    <item
+        android:id="@+id/item_search"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        android:icon="@drawable/ic_search_black_24dp"
+        android:orderInCategory="0"
+        android:title="@string/info"
+        app:showAsAction="always|withText"/>
+
+
+
 
     <item
         android:id="@+id/item_sort"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-        android:icon="@drawable/ic_filter"
-
+        android:icon="@drawable/ic_sort_black_24dp"
         android:orderInCategory="1"
         android:title="@string/sort"
-        android:tooltipText="hi"
         app:showAsAction="always|withText">
 
 
@@ -19,7 +27,7 @@
 
             <item
                 android:id="@+id/last_added"
-                android:orderInCategory="2"
+                android:orderInCategory="0"
                 android:title="@string/last_added"
                 app:showAsAction="never" />
             <item
@@ -33,6 +41,22 @@
     </item>
 
 
+
+    <item
+        android:id="@+id/item_filter"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        android:icon="@drawable/ic_filter"
+        android:orderInCategory="2"
+        android:title="@string/info"
+        app:showAsAction="always|withText"/>
+
+    <item
+        android:id="@+id/item_info"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        android:icon="@drawable/ic_info_outline_black_24dp"
+        android:orderInCategory="3"
+        android:title="@string/info"
+        app:showAsAction="always|withText"/>
 
 </menu>
 

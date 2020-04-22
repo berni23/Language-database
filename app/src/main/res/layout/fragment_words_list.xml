@@ -5,26 +5,71 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:windowSoftInputMode="adjustResize"
     tools:context=".ui.WordsListFragment">
 
-
-    <TextView
-
-        android:id="@+id/numWords_textView"
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:autofillHints="category"
-        android:hint="40"
-        android:maxLines="1"
-        android:textSize="15sp"
-        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-        android:layout_marginStart="40dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.15"
-      />
+        app:cardCornerRadius="5dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginStart="5dp"
+        app:layout_constraintBottom_toTopOf="@id/recycler_view_words"
+        app:layout_constraintStart_toStartOf="parent">
 
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="10dp"
+            android:background="@android:color/white"
+            android:baselineAligned="false"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/text_view_numWords"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginStart="20dp"
+                android:fontFamily="@font/lato_regular"
+                android:text="@string/_40_words"/>
+                <!--
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />-->
+
+            <TextView
+                android:id="@+id/text_view_last_additions"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/lato_regular"
+                android:text="@string/last_added_on"/>
+
+             <!--   app:layout_constraintBottom_toTopOf="@id/text_view_lastDate"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/text_view_numWords" />-->
+
+            <TextView
+                android:id="@+id/text_view_lastDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/lato_regular"
+                android:text="@string/last_additions"/>
+
+                <!--
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/text_view_last_additions" />-->
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+    </androidx.cardview.widget.CardView>
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/VguideView"
@@ -41,21 +86,11 @@
         app:layout_constraintGuide_percent='0.4' />
 
     <androidx.recyclerview.widget.RecyclerView
-
-        android:id="@+id/recycler_view_words"
-        android:layout_marginTop = "150dp"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:id="@+id/recycler_view_words"
+        android:layout_marginTop = "150dp">
 
     </androidx.recyclerview.widget.RecyclerView>
-
-
-   <!-- app:layout_constraintBottom_toBottomOf="@id/HguideView"
-    app:layout_constraintEnd_toEndOf="@id/VguideView"
-    app:layout_constraintStart_toStartOf="@id/VguideView"
-    app:layout_constraintTop_toTopOf="@id/HguideView">-->
-
-
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

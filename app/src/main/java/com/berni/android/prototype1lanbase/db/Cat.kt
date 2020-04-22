@@ -37,7 +37,9 @@ data class Word (
     @ColumnInfo(name  = "translation")
     val trans1: String,
     @ColumnInfo(name  = "example")
-    val ex1: String?
+    val ex1: String?,
+    @ColumnInfo(name = "date")
+    val date:String
 
 
 )

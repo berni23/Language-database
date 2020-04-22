@@ -64,7 +64,7 @@
         android:layout_marginTop="650dp"
         android:clickable="true"
         android:focusable="true"
-        android:src="@drawable/ic_sort_black_24dp"
+        android:src="@drawable/ic_list_24dp"
         app:backgroundTint="@color/colorButton2"
         app:layout_constraintBottom_toBottomOf="@id/HguideWord"
         app:layout_constraintEnd_toEndOf="@id/VguideBtn"

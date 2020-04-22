@@ -17,4 +17,8 @@
     <string name="last_added">sort by last added</string>
     <string name="alphabetically">sort alphabetically</string>
     <string name="sort">sort</string>
+    <string name="info">information</string>
+    <string name="last_additions">Last additions:</string>
+    <string name="last_added_on">Last added on</string>
+    <string name="_40_words">40 words</string>
 </resources>

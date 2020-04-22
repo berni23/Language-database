@@ -43,7 +43,6 @@ class FirstFragment : BaseFragment(),KodeinAware {
 
     ): View? {
 
-
         return inflater.inflate(R.layout.fragment_first, container, false)  }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

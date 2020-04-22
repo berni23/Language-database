@@ -1,5 +1,6 @@
 package com.berni.android.prototype1lanbase.ui
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.*
 import android.widget.Adapter
@@ -25,7 +26,12 @@ import kotlinx.android.synthetic.*
 class WordsListFragment : BaseFragment(), KodeinAware {
 
     //lateinit var navController: NavController
+
+
     lateinit var categoryName: String
+     var lastAdded: List<Word?>? = null
+     var lastAdditionDate : String? = null
+
 
     var adapter : WordAdapter? = null
 
@@ -48,6 +54,7 @@ class WordsListFragment : BaseFragment(), KodeinAware {
         return inflater.inflate(R.layout.fragment_words_list, container, false)
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -60,13 +67,34 @@ class WordsListFragment : BaseFragment(), KodeinAware {
         viewModel = ViewModelProvider(this, viewModelFactory).get(MainViewModel::class.java)
 
         runBlocking(Dispatchers.Default){
-            adapter = WordAdapter( viewModel.wordsInCat(categoryName))
+
+            val wordsInCat: List<Word> =  viewModel.wordsInCat(categoryName)
+            adapter = WordAdapter(wordsInCat)
             recycler_view_words.adapter =adapter
             numWords = adapter!!.itemCount
 
+            lastAdded = listOf(wordsInCat.getOrNull(0),wordsInCat.getOrNull(1),wordsInCat.getOrNull(2))
+            lastAdditionDate = wordsInCat.getOrNull(0)?.date?:"no additions"
         }
 
-        numWords_textView.text = numWords.toString()
+          var lastAdditions = "Last additions :"
+
+         lastAdded?.forEach{
+
+             lastAdditions.plus(" ${it?.wordName},")
+
+
+         }
+
+         if(lastAdded?.elementAt(0)==null) {lastAdditions = "No words added yet"}
+
+
+          text_view_numWords.text =  " ${numWords.toString()} words"
+          lastAdditionDate.let{text_view_lastDate.text = "Last added on $lastAdditionDate"}
+          text_view_last_additions.text = lastAdditions
+
+              //"Last additions : ${lastAdded?.getOrNull(0)},${lastAdded?.getOrElse(1){""}},${lastAdded?.getOrNull(0)}"
+
     }
 
     override fun onCreateContextMenu(menu: ContextMenu, v: View, menuInfo: ContextMenu.ContextMenuInfo?) {

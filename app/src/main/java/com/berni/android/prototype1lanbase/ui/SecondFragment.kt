@@ -18,6 +18,9 @@ import kotlinx.coroutines.launch
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.closestKodein
 import org.kodein.di.generic.instance
+import java.text.SimpleDateFormat
+import java.util.*
+
 /**
  * A simple [Fragment] subclass as the second destination in the navigation.
  */
@@ -51,7 +54,6 @@ class SecondFragment : BaseFragment(),KodeinAware {
 
         (activity as AppCompatActivity).supportActionBar?.title = categoryName
 
-
         viewModel = ViewModelProvider(this, viewModelFactory).get(MainViewModel::class.java)
 
         //catName_textView.text = categoryName
@@ -60,6 +62,7 @@ class SecondFragment : BaseFragment(),KodeinAware {
 
             val theWord = word_editText.text.toString().trim()
             val translation1 = trans1_editText.text.toString().trim()
+            val date =  SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(Date())
 
             if (theWord.isEmpty()) {
 
@@ -79,7 +82,7 @@ class SecondFragment : BaseFragment(),KodeinAware {
 
             launch{
 
-                val word = Word(wordId(categoryName,theWord),categoryName,theWord,translation1,null)
+                val word = Word(wordId(categoryName,theWord),categoryName,theWord,translation1,null,date.toString())
                 viewModel.addWord(word)
 
             }
