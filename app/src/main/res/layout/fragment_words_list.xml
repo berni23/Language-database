@@ -9,6 +9,7 @@
 
 
     <TextView
+
         android:id="@+id/numWords_textView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -45,11 +46,11 @@
         android:id="@+id/recycler_view_words"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+
         app:layout_constraintBottom_toBottomOf="@id/HguideView"
         app:layout_constraintEnd_toEndOf="@id/VguideView"
         app:layout_constraintStart_toStartOf="@id/VguideView"
         app:layout_constraintTop_toTopOf="@id/HguideView">
-
 
     </androidx.recyclerview.widget.RecyclerView>
 

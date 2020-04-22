@@ -8,9 +8,12 @@
         android:id="@+id/item_sort"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
         android:icon="@drawable/ic_filter"
+
         android:orderInCategory="1"
-        android:title="@string/last_added"
-        app:showAsAction="always">
+        android:title="@string/sort"
+        android:tooltipText="hi"
+        app:showAsAction="always|withText">
+
 
         <menu>
 

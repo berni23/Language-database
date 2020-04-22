@@ -16,4 +16,5 @@
     <string name="action_sortBy">sort by</string>
     <string name="last_added">sort by last added</string>
     <string name="alphabetically">sort alphabetically</string>
+    <string name="sort">sort</string>
 </resources>
