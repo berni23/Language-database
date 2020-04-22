@@ -29,8 +29,8 @@ class WordsListFragment : BaseFragment(), KodeinAware {
 
 
     lateinit var categoryName: String
-     var lastAdded: List<Word?>? = null
-     var lastAdditionDate : String? = null
+    lateinit var lastAdded: List<Word?>
+    var lastAdditionDate : String? = null
 
 
     var adapter : WordAdapter? = null
@@ -60,42 +60,52 @@ class WordsListFragment : BaseFragment(), KodeinAware {
 
         recycler_view_words.setHasFixedSize(true)
 
-        recycler_view_words.layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
+        recycler_view_words.layoutManager =
+            LinearLayoutManager(context, RecyclerView.VERTICAL, false)
 
         // navController = Navigation.findNavController(view)xt
 
         viewModel = ViewModelProvider(this, viewModelFactory).get(MainViewModel::class.java)
 
-        runBlocking(Dispatchers.Default){
+        runBlocking(Dispatchers.Default) {
 
-            val wordsInCat: List<Word> =  viewModel.wordsInCat(categoryName)
+            val wordsInCat: List<Word> = viewModel.wordsInCat(categoryName)
             adapter = WordAdapter(wordsInCat)
-            recycler_view_words.adapter =adapter
+            recycler_view_words.adapter = adapter
             numWords = adapter!!.itemCount
 
-            lastAdded = listOf(wordsInCat.getOrNull(0),wordsInCat.getOrNull(1),wordsInCat.getOrNull(2))
-            lastAdditionDate = wordsInCat.getOrNull(0)?.date?:"no additions"
+            lastAdded =
+                listOf(wordsInCat.getOrNull(0), wordsInCat.getOrNull(1), wordsInCat.getOrNull(2))
+            lastAdditionDate = wordsInCat.getOrNull(0)?.date ?: "no additions"
         }
 
-          var lastAdditions = "Last additions :"
+        var lastAdditions = "Last additions: "
 
-         lastAdded?.forEach{
+        lastAdded.forEach {
 
-             lastAdditions.plus(" ${it?.wordName},")
+            if (it?.wordName != null) {
 
+                lastAdditions += "${it.wordName},"
 
-         }
+            }
+        }
 
-         if(lastAdded?.elementAt(0)==null) {lastAdditions = "No words added yet"}
+        lastAdditions = lastAdditions.dropLast(1)
 
+        //   Toast.makeText(view.context, " word = ${it?.wordName}", Toast.LENGTH_SHORT).show() }
 
-          text_view_numWords.text =  " ${numWords.toString()} words"
-          lastAdditionDate.let{text_view_lastDate.text = "Last added on $lastAdditionDate"}
-          text_view_last_additions.text = lastAdditions
+        if (lastAdded.elementAt(0)?.wordName == "null") {
+            lastAdditions = "No words added yet"
+        }
+
+        text_view_numWords.text = " ${numWords.toString()} words"
+        lastAdditionDate.let { text_view_lastDate.text = "Last added on $lastAdditionDate" }
+        text_view_last_additions.text = lastAdditions
+
+    }
 
               //"Last additions : ${lastAdded?.getOrNull(0)},${lastAdded?.getOrElse(1){""}},${lastAdded?.getOrNull(0)}"
 
-    }
 
     override fun onCreateContextMenu(menu: ContextMenu, v: View, menuInfo: ContextMenu.ContextMenuInfo?) {
 

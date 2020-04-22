@@ -26,13 +26,12 @@ interface CatDao {
     fun getAllWords () : LiveData<List<Word>>
 
 
-    @Query("SELECT* FROM Word WHERE catParent LIKE :category ORDER BY date DESC")
+    @Query("SELECT* FROM Word WHERE catParent LIKE :category ORDER BY date ASC")
     fun wordsInCat(category: String) : List<Word>
 
 
     @Query("SELECT* FROM Word WHERE catParent LIKE :category ORDER BY wordName")
     fun wordsInCatAlphabetic(category: String) : List<Word>
-
 
     // delete
 
