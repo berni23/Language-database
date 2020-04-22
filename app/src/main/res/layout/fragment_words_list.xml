@@ -59,8 +59,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="10dp"
-                android:fontFamily="@font/lato_regular"
-                android:text="@string/last_additions"/>
+                android:fontFamily="@font/lato_regular" />
 
                 <!--
                 app:layout_constraintBottom_toBottomOf="parent"

@@ -30,6 +30,12 @@
                 android:orderInCategory="0"
                 android:title="@string/last_added"
                 app:showAsAction="never" />
+
+            <item
+                android:id="@+id/first_added"
+                android:orderInCategory="0"
+                android:title="@string/first_added"
+                app:showAsAction="never" />
             <item
                 android:id="@+id/alphabetically"
                 android:orderInCategory="1"

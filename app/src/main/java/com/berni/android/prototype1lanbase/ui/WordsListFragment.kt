@@ -30,7 +30,7 @@ class WordsListFragment : BaseFragment(), KodeinAware {
 
     lateinit var categoryName: String
     lateinit var lastAdded: List<Word?>
-    var lastAdditionDate : String? = null
+    var lastAdditionDate : String? = ""
 
 
     var adapter : WordAdapter? = null
@@ -70,13 +70,13 @@ class WordsListFragment : BaseFragment(), KodeinAware {
         runBlocking(Dispatchers.Default) {
 
             val wordsInCat: List<Word> = viewModel.wordsInCat(categoryName)
-            adapter = WordAdapter(wordsInCat)
+            adapter = WordAdapter(wordsInCat.reversed()) // sorting by last added
             recycler_view_words.adapter = adapter
             numWords = adapter!!.itemCount
 
             lastAdded =
                 listOf(wordsInCat.getOrNull(0), wordsInCat.getOrNull(1), wordsInCat.getOrNull(2))
-            lastAdditionDate = wordsInCat.getOrNull(0)?.date ?: "no additions"
+            lastAdditionDate = wordsInCat.getOrNull(0)?.date
         }
 
         var lastAdditions = "Last additions: "
@@ -94,12 +94,13 @@ class WordsListFragment : BaseFragment(), KodeinAware {
 
         //   Toast.makeText(view.context, " word = ${it?.wordName}", Toast.LENGTH_SHORT).show() }
 
-        if (lastAdded.elementAt(0)?.wordName == "null") {
+        if (lastAdded.elementAt(0)?.wordName == null) {
             lastAdditions = "No words added yet"
         }
 
+        val stringLastAdditionDate = "Last addition on $lastAdditionDate"
         text_view_numWords.text = " ${numWords.toString()} words"
-        lastAdditionDate.let { text_view_lastDate.text = "Last added on $lastAdditionDate" }
+        lastAdditionDate?.let{text_view_lastDate.text =stringLastAdditionDate}
         text_view_last_additions.text = lastAdditions
 
     }
@@ -145,11 +146,22 @@ class WordsListFragment : BaseFragment(), KodeinAware {
 
             R.id.last_added ->  {
 
-               runBlocking(Dispatchers.Default){sortedLastAdded = viewModel.wordsInCat(categoryName)}
+               runBlocking(Dispatchers.Default){sortedLastAdded = viewModel.wordsInCat(categoryName).reversed()}
                     recycler_view_words.adapter = WordAdapter(sortedLastAdded!!)
 
                 Toast.makeText(context, "sorting by last added..", Toast.LENGTH_SHORT).show() }
-        }
+
+
+            R.id.first_added ->{
+
+
+                runBlocking(Dispatchers.Default){sortedLastAdded = viewModel.wordsInCat(categoryName)}
+                recycler_view_words.adapter = WordAdapter(sortedLastAdded!!)
+
+                Toast.makeText(context, "sorting by first added..", Toast.LENGTH_SHORT).show() }
+
+            }
+
 
         return super.onOptionsItemSelected(item)
     }
