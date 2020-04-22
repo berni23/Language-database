@@ -31,7 +31,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent='0.20' />
+        app:layout_constraintGuide_percent='0.50' />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/HguideView"
@@ -40,20 +40,20 @@
         android:orientation="horizontal"
         app:layout_constraintGuide_percent='0.4' />
 
-
-
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler_view_words"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
 
-        app:layout_constraintBottom_toBottomOf="@id/HguideView"
-        app:layout_constraintEnd_toEndOf="@id/VguideView"
-        app:layout_constraintStart_toStartOf="@id/VguideView"
-        app:layout_constraintTop_toTopOf="@id/HguideView">
+        android:id="@+id/recycler_view_words"
+        android:layout_marginTop = "150dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
     </androidx.recyclerview.widget.RecyclerView>
 
+
+   <!-- app:layout_constraintBottom_toBottomOf="@id/HguideView"
+    app:layout_constraintEnd_toEndOf="@id/VguideView"
+    app:layout_constraintStart_toStartOf="@id/VguideView"
+    app:layout_constraintTop_toTopOf="@id/HguideView">-->
 
 
 
