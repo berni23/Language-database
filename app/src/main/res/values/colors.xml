@@ -4,4 +4,13 @@
     <color name="colorPrimaryDark">#3700B3</color>
     <color name="colorAccent">#03DAC5</color>
     <color name= "colorButton2">#B7C8E0</color>
+    <color name= "colorPrimary2">#128C7E</color>
+    <color name = "colorPrimaryDark2">#075E54</color>
+    <color name = "colorAccent2">#25D366</color>
+    <color name = "white">#FFFFFF</color>
+    <color name = "colorPrimary3">#00ACC1</color>
+    <color name = "colorPrimaryDark3">#007280</color>
+    <color name = "colorAccent3">#F19C9A</color>
+    
+
 </resources>
