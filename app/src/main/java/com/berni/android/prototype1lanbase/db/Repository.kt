@@ -19,9 +19,13 @@ class Repository(private val catDao: CatDao, val cat: Cat, val word: Word) {
 
         fun filterExample(currentCatName: String) : List<Word> {return catDao.filterExample(currentCatName)}
 
+        fun filterNoExample(currentCatName:String) :List<Word> {return catDao.filterNoExample(currentCatName)}
+
         fun deleteWordsInCat(currentCatName: String)  {catDao.deleteWordsInCat(currentCatName)}
 
         fun deleteCat(currentCat:Cat) {catDao.deleteCat(currentCat)}
+
+
 
     companion object {
 

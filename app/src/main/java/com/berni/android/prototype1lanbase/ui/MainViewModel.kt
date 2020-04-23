@@ -25,7 +25,10 @@ class MainViewModel(private val repos: Repository ) : ViewModel(){
 
     fun filterExample(currentCatName: String)  = repos.filterExample(currentCatName)
 
+    fun filterNoExample(currentCatName:String) = repos.filterNoExample(currentCatName)
+
     val allCats: LiveData<List<Cat>> =     repos.getAllCats()
+
     val allWords: LiveData<List<Word>> =   repos.getAllWords()
 
    // var catToBeDeleted: MutableLiveData<Cat>? = MutableLiveData(Cat("null","today"))

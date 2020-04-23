@@ -66,7 +66,9 @@ class SecondFragment : BaseFragment(),KodeinAware {
 
             val theWord = word_editText.text.toString().trim()
             val translation1 = trans1_editText.text.toString().trim()
-            val example1 = ex1_editText.text.toString().trim()
+            var example1 : String? = ex1_editText.text.toString().trim()
+
+            if(example1!!.isEmpty()) {example1 =null}
 
             val date =  SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(Date())
             
@@ -97,14 +99,8 @@ class SecondFragment : BaseFragment(),KodeinAware {
 
             word_editText.text.clear()
             trans1_editText.text.clear()
+            ex1_editText.text.clear()
 
-        }
-
-        btn_displayWords.setOnClickListener{
-
-            val bundle = bundleOf("categoryName" to categoryName)
-
-            Navigation.findNavController(it).navigate(R.id.actionWordsList,bundle)
         }
     }
 

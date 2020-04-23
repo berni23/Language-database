@@ -104,16 +104,6 @@ class WordsListFragment : BaseFragment(), KodeinAware {
 
     }
 
-              //"Last additions : ${lastAdded?.getOrNull(0)},${lastAdded?.getOrElse(1){""}},${lastAdded?.getOrNull(0)}"
-
-  /**  override fun onCreateContextMenu(menu: ContextMenu, v: View, menuInfo: ContextMenu.ContextMenuInfo?) {
-
-        super.onCreateContextMenu(menu, v, menuInfo)
-
-        MenuInflater(v.context).inflate(R.menu.menu_cat, menu)
-
-    }**/
-
         override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
 
                super.onCreateOptionsMenu(menu, inflater)
@@ -161,8 +151,15 @@ class WordsListFragment : BaseFragment(), KodeinAware {
 
                 Toast.makeText(context, "filtering words with an example..", Toast.LENGTH_SHORT).show() }
 
-        }
 
+            R.id.noExample ->{
+
+                runBlocking(Dispatchers.Default){sorted = viewModel.filterNoExample(categoryName)}
+                recycler_view_words.adapter = WordAdapter(sorted!!)
+
+                    Toast.makeText(context, "filtering words without example..", Toast.LENGTH_SHORT).show() }
+
+        }
 
         return super.onOptionsItemSelected(item)
     }

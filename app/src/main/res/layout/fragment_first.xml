@@ -7,6 +7,9 @@
     android:layout_height="match_parent"
     tools:context=".ui.FirstFragment">
 
+
+
+
     <androidx.recyclerview.widget.RecyclerView
 
         android:id="@+id/recycler_view_menu"
@@ -69,6 +72,21 @@
    </androidx.cardview.widget.CardView>
 
 
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/VguideBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.8" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/HguideBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.9" />
+
+
     <com.google.android.material.floatingactionbutton.FloatingActionButton
 
         android:id="@+id/btn_add"
@@ -76,12 +94,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:clickable="true"
-        app:layout_constraintHorizontal_bias="0.8"
-        app:layout_constraintVertical_bias="0.9"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/HguideBtn"
+        app:layout_constraintEnd_toStartOf="@id/VguideBtn"
+        app:layout_constraintStart_toEndOf="@id/VguideBtn"
+        app:layout_constraintTop_toTopOf="@id/HguideBtn"
         app:backgroundTint="#1EC3D8"
         android:focusable="true" />
 

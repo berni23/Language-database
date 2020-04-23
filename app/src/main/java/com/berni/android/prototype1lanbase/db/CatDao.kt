@@ -42,6 +42,12 @@ interface CatDao {
     @Query("SELECT* FROM Word WHERE catParent LIKE :category AND example IS NOT NULL ")
     fun filterExample(category:String) :List<Word>
 
+    //get words with no example
+
+    @Query("SELECT* FROM Word WHERE catParent LIKE :category AND example IS NULL ")
+    fun filterNoExample(category:String) :List<Word>
+
+
     // delete all  words from a given category
 
     @Query("DELETE FROM Word WHERE catParent LIKE :category")
