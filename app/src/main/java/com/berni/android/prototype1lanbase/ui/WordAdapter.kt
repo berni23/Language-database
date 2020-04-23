@@ -27,7 +27,6 @@ class WordAdapter(private val words: List<Word>): RecyclerView.Adapter<WordAdapt
     override fun onBindViewHolder(holder: WordViewHolder, position: Int) {
 
         holder.view.text_view_word.text = " ${words.get(position).wordName} "  // adding space at the beginning and at the end to avoid text cut
-
         holder.view.text_view_translation.text = " ${words.get(position).trans1} "
 
     }

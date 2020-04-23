@@ -19,9 +19,11 @@ class MainViewModel(private val repos: Repository ) : ViewModel(){
 
     fun deleteCat(currentCat: Cat) = repos.deleteCat(currentCat)
 
-    suspend fun wordsInCat(currentCatName:String) = repos.wordsInCat(currentCatName)
+    fun wordsInCat(currentCatName:String) = repos.wordsInCat(currentCatName)
 
     fun wordsInCatAlphabetic(currentCatName: String) = repos.wordsInCatAlphabetic(currentCatName)
+
+    fun filterExample(currentCatName: String)  = repos.filterExample(currentCatName)
 
     val allCats: LiveData<List<Cat>> =     repos.getAllCats()
     val allWords: LiveData<List<Word>> =   repos.getAllWords()

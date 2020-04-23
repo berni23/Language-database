@@ -107,7 +107,6 @@ class WordsListFragment : BaseFragment(), KodeinAware {
 
               //"Last additions : ${lastAdded?.getOrNull(0)},${lastAdded?.getOrElse(1){""}},${lastAdded?.getOrNull(0)}"
 
-
     override fun onCreateContextMenu(menu: ContextMenu, v: View, menuInfo: ContextMenu.ContextMenuInfo?) {
 
         super.onCreateContextMenu(menu, v, menuInfo)
@@ -115,7 +114,6 @@ class WordsListFragment : BaseFragment(), KodeinAware {
         MenuInflater(v.context).inflate(R.menu.menu_cat, menu)
 
     }
-
 
         override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
 
@@ -128,26 +126,23 @@ class WordsListFragment : BaseFragment(), KodeinAware {
 
         override fun onOptionsItemSelected(item: MenuItem): Boolean {
 
-            var sortedAlpha: List<Word>? = null
-            var sortedLastAdded: List<Word>? = null
+            var sorted: List<Word>? = null
 
         when (item.itemId) {
 
-
             R.id.alphabetically -> {
 
-                runBlocking(Dispatchers.Default){sortedAlpha = viewModel.wordsInCatAlphabetic(categoryName)}
+                runBlocking(Dispatchers.Default){sorted = viewModel.wordsInCatAlphabetic(categoryName)}
 
-                    recycler_view_words.adapter = WordAdapter(sortedAlpha!!)
+                    recycler_view_words.adapter = WordAdapter(sorted!!)
 
                     Toast.makeText(context, "sorting by alphabetic order..", Toast.LENGTH_SHORT).show()}
 
 
+            R.id.last_added ->{
 
-            R.id.last_added ->  {
-
-               runBlocking(Dispatchers.Default){sortedLastAdded = viewModel.wordsInCat(categoryName).reversed()}
-                    recycler_view_words.adapter = WordAdapter(sortedLastAdded!!)
+               runBlocking(Dispatchers.Default){sorted = viewModel.wordsInCat(categoryName).reversed()}
+                    recycler_view_words.adapter = WordAdapter(sorted!!)
 
                 Toast.makeText(context, "sorting by last added..", Toast.LENGTH_SHORT).show() }
 
@@ -155,12 +150,21 @@ class WordsListFragment : BaseFragment(), KodeinAware {
             R.id.first_added ->{
 
 
-                runBlocking(Dispatchers.Default){sortedLastAdded = viewModel.wordsInCat(categoryName)}
-                recycler_view_words.adapter = WordAdapter(sortedLastAdded!!)
+                runBlocking(Dispatchers.Default){sorted = viewModel.wordsInCat(categoryName)}
+                recycler_view_words.adapter = WordAdapter(sorted!!)
 
                 Toast.makeText(context, "sorting by first added..", Toast.LENGTH_SHORT).show() }
 
-            }
+
+            R.id.withExample ->{
+
+
+                runBlocking(Dispatchers.Default){sorted = viewModel.filterExample(categoryName)}
+                recycler_view_words.adapter = WordAdapter(sorted!!)
+
+                Toast.makeText(context, "filtering words with an example..", Toast.LENGTH_SHORT).show() }
+
+        }
 
 
         return super.onOptionsItemSelected(item)

@@ -17,6 +17,8 @@ class Repository(private val catDao: CatDao, val cat: Cat, val word: Word) {
 
         fun wordsInCatAlphabetic(currentCatName: String) : List<Word> { return catDao.wordsInCatAlphabetic(currentCatName)}
 
+        fun filterExample(currentCatName: String) : List<Word> {return catDao.filterExample(currentCatName)}
+
         fun deleteWordsInCat(currentCatName: String)  {catDao.deleteWordsInCat(currentCatName)}
 
         fun deleteCat(currentCat:Cat) {catDao.deleteCat(currentCat)}

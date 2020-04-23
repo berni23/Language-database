@@ -22,4 +22,12 @@
     <string name="last_added_on">Last added on</string>
     <string name="_40_words">40 words</string>
     <string name="first_added">sort by first added</string>
+    <string name="translation">translation</string>
+    <string name="example">example (optional)</string>
+    <string name="withExample">words with example</string>
+    <string name="withDefinition">words with definition</string>
+    <string name="noExample">no example</string>
+    <string name="noDefinition">no definition</string>
+    <string name="create">create</string>
+    <string name="cancel">cancel</string>
 </resources>

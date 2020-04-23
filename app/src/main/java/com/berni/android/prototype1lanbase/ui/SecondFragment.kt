@@ -62,8 +62,10 @@ class SecondFragment : BaseFragment(),KodeinAware {
 
             val theWord = word_editText.text.toString().trim()
             val translation1 = trans1_editText.text.toString().trim()
-            val date =  SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(Date())
+            val example1 = ex1_editText.text.toString().trim()
 
+            val date =  SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(Date())
+            
             if (theWord.isEmpty()) {
 
                 word_editText.error = "word required"
@@ -82,7 +84,7 @@ class SecondFragment : BaseFragment(),KodeinAware {
 
             launch{
 
-                val word = Word(wordId(categoryName,theWord),categoryName,theWord,translation1,null,date.toString())
+                val word = Word(wordId(categoryName,theWord),categoryName,theWord,translation1,example1,date.toString())
                 viewModel.addWord(word)
 
             }

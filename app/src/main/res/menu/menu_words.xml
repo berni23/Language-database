@@ -20,7 +20,6 @@
         android:title="@string/sort"
         app:showAsAction="always|withText">
 
-
         <menu>
 
             <item
@@ -53,7 +52,41 @@
         android:iconTint="@color/white"
         android:orderInCategory="2"
         android:title="@string/info"
-        app:showAsAction="always|withText"/>
+        app:showAsAction="always|withText">
+
+
+        <menu>
+
+            <item
+                android:id="@+id/withExample"
+                android:orderInCategory="1"
+                android:title="@string/withExample"
+                app:showAsAction="never"/>
+
+            <item
+                android:id="@+id/noExample"
+                android:orderInCategory="1"
+                android:title="@string/noExample"
+                app:showAsAction="never"/>
+
+
+            <item
+                android:id="@+id/withDefinition"
+                android:orderInCategory="1"
+                android:title="@string/withDefinition"
+                app:showAsAction="never"/>
+
+
+            <item
+                android:id="@+id/noDefinition"
+                android:orderInCategory="1"
+                android:title="@string/noDefinition"
+                app:showAsAction="never"/>
+
+        </menu>
+
+    </item>
+
 
     <item
         android:id="@+id/item_info"

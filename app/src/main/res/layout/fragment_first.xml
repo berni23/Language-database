@@ -54,7 +54,7 @@
              android:clickable="true"
              android:layout_marginTop="80dp"
              android:textSize="15sp"
-             android:text="create" />
+             android:text="@string/create" />
 
          <Button
              android:id="@+id/btnCancel"
@@ -63,7 +63,7 @@
              android:clickable="true"
              android:layout_marginStart="100dp"
              android:layout_marginTop="80dp"
-             android:text="cancel"
+             android:text="@string/cancel"
              android:focusable="true" />
 
 
@@ -83,7 +83,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:backgroundTint="@color/colorButton2"
+        app:backgroundTint="@color/colorAccent3"
         android:focusable="true" />
 
 

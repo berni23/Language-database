@@ -26,7 +26,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent='0.8' />
+        app:layout_constraintGuide_percent="0.78" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/HguideBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.88" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/HguideWord"
@@ -43,36 +50,11 @@
         app:layout_constraintGuide_percent="0.3" />
 
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/btn_save"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:clickable="true"
-        android:focusable="true"
-        android:src="@drawable/ic_check_black_24dp"
-        app:backgroundTint="@color/colorAccent3"
-        app:layout_constraintBottom_toBottomOf="@id/HguideWord"
-        app:layout_constraintEnd_toEndOf="@id/VguideBtn"
-        app:layout_constraintStart_toStartOf="@id/VguideBtn"
-        app:layout_constraintTop_toTopOf="@id/HguideWord" />
 
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/btn_displayWords"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="650dp"
-        android:clickable="true"
-        android:focusable="true"
-        android:src="@drawable/ic_list_24dp"
-        app:backgroundTint="@color/colorAccent3"
-        app:layout_constraintBottom_toBottomOf="@id/HguideWord"
-        app:layout_constraintEnd_toEndOf="@id/VguideBtn"
-        app:layout_constraintStart_toStartOf="@id/VguideBtn"
-        app:layout_constraintTop_toBottomOf="@id/btn_save" />
 
 
-    <EditText
+ <EditText
         android:id="@+id/word_editText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -89,14 +71,13 @@
 
 
     <EditText
-
         android:id="@+id/trans1_editText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="100dp"
         android:autofillHints="translation"
         android:drawableStart="@drawable/ic_item"
-        android:hint="translation"
+        android:hint="@string/translation"
         android:inputType="text"
         android:maxLines="1"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
@@ -104,6 +85,52 @@
         app:layout_constraintEnd_toEndOf="@id/word_editText"
         app:layout_constraintStart_toStartOf="@id/VguideWord"
         app:layout_constraintTop_toTopOf="@id/HguideWord" />
+
+
+ <EditText
+
+     android:id="@+id/ex1_editText"
+     android:layout_width="wrap_content"
+     android:layout_height="wrap_content"
+     android:layout_marginTop="200dp"
+     android:autofillHints="example"
+     android:drawableStart="@drawable/ic_item"
+     android:hint="@string/example"
+     android:inputType="text"
+     android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+     app:layout_constraintBottom_toBottomOf="@id/trans1_editText"
+     app:layout_constraintEnd_toEndOf="@id/trans1_editText"
+     app:layout_constraintStart_toStartOf="@id/VguideWord"
+     app:layout_constraintTop_toTopOf="@id/HguideWord" />
+
+
+ <com.google.android.material.floatingactionbutton.FloatingActionButton
+     android:id="@+id/btn_displayWords"
+     android:layout_width="wrap_content"
+     android:layout_height="wrap_content"
+     android:clickable="true"
+     android:focusable="true"
+     android:src="@drawable/ic_list_24dp"
+     app:backgroundTint="@color/colorAccent3"
+     android:layout_marginStart="10dp"
+     app:layout_constraintBottom_toBottomOf="@id/HguideBtn"
+     app:layout_constraintEnd_toStartOf="@id/VguideBtn"
+     app:layout_constraintStart_toEndOf="@id/btn_save"
+     app:layout_constraintTop_toTopOf="@id/HguideBtn" />
+
+
+ <com.google.android.material.floatingactionbutton.FloatingActionButton
+     android:id="@+id/btn_save"
+     android:layout_width="wrap_content"
+     android:layout_height="wrap_content"
+     android:clickable="true"
+     android:focusable="true"
+     android:src="@drawable/ic_save_black_24dp"
+     app:backgroundTint="@color/colorAccent3"
+     app:layout_constraintBottom_toBottomOf="@id/HguideBtn"
+     app:layout_constraintEnd_toStartOf="@id/btn_displayWords"
+     app:layout_constraintStart_toEndOf="@id/VguideBtn"
+     app:layout_constraintTop_toTopOf="@id/HguideBtn" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
