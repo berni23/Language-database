@@ -10,7 +10,8 @@
     <color name = "white">#FFFFFF</color>
     <color name = "colorPrimary3">#00ACC1</color>
     <color name = "colorPrimaryDark3">#007280</color>
-    <color name = "colorAccent3">#F19C9A</color>
-    
+    <color name = "colorAccent3">#9ED6F1</color>
+    <color name = "colorButton3">#1EC3D8</color>
+
 
 </resources>

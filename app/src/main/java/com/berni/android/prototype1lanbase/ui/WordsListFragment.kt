@@ -27,7 +27,6 @@ class WordsListFragment : BaseFragment(), KodeinAware {
 
     //lateinit var navController: NavController
 
-
     lateinit var categoryName: String
     lateinit var lastAdded: List<Word?>
     var lastAdditionDate : String? = ""
@@ -69,8 +68,8 @@ class WordsListFragment : BaseFragment(), KodeinAware {
 
         runBlocking(Dispatchers.Default) {
 
-            val wordsInCat: List<Word> = viewModel.wordsInCat(categoryName)
-            adapter = WordAdapter(wordsInCat.reversed()) // sorting by last added
+            val wordsInCat: List<Word> = viewModel.wordsInCat(categoryName).reversed()
+            adapter = WordAdapter(wordsInCat) // sorting by last added
             recycler_view_words.adapter = adapter
             numWords = adapter!!.itemCount
 
@@ -85,7 +84,7 @@ class WordsListFragment : BaseFragment(), KodeinAware {
 
             if (it?.wordName != null) {
 
-                lastAdditions += "${it.wordName},"
+                lastAdditions += " ${it.wordName},"
 
             }
         }
@@ -107,20 +106,18 @@ class WordsListFragment : BaseFragment(), KodeinAware {
 
               //"Last additions : ${lastAdded?.getOrNull(0)},${lastAdded?.getOrElse(1){""}},${lastAdded?.getOrNull(0)}"
 
-    override fun onCreateContextMenu(menu: ContextMenu, v: View, menuInfo: ContextMenu.ContextMenuInfo?) {
+  /**  override fun onCreateContextMenu(menu: ContextMenu, v: View, menuInfo: ContextMenu.ContextMenuInfo?) {
 
         super.onCreateContextMenu(menu, v, menuInfo)
 
         MenuInflater(v.context).inflate(R.menu.menu_cat, menu)
 
-    }
+    }**/
 
         override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
 
                super.onCreateOptionsMenu(menu, inflater)
                inflater.inflate(R.menu.menu_words, menu)
-
-            // menu.setIcon(ContextCompat.getDrawable(context!!, R.drawable.ic_add_black_24dp));
 
     }
 

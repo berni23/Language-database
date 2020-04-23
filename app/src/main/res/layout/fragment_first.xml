@@ -37,7 +37,6 @@
 
 
          <EditText
-
              android:hint="write the new category "
              android:autofillHints="write the new category "
              android:focusable="true"
@@ -83,7 +82,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:backgroundTint="@color/colorAccent3"
+        app:backgroundTint="#1EC3D8"
         android:focusable="true" />
 
 

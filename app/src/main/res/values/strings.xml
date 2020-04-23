@@ -30,4 +30,5 @@
     <string name="noDefinition">no definition</string>
     <string name="create">create</string>
     <string name="cancel">cancel</string>
+    <string name="go_to_words_list">go to words list</string>
 </resources>

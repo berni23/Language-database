@@ -87,7 +87,7 @@ class CatAdapter(private val cats: List<Cat>, val viewModel: MainViewModel,
 
                 //TODO : change the name in the database when the category has been renamed
 
-                holder.view.text_view_title.setFocusable(true)
+                holder.view.text_view_title.isFocusable = true
                 holder.view.text_view_title.isFocusableInTouchMode = true
 
                 Toast.makeText(v?.context, "renaming..", Toast.LENGTH_SHORT).show()

@@ -36,8 +36,6 @@ class FirstFragment : BaseFragment(),KodeinAware {
 
     override fun onCreateView(
 
-
-
     inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
 
