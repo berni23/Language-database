@@ -19,11 +19,10 @@ import org.kodein.di.KodeinAware
 import org.kodein.di.generic.instance
 import kotlin.coroutines.CoroutineContext
 
-class CatAdapter(private val cats: List<Cat>, val viewModel: MainViewModel,
+class CatAdapter(private val cats: List<Cat>, private val viewModel: MainViewModel,
                  override val coroutineContext: CoroutineContext
 ) : RecyclerView.Adapter<CatAdapter.CatViewHolder>(),
     View.OnCreateContextMenuListener, CoroutineScope {
-
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CatViewHolder {
 
@@ -33,9 +32,7 @@ class CatAdapter(private val cats: List<Cat>, val viewModel: MainViewModel,
     }
 
     override fun onCreateContextMenu(menu: ContextMenu, v: View?, menuInfo: ContextMenuInfo?) {
-
         MenuInflater(v?.context).inflate(R.menu.menu_cat, menu)
-
     }
 
     override fun getItemCount() = cats.size
@@ -73,7 +70,6 @@ class CatAdapter(private val cats: List<Cat>, val viewModel: MainViewModel,
                         }
 
                         Toast.makeText(v?.context, "deleting confirmed..", Toast.LENGTH_SHORT).show()
-
                     }
 
                     setNegativeButton("No") { _, _ ->

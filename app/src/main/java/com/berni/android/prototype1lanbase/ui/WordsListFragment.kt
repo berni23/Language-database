@@ -24,15 +24,13 @@ import org.kodein.di.generic.instance
 class WordsListFragment : BaseFragment(), KodeinAware {
 
     //lateinit var navController: NavController
+    private lateinit var categoryName: String
+    private lateinit var lastAdded: List<Word?>
+    lateinit var displayedWords: List<Word>
 
-    lateinit var categoryName: String
-    lateinit var lastAdded: List<Word?>
-
-    var lastAdditionDate : String? = ""
-
-    var adapter : WordAdapter? = null
-
-    var numWords: Int? = null
+    private  var lastAdditionDate : String? = ""
+    private  var adapter : WordAdapter? = null
+    private  var numWords: Int? = null
 
     override val kodein by closestKodein()
 
@@ -45,9 +43,7 @@ class WordsListFragment : BaseFragment(), KodeinAware {
     ): View? {
 
         setHasOptionsMenu(true)
-
         categoryName = arguments?.getString("categoryName").toString()
-
         return inflater.inflate(R.layout.fragment_words_list, container, false)
     }
 
@@ -55,32 +51,25 @@ class WordsListFragment : BaseFragment(), KodeinAware {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        lateinit var wordsInCat: List<Word>
 
         recycler_view_words.setHasFixedSize(true)
         recycler_view_words.layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
 
         viewModel = ViewModelProvider(this, viewModelFactory).get(MainViewModel::class.java)
-
-        runBlocking(Dispatchers.Default) { wordsInCat= viewModel.wordsInCat(categoryName).reversed() }
-
-        adapter = WordAdapter(wordsInCat,coroutineContext) // sorting by last added
-
+        runBlocking(Dispatchers.Default) { displayedWords= viewModel.wordsInCat(categoryName).reversed() }
+        adapter = WordAdapter(displayedWords) // sorting by last added
         recycler_view_words.adapter = adapter
         numWords = adapter!!.itemCount
 
-        lastAdded = listOf(wordsInCat.getOrNull(0), wordsInCat.getOrNull(1), wordsInCat.getOrNull(2))
-        lastAdditionDate = wordsInCat.getOrNull(0)?.date
-
+        lastAdded = listOf(displayedWords.getOrNull(0), displayedWords.getOrNull(1), displayedWords.getOrNull(2))
+        lastAdditionDate = displayedWords.getOrNull(0)?.date
         var lastAdditions = "Last additions: "
-
-        lastAdded.forEach {   if (it?.wordName != null) {   lastAdditions += " ${it.wordName},"    }}
-
+        lastAdded.forEach { if (it?.wordName != null) { lastAdditions += " ${it.wordName},"  } }
         lastAdditions = lastAdditions.dropLast(1)
 
         //   Toast.makeText(view.context, " word = ${it?.wordName}", Toast.LENGTH_SHORT).show() }
 
-        if (lastAdded.elementAt(0)?.wordName == null) {  lastAdditions = "No words added yet"  }
+        if (lastAdded.elementAt(0)?.wordName == null) { lastAdditions = "No words added yet"  }
 
         val stringLastAdditionDate = "Last addition on $lastAdditionDate"
         text_view_numWords.text = " ${numWords.toString()} words"
@@ -89,85 +78,90 @@ class WordsListFragment : BaseFragment(), KodeinAware {
 
     }
 
-        override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.menu_words, menu)
+
+        val searchView: SearchView = menu.findItem(R.id.item_search).actionView as SearchView
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
 
 
-            inflater.inflate(R.menu.menu_words, menu)
+              //  val wordsList = adapter?.words
+                var newWordsList = mutableListOf<Word>()
 
-            val searchItem = menu.findItem(R.id.item_search)
-            val searchView = searchItem.actionView as SearchView
-            searchView.queryHint = "Search word"
+                if (newText.isNullOrEmpty()) {
 
-            searchView.setOnQueryTextListener(object :
-                SearchView.OnQueryTextListener {
-                override fun onQueryTextSubmit(query: String): Boolean {
-                    return false
+                    adapter = WordAdapter(newWordsList)
+
+                    // emit toast , no results found
+
+                   // recycler_view_words.adapter = WordAdapter(wordsList)
+
                 }
 
-                override fun onQueryTextChange(newText: String): Boolean {
+                else {
+                    displayedWords.forEach {
 
-                    adapter!!.filter.filter(newText)
+                        if (it.wordName.startsWith(newText!!)) {
 
-                    recycler_view_words.adapter = adapter
+                            newWordsList.add(it)
 
-                    return false
+                        }
+                    }
+
+                    adapter = WordAdapter(newWordsList)
                 }
-            })
 
-            return super.onCreateOptionsMenu(menu, inflater)
-    }
+                recycler_view_words.adapter = adapter
 
 
-        override fun onOptionsItemSelected(item: MenuItem): Boolean {
+                return false
+            }
 
-            var sorted: List<Word>? = null
+        })
 
+        return super.onCreateOptionsMenu(menu, inflater)
+     }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+
+        var message :String? =  null
         when (item.itemId) {
 
             R.id.alphabetically -> {
+                runBlocking(Dispatchers.Default){
 
-                runBlocking(Dispatchers.Default){sorted = viewModel.wordsInCatAlphabetic(categoryName)}
-
-                    recycler_view_words.adapter = WordAdapter(sorted!!,coroutineContext)
-
-                    Toast.makeText(context, "sorting by alphabetic order..", Toast.LENGTH_SHORT).show()}
-
+                    displayedWords = viewModel.wordsInCatAlphabetic(categoryName)
+                }
+                message = "sorting by alphabetic order.." }
 
             R.id.last_added ->{
-
-               runBlocking(Dispatchers.Default){sorted = viewModel.wordsInCat(categoryName).reversed()}
-                    recycler_view_words.adapter = WordAdapter(sorted!!,coroutineContext)
-
-                Toast.makeText(context, "sorting by last added..", Toast.LENGTH_SHORT).show() }
+                runBlocking(Dispatchers.Default){displayedWords = viewModel.wordsInCat(categoryName).reversed()}
+                message = "sorting by last added.." }
 
             R.id.first_added ->{
-
-                runBlocking(Dispatchers.Default){sorted = viewModel.wordsInCat(categoryName)}
-                recycler_view_words.adapter = WordAdapter(sorted!!,coroutineContext)
-
-                Toast.makeText(context, "sorting by first added..", Toast.LENGTH_SHORT).show() }
+                runBlocking(Dispatchers.Default){displayedWords= viewModel.wordsInCat(categoryName)}
+                message =  "sorting by first added.." }
 
             R.id.withExample ->{
-
-
-                runBlocking(Dispatchers.Default){sorted = viewModel.filterExample(categoryName)}
-                recycler_view_words.adapter = WordAdapter(sorted!!,coroutineContext)
-
-                Toast.makeText(context, "filtering words with an example..", Toast.LENGTH_SHORT).show() }
+                runBlocking(Dispatchers.Default){displayedWords = viewModel.filterExample(categoryName)}
+                message = "filtering words with an example.."}
 
             R.id.noExample ->{
-
-                runBlocking(Dispatchers.Default){sorted = viewModel.filterNoExample(categoryName)}
-                recycler_view_words.adapter = WordAdapter(sorted!!,coroutineContext)
-
-                    Toast.makeText(context, "filtering words without example..", Toast.LENGTH_SHORT).show() }
+                runBlocking(Dispatchers.Default){displayedWords = viewModel.filterNoExample(categoryName)}
+                message  = "filtering words without example.." }
         }
 
+        Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
+
+        adapter = WordAdapter(displayedWords)
+        recycler_view_words.adapter = adapter
         return super.onOptionsItemSelected(item)
     }
 
+   // fun getWordNameList(adapter: WordAdapter) : MutableList<String>?     {return adapter.wordNameList }
 }
-
-
-
-
