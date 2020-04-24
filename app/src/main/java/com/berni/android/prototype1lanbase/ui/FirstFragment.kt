@@ -10,9 +10,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.berni.android.prototype1lanbase.R
 import com.berni.android.prototype1lanbase.db.Cat
-import kotlinx.android.synthetic.*
 import kotlinx.android.synthetic.main.fragment_first.*
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.closestKodein
@@ -46,20 +44,26 @@ class FirstFragment : BaseFragment(),KodeinAware {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        viewModel = ViewModelProvider(this, viewModelFactory).get(MainViewModel::class.java)
+
         //title = " Language Database"
 
+        (activity as AppCompatActivity).supportActionBar?.title = "Language Database"
+
         recycler_view_cats.setHasFixedSize(true)
+
         recycler_view_cats.layoutManager =  StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
 
-       // navController = Navigation.findNavController(view)
-
-        viewModel = ViewModelProvider(this, viewModelFactory).get(MainViewModel::class.java)
+        // navController = Navigation.findNavController(view)
 
         viewModel.allCats.observe(viewLifecycleOwner, Observer<List<Cat>> {
 
+
             launch{recycler_view_cats.adapter = CatAdapter(it,viewModel,this.coroutineContext)}
 
-           })
+            viewModel = ViewModelProvider(this, viewModelFactory).get(MainViewModel::class.java)
+
+        })
 
         btn_add.setOnClickListener {
 
@@ -68,12 +72,12 @@ class FirstFragment : BaseFragment(),KodeinAware {
             recycler_view_newCat.visibility = View.VISIBLE
              }
 
-        btnCancel.setOnClickListener { recycler_view_newCat.visibility = View.GONE }
+         btnCancel.setOnClickListener { recycler_view_newCat.visibility = View.GONE }
 
         btnCreate.setOnClickListener {
 
             //TODO( window disappears on screen rotated. probably fixed with creation of viewmodel or using a binding method)
-            recycler_view_newCat.visibility = View.VISIBLE
+             recycler_view_newCat.visibility = View.GONE
 
             newCatName = editText_newCat.text.toString().trim()
             val currentDate: String = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(Date())
@@ -84,8 +88,6 @@ class FirstFragment : BaseFragment(),KodeinAware {
                 editText_newCat.requestFocus()
                 return@setOnClickListener
             }
-
-           // viewModel = ViewModelProvider(this, viewModelFactory).get(MainViewModel::class.java)
 
             launch {
 

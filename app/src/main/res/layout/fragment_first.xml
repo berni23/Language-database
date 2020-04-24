@@ -7,8 +7,7 @@
     android:layout_height="match_parent"
     tools:context=".ui.FirstFragment">
 
-
-
+    <!--
 
     <androidx.recyclerview.widget.RecyclerView
 
@@ -17,10 +16,9 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-    </androidx.recyclerview.widget.RecyclerView>
+    </androidx.recyclerview.widget.RecyclerView>-->
 
     <androidx.recyclerview.widget.RecyclerView
-
         android:id="@+id/recycler_view_cats"
         android:layout_marginTop = "70dp"
         android:layout_width="match_parent"

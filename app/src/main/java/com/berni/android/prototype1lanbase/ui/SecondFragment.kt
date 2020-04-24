@@ -53,14 +53,12 @@ class SecondFragment : BaseFragment(),KodeinAware {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
         navController = Navigation.findNavController(view)
 
         (activity as AppCompatActivity).supportActionBar?.title = categoryName
 
         viewModel = ViewModelProvider(this, viewModelFactory).get(MainViewModel::class.java)
 
-        //catName_textView.text = categoryName
 
         btn_save.setOnClickListener {
 
@@ -124,14 +122,10 @@ class SecondFragment : BaseFragment(),KodeinAware {
            R.id.item_toWordsList -> {
 
                val bundle = bundleOf("categoryName" to categoryName)
-
                navController.navigate(R.id.actionWordsList, bundle)
            }
-
        }
-
        return super.onOptionsItemSelected(item)
-
    }
 }
 

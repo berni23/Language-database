@@ -51,7 +51,6 @@ class WordsListFragment : BaseFragment(), KodeinAware {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
         recycler_view_words.setHasFixedSize(true)
         recycler_view_words.layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
 
@@ -92,7 +91,7 @@ class WordsListFragment : BaseFragment(), KodeinAware {
               //  val wordsList = adapter?.words
 
                 var newWordsList = mutableListOf<Word>()
-                
+
                     displayedWords.forEach {
 
                         if (it.wordName.startsWith(newText!!)) {
@@ -133,7 +132,8 @@ class WordsListFragment : BaseFragment(), KodeinAware {
                 Toast.makeText(context, message, Toast.LENGTH_SHORT).show()}
 
             R.id.first_added ->{
-                runBlocking(Dispatchers.Default){displayedWords= viewModel.wordsInCat(categoryName)}
+                runBlocking(Dispatchers.Default){
+                    displayedWords= viewModel.wordsInCat(categoryName)}
 
                 message =  "sorting by first added.."
                 Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
@@ -161,5 +161,4 @@ class WordsListFragment : BaseFragment(), KodeinAware {
         return super.onOptionsItemSelected(item)
     }
 
-   // fun getWordNameList(adapter: WordAdapter) : MutableList<String>?     {return adapter.wordNameList }
 }

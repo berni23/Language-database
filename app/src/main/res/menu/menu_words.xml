@@ -19,7 +19,7 @@
         android:icon="@drawable/ic_sort_white_24dp"
         android:orderInCategory="1"
         android:title="@string/sort"
-        app:showAsAction="always">
+        app:showAsAction="always|withText">
 
         <menu>
 
@@ -57,7 +57,7 @@
 
             <item
                 android:id="@+id/withExample"
-                android:orderInCategory="1"
+                android:orderInCategory="0"
                 android:title="@string/withExample"
                 app:showAsAction="never"/>
 
@@ -70,14 +70,14 @@
 
             <item
                 android:id="@+id/withDefinition"
-                android:orderInCategory="1"
+                android:orderInCategory="2"
                 android:title="@string/withDefinition"
                 app:showAsAction="never"/>
 
 
             <item
                 android:id="@+id/noDefinition"
-                android:orderInCategory="1"
+                android:orderInCategory="3"
                 android:title="@string/noDefinition"
                 app:showAsAction="never"/>
 

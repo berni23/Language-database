@@ -48,7 +48,6 @@ class CatAdapter(private val cats: List<Cat>, private val viewModel: MainViewMod
         holder.view.setOnClickListener {
 
             val bundle = bundleOf("categoryName" to cats[position].catName)
-
             findNavController(it).navigate(R.id.actionAddCat, bundle)
         }
 
