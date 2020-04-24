@@ -9,7 +9,8 @@
         android:icon="@drawable/ic_search_white_24dp"
         android:orderInCategory="0"
         android:title="@string/info"
-        app:showAsAction="always|withText"/>
+        app:showAsAction="always"
+        app:actionViewClass="android.widget.SearchView"/>
 
 
     <item
@@ -18,7 +19,7 @@
         android:icon="@drawable/ic_sort_white_24dp"
         android:orderInCategory="1"
         android:title="@string/sort"
-        app:showAsAction="always|withText">
+        app:showAsAction="always">
 
         <menu>
 
