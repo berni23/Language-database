@@ -89,21 +89,10 @@ class WordsListFragment : BaseFragment(), KodeinAware {
 
             override fun onQueryTextChange(newText: String?): Boolean {
 
-
               //  val wordsList = adapter?.words
+
                 var newWordsList = mutableListOf<Word>()
-
-                if (newText.isNullOrEmpty()) {
-
-                    adapter = WordAdapter(newWordsList)
-
-                    // emit toast , no results found
-
-                   // recycler_view_words.adapter = WordAdapter(wordsList)
-
-                }
-
-                else {
+                
                     displayedWords.forEach {
 
                         if (it.wordName.startsWith(newText!!)) {
@@ -114,11 +103,8 @@ class WordsListFragment : BaseFragment(), KodeinAware {
                     }
 
                     adapter = WordAdapter(newWordsList)
-                }
 
                 recycler_view_words.adapter = adapter
-
-
                 return false
             }
 
@@ -137,26 +123,38 @@ class WordsListFragment : BaseFragment(), KodeinAware {
 
                     displayedWords = viewModel.wordsInCatAlphabetic(categoryName)
                 }
-                message = "sorting by alphabetic order.." }
+                message = "sorting by alphabetic order.."
+                Toast.makeText(context, message, Toast.LENGTH_SHORT).show()}
 
             R.id.last_added ->{
                 runBlocking(Dispatchers.Default){displayedWords = viewModel.wordsInCat(categoryName).reversed()}
-                message = "sorting by last added.." }
+
+                message = "sorting by last added.."
+                Toast.makeText(context, message, Toast.LENGTH_SHORT).show()}
 
             R.id.first_added ->{
                 runBlocking(Dispatchers.Default){displayedWords= viewModel.wordsInCat(categoryName)}
-                message =  "sorting by first added.." }
 
-            R.id.withExample ->{
-                runBlocking(Dispatchers.Default){displayedWords = viewModel.filterExample(categoryName)}
-                message = "filtering words with an example.."}
+                message =  "sorting by first added.."
+                Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
+            }
 
-            R.id.noExample ->{
-                runBlocking(Dispatchers.Default){displayedWords = viewModel.filterNoExample(categoryName)}
-                message  = "filtering words without example.." }
+            R.id.withExample -> {
+                runBlocking(Dispatchers.Default) {
+                    displayedWords = viewModel.filterExample(categoryName)
+                }
+                message = "filtering words with an example.."
+                Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
+            }
+
+            R.id.noExample -> {
+                runBlocking(Dispatchers.Default) {
+                    displayedWords = viewModel.filterNoExample(categoryName)
+                }
+                message = "filtering words without example.."
+                Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
+            }
         }
-
-        Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
 
         adapter = WordAdapter(displayedWords)
         recycler_view_words.adapter = adapter
