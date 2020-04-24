@@ -31,7 +31,6 @@ class MainViewModel(private val repos: Repository ) : ViewModel(){
 
     val allWords: LiveData<List<Word>> =   repos.getAllWords()
 
-   // var catToBeDeleted: MutableLiveData<Cat>? = MutableLiveData(Cat("null","today"))
 
 }
 

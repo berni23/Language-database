@@ -30,22 +30,22 @@ interface CatDao {
     //get from a given category, ordering by first added
 
     @Query("SELECT* FROM Word WHERE catParent LIKE :category")
-    fun wordsInCat(category: String) : List<Word>
+    fun wordsInCat(category: String) : LiveData<List<Word>>
 
     //get from a given category, ordering alphabetically
 
     @Query("SELECT* FROM Word WHERE catParent LIKE :category ORDER BY wordName")
-    fun wordsInCatAlphabetic(category: String) : List<Word>
+    fun wordsInCatAlphabetic(category: String) : LiveData<List<Word>>
 
     //get words with example
 
     @Query("SELECT* FROM Word WHERE catParent LIKE :category AND example IS NOT NULL ")
-    fun filterExample(category:String) :List<Word>
+    fun filterExample(category:String) : LiveData<List<Word>>
 
     //get words with no example
 
     @Query("SELECT* FROM Word WHERE catParent LIKE :category AND example IS NULL ")
-    fun filterNoExample(category:String) :List<Word>
+    fun filterNoExample(category:String) : LiveData<List<Word>>
 
 
     // delete all  words from a given category

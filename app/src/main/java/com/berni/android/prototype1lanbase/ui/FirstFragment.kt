@@ -58,10 +58,7 @@ class FirstFragment : BaseFragment(),KodeinAware {
 
         viewModel.allCats.observe(viewLifecycleOwner, Observer<List<Cat>> {
 
-
             launch{recycler_view_cats.adapter = CatAdapter(it,viewModel,this.coroutineContext)}
-
-            viewModel = ViewModelProvider(this, viewModelFactory).get(MainViewModel::class.java)
 
         })
 

@@ -5,21 +5,21 @@ import androidx.lifecycle.LiveData
 
 class Repository(private val catDao: CatDao, val cat: Cat, val word: Word) {
 
-        suspend fun addCat(cat: Cat)        {catDao.addCat(cat)  }
+        suspend fun addCat(cat: Cat)  {catDao.addCat(cat)}
 
-        suspend fun addWord(word: Word)     { catDao.addWord(word) }
+        suspend fun addWord(word: Word)  {catDao.addWord(word)}
 
-        fun getAllCats () : LiveData<List<Cat>> {return catDao.getAllCats() }
+        fun getAllCats () : LiveData<List<Cat>> {return catDao.getAllCats()}
 
-        fun getAllWords (): LiveData<List<Word>> {return catDao.getAllWords() }
+        fun getAllWords (): LiveData<List<Word>> {return catDao.getAllWords()}
 
-        fun wordsInCat(currentCatName: String) : List<Word> {return catDao.wordsInCat(currentCatName)}
+        fun wordsInCat(currentCatName: String) :  LiveData<List<Word>> {return catDao.wordsInCat(currentCatName)}
 
-        fun wordsInCatAlphabetic(currentCatName: String) : List<Word> { return catDao.wordsInCatAlphabetic(currentCatName)}
+        fun wordsInCatAlphabetic(currentCatName: String) :  LiveData<List<Word>> {return catDao.wordsInCatAlphabetic(currentCatName)}
 
-        fun filterExample(currentCatName: String) : List<Word> {return catDao.filterExample(currentCatName)}
+        fun filterExample(currentCatName: String) :  LiveData<List<Word>> {return catDao.filterExample(currentCatName)}
 
-        fun filterNoExample(currentCatName:String) :List<Word> {return catDao.filterNoExample(currentCatName)}
+        fun filterNoExample(currentCatName:String) : LiveData<List<Word>> {return catDao.filterNoExample(currentCatName)}
 
         fun deleteWordsInCat(currentCatName: String)  {catDao.deleteWordsInCat(currentCatName)}
 
