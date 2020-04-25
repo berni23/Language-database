@@ -42,35 +42,23 @@ class FirstFragment : BaseFragment(),KodeinAware {
 
     ): View? {
 
-        viewModel = ViewModelProvider(this, viewModelFactory).get(MainViewModel::class.java)
-
-        viewModel.allWords.observe(viewLifecycleOwner,Observer {
-
-            _allWords = it
-
-        })
-
         return inflater.inflate(R.layout.fragment_first, container, false) }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
 
-
         //title = " Language Database"
 
         (activity as AppCompatActivity).supportActionBar?.title = "Language Database"
-
         recycler_view_cats.setHasFixedSize(true)
-
+        viewModel = ViewModelProvider(this, viewModelFactory).get(MainViewModel::class.java)
 
         viewModel.allCats.observe(viewLifecycleOwner, Observer<List<Cat>> {
 
-            viewModel = ViewModelProvider(this, viewModelFactory).get(MainViewModel::class.java)
-
+            runBlocking(Dispatchers.Default){_allWords = viewModel.getAllWords()}
             recycler_view_cats.layoutManager =  StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
             recycler_view_cats.adapter = CatAdapter(it,_allWords,viewModel,this.coroutineContext)
-
 
         })
 

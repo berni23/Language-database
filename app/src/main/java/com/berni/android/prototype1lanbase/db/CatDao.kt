@@ -26,7 +26,7 @@ interface CatDao {
     //get all words
 
     @Query("SELECT* FROM Word ORDER BY wordId DESC")
-    fun getAllWords () : LiveData<List<Word>>
+    fun getAllWords () : List<Word>
 
     //get from a given category, ordering by first added
 

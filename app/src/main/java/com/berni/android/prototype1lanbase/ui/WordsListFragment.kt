@@ -58,13 +58,15 @@ class WordsListFragment : BaseFragment(), KodeinAware {
 
         lateinit var adapter : WordAdapter
         recycler_view_words.setHasFixedSize(true)
-        recycler_view_words.layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
+
 
         viewModel = ViewModelProvider(this, viewModelFactory).get(MainViewModel::class.java)
 
         // observe if the words within the category suffer any change (like edition or deletion)
 
         viewModel.wordsInCat(categoryName).observe(viewLifecycleOwner, Observer<List<Word>> {
+
+            recycler_view_words.layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
 
             displayedWords = it.reversed()
             val _displayedWords = displayedWords?:listOf<Word>()
