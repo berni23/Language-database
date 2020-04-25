@@ -1,17 +1,21 @@
 package com.berni.android.prototype1lanbase.ui
 
+import android.app.Activity
+import android.content.Context
 import android.os.Bundle
 import android.view.*
+import android.view.inputmethod.InputMethodManager
 import androidx.fragment.app.Fragment
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat.getSystemService
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.berni.android.prototype1lanbase.R
 import com.berni.android.prototype1lanbase.db.Cat
 import kotlinx.android.synthetic.main.fragment_first.*
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.closestKodein
 import org.kodein.di.generic.instance
@@ -52,13 +56,19 @@ class FirstFragment : BaseFragment(),KodeinAware {
 
         recycler_view_cats.setHasFixedSize(true)
 
-        recycler_view_cats.layoutManager =  StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
+        //recycler_view_cats.layoutManager =  StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
 
         // navController = Navigation.findNavController(view)
 
         viewModel.allCats.observe(viewLifecycleOwner, Observer<List<Cat>> {
 
-            launch{recycler_view_cats.adapter = CatAdapter(it,viewModel,this.coroutineContext)}
+            recycler_view_cats.layoutManager =  StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
+
+           //awaitAll()
+
+           // viewModel = ViewModelProvider(this, viewModelFactory).get(MainViewModel::class.java)
+
+            recycler_view_cats.adapter = CatAdapter(it,viewModel,this.coroutineContext)
 
         })
 
@@ -98,4 +108,7 @@ class FirstFragment : BaseFragment(),KodeinAware {
             editText_newCat.text.clear()
 
         }
-    }}
+    }
+
+
+}

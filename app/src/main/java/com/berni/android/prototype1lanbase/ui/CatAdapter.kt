@@ -1,11 +1,15 @@
 package com.berni.android.prototype1lanbase.ui
 
+import android.app.Activity
 import android.app.AlertDialog
+import android.content.Context
 import android.os.Bundle
 import android.view.*
 import android.view.ContextMenu.ContextMenuInfo
+import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.core.os.bundleOf
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.navigation.Navigation.findNavController
@@ -39,7 +43,7 @@ class CatAdapter(private val cats: List<Cat>, private val viewModel: MainViewMod
 
     override fun onBindViewHolder(holder: CatViewHolder, position: Int) {
 
-        holder.view.setOnCreateContextMenuListener(this)
+      //  holder.view.setOnCreateContextMenuListener(this)
         holder.view.text_view_title.setText(cats[position].catName)
         holder.view.text_view_date.text = cats[position].catDate
 
@@ -61,14 +65,14 @@ class CatAdapter(private val cats: List<Cat>, private val viewModel: MainViewMod
 
                     setPositiveButton("Yes") { _, _ ->
 
-                        GlobalScope.launch(Dispatchers.Default){
+                        launch(Dispatchers.Default){
 
                             viewModel.deleteWordsInCat(cats[position].catName)
                             viewModel.deleteCat(cats[position])
 
                         }
 
-                        Toast.makeText(v?.context, "deleting confirmed..", Toast.LENGTH_SHORT).show()
+                    //    Toast.makeText(v?.context, "deleting confirmed..", Toast.LENGTH_SHORT).show()
                     }
 
                     setNegativeButton("No") { _, _ ->
@@ -93,6 +97,7 @@ class CatAdapter(private val cats: List<Cat>, private val viewModel: MainViewMod
     }
 
     class CatViewHolder(val view: View) : RecyclerView.ViewHolder(view)
+
 }
 
 

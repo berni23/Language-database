@@ -6,15 +6,12 @@ import android.view.*
 import android.widget.SearchView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.berni.android.prototype1lanbase.R
-import com.berni.android.prototype1lanbase.db.Cat
 import com.berni.android.prototype1lanbase.db.Word
-import kotlinx.android.synthetic.main.fragment_first.*
 import kotlinx.android.synthetic.main.fragment_words_list.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -32,15 +29,14 @@ class WordsListFragment : BaseFragment(), KodeinAware {
     private lateinit var categoryName: String
     private lateinit var lastAdded: List<Word?>
     private lateinit var displayedWords: List<Word>
+    private lateinit var viewModel: MainViewModel
 
     private  var lastAdditionDate : String? = ""
     private  var adapter : WordAdapter? = null
-    private  var numWords: Int? = null
+    private val viewModelFactory: ViewModelFactory by instance<ViewModelFactory>()
 
     override val kodein by closestKodein()
 
-    private val viewModelFactory: ViewModelFactory by instance<ViewModelFactory>()
-    private lateinit var viewModel: MainViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -48,6 +44,7 @@ class WordsListFragment : BaseFragment(), KodeinAware {
     ): View? {
 
         setHasOptionsMenu(true)
+
         categoryName = arguments?.getString("categoryName").toString()
         return inflater.inflate(R.layout.fragment_words_list, container, false)
     }
@@ -59,7 +56,7 @@ class WordsListFragment : BaseFragment(), KodeinAware {
         lateinit var adapter : WordAdapter
 
         recycler_view_words.setHasFixedSize(true)
-        recycler_view_words.layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
+        recycler_view_words.layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, true)
 
         viewModel = ViewModelProvider(this, viewModelFactory).get(MainViewModel::class.java)
 
@@ -79,12 +76,12 @@ class WordsListFragment : BaseFragment(), KodeinAware {
 
         lastAdditionDate = displayedWords.getOrNull(0)?.date
         var lastAdditions = "Last additions: "
-        lastAdded.forEach { if (it?.wordName != null) { lastAdditions += " ${it.wordName},"  } }
+        lastAdded.forEach { if (it?.wordName != null) {lastAdditions += " ${it.wordName},"  }}
         lastAdditions = lastAdditions.dropLast(1)  // drop the last comma of the string
         if (lastAdded.elementAt(0)?.wordName == null) { lastAdditions = "No words added yet"  }
         val stringLastAdditionDate = "Last addition on $lastAdditionDate"
 
-        // editing the corresponding info to the textviews
+        // editing the corresponding info to the text views
 
         text_view_numWords.text = " ${adapter.itemCount} words"
         lastAdditionDate?.let{text_view_lastDate.text =stringLastAdditionDate}
@@ -113,9 +110,7 @@ class WordsListFragment : BaseFragment(), KodeinAware {
                     displayedWords.forEach {
 
                         if (it.wordName.startsWith(newText!!)) {
-
                             newWordsList.add(it)
-
                         }
                     }
 
@@ -180,4 +175,5 @@ class WordsListFragment : BaseFragment(), KodeinAware {
         recycler_view_words.adapter = adapter
         return super.onOptionsItemSelected(item)
     }
+
 }
