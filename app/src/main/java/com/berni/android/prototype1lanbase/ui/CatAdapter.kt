@@ -59,7 +59,7 @@ class CatAdapter(private val cats: List<Cat>,private val words : List<Word>?, pr
 
         numWords = wordNames.size
 
-        var lastAdditions = "Last additions: "
+        var lastAdditions = "last additions: "
 
         if (lastAdded.elementAt(0)== null) {
 
