@@ -1,13 +1,14 @@
 package com.berni.android.prototype1lanbase.db
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.room.*
 
 
 @Dao
 interface CatDao {
 
-   //TODO  Emit  toast 'on conflict'
+     //TODO  Emit  toast 'on conflict'
 
     //insert
 
@@ -40,13 +41,12 @@ interface CatDao {
     //get words with example
 
     @Query("SELECT* FROM Word WHERE catParent LIKE :category AND example IS NOT NULL ")
-    fun filterExample(category:String) : LiveData<List<Word>>
+    fun filterExample(category:String) :LiveData<List<Word>>
 
     //get words with no example
 
     @Query("SELECT* FROM Word WHERE catParent LIKE :category AND example IS NULL ")
     fun filterNoExample(category:String) : LiveData<List<Word>>
-
 
     // delete all  words from a given category
 

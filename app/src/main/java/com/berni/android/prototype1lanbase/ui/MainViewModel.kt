@@ -27,9 +27,9 @@ class MainViewModel(private val repos: Repository ) : ViewModel(){
 
     fun filterNoExample(currentCatName:String) = repos.filterNoExample(currentCatName)
 
-    val allCats: LiveData<List<Cat>> =     repos.getAllCats()
+    val allCats: LiveData<List<Cat>> = repos.getAllCats()
 
-    val allWords: LiveData<List<Word>> =   repos.getAllWords()
+    val allWords: LiveData<List<Word>> = repos.getAllWords()
 
 
 }

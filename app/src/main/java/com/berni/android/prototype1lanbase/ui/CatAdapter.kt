@@ -15,13 +15,14 @@ import kotlinx.android.synthetic.main.adapter_cat.view.*
 import kotlinx.coroutines.*
 import kotlin.coroutines.CoroutineContext
 
-class CatAdapter(private val cats: List<Cat>, private val viewModel: MainViewModel,
+class CatAdapter(private val cats: List<Cat>,private val words : List<Word>?, private val viewModel: MainViewModel,
                  override val coroutineContext: CoroutineContext
 ) : RecyclerView.Adapter<CatAdapter.CatViewHolder>(),
     View.OnCreateContextMenuListener, CoroutineScope {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CatViewHolder {
 
+        // get all the wordNames from all the words
         return CatViewHolder(
             LayoutInflater.from(parent.context).inflate(R.layout.adapter_cat, parent, false)
         )
@@ -35,51 +36,49 @@ class CatAdapter(private val cats: List<Cat>, private val viewModel: MainViewMod
 
     override fun onBindViewHolder(holder: CatViewHolder, position: Int) {
 
-      //  holder.view.setOnCreateContextMenuListener(this)
+        val wordNames  = mutableListOf<String>()
+        //  holder.view.setOnCreateContextMenuListener(this)
 
-        var lastAdded: List<Word?>
-        var numWords : Int? = null
+        words?.reversed()?.forEach {
 
-
-        holder.view.text_view_title.setText(cats[position].catName)
-        val words: List<Word?>? = viewModel.wordsInCat(cats[position].catName).value
-
-         lastAdded = listOf(words?.getOrNull(0),
-         words?.getOrNull(1),
-         words?.getOrNull(2)
-
-         ).reversed()
-
-        numWords = words?.size
-
-
-
-         val lastWords  = mutableListOf<String?>()
-         lastAdded.forEach{lastWords.add(it?.wordName)}
-
-        val lastAdditionDate = lastAdded.getOrNull(0)?.date
-        var lastAdditions = "Last additions: "
-
-
-        if (lastAdded.elementAt(0)?.wordName == null) { lastAdditions = "No words added "
-
-            holder.view.text_view_numWords.text = ""
-            holder.view.text_view_date.text =  " created  on ${cats[position].catDate}"
-                                                                }
-
-        else {
-            lastAdded.forEach { lastAdditions += " ${it?.wordName}," }
-            lastAdditions = lastAdditions.dropLast(1)  // drop the last comma of the string
-
-            holder.view.text_view_numWords.text= " $numWords words"
-            holder.view.text_view_date.text =  " Last addition on  $lastAdditionDate"
+            if (it.catParent == cats[position].catName) {
+                wordNames.add(it.wordName)
+            }
         }
 
+         var lastAdded: List<String?>
+         var numWords : Int? = null
+
+        holder.view.text_view_title.setText(cats[position].catName)
+
+         lastAdded = listOf(wordNames?.getOrNull(0),
+         wordNames.getOrNull(1),
+         wordNames.getOrNull(2)
+
+         )
+
+        numWords = wordNames.size
+
+        var lastAdditions = "Last additions: "
+
+        if (lastAdded.elementAt(0)== null) {
+
+            holder.view.text_view_last_additions.text = "no words added"
+            holder.view.text_view_numWords.text = ""
+
+                                                                }
+        else {
+            lastAdded.reversed().forEach {if (it != null)  lastAdditions += " ${it}," }
+            lastAdditions = lastAdditions.dropLast(1)  // drop the last comma of the string
+
+            holder.view.text_view_last_additions.text = lastAdditions
+            holder.view.text_view_numWords.text= " $numWords words"
+
+        }
+
+        holder.view.text_view_date.text =  " created  on ${cats[position].catDate}"
 
         // editing the corresponding info to the text views
-
-
-        holder.view.text_view_last_additions.text = lastAdditions
 
        // TODO() :  enbable category name editting
 
@@ -107,8 +106,7 @@ class CatAdapter(private val cats: List<Cat>, private val viewModel: MainViewMod
                             viewModel.deleteCat(cats[position])
 
                         }
-
-                    //    Toast.makeText(v?.context, "deleting confirmed..", Toast.LENGTH_SHORT).show()
+                    // Toast.makeText(v?.context, "deleting confirmed..", Toast.LENGTH_SHORT).show()
                     }
 
                     setNegativeButton("No") { _, _ ->
@@ -131,9 +129,7 @@ class CatAdapter(private val cats: List<Cat>, private val viewModel: MainViewMod
         }
 
     }
-
     class CatViewHolder(val view: View) : RecyclerView.ViewHolder(view)
-
 }
 
 

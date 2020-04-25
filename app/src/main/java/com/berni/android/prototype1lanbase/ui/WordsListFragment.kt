@@ -29,6 +29,7 @@ import org.kodein.di.generic.instance
 class WordsListFragment : BaseFragment(), KodeinAware {
 
     //lateinit var navController: NavController
+
     private lateinit var categoryName: String
     private lateinit var lastAdded: List<Word?>
     private  var displayedWords : List<Word>? = null
@@ -69,7 +70,6 @@ class WordsListFragment : BaseFragment(), KodeinAware {
             val _displayedWords = displayedWords?:listOf<Word>()
 
             adapter = WordAdapter(_displayedWords)
-            
             launch{recycler_view_words.adapter = WordAdapter(_displayedWords)}  // launch, accounting for the case where we delete a word
 
             // setting up info for the info box in top of words list, several cases to be accounted for
@@ -80,7 +80,7 @@ class WordsListFragment : BaseFragment(), KodeinAware {
 
             lastAdditionDate = _displayedWords.getOrNull(0)?.date
             var lastAdditions = "Last additions: "
-            lastAdded.forEach { if (it?.wordName != null) { lastAdditions += " ${it.wordName},"  } }
+            lastAdded.forEach {if (it?.wordName != null) { lastAdditions += " ${it.wordName},"  } }
             lastAdditions = lastAdditions.dropLast(1)  // drop the last comma of the string
             if (lastAdded.elementAt(0)?.wordName == null) { lastAdditions = "No words added yet"  }
             val stringLastAdditionDate = "Last addition on $lastAdditionDate"
@@ -161,6 +161,7 @@ class WordsListFragment : BaseFragment(), KodeinAware {
             }
 
             R.id.withExample -> {
+
                 runBlocking(Dispatchers.Default) {
                     displayedWords = viewModel.filterExample(categoryName).value
                 }
@@ -177,7 +178,7 @@ class WordsListFragment : BaseFragment(), KodeinAware {
             }
         }
 
-        adapter = displayedWords?.let { WordAdapter(it) }
+        adapter =WordAdapter(displayedWords!!)
         recycler_view_words.adapter = adapter
         return super.onOptionsItemSelected(item)
     }
