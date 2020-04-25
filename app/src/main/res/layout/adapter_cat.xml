@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
+    android:layout_marginStart="10dp"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content">
 
@@ -11,7 +12,7 @@
         android:layout_height="wrap_content">
 
         <RelativeLayout
-            android:padding="8dp"
+            android:padding="20dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
 
@@ -21,6 +22,7 @@
                 tools:text="category"
                 android:focusable = "false"
                 android:imeOptions="actionSend"
+                android:fontFamily="@font/lato_regular"
                 android:layout_marginBottom="10dp"
                 android:id="@+id/text_view_title"
                 android:layout_width="wrap_content"
@@ -29,8 +31,30 @@
             <TextView
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
                 tools:text="date"
+                android:fontFamily="@font/lato_regular"
                 android:layout_below="@id/text_view_title"
                 android:id="@+id/text_view_date"
+                android:textSize="12sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                tools:text="numWords"
+                android:fontFamily="@font/lato_regular"
+                android:layout_below="@id/text_view_date"
+                android:id="@+id/text_view_numWords"
+                android:textSize="12sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                tools:text="last words added"
+                android:fontFamily="@font/lato_regular"
+                android:layout_below="@id/text_view_numWords"
+                android:id="@+id/text_view_last_additions"
+                android:textSize="12sp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
 

@@ -6,12 +6,15 @@ import android.view.*
 import android.widget.SearchView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.berni.android.prototype1lanbase.R
+import com.berni.android.prototype1lanbase.db.Cat
 import com.berni.android.prototype1lanbase.db.Word
+import kotlinx.android.synthetic.main.fragment_first.*
 import kotlinx.android.synthetic.main.fragment_words_list.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -28,15 +31,15 @@ class WordsListFragment : BaseFragment(), KodeinAware {
     //lateinit var navController: NavController
     private lateinit var categoryName: String
     private lateinit var lastAdded: List<Word?>
-    private lateinit var displayedWords: List<Word>
-    private lateinit var viewModel: MainViewModel
+    private  var displayedWords : List<Word>? = null
 
     private  var lastAdditionDate : String? = ""
     private  var adapter : WordAdapter? = null
-    private val viewModelFactory: ViewModelFactory by instance<ViewModelFactory>()
+    private  var numWords: Int? = null
 
     override val kodein by closestKodein()
-
+    private val viewModelFactory: ViewModelFactory by instance<ViewModelFactory>()
+    private lateinit var viewModel: MainViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -44,7 +47,6 @@ class WordsListFragment : BaseFragment(), KodeinAware {
     ): View? {
 
         setHasOptionsMenu(true)
-
         categoryName = arguments?.getString("categoryName").toString()
         return inflater.inflate(R.layout.fragment_words_list, container, false)
     }
@@ -54,9 +56,8 @@ class WordsListFragment : BaseFragment(), KodeinAware {
         super.onViewCreated(view, savedInstanceState)
 
         lateinit var adapter : WordAdapter
-
         recycler_view_words.setHasFixedSize(true)
-        recycler_view_words.layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, true)
+        recycler_view_words.layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
 
         viewModel = ViewModelProvider(this, viewModelFactory).get(MainViewModel::class.java)
 
@@ -64,28 +65,31 @@ class WordsListFragment : BaseFragment(), KodeinAware {
 
         viewModel.wordsInCat(categoryName).observe(viewLifecycleOwner, Observer<List<Word>> {
 
-        displayedWords = it.reversed()
-        adapter = WordAdapter(displayedWords)
-        launch{recycler_view_words.adapter = WordAdapter(displayedWords)}  // launch, accounting for the case where we delete a word
+            displayedWords = it.reversed()
+            val _displayedWords = displayedWords?:listOf<Word>()
 
-        // setting up info for the info box in top of words list, several cases to be accounted for
+            adapter = WordAdapter(_displayedWords)
+            
+            launch{recycler_view_words.adapter = WordAdapter(_displayedWords)}  // launch, accounting for the case where we delete a word
 
-        lastAdded = listOf(displayedWords.getOrNull(0),
-                           displayedWords.getOrNull(1),
-                           displayedWords.getOrNull(2))
+            // setting up info for the info box in top of words list, several cases to be accounted for
 
-        lastAdditionDate = displayedWords.getOrNull(0)?.date
-        var lastAdditions = "Last additions: "
-        lastAdded.forEach { if (it?.wordName != null) {lastAdditions += " ${it.wordName},"  }}
-        lastAdditions = lastAdditions.dropLast(1)  // drop the last comma of the string
-        if (lastAdded.elementAt(0)?.wordName == null) { lastAdditions = "No words added yet"  }
-        val stringLastAdditionDate = "Last addition on $lastAdditionDate"
+            lastAdded = listOf(_displayedWords.getOrNull(0),
+                _displayedWords.getOrNull(1),
+               _displayedWords.getOrNull(2))
 
-        // editing the corresponding info to the text views
+            lastAdditionDate = _displayedWords.getOrNull(0)?.date
+            var lastAdditions = "Last additions: "
+            lastAdded.forEach { if (it?.wordName != null) { lastAdditions += " ${it.wordName},"  } }
+            lastAdditions = lastAdditions.dropLast(1)  // drop the last comma of the string
+            if (lastAdded.elementAt(0)?.wordName == null) { lastAdditions = "No words added yet"  }
+            val stringLastAdditionDate = "Last addition on $lastAdditionDate"
 
-        text_view_numWords.text = " ${adapter.itemCount} words"
-        lastAdditionDate?.let{text_view_lastDate.text =stringLastAdditionDate}
-        text_view_last_additions.text = lastAdditions
+            // editing the corresponding info to the textviews
+
+            text_view_numWords.text = " ${adapter.itemCount} words"
+            lastAdditionDate?.let{text_view_lastDate.text =stringLastAdditionDate}
+            text_view_last_additions.text = lastAdditions
 
 
         })
@@ -103,18 +107,20 @@ class WordsListFragment : BaseFragment(), KodeinAware {
 
             override fun onQueryTextChange(newText: String?): Boolean {
 
-              //  val wordsList = adapter?.words
+                //  val wordsList = adapter?.words
 
                 var newWordsList = mutableListOf<Word>()
 
-                    displayedWords.forEach {
+                displayedWords?.forEach {
 
-                        if (it.wordName.startsWith(newText!!)) {
-                            newWordsList.add(it)
-                        }
+                    if (it.wordName.startsWith(newText!!)) {
+
+                        newWordsList.add(it)
+
                     }
+                }
 
-                    adapter = WordAdapter(newWordsList)
+                adapter = WordAdapter(newWordsList)
 
                 recycler_view_words.adapter = adapter
                 return false
@@ -123,7 +129,7 @@ class WordsListFragment : BaseFragment(), KodeinAware {
         })
 
         return super.onCreateOptionsMenu(menu, inflater)
-     }
+    }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
 
@@ -133,14 +139,14 @@ class WordsListFragment : BaseFragment(), KodeinAware {
             R.id.alphabetically -> {
                 runBlocking(Dispatchers.Default){
 
-                    displayedWords = viewModel.wordsInCatAlphabetic(categoryName).value!!
+                    displayedWords = viewModel.wordsInCatAlphabetic(categoryName).value
                 }
                 message = "sorting by alphabetic order.."
                 Toast.makeText(context, message, Toast.LENGTH_SHORT).show()}
 
             R.id.last_added ->{
                 runBlocking(Dispatchers.Default){displayedWords =
-                    viewModel.wordsInCat(categoryName).value!!
+                    viewModel.wordsInCat(categoryName).value
                 }
 
                 message = "sorting by last added.."
@@ -148,7 +154,7 @@ class WordsListFragment : BaseFragment(), KodeinAware {
 
             R.id.first_added ->{
                 runBlocking(Dispatchers.Default){
-                    displayedWords= viewModel.wordsInCat(categoryName).value!!}
+                    displayedWords= viewModel.wordsInCat(categoryName).value}
 
                 message =  "sorting by first added.."
                 Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
@@ -156,7 +162,7 @@ class WordsListFragment : BaseFragment(), KodeinAware {
 
             R.id.withExample -> {
                 runBlocking(Dispatchers.Default) {
-                    displayedWords = viewModel.filterExample(categoryName).value!!
+                    displayedWords = viewModel.filterExample(categoryName).value
                 }
                 message = "filtering words with an example.."
                 Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
@@ -164,16 +170,15 @@ class WordsListFragment : BaseFragment(), KodeinAware {
 
             R.id.noExample -> {
                 runBlocking(Dispatchers.Default) {
-                    displayedWords = viewModel.filterNoExample(categoryName).value!!
+                    displayedWords = viewModel.filterNoExample(categoryName).value
                 }
                 message = "filtering words without example.."
                 Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
             }
         }
 
-        adapter = WordAdapter(displayedWords)
+        adapter = displayedWords?.let { WordAdapter(it) }
         recycler_view_words.adapter = adapter
         return super.onOptionsItemSelected(item)
     }
-
 }

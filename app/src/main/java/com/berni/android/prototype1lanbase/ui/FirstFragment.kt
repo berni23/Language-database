@@ -56,15 +56,11 @@ class FirstFragment : BaseFragment(),KodeinAware {
 
         recycler_view_cats.setHasFixedSize(true)
 
-        //recycler_view_cats.layoutManager =  StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
-
         // navController = Navigation.findNavController(view)
 
         viewModel.allCats.observe(viewLifecycleOwner, Observer<List<Cat>> {
 
             recycler_view_cats.layoutManager =  StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
-
-           //awaitAll()
 
            // viewModel = ViewModelProvider(this, viewModelFactory).get(MainViewModel::class.java)
 

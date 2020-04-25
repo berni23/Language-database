@@ -1,26 +1,18 @@
 package com.berni.android.prototype1lanbase.ui
 
-import android.app.Activity
+
 import android.app.AlertDialog
-import android.content.Context
-import android.os.Bundle
 import android.view.*
 import android.view.ContextMenu.ContextMenuInfo
-import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.core.os.bundleOf
-import androidx.fragment.app.Fragment
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.navigation.Navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.berni.android.prototype1lanbase.R
 import com.berni.android.prototype1lanbase.db.Cat
+import com.berni.android.prototype1lanbase.db.Word
 import kotlinx.android.synthetic.main.adapter_cat.view.*
 import kotlinx.coroutines.*
-import org.kodein.di.Kodein
-import org.kodein.di.KodeinAware
-import org.kodein.di.generic.instance
 import kotlin.coroutines.CoroutineContext
 
 class CatAdapter(private val cats: List<Cat>, private val viewModel: MainViewModel,
@@ -44,8 +36,52 @@ class CatAdapter(private val cats: List<Cat>, private val viewModel: MainViewMod
     override fun onBindViewHolder(holder: CatViewHolder, position: Int) {
 
       //  holder.view.setOnCreateContextMenuListener(this)
+
+        var lastAdded: List<Word?>
+        var numWords : Int? = null
+
+
         holder.view.text_view_title.setText(cats[position].catName)
-        holder.view.text_view_date.text = cats[position].catDate
+        val words: List<Word?>? = viewModel.wordsInCat(cats[position].catName).value
+
+         lastAdded = listOf(words?.getOrNull(0),
+         words?.getOrNull(1),
+         words?.getOrNull(2)
+
+         ).reversed()
+
+        numWords = words?.size
+
+
+
+         val lastWords  = mutableListOf<String?>()
+         lastAdded.forEach{lastWords.add(it?.wordName)}
+
+        val lastAdditionDate = lastAdded.getOrNull(0)?.date
+        var lastAdditions = "Last additions: "
+
+
+        if (lastAdded.elementAt(0)?.wordName == null) { lastAdditions = "No words added "
+
+            holder.view.text_view_numWords.text = ""
+            holder.view.text_view_date.text =  " created  on ${cats[position].catDate}"
+                                                                }
+
+        else {
+            lastAdded.forEach { lastAdditions += " ${it?.wordName}," }
+            lastAdditions = lastAdditions.dropLast(1)  // drop the last comma of the string
+
+            holder.view.text_view_numWords.text= " $numWords words"
+            holder.view.text_view_date.text =  " Last addition on  $lastAdditionDate"
+        }
+
+
+        // editing the corresponding info to the text views
+
+
+        holder.view.text_view_last_additions.text = lastAdditions
+
+       // TODO() :  enbable category name editting
 
         // holder.view.text_view_title.setImeActionLabel("Custom text", KeyEvent.KEYCODE_ENTER)
 
