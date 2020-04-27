@@ -56,15 +56,14 @@ class WordsListFragment : BaseFragment(), KodeinAware {
 
         // observe if the words within the category suffer any change (like edition or deletion)
 
-        viewModel.allWords.observe(viewLifecycleOwner, Observer<List<Word>> {
+        viewModel.wordsInCat(categoryName).observe(viewLifecycleOwner, Observer<List<Word>> {
 
            recycler_view_words.layoutManager =
                 LinearLayoutManager(context, RecyclerView.VERTICAL, false)
 
-
            runBlocking(Dispatchers.Default){
 
-               displayedWords =  viewModel.wordsInCat(categoryName).reversed()
+               displayedWords =  it.reversed()
 
                recycler_view_words.adapter = WordAdapter(displayedWords,viewModel,this.coroutineContext)
 

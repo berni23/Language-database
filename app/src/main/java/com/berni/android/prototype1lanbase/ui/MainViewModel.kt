@@ -33,7 +33,7 @@ class MainViewModel(private val repos: Repository ) : ViewModel(){
 
     val allWords : LiveData<List<Word>> = repos.getAllWordsLive()
 
-    suspend fun getAllWords( ): List<Word> {return repos.getAllWords()}  //val allWords: LiveData<List<Word>> =
+    suspend fun getAllWords(): List<Word> {return repos.getAllWords()}  //val allWords: LiveData<List<Word>> =
 
 
 }

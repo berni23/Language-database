@@ -16,7 +16,7 @@ class Repository(private val catDao: CatDao, val cat: Cat, val word: Word) {
 
         fun getAllWordsLive(): LiveData<List<Word>> {return catDao.getAllWordsLive()}
 
-        fun wordsInCat(currentCatName: String) : List<Word> {return catDao.wordsInCat(currentCatName)}
+        fun wordsInCat(currentCatName: String) : LiveData<List<Word>> {return catDao.wordsInCat(currentCatName)}
 
         fun wordsInCatAlphabetic(currentCatName: String) :  LiveData<List<Word>> {return catDao.wordsInCatAlphabetic(currentCatName)}
 
