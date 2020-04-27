@@ -33,7 +33,6 @@ class CatAdapter(private val cats: List<Cat>,private val words : List<Word>?, pr
     }
 
     override fun getItemCount() = cats.size
-
     override fun onBindViewHolder(holder: CatViewHolder, position: Int) {
 
         val wordNames  = mutableListOf<String>()
@@ -106,7 +105,7 @@ class CatAdapter(private val cats: List<Cat>,private val words : List<Word>?, pr
                             viewModel.deleteCat(cats[position])
 
                         }
-                    // Toast.makeText(v?.context, "deleting confirmed..", Toast.LENGTH_SHORT).show()
+                     Toast.makeText(v?.context, "deleting  category ${cats[position].catName}..", Toast.LENGTH_SHORT).show()
                     }
 
                     setNegativeButton("No") { _, _ ->

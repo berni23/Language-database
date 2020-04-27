@@ -35,4 +35,5 @@
     <string name="delete">delete</string>
     <string name="rename">rename</string>
     <string name="edit">edit</string>
+    <string name="search">search</string>
 </resources>

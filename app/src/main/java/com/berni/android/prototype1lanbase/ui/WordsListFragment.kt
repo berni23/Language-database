@@ -51,15 +51,13 @@ class WordsListFragment : BaseFragment(), KodeinAware {
         super.onViewCreated(view, savedInstanceState)
 
         recycler_view_words.setHasFixedSize(true)
-
         viewModel = ViewModelProvider(this, viewModelFactory).get(MainViewModel::class.java)
 
         // observe if the words within the category suffer any change (like edition or deletion)
 
         viewModel.wordsInCat(categoryName).observe(viewLifecycleOwner, Observer<List<Word>> {
 
-           recycler_view_words.layoutManager =
-                LinearLayoutManager(context, RecyclerView.VERTICAL, false)
+        recycler_view_words.layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
 
            runBlocking(Dispatchers.Default){
 
@@ -111,8 +109,6 @@ class WordsListFragment : BaseFragment(), KodeinAware {
             }
 
             override fun onQueryTextChange(newText: String?): Boolean {
-
-                //  val wordsList = adapter?.words
 
                 val newWordsList = mutableListOf<Word>()
 
