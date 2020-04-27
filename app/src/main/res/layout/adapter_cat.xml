@@ -11,9 +11,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
 
+        <!-- Constraint layout instead of relative-->
         <RelativeLayout
-            android:padding="20dp"
-            android:layout_width="wrap_content"
+           android:padding="20dp"
+            android:layout_width="150dp"
             android:layout_height="wrap_content">
 
             <EditText
@@ -21,12 +22,14 @@
                 android:background="@null"
                 tools:text="category"
                 android:focusable = "false"
-                android:imeOptions="actionSend"
                 android:fontFamily="@font/lato_regular"
                 android:layout_marginBottom="10dp"
                 android:id="@+id/text_view_title"
+                android:hint = "@string/category"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:autofillHints="category"
+                android:inputType="textMultiLine" />
 
             <TextView
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
@@ -59,7 +62,8 @@
                 android:id="@+id/text_view_date"
                 android:textSize="10sp"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                tools:ignore="SmallSp" />
 
 
         </RelativeLayout>

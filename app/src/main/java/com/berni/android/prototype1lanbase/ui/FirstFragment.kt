@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.berni.android.prototype1lanbase.R
 import com.berni.android.prototype1lanbase.db.Cat
 import com.berni.android.prototype1lanbase.db.Word
+import com.berni.android.prototype1lanbase.hideKeyboard
 import kotlinx.android.synthetic.main.fragment_first.*
 import kotlinx.android.synthetic.main.fragment_words_list.*
 import kotlinx.coroutines.*
@@ -53,9 +54,7 @@ class FirstFragment : BaseFragment(),KodeinAware {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        //title = " Language Database"
-
-       // (activity as AppCompatActivity).supportActionBar?.title = "Language Database"
+        (activity as AppCompatActivity).supportActionBar?.title = "Language Database"
 
         recycler_view_cats.setHasFixedSize(true)
         viewModel = ViewModelProvider(this, viewModelFactory).get(MainViewModel::class.java)
@@ -105,6 +104,7 @@ class FirstFragment : BaseFragment(),KodeinAware {
             recycler_view_newCat.visibility = View.GONE
             Toast.makeText(context, "category $newCatName successfully created", Toast.LENGTH_SHORT).show()
             editText_newCat.text.clear()
+            hideKeyboard()
 
         }
     }
@@ -120,7 +120,6 @@ class FirstFragment : BaseFragment(),KodeinAware {
             }
 
             override fun onQueryTextChange(newText: String?): Boolean {
-
 
                 if (newText.isNullOrEmpty()) {displayedCats = _allCats}
 
