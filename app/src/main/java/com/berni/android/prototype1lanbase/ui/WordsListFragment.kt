@@ -6,19 +6,15 @@ import android.view.*
 import android.widget.SearchView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.berni.android.prototype1lanbase.R
-import com.berni.android.prototype1lanbase.db.Cat
 import com.berni.android.prototype1lanbase.db.Word
-import kotlinx.android.synthetic.main.fragment_first.*
 import kotlinx.android.synthetic.main.fragment_words_list.*
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.*
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.closestKodein
 import org.kodein.di.generic.instance
@@ -34,11 +30,7 @@ class WordsListFragment : BaseFragment(), KodeinAware {
     private lateinit var lastAdded: List<Word?>
     private var displayedWords =  listOf<Word>()
     private var displayedWords1 =  listOf<Word>()
-
-
     private var lastAdditionDate: String? = ""
-    private var adapter: WordAdapter? = null
-    private var numWords: Int? = null
 
     override val kodein by closestKodein()
     private val viewModelFactory: ViewModelFactory by instance<ViewModelFactory>()
@@ -58,26 +50,27 @@ class WordsListFragment : BaseFragment(), KodeinAware {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        lateinit var adapter: WordAdapter
         recycler_view_words.setHasFixedSize(true)
 
         viewModel = ViewModelProvider(this, viewModelFactory).get(MainViewModel::class.java)
 
         // observe if the words within the category suffer any change (like edition or deletion)
 
-        viewModel.wordsInCat(categoryName).observe(viewLifecycleOwner, Observer<List<Word>> {
+        viewModel.allWords.observe(viewLifecycleOwner, Observer<List<Word>> {
 
-            recycler_view_words.layoutManager =
+           recycler_view_words.layoutManager =
                 LinearLayoutManager(context, RecyclerView.VERTICAL, false)
 
-            displayedWords = it.reversed()
 
-            displayedWords1 = displayedWords
+           runBlocking(Dispatchers.Default){
 
-            adapter = WordAdapter(displayedWords)
-            launch {
-                recycler_view_words.adapter = WordAdapter(displayedWords)
-            }  // launch, accounting for the case where we delete a word
+               displayedWords =  viewModel.wordsInCat(categoryName).reversed()
+
+               recycler_view_words.adapter = WordAdapter(displayedWords,viewModel,this.coroutineContext)
+
+           }
+
+              displayedWords1 = displayedWords
 
             // setting up info for the info box in top of words list, several cases to be accounted for
 
@@ -102,13 +95,11 @@ class WordsListFragment : BaseFragment(), KodeinAware {
 
             // editing the corresponding info to the textviews
 
-            text_view_numWords.text = " ${adapter.itemCount} words"
+            text_view_numWords.text = " ${recycler_view_words.adapter?.itemCount?:0} words"
             lastAdditionDate?.let { text_view_lastDate.text = stringLastAdditionDate }
             text_view_last_additions.text = lastAdditions
 
-
         })
-
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -126,7 +117,7 @@ class WordsListFragment : BaseFragment(), KodeinAware {
 
                 val newWordsList = mutableListOf<Word>()
 
-                displayedWords.forEach {
+                displayedWords1.forEach {
 
                     if (it.wordName.startsWith(newText!!)) {
 
@@ -135,9 +126,9 @@ class WordsListFragment : BaseFragment(), KodeinAware {
                     }
                 }
 
-                adapter = WordAdapter(newWordsList)
+                displayedWords1 = newWordsList
 
-                recycler_view_words.adapter = adapter
+                recycler_view_words.adapter = WordAdapter(displayedWords1,viewModel,coroutineContext)
                 return false
             }
 
@@ -202,10 +193,9 @@ class WordsListFragment : BaseFragment(), KodeinAware {
             }
         }
 
-        recycler_view_words.adapter = WordAdapter(displayedWords1)
+        recycler_view_words.adapter = WordAdapter(displayedWords1,viewModel,this.coroutineContext)
         return super.onOptionsItemSelected(item)
     }
-
 
     private fun filterNoExample(toFilter: List<Word>): List<Word> {
 
@@ -252,16 +242,17 @@ class WordsListFragment : BaseFragment(), KodeinAware {
         return alphaSorted
 
     }
-    
 
     private fun sortByLength() : List<Word> {
 
         val displayed = displayedWords.toTypedArray()
 
        val lengthSorted = displayed.sortedBy { it.wordName.length}
-
         return lengthSorted
+
         }
+
+
 
     // also, for the sorting and filtering not to be applied but rather activated, the filters
     // can be performed the same way and the sorting can start with initial data and pass the first

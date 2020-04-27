@@ -5,13 +5,13 @@
     android:id="@+id/menu_longClick">
 
     <item
-        android:id ="@id/rename"
+        android:id ="@+id/edit_word"
         android:orderInCategory="100"
-        android:title="@string/rename"
+        android:title="@string/edit"
         app:showAsAction="never" />
 
     <item
-        android:id ="@id/delete"
+        android:id ="@+id/delete_word"
         android:orderInCategory="100"
         android:title="@string/delete"
         app:showAsAction="never" />

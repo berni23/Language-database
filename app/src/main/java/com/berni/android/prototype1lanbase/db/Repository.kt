@@ -14,7 +14,9 @@ class Repository(private val catDao: CatDao, val cat: Cat, val word: Word) {
 
         suspend fun getAllWords (): List<Word> {return catDao.getAllWords()}
 
-        fun wordsInCat(currentCatName: String) : LiveData<List<Word>> {return catDao.wordsInCat(currentCatName)}
+        fun getAllWordsLive(): LiveData<List<Word>> {return catDao.getAllWordsLive()}
+
+        fun wordsInCat(currentCatName: String) : List<Word> {return catDao.wordsInCat(currentCatName)}
 
         fun wordsInCatAlphabetic(currentCatName: String) :  LiveData<List<Word>> {return catDao.wordsInCatAlphabetic(currentCatName)}
 
@@ -25,6 +27,8 @@ class Repository(private val catDao: CatDao, val cat: Cat, val word: Word) {
         fun deleteWordsInCat(currentCatName: String)  {catDao.deleteWordsInCat(currentCatName)}
 
         fun deleteCat(currentCat:Cat) {catDao.deleteCat(currentCat)}
+
+        fun deleteWord(currentWord: Word) {catDao.deleteWord(currentWord)}
 
 
 

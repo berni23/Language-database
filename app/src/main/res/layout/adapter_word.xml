@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_height="wrap_content"
     android:layout_marginLeft="5dp"
     android:layout_marginTop="5dp"
     android:layout_marginRight="5dp"
     card_view:cardCornerRadius="5dp">
 
-    <LinearLayout
+   <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@android:color/white"
@@ -16,11 +18,14 @@
         android:orientation="horizontal">
 
         <LinearLayout
-            android:layout_width="0dp"
+            android:layout_width="290dp"
             android:layout_height="match_parent"
-            android:layout_weight="1"
             android:gravity="center_vertical"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
             <TextView
                 android:id="@+id/text_view_word"
@@ -50,29 +55,32 @@
 
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
 
-            <ImageView
-                android:id="@+id/ivRowDelete"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_margin="7dp"
-                android:src="@drawable/ic_delete"
-                android:tint="#9E9E9E" />
+        <ImageView
+            android:id="@+id/edit_word"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginStart="320dp"
+            android:src="@drawable/ic_more_vert_black_40dp"
+            android:tint="#9E9E9E"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-            <ImageView
+
+          <!--  <ImageView
                 android:id="@+id/ivRowEdit"
                 android:layout_width="20dp"
                 android:layout_height="20dp"
                 android:layout_margin="7dp"
                 android:src="@drawable/ic_edit"
-                android:tint="#9E9E9E" />
-        </LinearLayout>
+                android:tint="#9E9E9E" />-->
 
-    </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.cardview.widget.CardView>
 <!---

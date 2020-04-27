@@ -51,7 +51,7 @@ class CatAdapter(private val cats: List<Cat>,private val words : List<Word>?, pr
 
         holder.view.text_view_title.setText(cats[position].catName)
 
-         lastAdded = listOf(wordNames?.getOrNull(0),
+         lastAdded = listOf(wordNames.getOrNull(0),
          wordNames.getOrNull(1),
          wordNames.getOrNull(2)
 

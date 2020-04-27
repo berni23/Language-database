@@ -30,8 +30,13 @@ interface CatDao {
 
     //get from a given category, ordering by first added
 
+    @Query("SELECT* FROM Word ORDER BY wordId DESC")
+    fun getAllWordsLive () : LiveData<List<Word>>
+
+    //get from a given category, ordering by first adde
+
     @Query("SELECT* FROM Word WHERE catParent LIKE :category")
-    fun wordsInCat(category: String) : LiveData<List<Word>>
+    fun wordsInCat(category: String) : List<Word>
 
     //get from a given category, ordering alphabetically
 
@@ -57,4 +62,9 @@ interface CatDao {
 
     @Delete
     fun deleteCat(cat: Cat)
+
+    //delete a given word
+
+    @Delete
+    fun deleteWord(word: Word)
 }

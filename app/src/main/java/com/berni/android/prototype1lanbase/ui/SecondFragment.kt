@@ -59,7 +59,6 @@ class SecondFragment : BaseFragment(),KodeinAware {
 
         viewModel = ViewModelProvider(this, viewModelFactory).get(MainViewModel::class.java)
 
-
         btn_save.setOnClickListener {
 
             val theWord = word_editText.text.toString().trim()
@@ -113,9 +112,9 @@ class SecondFragment : BaseFragment(),KodeinAware {
 
    override fun onOptionsItemSelected(item: MenuItem): Boolean {
 
-       val wordsListView: View? = view?.findViewById<View>(R.id.item_toWordsList)
+       //val wordsListView: View? = view?.findViewById<View>(R.id.item_toWordsList)
 
-       var sorted: List<Word>? = null
+      // var sorted: List<Word>? = null
 
        when (item.itemId) {
 
