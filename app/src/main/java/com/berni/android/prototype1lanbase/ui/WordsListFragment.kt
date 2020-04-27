@@ -124,9 +124,9 @@ class WordsListFragment : BaseFragment(), KodeinAware {
 
                 //  val wordsList = adapter?.words
 
-                var newWordsList = mutableListOf<Word>()
+                val newWordsList = mutableListOf<Word>()
 
-                displayedWords?.forEach {
+                displayedWords.forEach {
 
                     if (it.wordName.startsWith(newText!!)) {
 
@@ -191,8 +191,16 @@ class WordsListFragment : BaseFragment(), KodeinAware {
                 message = "filtering words without example.."
                 Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
             }
-        }
 
+            R.id.byLength -> {
+
+                displayedWords1 = sortByLength()
+
+                message = "sorting words by their length.."
+                Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
+
+            }
+        }
 
         recycler_view_words.adapter = WordAdapter(displayedWords1)
         return super.onOptionsItemSelected(item)
@@ -210,7 +218,6 @@ class WordsListFragment : BaseFragment(), KodeinAware {
         }
 
         return filtered
-
     }
 
     private fun filterExample(toFilter: List<Word>): List<Word> {
@@ -222,7 +229,6 @@ class WordsListFragment : BaseFragment(), KodeinAware {
                 filtered.add(it)
             }
         }
-
         return filtered
     }
 
@@ -246,6 +252,20 @@ class WordsListFragment : BaseFragment(), KodeinAware {
         return alphaSorted
 
     }
+    
+
+    private fun sortByLength() : List<Word> {
+
+        val displayed = displayedWords.toTypedArray()
+
+       val lengthSorted = displayed.sortedBy { it.wordName.length}
+
+        return lengthSorted
+        }
+
+    // also, for the sorting and filtering not to be applied but rather activated, the filters
+    // can be performed the same way and the sorting can start with initial data and pass the first
+    // X elements, where x = size of filtered list
 
 }
 

@@ -114,7 +114,6 @@ class CatAdapter(private val cats: List<Cat>,private val words : List<Word>?, pr
                     }}.create().show()
 
                 true
-
             }
             menu?.add("rename")?.setOnMenuItemClickListener {
 

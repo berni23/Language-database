@@ -31,4 +31,5 @@
     <string name="create">create</string>
     <string name="cancel">cancel</string>
     <string name="go_to_words_list">go to words list</string>
+    <string name="sort_by_length">sort by length</string>
 </resources>

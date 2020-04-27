@@ -4,7 +4,6 @@
     tools:context="com.berni.android.prototype1lanbase.ui.WordsListFragment">
 
     <item
-
         android:id="@+id/item_toWordsList"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
         android:icon="@drawable/ic_list_white_24dp"

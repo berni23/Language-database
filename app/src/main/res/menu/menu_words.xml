@@ -40,6 +40,12 @@
                 android:title="@string/alphabetically"
                 app:showAsAction="never" />
 
+            <item
+                android:id="@+id/byLength"
+                android:orderInCategory="2"
+                android:title="@string/sort_by_length"
+                app:showAsAction="never"/>
+
         </menu>
 
     </item>
@@ -68,6 +74,8 @@
                 app:showAsAction="never"/>
 
 
+
+            <!--
             <item
                 android:id="@+id/withDefinition"
                 android:orderInCategory="2"
@@ -81,6 +89,7 @@
                 android:title="@string/noDefinition"
                 app:showAsAction="never"/>
 
+            -->
         </menu>
 
     </item>
