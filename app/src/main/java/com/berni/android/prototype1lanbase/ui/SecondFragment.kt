@@ -61,11 +61,18 @@ class SecondFragment : BaseFragment(),KodeinAware {
 
         btn_save.setOnClickListener {
 
+
+            //TODO() http request for auto -completion of all the blanks except for the 'word'
+
             val theWord = word_editText.text.toString().trim()
             val translation1 = trans1_editText.text.toString().trim()
             var example1 : String? = ex1_editText.text.toString().trim()
+            var translation_example1 : String? = ex1Trans_editText.text.toString().trim()
+            var definition : String? = definition_editText.text.toString().trim()
 
             if(example1!!.isEmpty()) {example1 =null}
+            if(translation_example1!!.isEmpty()) {translation_example1 =null}
+            if(definition!!.isEmpty()) {definition=null}
 
             val date =  SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(Date())
             
@@ -85,9 +92,10 @@ class SecondFragment : BaseFragment(),KodeinAware {
 
             }
 
+
             launch{
 
-                val word = Word(wordId(categoryName,theWord),categoryName,theWord,translation1,example1,date.toString())
+                val word = Word(wordId(categoryName,theWord),categoryName,theWord,translation1,example1,translation_example1,definition,date.toString())
                 viewModel.addWord(word)
 
             }
@@ -97,6 +105,8 @@ class SecondFragment : BaseFragment(),KodeinAware {
             word_editText.text.clear()
             trans1_editText.text.clear()
             ex1_editText.text.clear()
+            definition_editText.text.clear()
+            ex1Trans_editText.text.clear()
 
         }
     }
@@ -105,16 +115,10 @@ class SecondFragment : BaseFragment(),KodeinAware {
 
         super.onCreateOptionsMenu(menu, inflater)
         inflater.inflate(R.menu.menu_fragment_second, menu)
-
-       // val wordsListView: View? = view?.findViewById<View>(R.id.item_toWordsList)
-
     }
 
    override fun onOptionsItemSelected(item: MenuItem): Boolean {
 
-       //val wordsListView: View? = view?.findViewById<View>(R.id.item_toWordsList)
-
-      // var sorted: List<Word>? = null
 
        when (item.itemId) {
 

@@ -42,4 +42,5 @@
     <string name="ex1_editText">first example</string>
     <string name="translation_example">translation example (optional)</string>
     <string name="definition_editText">definiton ( optional)</string>
+    <string name="hint_newCat">write the new category name</string>
 </resources>

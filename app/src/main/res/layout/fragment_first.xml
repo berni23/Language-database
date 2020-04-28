@@ -37,7 +37,7 @@
 
 
          <EditText
-             android:hint="write the new category "
+             android:hint="@string/hint_newCat"
              android:autofillHints="write the new category "
              android:focusable="true"
              android:id="@+id/editText_newCat"

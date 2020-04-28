@@ -11,7 +11,6 @@ interface CatDao {
      //TODO  Emit  toast 'on conflict'
 
     //insert
-
     @Insert(onConflict = OnConflictStrategy.IGNORE )
     suspend fun addCat(cat: Cat)
 

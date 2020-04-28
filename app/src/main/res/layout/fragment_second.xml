@@ -83,7 +83,6 @@
         android:maxLines="1"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
 
-
     <androidx.cardview.widget.CardView
         android:id="@+id/cardview_ex1_editText"
         android:layout_marginTop="20dp"
@@ -183,7 +182,6 @@
      app:layout_constraintEnd_toStartOf="@id/VguideBtn"
      app:layout_constraintStart_toEndOf="@id/VguideBtn"
      app:layout_constraintTop_toTopOf="@id/HguideBtn"/>
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

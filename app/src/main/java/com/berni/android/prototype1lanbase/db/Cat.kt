@@ -38,8 +38,16 @@ data class Word (
     val trans1: String,
     @ColumnInfo(name  = "example")
     val ex1: String?,
+    @ColumnInfo(name = "translation example")
+    val trans_ex1: String?,
+    @ColumnInfo(name = "definiton")
+    val definition: String?,
     @ColumnInfo(name = "date")
     val date:String
+
+
+
+
 
 
 )
