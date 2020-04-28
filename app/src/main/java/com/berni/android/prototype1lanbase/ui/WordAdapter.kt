@@ -75,12 +75,9 @@ class WordAdapter(private val words: List<Word>, private val viewModel: MainView
 
                                 }
 
-                                Toast.makeText(it.context,"deleting word ..",Toast.LENGTH_SHORT).show()
                             }
 
                             setNegativeButton("No") { _, _ ->
-
-                                Toast.makeText(it.context," keeping ..",Toast.LENGTH_SHORT).show()
 
                             }}.create().show()
 
