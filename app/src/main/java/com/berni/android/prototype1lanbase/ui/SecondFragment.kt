@@ -80,7 +80,6 @@ class SecondFragment : BaseFragment(),KodeinAware {
             if(translation_example1!!.isEmpty()) {translation_example1 =null}
             if(definition!!.isEmpty()) {definition=null}
 
-
             
             if (theWord.isEmpty()) {
 
@@ -97,7 +96,6 @@ class SecondFragment : BaseFragment(),KodeinAware {
                 return@setOnClickListener
 
             }
-
 
             launch{
 
@@ -126,7 +124,6 @@ class SecondFragment : BaseFragment(),KodeinAware {
    override fun onOptionsItemSelected(item: MenuItem): Boolean {
 
        when (item.itemId) {
-
            R.id.item_toWordsList -> {
 
                val bundle = bundleOf("categoryName" to categoryName)

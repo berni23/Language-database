@@ -124,12 +124,6 @@
                 android:paddingVertical="5dp"
                 android:paddingHorizontal="5dp"
                 android:layout_height="150dp">
-                <!--
-                app:layout_constraintBottom_toBottomOf="@id/HguideWord"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/layout_edit_word"-->
-
 
                 <EditText
                     android:id="@+id/editEx1_editText"
@@ -138,6 +132,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
                     android:layout_marginStart="10dp"
+                    android:layout_marginTop="20dp"
                     android:background="@android:color/transparent"
                     android:autofillHints="example"
                     android:hint="@string/example"
@@ -164,13 +159,6 @@
                 android:paddingHorizontal="5dp"
                 android:layout_height="150dp">
 
-                <!--
-                app:layout_constraintBottom_toBottomOf="@id/HguideWord"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/cardview_ex1_editText"
-                -->
-
                 <EditText
                     android:id="@+id/editEx1Trans_editText"
                     android:fontFamily="@font/lato_regular"
@@ -196,7 +184,6 @@
                 android:fontFamily="@font/lato_italic"
                 android:layout_marginHorizontal="20dp"
                 android:text = "@string/definition_editText"/>
-
 
             <androidx.cardview.widget.CardView
                 android:layout_marginTop="10dp"

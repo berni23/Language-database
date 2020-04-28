@@ -14,6 +14,7 @@ class MainViewModel(private val repos: Repository ) : ViewModel(){
 
     suspend fun addCat(cat: Cat)     =  repos.addCat(cat)
     suspend fun addWord(word: Word)  =  repos.addWord(word)
+    suspend fun updateWord(word: Word) = repos.updateWord(word)
 
     fun deleteWordsInCat(currentCatName:String) = repos.deleteWordsInCat(currentCatName)
 

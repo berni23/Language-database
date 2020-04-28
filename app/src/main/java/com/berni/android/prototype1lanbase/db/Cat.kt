@@ -29,7 +29,6 @@ data class Cat(
 data class Word  (
 
     // word id made out of catName + wordName . Function in Tools.kt
-
     @PrimaryKey(autoGenerate = false)
     val wordId: String,
     @ColumnInfo(name  = "catParent")

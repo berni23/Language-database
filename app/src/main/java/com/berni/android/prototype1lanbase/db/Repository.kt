@@ -10,9 +10,13 @@ class Repository(private val catDao: CatDao, val cat: Cat, val word: Word) {
 
         suspend fun addWord(word: Word)  {catDao.addWord(word)}
 
-        fun getAllCats () : LiveData<List<Cat>> {return catDao.getAllCats()}
+        suspend fun updateWord(word: Word) {catDao.updateWord(word)}
 
         suspend fun getAllWords (): List<Word> {return catDao.getAllWords()}
+
+        fun getAllCats () : LiveData<List<Cat>> {return catDao.getAllCats()}
+
+
 
         fun getAllWordsLive(): LiveData<List<Word>> {return catDao.getAllWordsLive()}
 
