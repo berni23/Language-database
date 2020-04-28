@@ -28,7 +28,7 @@ class LanApplication() : Application(), KodeinAware {
 
         import(androidXModule(this@LanApplication))
 
-        bind() from singleton { Word(instance(),instance(),instance(),instance(),instance(),instance()) }
+        bind() from singleton { Word(instance(),instance(),instance(),instance(),instance(),instance(),instance(),instance()) }
         bind() from singleton {String()}
         bind() from singleton { Cat(instance(),instance()) }
         bind() from singleton { LanDataBase(instance()) }

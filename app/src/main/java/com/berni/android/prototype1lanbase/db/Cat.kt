@@ -45,11 +45,6 @@ data class Word (
     @ColumnInfo(name = "date")
     val date:String
 
-
-
-
-
-
 )
 
     /*:Serializable{

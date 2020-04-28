@@ -64,17 +64,24 @@ class SecondFragment : BaseFragment(),KodeinAware {
 
             //TODO() http request for auto -completion of all the blanks except for the 'word'
 
+            // required blanks
+
             val theWord = word_editText.text.toString().trim()
             val translation1 = trans1_editText.text.toString().trim()
+            val date =  SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(Date())
+
+            // optional blanks
+
             var example1 : String? = ex1_editText.text.toString().trim()
             var translation_example1 : String? = ex1Trans_editText.text.toString().trim()
             var definition : String? = definition_editText.text.toString().trim()
+
 
             if(example1!!.isEmpty()) {example1 =null}
             if(translation_example1!!.isEmpty()) {translation_example1 =null}
             if(definition!!.isEmpty()) {definition=null}
 
-            val date =  SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(Date())
+
             
             if (theWord.isEmpty()) {
 
@@ -118,7 +125,6 @@ class SecondFragment : BaseFragment(),KodeinAware {
     }
 
    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-
 
        when (item.itemId) {
 

@@ -30,8 +30,6 @@ class Repository(private val catDao: CatDao, val cat: Cat, val word: Word) {
 
         fun deleteWord(currentWord: Word) {catDao.deleteWord(currentWord)}
 
-
-
     companion object {
 
             @Volatile private var instance: Repository? = null
