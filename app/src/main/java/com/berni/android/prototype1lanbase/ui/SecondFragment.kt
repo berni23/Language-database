@@ -106,7 +106,7 @@ class SecondFragment : BaseFragment(),KodeinAware {
         super.onCreateOptionsMenu(menu, inflater)
         inflater.inflate(R.menu.menu_fragment_second, menu)
 
-        val wordsListView: View? = view?.findViewById<View>(R.id.item_toWordsList)
+       // val wordsListView: View? = view?.findViewById<View>(R.id.item_toWordsList)
 
     }
 

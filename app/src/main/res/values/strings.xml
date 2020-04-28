@@ -37,4 +37,9 @@
     <string name="edit">edit</string>
     <string name="search">search</string>
     <string name="category">category</string>
+    <string name="word">word</string>
+    <string name="createdOn">created on</string>
+    <string name="ex1_editText">first example</string>
+    <string name="translation_example">translation example (optional)</string>
+    <string name="definition_editText">definiton ( optional)</string>
 </resources>

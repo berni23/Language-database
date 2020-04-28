@@ -30,25 +30,27 @@
             android:id="@+id/actionWordsList"
             app:destination="@id/wordsListFragment" />
 
-        <!-- app:argType = String -->
-
-        <!--
-
-        <action
-            android:id="@+id/actionSaveCat"
-            app:destination="@id/FirstFragment" />
-
-            -->
-
     </fragment>
     <fragment
         android:id="@+id/wordsListFragment"
         android:name="com.berni.android.prototype1lanbase.ui.WordsListFragment"
         android:label="fragment_words_list"
-        tools:layout="@layout/fragment_words_list" />
-
+        tools:layout="@layout/fragment_words_list" >
+        <action
+            android:id="@+id/actionEditWord"
+            app:destination="@id/editWordFragment" />
+    </fragment>
 
     <argument android:name = "categoryName"
+        app:nullable="true"
+        android:defaultValue="@null"/>
+    <fragment
+        android:id="@+id/editWordFragment"
+        android:name="com.berni.android.prototype1lanbase.ui.EditWordFragment"
+        android:label="fragment_edit_word"
+        tools:layout="@layout/fragment_edit_word" />
+
+    <argument android:name = "word"
         app:nullable="true"
         android:defaultValue="@null"/>
 

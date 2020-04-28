@@ -14,14 +14,12 @@ import com.berni.android.prototype1lanbase.db.Cat
 import com.berni.android.prototype1lanbase.db.Word
 import com.berni.android.prototype1lanbase.hideKeyboard
 import kotlinx.android.synthetic.main.fragment_first.*
-import kotlinx.android.synthetic.main.fragment_words_list.*
 import kotlinx.coroutines.*
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.closestKodein
 import org.kodein.di.generic.instance
 import java.text.SimpleDateFormat
 import java.util.*
-
 
 /**
  * A simple [Fragment] subclass as the default destination in the navigation.

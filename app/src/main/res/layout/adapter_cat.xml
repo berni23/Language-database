@@ -65,7 +65,6 @@
                 android:layout_height="wrap_content"
                 tools:ignore="SmallSp" />
 
-
         </RelativeLayout>
 
     </androidx.cardview.widget.CardView>
