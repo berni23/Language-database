@@ -7,6 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.widget.PopupMenu
+import androidx.core.os.bundleOf
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.berni.android.prototype1lanbase.R
 import com.berni.android.prototype1lanbase.db.Word
@@ -45,12 +47,13 @@ class WordAdapter(private val words: List<Word>, private val viewModel: MainView
         holder.view.edit_word.setOnClickListener {
 
             val popupMenu = PopupMenu(it.context,it)
-
             popupMenu.setOnMenuItemClickListener { item ->
 
                 when(item.itemId){
-
                     R.id.edit_word -> {
+
+                        val bundle = bundleOf("word" to words[position])
+                        Navigation.findNavController(it).navigate(R.id.actionEditWord, bundle)
 
                        //  TODO(navigate to word edit fragment ( to be created) )
 
@@ -89,10 +92,8 @@ class WordAdapter(private val words: List<Word>, private val viewModel: MainView
             }
 
             popupMenu.inflate(R.menu.menu_single_word)
-
             popupMenu.show()
         }
-
     }
 
     class WordViewHolder(val view: View) : RecyclerView.ViewHolder(view)

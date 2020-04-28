@@ -17,7 +17,7 @@ interface CatDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE )
     suspend fun addWord(word: Word )
 
-    //get all cat
+    //get all categories
 
     @Query( "SELECT* FROM Cat ORDER BY catName DESC")
     fun getAllCats() : LiveData<List<Cat>>
@@ -26,6 +26,13 @@ interface CatDao {
 
     @Query("SELECT* FROM Word ORDER BY wordId DESC")
     fun getAllWords () : List<Word>
+
+    //update words
+
+    @Update
+
+    fun updateWord(word: Word)
+
 
     //get from a given category, ordering by first added
 

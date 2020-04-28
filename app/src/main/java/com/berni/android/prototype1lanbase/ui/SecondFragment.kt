@@ -61,7 +61,6 @@ class SecondFragment : BaseFragment(),KodeinAware {
 
         btn_save.setOnClickListener {
 
-
             //TODO() http request for auto -completion of all the blanks except for the 'word'
 
             // required blanks

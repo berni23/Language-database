@@ -1,6 +1,8 @@
 package com.berni.android.prototype1lanbase.db
 
 import androidx.room.*
+import android.os.Parcelable
+import java.io.Serializable
 
 data class CatWords(
 
@@ -24,7 +26,7 @@ data class Cat(
 )
 
 @Entity
-data class Word (
+data class Word  (
 
     // word id made out of catName + wordName . Function in Tools.kt
 
@@ -45,8 +47,7 @@ data class Word (
     @ColumnInfo(name = "date")
     val date:String
 
-)
-
+):Serializable
     /*:Serializable{
     @PrimaryKey(autoGenerate = true)
     var wordId: Int = 0}

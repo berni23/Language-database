@@ -134,7 +134,7 @@ class WordsListFragment : BaseFragment(), KodeinAware {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
 
-        var message: String?
+        val message: String?
 
         when (item.itemId) {
 
@@ -231,9 +231,7 @@ class WordsListFragment : BaseFragment(), KodeinAware {
     private fun sortAlphabetically() : List<Word>{
 
         val displayed = displayedWords.toTypedArray()
-
         val alphaSorted = displayed.sortedBy { it.wordName }
-
         return alphaSorted
 
     }
@@ -241,18 +239,15 @@ class WordsListFragment : BaseFragment(), KodeinAware {
     private fun sortByLength() : List<Word> {
 
         val displayed = displayedWords.toTypedArray()
-
-       val lengthSorted = displayed.sortedBy { it.wordName.length}
+        val lengthSorted = displayed.sortedBy { it.wordName.length}
         return lengthSorted
 
         }
 
-
-
-    // also, for the sorting and filtering not to be applied but rather activated, the filters
-    // can be performed the same way and the sorting can start with initial data and pass the first
-    // X elements, where x = size of filtered list
-
+    /** also, for the sorting and filtering not to be applied but rather activated, the filters
+        can  perform the same way and the sorting can start with initial data and pass the first
+        X elements, where x = size of filtered list
+**/
 }
 
 
