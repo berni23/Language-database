@@ -1,7 +1,6 @@
 package com.berni.android.prototype1lanbase.db
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.room.*
 
 
@@ -25,14 +24,29 @@ interface CatDao {
     //get all words
 
     @Query("SELECT* FROM Word ORDER BY wordId DESC")
-    fun getAllWords () : List<Word>
+    fun getAllWords() : List<Word>
 
-    //update words
+    @Query("SELECT* FROM Cat WHERE catName=:newName" )
+
+    fun validCatName(newName: String?) : List<Cat>
+
+    @Query("SELECT* FROM Word WHERE wordId=:newId" )
+
+    fun validWordId(newId: String?): List<Word>
+
+    //update the whole word object
 
     @Update
-
     fun updateWord(word: Word)
 
+    //update just the category name, keeping the rest of the parameters the same
+
+    @Query("UPDATE Cat SET catName=:newName WHERE catName = :oldName")
+
+    fun updateCat(oldName:String?,newName:String?)
+
+    @Query("SELECT* FROM Cat ORDER BY catNum DESC LIMIT 1 ")
+    fun maxNum() : Cat?
 
     //get from a given category, ordering by first added
 

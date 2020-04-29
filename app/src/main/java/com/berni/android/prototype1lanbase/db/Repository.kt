@@ -12,15 +12,29 @@ class Repository(private val catDao: CatDao, val cat: Cat, val word: Word) {
 
         suspend fun updateWord(word: Word) {catDao.updateWord(word)}
 
+        suspend fun updateCat(oldName:String,newName:String) {catDao.updateCat(oldName,newName)}
+
         suspend fun getAllWords (): List<Word> {return catDao.getAllWords()}
 
         fun getAllCats () : LiveData<List<Cat>> {return catDao.getAllCats()}
 
+        fun validCatName(catName: String) : List<Cat> {return catDao.validCatName(catName)}
 
+        fun validWordId(wordId:String): List<Word> {return catDao.validWordId(wordId)}
 
         fun getAllWordsLive(): LiveData<List<Word>> {return catDao.getAllWordsLive()}
 
         fun wordsInCat(currentCatName: String) : LiveData<List<Word>> {return catDao.wordsInCat(currentCatName)}
+
+        fun deleteWordsInCat(currentCatName: String)  {catDao.deleteWordsInCat(currentCatName)}
+
+        fun deleteCat(currentCat:Cat) {catDao.deleteCat(currentCat)}
+
+        fun deleteWord(currentWord: Word) {catDao.deleteWord(currentWord)}
+
+        fun maxNum() : Int {return catDao.maxNum()?.catNum?.toInt()?:0}
+
+        // methods not used for the moment
 
         fun wordsInCatAlphabetic(currentCatName: String) :  LiveData<List<Word>> {return catDao.wordsInCatAlphabetic(currentCatName)}
 
@@ -28,11 +42,7 @@ class Repository(private val catDao: CatDao, val cat: Cat, val word: Word) {
 
         fun filterNoExample(currentCatName:String) : LiveData<List<Word>> {return catDao.filterNoExample(currentCatName)}
 
-        fun deleteWordsInCat(currentCatName: String)  {catDao.deleteWordsInCat(currentCatName)}
 
-        fun deleteCat(currentCat:Cat) {catDao.deleteCat(currentCat)}
-
-        fun deleteWord(currentWord: Word) {catDao.deleteWord(currentWord)}
 
     companion object {
 

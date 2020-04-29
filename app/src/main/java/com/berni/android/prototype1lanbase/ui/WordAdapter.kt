@@ -73,7 +73,6 @@ class WordAdapter(private val words: List<Word>, private val viewModel: MainView
                                     viewModel.deleteWord(words[position])
 
                                 }
-
                             }
 
                             setNegativeButton("No") { _, _ ->

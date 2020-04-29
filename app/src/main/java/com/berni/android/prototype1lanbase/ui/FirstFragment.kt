@@ -20,6 +20,7 @@ import org.kodein.di.android.x.closestKodein
 import org.kodein.di.generic.instance
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.coroutines.CoroutineContext
 
 /**
  * A simple [Fragment] subclass as the default destination in the navigation.
@@ -78,7 +79,6 @@ class FirstFragment : BaseFragment(),KodeinAware {
         btnCreate.setOnClickListener {
 
             //TODO( window disappears on screen rotated. probably fixed with creation of viewmodel or using a binding method)
-             recycler_view_newCat.visibility = View.GONE
 
             newCatName = editText_newCat.text.toString().trim()
             val currentDate: String = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(Date())
@@ -90,12 +90,27 @@ class FirstFragment : BaseFragment(),KodeinAware {
                 return@setOnClickListener
             }
 
-            launch {
+            var bool = true
 
-                val cat = Cat(newCatName!!, currentDate)
-                viewModel.addCat(cat)
+            runBlocking(Dispatchers.Default){ bool = viewModel.validCatName(newCatName!!)}
 
-            }
+                if(bool) {
+
+                    launch(Dispatchers.Default) {
+
+                        val  num = viewModel.maxNum()
+
+                        val cat = Cat(newCatName!!, currentDate,(num+1).toString())
+                        viewModel.addCat(cat)
+                    }
+                }
+
+                else
+                    {
+                    editText_newCat.error = " category already exists"
+                    editText_newCat.text.clear()
+                    return@setOnClickListener
+                }
 
             recycler_view_newCat.visibility = View.GONE
             Toast.makeText(context, "category $newCatName successfully created", Toast.LENGTH_SHORT).show()
@@ -103,6 +118,8 @@ class FirstFragment : BaseFragment(),KodeinAware {
             hideKeyboard()
 
         }
+
+        recycler_view_newCat.visibility = View.GONE
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {

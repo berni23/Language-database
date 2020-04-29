@@ -11,6 +11,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.berni.android.prototype1lanbase.R
+import com.berni.android.prototype1lanbase.db.Cat
 import com.berni.android.prototype1lanbase.db.Word
 import kotlinx.android.synthetic.main.fragment_words_list.*
 import kotlinx.coroutines.launch
@@ -26,7 +27,7 @@ class WordsListFragment : BaseFragment(), KodeinAware {
 
     //lateinit var navController: NavController
 
-    private lateinit var categoryName: String
+    private lateinit var cat: Cat
     private lateinit var lastAdded: List<Word?>
     private var displayedWords =  listOf<Word>()
     private var displayedWords1 =  listOf<Word>()
@@ -42,7 +43,7 @@ class WordsListFragment : BaseFragment(), KodeinAware {
     ): View? {
 
         setHasOptionsMenu(true)
-        categoryName = arguments?.getString("categoryName").toString()
+        cat = arguments?.get("cat") as Cat
         return inflater.inflate(R.layout.fragment_words_list, container, false)
     }
 
@@ -55,7 +56,7 @@ class WordsListFragment : BaseFragment(), KodeinAware {
 
         // observe if the words within the category suffer any change (like edition or deletion)
 
-        viewModel.wordsInCat(categoryName).observe(viewLifecycleOwner, Observer<List<Word>> {
+        viewModel.wordsInCat(cat.catNum!!).observe(viewLifecycleOwner, Observer<List<Word>> {
 
         recycler_view_words.layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
 

@@ -23,8 +23,9 @@
 
         <argument android:name = "categoryName"
 
-          app:nullable="true"
-          android:defaultValue="@null"/>
+            app:argType="com.berni.android.prototype1lanbase.db.Cat"
+            app:nullable="true"
+            android:defaultValue="@null"/>
 
         <action
             android:id="@+id/actionWordsList"
@@ -61,7 +62,6 @@
         android:name="com.berni.android.prototype1lanbase.ui.DisplayWordFragment"
         android:label="fragment_display_word"
         tools:layout="@layout/fragment_display_word" />
-
 
     <argument android:name ="displayWord"
         app:argType="com.berni.android.prototype1lanbase.db.Word"

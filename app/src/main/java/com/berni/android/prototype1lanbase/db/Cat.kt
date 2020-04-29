@@ -3,8 +3,9 @@ package com.berni.android.prototype1lanbase.db
 import androidx.room.*
 import android.os.Parcelable
 import java.io.Serializable
+import kotlin.properties.Delegates
 
-data class CatWords(
+/**data class CatWords(
 
     @Embedded
     val cat: Cat,
@@ -13,7 +14,7 @@ data class CatWords(
         entityColumn = "catParent")
 
     val words: List<Word>
-)
+)**/
 
 @Entity
 data class Cat(
@@ -22,8 +23,12 @@ data class Cat(
     @ColumnInfo(name = "catName")
     val catName: String,
     @ColumnInfo(name = "catDate")
-    val catDate: String
-)
+    val catDate: String,
+    @ColumnInfo(name = "catNum")
+    val catNum: String?
+
+):Serializable
+
 
 @Entity
 data class Word  (
@@ -41,7 +46,7 @@ data class Word  (
     val ex1: String?,
     @ColumnInfo(name = "translation example")
     val trans_ex1: String?,
-    @ColumnInfo(name = "definiton")
+    @ColumnInfo(name = "definition")
     val definition: String?,
     @ColumnInfo(name = "date")
     val date:String

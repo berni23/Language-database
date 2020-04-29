@@ -9,11 +9,10 @@ import androidx.fragment.app.Fragment
 // generate  word id, so words have to be unique within the same category but
 // can be duplicated if in different categories .
 
-fun wordId( catName:String, wordName: String) : String{
+fun wordId( catNum:String, wordName: String) : String{
 
-    return  catName.plus("_").plus(wordName)
+    return  wordName.plus(catNum)
 }
-
 
 // fun for hiding keyboard
 

@@ -88,7 +88,7 @@ class EditWordFragment : BaseFragment(), KodeinAware {
 
                 }
 
-                val id = wordId(cat,name)
+                val id = wordId(cat.toString(),name)
 
             launch(Dispatchers.Default){
 

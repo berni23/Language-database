@@ -11,10 +11,13 @@ import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.navigation.findNavController
 import com.berni.android.prototype1lanbase.R
+import com.berni.android.prototype1lanbase.db.Cat
 import com.berni.android.prototype1lanbase.db.Word
 import com.berni.android.prototype1lanbase.wordId
 import kotlinx.android.synthetic.main.fragment_second.*
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.closestKodein
 import org.kodein.di.generic.instance
@@ -30,13 +33,13 @@ class SecondFragment : BaseFragment(),KodeinAware {
 
     private val viewModelFactory: ViewModelFactory by instance<ViewModelFactory>()
     private lateinit var viewModel: MainViewModel
-    private lateinit var categoryName: String
+    private lateinit var cat: Cat
     private lateinit var navController: NavController
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        categoryName = arguments?.getString("categoryName").toString()
+        cat= arguments?.get("categoryName") as Cat
 
     }
 
@@ -55,7 +58,7 @@ class SecondFragment : BaseFragment(),KodeinAware {
 
         navController = Navigation.findNavController(view)
 
-        (activity as AppCompatActivity).supportActionBar?.title = categoryName
+        (activity as AppCompatActivity).supportActionBar?.title = cat.catName
 
         viewModel = ViewModelProvider(this, viewModelFactory).get(MainViewModel::class.java)
 
@@ -80,7 +83,6 @@ class SecondFragment : BaseFragment(),KodeinAware {
             if(translation_example1!!.isEmpty()) {translation_example1 =null}
             if(definition!!.isEmpty()) {definition=null}
 
-            
             if (theWord.isEmpty()) {
 
                 word_editText.error = "word required"
@@ -97,11 +99,25 @@ class SecondFragment : BaseFragment(),KodeinAware {
 
             }
 
+             var bool = true
+             var id = wordId(cat.catNum.toString(),theWord)
+
+            runBlocking(Dispatchers.Default) { bool = viewModel.validWordId(id) }
+
+            if(bool) {
+
             launch{
 
-                val word = Word(wordId(categoryName,theWord),categoryName,theWord,translation1,example1,translation_example1,definition,date.toString())
+                val word = Word(id,cat.catNum,theWord,translation1,example1,translation_example1,definition,date.toString())
                 viewModel.addWord(word)
 
+            }   }
+
+            else {
+
+                  word_editText.error = "word already exists"
+                  word_editText.requestFocus()
+                  return@setOnClickListener
             }
 
             Toast.makeText(context, "word successfully added", Toast.LENGTH_SHORT).show()
@@ -126,7 +142,7 @@ class SecondFragment : BaseFragment(),KodeinAware {
        when (item.itemId) {
            R.id.item_toWordsList -> {
 
-               val bundle = bundleOf("categoryName" to categoryName)
+               val bundle = bundleOf("cat" to cat)
                navController.navigate(R.id.actionWordsList, bundle)
            }
        }

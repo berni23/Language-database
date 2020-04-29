@@ -1,9 +1,10 @@
 package com.berni.android.prototype1lanbase.ui
 
-
 import android.app.AlertDialog
 import android.view.*
 import android.view.ContextMenu.ContextMenuInfo
+import android.widget.EditText
+import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.navigation.Navigation.findNavController
@@ -12,13 +13,21 @@ import com.berni.android.prototype1lanbase.R
 import com.berni.android.prototype1lanbase.db.Cat
 import com.berni.android.prototype1lanbase.db.Word
 import kotlinx.android.synthetic.main.adapter_cat.view.*
-import kotlinx.coroutines.*
+import kotlinx.android.synthetic.main.fragment_first.*
+import kotlinx.android.synthetic.main.fragment_second.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 import kotlin.coroutines.CoroutineContext
+
 
 class CatAdapter(private val cats: List<Cat>,private val words : List<Word>?, private val viewModel: MainViewModel,
                  override val coroutineContext: CoroutineContext
 ) : RecyclerView.Adapter<CatAdapter.CatViewHolder>(),
     View.OnCreateContextMenuListener, CoroutineScope {
+
+    val wordNames  = mutableListOf<String>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CatViewHolder {
 
@@ -35,19 +44,17 @@ class CatAdapter(private val cats: List<Cat>,private val words : List<Word>?, pr
     override fun getItemCount() = cats.size
     override fun onBindViewHolder(holder: CatViewHolder, position: Int) {
 
-        val wordNames  = mutableListOf<String>()
         //  holder.view.setOnCreateContextMenuListener(this)
 
         words?.reversed()?.forEach {
 
-            if (it.catParent == cats[position].catName) {
+            if (it.catParent == cats[position].catNum) {
                 wordNames.add(it.wordName)
             }
         }
 
          val lastAdded: List<String?>
          val numWords: Int
-
 
         holder.view.text_view_title.setText(cats[position].catName)
 
@@ -86,7 +93,7 @@ class CatAdapter(private val cats: List<Cat>,private val words : List<Word>?, pr
 
         holder.view.setOnClickListener {
 
-            val bundle = bundleOf("categoryName" to cats[position].catName)
+            val bundle = bundleOf("categoryName" to cats[position])
             findNavController(it).navigate(R.id.actionAddCat, bundle)
         }
 
@@ -97,7 +104,6 @@ class CatAdapter(private val cats: List<Cat>,private val words : List<Word>?, pr
                 AlertDialog.Builder(v?.context).apply {
                     setTitle("Are you sure?")
                     setMessage("You cannot undo this operation")
-
                     setPositiveButton("Yes") { _, _ ->
 
                         launch(Dispatchers.Default){
@@ -117,7 +123,48 @@ class CatAdapter(private val cats: List<Cat>,private val words : List<Word>?, pr
             }
             menu?.add("rename")?.setOnMenuItemClickListener {
 
-                //TODO : change the name in the database when the category has been renamed
+                AlertDialog.Builder(v?.context).apply {
+
+                    val input = EditText(context)
+                    val lp = LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT)
+
+                    input.layoutParams = lp
+                    this.setView(input)
+
+                    setTitle("edit category name")
+                   // setMessage("You cannot undo this operation")
+
+                    setPositiveButton("modify") { _, _ ->
+
+                        val renamed = input.text.toString().trim()
+                        if (renamed.isEmpty()) {
+
+                            input.error = "new name required"
+                            input.requestFocus()
+                            return@setPositiveButton
+                        }
+
+                        var bool = true
+
+                        runBlocking(Dispatchers.Default){bool = viewModel.validCatName(renamed) }
+
+                        if(bool) {  launch(Dispatchers.Default){ viewModel.updateCat(cats[position].catName,renamed) }  }
+
+                        else
+                        {
+                            input.error = " name already exists"
+                            input.text.clear()
+                            return@setPositiveButton
+                        }
+
+                        val renameWords = mutableListOf<Word>()
+
+
+                    }
+
+                    setNegativeButton("Cancel") { _, _ ->
+
+                    }}.create().show()
 
                 holder.view.text_view_title.isFocusable = true
                 holder.view.text_view_title.isFocusableInTouchMode = true
