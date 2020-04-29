@@ -39,6 +39,9 @@
         <action
             android:id="@+id/actionEditWord"
             app:destination="@id/editWordFragment" />
+        <action
+            android:id="@+id/actionDisplayWord"
+            app:destination="@id/displayWordFragment" />
     </fragment>
     <argument android:name = "categoryName"
         app:nullable="true"
@@ -52,4 +55,18 @@
     <argument android:name ="word"
         app:argType="com.berni.android.prototype1lanbase.db.Word"
         app:nullable="false" />
+
+    <fragment
+        android:id="@+id/displayWordFragment"
+        android:name="com.berni.android.prototype1lanbase.ui.DisplayWordFragment"
+        android:label="fragment_display_word"
+        tools:layout="@layout/fragment_display_word" />
+
+
+    <argument android:name ="displayWord"
+        app:argType="com.berni.android.prototype1lanbase.db.Word"
+        app:nullable="false" />
+
+
+
 </navigation>

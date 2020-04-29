@@ -41,6 +41,10 @@
     <string name="createdOn">created on</string>
     <string name="ex1_editText">first example</string>
     <string name="translation_example">translation example (optional)</string>
-    <string name="definition_editText">definiton ( optional)</string>
+    <string name="definition_editText">definiton (optional)</string>
     <string name="hint_newCat">write the new category name</string>
+    <string name="note">Note</string>
+    <string name="no_example_provided">No example provided</string>
+    <string name="no_example_translation_provided">no example translation provided</string>
+    <string name="no_definition_provided">no definition provided</string>
 </resources>

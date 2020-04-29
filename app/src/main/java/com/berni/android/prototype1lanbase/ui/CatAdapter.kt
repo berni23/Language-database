@@ -45,8 +45,9 @@ class CatAdapter(private val cats: List<Cat>,private val words : List<Word>?, pr
             }
         }
 
-         var lastAdded: List<String?>
-         var numWords : Int? = null
+         val lastAdded: List<String?>
+         val numWords: Int
+
 
         holder.view.text_view_title.setText(cats[position].catName)
 
@@ -79,7 +80,7 @@ class CatAdapter(private val cats: List<Cat>,private val words : List<Word>?, pr
 
         // editing the corresponding info to the text views
 
-       // TODO() :  enbable category name editting
+       // TODO() :  enable category name editting
 
         // holder.view.text_view_title.setImeActionLabel("Custom text", KeyEvent.KEYCODE_ENTER)
 

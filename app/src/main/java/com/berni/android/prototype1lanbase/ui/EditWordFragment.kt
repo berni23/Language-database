@@ -51,12 +51,11 @@ class EditWordFragment : BaseFragment(), KodeinAware {
         (activity as AppCompatActivity).supportActionBar?.title = word.wordName
         viewModel  = ViewModelProvider(this, viewModelFactory).get(MainViewModel::class.java)
 
-
         // mandatory fields
 
         editWord_editText.setText(word.wordName)
         editTrans1_editText.setText(word.trans1)
-        editDate.setText("created on ${word.date}")
+        editDate.setText("added on ${word.date}")
 
         //optional fields
 

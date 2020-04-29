@@ -15,7 +15,6 @@ import com.berni.android.prototype1lanbase.db.Word
 import kotlinx.android.synthetic.main.adapter_word.view.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import kotlin.coroutines.CoroutineContext
 
@@ -90,6 +89,13 @@ class WordAdapter(private val words: List<Word>, private val viewModel: MainView
 
             popupMenu.inflate(R.menu.menu_single_word)
             popupMenu.show()
+        }
+
+        holder.view.setOnClickListener{
+
+            val bundle = bundleOf("displayWord" to words[position])
+            Navigation.findNavController(it).navigate(R.id.actionDisplayWord, bundle)
+
         }
     }
 
