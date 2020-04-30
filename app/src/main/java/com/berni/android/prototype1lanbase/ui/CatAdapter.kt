@@ -153,7 +153,7 @@ class CatAdapter(private val cats: List<Cat>,private val words : List<Word>?, pr
                         else
                         {
                             input.error = " name already exists"
-                            input.text.clear()
+                            input.requestFocus()
                             return@setPositiveButton
                         }
 

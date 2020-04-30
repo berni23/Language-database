@@ -28,13 +28,17 @@ class LanApplication() : Application(), KodeinAware {
 
         import(androidXModule(this@LanApplication))
 
-        bind() from singleton { Word(instance(),instance(),instance(),instance(),instance(),instance(),instance(),instance()) }
-        bind() from singleton {String()}
-        bind() from singleton {Cat(instance<String>(),instance<String>(),instance<String>())}
         bind() from singleton {LanDataBase(instance()) }
         bind() from singleton {instance<LanDataBase>().catDao()}
+        bind<Repository>() with singleton {Repository(instance(),instance(),instance())}
         bind() from provider  {ViewModelFactory(instance()) }
-        bind<Repository>() with singleton { Repository(instance(),instance(),instance())}
+        bind() from singleton {String()}
+
+        bind<Cat>() with singleton {Cat(instance<String>(),instance<String>(),instance<String>())}
+
+        bind<Word>() with singleton { Word(instance(),instance(),instance(),instance(),instance(),instance(),instance(),instance()) }
+
+
 
       //  bind<Fragment>() with singleton {Fragment()}
 

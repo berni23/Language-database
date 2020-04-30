@@ -21,6 +21,7 @@ import org.kodein.di.generic.instance
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.coroutines.CoroutineContext
+import kotlin.Int
 
 /**
  * A simple [Fragment] subclass as the default destination in the navigation.
@@ -99,16 +100,18 @@ class FirstFragment : BaseFragment(),KodeinAware {
                     launch(Dispatchers.Default) {
 
                         val  num = viewModel.maxNum()
-
                         val cat = Cat(newCatName!!, currentDate,(num+1).toString())
                         viewModel.addCat(cat)
                     }
+
+                    Toast.makeText(context,"category name accepted",Toast.LENGTH_SHORT).show()
                 }
 
                 else
                     {
                     editText_newCat.error = " category already exists"
-                    editText_newCat.text.clear()
+                    editText_newCat.requestFocus()
+                    Toast.makeText(context,"category name rejected",Toast.LENGTH_SHORT).show()
                     return@setOnClickListener
                 }
 
