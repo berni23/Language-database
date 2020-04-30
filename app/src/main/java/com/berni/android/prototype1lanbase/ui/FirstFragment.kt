@@ -100,7 +100,7 @@ class FirstFragment : BaseFragment(),KodeinAware {
                     launch(Dispatchers.Default) {
 
                         val  num = viewModel.maxNum()
-                        val cat = Cat(newCatName!!, currentDate,(num+1).toString())
+                        val cat = Cat(newCatName!!, currentDate,(num+1).toString(),1)
                         viewModel.addCat(cat)
                     }
 

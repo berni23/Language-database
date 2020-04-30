@@ -6,9 +6,9 @@ import androidx.lifecycle.MutableLiveData
 
 interface Repository{
 
-    val catDao: CatDao
-    val cat: Cat
-    val word: Word
+        val catDao: CatDao
+        val cat: Cat
+        val word: Word
 
         suspend fun addCat(cat: Cat)  {catDao.addCat(cat)}
 

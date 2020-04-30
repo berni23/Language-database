@@ -1,6 +1,5 @@
 package com.berni.android.prototype1lanbase.db
 
-
     class RepositoryImpl(
 
         override  val catDao: CatDao,

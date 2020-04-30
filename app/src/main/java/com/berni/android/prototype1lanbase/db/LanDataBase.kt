@@ -6,7 +6,7 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 
 
-@Database(entities = [Word::class, Cat::class],version = 3, exportSchema = false)
+@Database(entities = [Word::class, Cat::class],version = 4, exportSchema = false)
 
 abstract class LanDataBase : RoomDatabase() {
 
@@ -32,7 +32,6 @@ abstract class LanDataBase : RoomDatabase() {
                     "Lan.db"
                 )
                     .build()
-
             //fun getInstance(catDao: CatDao): CatDao { return catDao }
         }
 }

@@ -25,9 +25,14 @@ data class Cat(
     @ColumnInfo(name = "catDate")
     val catDate: String,
     @ColumnInfo(name = "catNum")
-    val catNum: String?
+    val catNum: String?,
+    @ColumnInfo(name = "trial")
+    val trial: Int = 0
 
 ):Serializable
+
+
+
 
 
 @Entity

@@ -4,10 +4,7 @@ import android.app.Application
 import android.content.Context
 import android.media.CamcorderProfile.get
 import androidx.fragment.app.Fragment
-import com.berni.android.prototype1lanbase.db.Cat
-import com.berni.android.prototype1lanbase.db.LanDataBase
-import com.berni.android.prototype1lanbase.db.Repository
-import com.berni.android.prototype1lanbase.db.Word
+import com.berni.android.prototype1lanbase.db.*
 import com.berni.android.prototype1lanbase.ui.BaseFragment
 import com.berni.android.prototype1lanbase.ui.FirstFragment
 import com.berni.android.prototype1lanbase.ui.ViewModelFactory
@@ -21,22 +18,21 @@ class LanApplication() : Application(), KodeinAware {
 
    // lateinit var context: Context
 
-    infix fun Int(int: Int){
 
-    }
     override val kodein = Kodein.lazy {
 
         import(androidXModule(this@LanApplication))
 
+        bind() from singleton {Int}
         bind() from singleton {LanDataBase(instance()) }
         bind() from singleton {instance<LanDataBase>().catDao()}
-        bind<Repository>() with singleton {Repository(instance(),instance(),instance())}
+        bind<Repository>() with singleton {RepositoryImpl(instance(),instance(),instance()) }
         bind() from provider  {ViewModelFactory(instance()) }
         bind() from singleton {String()}
 
-        bind<Cat>() with singleton {Cat(instance<String>(),instance<String>(),instance<String>())}
+        bind() from provider {Cat(instance<String>(),instance<String>(),instance<String>())}
 
-        bind<Word>() with singleton { Word(instance(),instance(),instance(),instance(),instance(),instance(),instance(),instance()) }
+        bind() from provider { Word(instance(),instance(),instance(),instance(),instance(),instance(),instance(),instance()) }
 
 
 
