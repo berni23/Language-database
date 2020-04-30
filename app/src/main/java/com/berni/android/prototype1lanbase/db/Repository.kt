@@ -4,7 +4,11 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 
 
-class Repository(private val catDao: CatDao, val cat: Cat, val word: Word) {
+interface Repository{
+
+    val catDao: CatDao
+    val cat: Cat
+    val word: Word
 
         suspend fun addCat(cat: Cat)  {catDao.addCat(cat)}
 
@@ -42,13 +46,5 @@ class Repository(private val catDao: CatDao, val cat: Cat, val word: Word) {
 
         fun filterNoExample(currentCatName:String) : LiveData<List<Word>> {return catDao.filterNoExample(currentCatName)}
 
-
-
-    companion object {
-
-            @Volatile private var instance: Repository? = null
-
-            fun getInstance(catDao: CatDao,cat: Cat,word: Word) = instance ?: synchronized(this){instance ?:Repository(catDao,cat=cat,word = word).also{instance =it} }
-        }
     }
 
