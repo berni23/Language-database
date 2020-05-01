@@ -45,7 +45,7 @@ interface CatDao {
 
     fun updateCat(oldName:String?,newName:String?)
 
-    @Query("SELECT* FROM Cat ORDER BY catNum DESC LIMIT 1 ")
+    @Query("SELECT* FROM Cat ORDER BY catId DESC LIMIT 1 ")
     fun maxNum() : Cat?
 
     //get from a given category, ordering by first added
@@ -56,7 +56,7 @@ interface CatDao {
     //get from a given category, ordering by first adde
 
     @Query("SELECT* FROM Word WHERE catParent LIKE :category")
-    fun wordsInCat(category: String) : LiveData<List<Word>>
+    fun wordsInCat(category: Int) : LiveData<List<Word>>
 
     //get from a given category, ordering alphabetically
 
@@ -76,7 +76,7 @@ interface CatDao {
     // delete all  words from a given category
 
     @Query("DELETE FROM Word WHERE catParent LIKE :category")
-    fun deleteWordsInCat(category: String)
+    fun deleteWordsInCat(category: Int?)
 
     //delete a given category
 

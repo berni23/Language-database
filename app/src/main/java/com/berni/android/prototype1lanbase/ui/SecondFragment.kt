@@ -100,7 +100,7 @@ class SecondFragment : BaseFragment(),KodeinAware {
             }
 
              var bool = true
-             var id = wordId(cat.catNum.toString(),theWord)
+             var id = wordId(cat.catId.toString(),theWord)
 
             runBlocking(Dispatchers.Default) { bool = viewModel.validWordId(id) }
 
@@ -108,7 +108,7 @@ class SecondFragment : BaseFragment(),KodeinAware {
 
             launch{
 
-                val word = Word(id,cat.catNum,theWord,translation1,example1,translation_example1,definition,date.toString())
+                val word = Word(id,theWord,translation1,example1,translation_example1,definition,date.toString(),cat.catId)
                 viewModel.addWord(word)
 
             }   }

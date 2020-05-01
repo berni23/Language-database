@@ -19,21 +19,17 @@ import kotlin.properties.Delegates
 @Entity
 data class Cat(
 
-    @PrimaryKey(autoGenerate = false)
     @ColumnInfo(name = "catName")
     val catName: String,
     @ColumnInfo(name = "catDate")
     val catDate: String,
-    @ColumnInfo(name = "catNum")
-    val catNum: String?,
-    @ColumnInfo(name = "trial")
-    val trial: Int = 0
+   // @ColumnInfo(name = "catNum")
+  //  val catNum: String?,
+    @PrimaryKey(autoGenerate = true)
+    @ColumnInfo(name = "catId")
+    val catId: Int = 0
 
 ):Serializable
-
-
-
-
 
 @Entity
 data class Word  (
@@ -41,8 +37,6 @@ data class Word  (
     // word id made out of catName + wordName . Function in Tools.kt
     @PrimaryKey(autoGenerate = false)
     val wordId: String,
-    @ColumnInfo(name  = "catParent")
-    val catParent: String?,
     @ColumnInfo(name  = "wordName")
     val wordName: String,
     @ColumnInfo(name  = "translation")
@@ -54,7 +48,9 @@ data class Word  (
     @ColumnInfo(name = "definition")
     val definition: String?,
     @ColumnInfo(name = "date")
-    val date:String
+    val date:String,
+    @ColumnInfo(name  = "catParent")
+      val catParent: Int? = 0
 
 ):Serializable
     /*:Serializable{

@@ -20,13 +20,13 @@ class MainViewModel(private val repos: Repository ) : ViewModel(){
 
     suspend fun updateCat(oldName:String,newName:String) = repos.updateCat(oldName, newName)
 
-    fun deleteWordsInCat(currentCatName:String) = repos.deleteWordsInCat(currentCatName)
+    fun deleteWordsInCat(currentCatId :Int) = repos.deleteWordsInCat(currentCatId)
 
     fun deleteCat(currentCat: Cat) = repos.deleteCat(currentCat)
 
     fun deleteWord(currentWord: Word) = repos.deleteWord(currentWord)
 
-    fun wordsInCat(currentCatName:String) = repos.wordsInCat(currentCatName)
+    fun wordsInCat(currentCatId:Int) = repos.wordsInCat(currentCatId)
 
     fun wordsInCatAlphabetic(currentCatName: String) = repos.wordsInCatAlphabetic(currentCatName)
 
@@ -36,7 +36,8 @@ class MainViewModel(private val repos: Repository ) : ViewModel(){
 
     fun filterNoExample(currentCatName:String) = repos.filterNoExample(currentCatName)
 
-    fun validCatName(catName: String) : Boolean { return repos.validCatName(catName).isEmpty()  }
+    fun validCatName(catName: String) : Boolean { return repos.validCatName(catName).isEmpty() }
+
     fun validWordId(wordId:String): Boolean {return repos.validWordId(wordId).isEmpty()}
 
     val allCats: LiveData<List<Cat>> = repos.getAllCats()

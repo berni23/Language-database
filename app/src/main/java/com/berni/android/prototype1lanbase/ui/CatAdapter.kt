@@ -48,7 +48,7 @@ class CatAdapter(private val cats: List<Cat>,private val words : List<Word>?, pr
 
         words?.reversed()?.forEach {
 
-            if (it.catParent == cats[position].catNum) {
+            if (it.catParent == cats[position].catId) {
                 wordNames.add(it.wordName)
             }
         }
@@ -108,7 +108,7 @@ class CatAdapter(private val cats: List<Cat>,private val words : List<Word>?, pr
 
                         launch(Dispatchers.Default){
 
-                            viewModel.deleteWordsInCat(cats[position].catName)
+                            viewModel.deleteWordsInCat(cats[position].catId)
                             viewModel.deleteCat(cats[position])
 
                         }
@@ -148,7 +148,7 @@ class CatAdapter(private val cats: List<Cat>,private val words : List<Word>?, pr
 
                         runBlocking(Dispatchers.Default){bool = viewModel.validCatName(renamed) }
 
-                        if(bool) {  launch(Dispatchers.Default){ viewModel.updateCat(cats[position].catName,renamed) }  }
+                        if(bool) {launch(Dispatchers.Default){ viewModel.updateCat(cats[position].catName,renamed) }  }
 
                         else
                         {

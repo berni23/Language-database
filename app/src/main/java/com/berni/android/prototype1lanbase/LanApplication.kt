@@ -29,10 +29,8 @@ class LanApplication() : Application(), KodeinAware {
         bind<Repository>() with singleton {RepositoryImpl(instance(),instance(),instance()) }
         bind() from provider  {ViewModelFactory(instance()) }
         bind() from singleton {String()}
-
-        bind() from provider {Cat(instance<String>(),instance<String>(),instance<String>())}
-
-        bind() from provider { Word(instance(),instance(),instance(),instance(),instance(),instance(),instance(),instance()) }
+        bind() from provider {Cat(instance<String>(),instance<String>())}
+        bind() from provider { Word(instance<String>(),instance<String>(),instance(),instance(),instance(),instance(),instance()) }
 
 
 

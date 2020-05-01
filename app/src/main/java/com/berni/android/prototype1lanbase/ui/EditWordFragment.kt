@@ -65,7 +65,7 @@ class EditWordFragment : BaseFragment(), KodeinAware {
 
         edit_btn_save.setOnClickListener{
 
-                val cat = word.catParent!!
+                val catId = word.catParent!!
                 val name = editWord_editText.text?.toString()?.trim()
                 val trans =editTrans1_editText.text?.toString()?.trim()
                 val ex = editEx1_editText.text?.toString()?.trim()
@@ -88,11 +88,11 @@ class EditWordFragment : BaseFragment(), KodeinAware {
 
                 }
 
-                val id = wordId(cat.toString(),name)
+                val id = wordId(catId.toString(),name)
 
             launch(Dispatchers.Default){
 
-                val updatedWord = Word(id,cat,name,trans,ex,transEx,def,word.date)
+                val updatedWord = Word(id,name,trans,ex,transEx,def,word.date,catId)
 
                 if (id==word.wordId)  {viewModel.updateWord(updatedWord)}
 

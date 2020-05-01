@@ -28,15 +28,15 @@ interface Repository{
 
         fun getAllWordsLive(): LiveData<List<Word>> {return catDao.getAllWordsLive()}
 
-        fun wordsInCat(currentCatName: String) : LiveData<List<Word>> {return catDao.wordsInCat(currentCatName)}
+        fun wordsInCat(currentCatId: Int) : LiveData<List<Word>> {return catDao.wordsInCat(currentCatId)}
 
-        fun deleteWordsInCat(currentCatName: String)  {catDao.deleteWordsInCat(currentCatName)}
+        fun deleteWordsInCat(currentCatId: Int)  {catDao.deleteWordsInCat(currentCatId)}
 
         fun deleteCat(currentCat:Cat) {catDao.deleteCat(currentCat)}
 
         fun deleteWord(currentWord: Word) {catDao.deleteWord(currentWord)}
 
-        fun maxNum() : Int {return catDao.maxNum()?.catNum?.toInt()?:0}
+        fun maxNum() : Int {return catDao.maxNum()?.catId?:0}
 
         // methods not used for the moment
 
