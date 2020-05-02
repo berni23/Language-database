@@ -36,7 +36,7 @@ interface Repository{
 
         fun deleteWord(currentWord: Word) {catDao.deleteWord(currentWord)}
 
-        fun wordsForTest(): List<Word> {return catDao.wordsForTest()}
+        suspend fun wordsForTest(): List<Word> {return catDao.wordsForTest()}
 
         // methods not used for the moment
 

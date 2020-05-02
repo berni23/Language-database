@@ -11,6 +11,7 @@ import androidx.core.os.bundleOf
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.berni.android.prototype1lanbase.R
 import com.berni.android.prototype1lanbase.db.Cat
@@ -49,7 +50,6 @@ class FirstFragment : BaseFragment(),KodeinAware {
     ): View? {
 
         setHasOptionsMenu(true)
-
         return inflater.inflate(R.layout.fragment_first, container, false)
     }
 
@@ -57,6 +57,8 @@ class FirstFragment : BaseFragment(),KodeinAware {
         super.onViewCreated(view, savedInstanceState)
 
         (activity as AppCompatActivity).supportActionBar?.title = "Language Database"
+
+        navController = Navigation.findNavController(view)
 
         recycler_view_cats.setHasFixedSize(true)
         viewModel = ViewModelProvider(this, viewModelFactory).get(MainViewModel::class.java)
@@ -166,22 +168,18 @@ class FirstFragment : BaseFragment(),KodeinAware {
         })
         return super.onCreateOptionsMenu(menu, inflater)
     }
-
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
 
-        when (item.itemId) {
+        when(item.itemId) {
             R.id.item_test -> {
 
                 Test.setCounter()
-
                 val wordsNotAcquired = _allWords.filter { !it.acquired } // words yet to be acquired by user's memory
-
                 var wordsForTest = listOf<Word>()
 
                 if (Test.number >= 2) {
 
                     val message = "You have already made two tests today, try tomorrow!!  =)"
-
                     Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
 
                 } else if (_allWords.size <= 5) {
@@ -193,46 +191,43 @@ class FirstFragment : BaseFragment(),KodeinAware {
 
                     val testFalse = wordsNotAcquired.filter {!it.test }
 
-                    runBlocking(Dispatchers.Default) {
+                        runBlocking(Dispatchers.Default) {
 
-                        testFalse.forEach {
+                            testFalse.forEach {
 
-                            val diff = Calendar.DATE - it.lastOk
+                                val diff = Calendar.DATE - it.lastOk
 
-                            if (it.lvl == 1 && diff >= 3) { it.test = true }
+                                if (it.lvl == 1 && diff >= 3) {
 
-                            else if (it.lvl == 2 && diff >= 7) { it.test = true }
+                                    it.test = true
 
-                            viewModel.updateWord(it)
+                                } else if (it.lvl == 2 && diff >= 7) {
+                                    it.test = true
+                                }
 
+                                viewModel.updateWord(it)
+                            }
                         }
-                    }
 
-                    viewModel = ViewModelProvider(this, viewModelFactory).get(MainViewModel::class.java)
+                   viewModel = ViewModelProvider(this, viewModelFactory).get(MainViewModel::class.java)
 
-                    runBlocking(Dispatchers.Default) {wordsForTest = viewModel.wordsForTest }
+                    runBlocking(Dispatchers.Default){wordsForTest = viewModel.wordsForTest() }
 
                     if (wordsForTest.size<=5) {
 
-                        val message = "Please add some more words or wait a bit in order to make a test"
+                        val message = "Please add some more words or wait some days"
                         Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
-
                     }
 
                     else {
 
                     val bundle = bundleOf("listWords" to wordsForTest)
                     navController.navigate(R.id.actionTest1, bundle)
-
                     }
-
+                  }
                 }
-
-                }
-            }
-
+              }
             return super.onOptionsItemSelected(item)
-
         }
     }
 

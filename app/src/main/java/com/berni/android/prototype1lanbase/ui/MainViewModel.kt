@@ -30,7 +30,7 @@ class MainViewModel(private val repos: Repository ) : ViewModel(){
 
     fun wordsInCat(currentCatId:Int) = repos.wordsInCat(currentCatId)
 
-    fun validCatName(catName: String) : Boolean { return repos.validCatName(catName).isEmpty() }
+    fun validCatName(catName: String) : Boolean {return repos.validCatName(catName).isEmpty() }
 
     fun validWordId(wordId:String): Boolean {return repos.validWordId(wordId).isEmpty()}
 
@@ -38,7 +38,7 @@ class MainViewModel(private val repos: Repository ) : ViewModel(){
 
     val allWords : LiveData<List<Word>> = repos.getAllWordsLive()
 
-    val wordsForTest : List<Word> = repos.wordsForTest()
+    suspend fun wordsForTest() : List<Word> = repos.wordsForTest()
 
     // not used functions
 
@@ -47,9 +47,6 @@ class MainViewModel(private val repos: Repository ) : ViewModel(){
     fun filterExample(currentCatName: String)  = repos.filterExample(currentCatName)
 
     fun filterNoExample(currentCatName:String) = repos.filterNoExample(currentCatName)
-
-
-
 
 }
 

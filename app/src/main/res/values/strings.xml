@@ -47,4 +47,6 @@
     <string name="no_example_provided">No example provided</string>
     <string name="no_example_translation_provided">no example translation provided</string>
     <string name="no_definition_provided">no definition provided</string>
+    <string name="ready">I\'m Ready!!</string>
+    <string name="test">test</string>
 </resources>

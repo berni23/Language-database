@@ -79,8 +79,6 @@ interface CatDao {
     // queries not used anymore
     //-----------------------------------------------------------------------
 
-
-
     //get from a given category, ordering alphabetically
 
     @Query("SELECT* FROM Word WHERE catParent LIKE :category ORDER BY wordName")
