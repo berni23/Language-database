@@ -36,7 +36,7 @@ interface Repository{
 
         fun deleteWord(currentWord: Word) {catDao.deleteWord(currentWord)}
 
-        fun maxNum() : Int {return catDao.maxNum()?.catId?:0}
+        fun wordsForTest(): List<Word> {return catDao.wordsForTest()}
 
         // methods not used for the moment
 

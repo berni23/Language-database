@@ -13,8 +13,7 @@ import com.berni.android.prototype1lanbase.R
 import com.berni.android.prototype1lanbase.db.Cat
 import com.berni.android.prototype1lanbase.db.Word
 import kotlinx.android.synthetic.main.adapter_cat.view.*
-import kotlinx.android.synthetic.main.fragment_first.*
-import kotlinx.android.synthetic.main.fragment_second.*
+
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -72,7 +71,6 @@ class CatAdapter(private val cats: List<Cat>,private val words : List<Word>?, pr
 
             holder.view.text_view_last_additions.text = "no words added"
             holder.view.text_view_numWords.text = ""
-
                                                                 }
         else {
             lastAdded.reversed().forEach {if (it != null)  lastAdditions += " ${it}," }
@@ -145,9 +143,7 @@ class CatAdapter(private val cats: List<Cat>,private val words : List<Word>?, pr
                         }
 
                         var bool = true
-
                         runBlocking(Dispatchers.Default){bool = viewModel.validCatName(renamed) }
-
                         if(bool) {launch(Dispatchers.Default){ viewModel.updateCat(cats[position].catName,renamed) }  }
 
                         else
@@ -158,7 +154,6 @@ class CatAdapter(private val cats: List<Cat>,private val words : List<Word>?, pr
                         }
 
                         val renameWords = mutableListOf<Word>()
-
 
                     }
 

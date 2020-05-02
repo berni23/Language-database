@@ -20,6 +20,8 @@ class MainViewModel(private val repos: Repository ) : ViewModel(){
 
     suspend fun updateCat(oldName:String,newName:String) = repos.updateCat(oldName, newName)
 
+    suspend fun getAllWords(): List<Word> {return repos.getAllWords()}
+
     fun deleteWordsInCat(currentCatId :Int) = repos.deleteWordsInCat(currentCatId)
 
     fun deleteCat(currentCat: Cat) = repos.deleteCat(currentCat)
@@ -27,14 +29,6 @@ class MainViewModel(private val repos: Repository ) : ViewModel(){
     fun deleteWord(currentWord: Word) = repos.deleteWord(currentWord)
 
     fun wordsInCat(currentCatId:Int) = repos.wordsInCat(currentCatId)
-
-    fun wordsInCatAlphabetic(currentCatName: String) = repos.wordsInCatAlphabetic(currentCatName)
-
-    fun maxNum() = repos.maxNum()
-
-    fun filterExample(currentCatName: String)  = repos.filterExample(currentCatName)
-
-    fun filterNoExample(currentCatName:String) = repos.filterNoExample(currentCatName)
 
     fun validCatName(catName: String) : Boolean { return repos.validCatName(catName).isEmpty() }
 
@@ -44,7 +38,17 @@ class MainViewModel(private val repos: Repository ) : ViewModel(){
 
     val allWords : LiveData<List<Word>> = repos.getAllWordsLive()
 
-    suspend fun getAllWords(): List<Word> {return repos.getAllWords()}  //val allWords: LiveData<List<Word>> =
+    val wordsForTest : List<Word> = repos.wordsForTest()
+
+    // not used functions
+
+    fun wordsInCatAlphabetic(currentCatName: String) = repos.wordsInCatAlphabetic(currentCatName)
+
+    fun filterExample(currentCatName: String)  = repos.filterExample(currentCatName)
+
+    fun filterNoExample(currentCatName:String) = repos.filterNoExample(currentCatName)
+
+
 
 
 }

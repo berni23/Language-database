@@ -7,7 +7,6 @@ import androidx.room.*
 @Dao
 interface CatDao {
 
-
     //insert
     @Insert(onConflict = OnConflictStrategy.IGNORE )
     suspend fun addCat(cat: Cat)
@@ -54,7 +53,6 @@ interface CatDao {
     @Query("UPDATE Cat SET catName=:newName WHERE catName = :oldName")
     fun updateCat(oldName:String?,newName:String?)
 
-
     // delete category
 
     @Delete
@@ -70,14 +68,12 @@ interface CatDao {
     @Query("DELETE FROM Word WHERE catParent LIKE :category")
     fun deleteWordsInCat(category: Int?)
 
-
-
-    //-----------------------------------------------------------------------
+    //---------------------------------------------------------------------
     //queries for the tests
     //-----------------------------------------------------------------------
 
-
-   // @Query( "SELECT * FROM Word WHERE")
+    @Query("SELECT * FROM Word WHERE test=1" )
+    fun wordsForTest(): List<Word>
 
     //-----------------------------------------------------------------------
     // queries not used anymore

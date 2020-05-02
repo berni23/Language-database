@@ -51,9 +51,14 @@ data class Word  (
     val date:String,
     @ColumnInfo(name  = "catParent")
     val catParent: Int? = 0,
-     @ColumnInfo(name = "test")
-
-     val test : Boolean = true
+    @ColumnInfo(name = "acquired")
+    val acquired:Boolean  = false,
+    @ColumnInfo(name = "test")
+    var test : Boolean = true,
+    @ColumnInfo(name ="lvl" )
+    val lvl:Int = 0,
+    @ColumnInfo(name  ="lastOK")
+    val lastOk: Int = 10
 
 
 ):Serializable

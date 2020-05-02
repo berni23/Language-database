@@ -6,7 +6,7 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 
 
-@Database(entities = [Word::class, Cat::class],version = 5, exportSchema = false)
+@Database(entities = [Word::class, Cat::class],version = 6, exportSchema = false)
 
 abstract class LanDataBase : RoomDatabase() {
 

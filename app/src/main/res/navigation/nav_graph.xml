@@ -14,6 +14,9 @@
         <action
             android:id="@+id/actionAddCat"
             app:destination="@id/SecondFragment" />
+        <action
+            android:id="@+id/actionTest1"
+            app:destination="@id/testFragment1" />
     </fragment>
     <fragment
         android:id="@+id/SecondFragment"
@@ -67,6 +70,14 @@
         app:argType="com.berni.android.prototype1lanbase.db.Word"
         app:nullable="false" />
 
+    <fragment
+        android:id="@+id/testFragment1"
+        android:name="com.berni.android.prototype1lanbase.ui.TestFragment1"
+        android:label="fragment_test1"
+        tools:layout="@layout/fragment_test1" />
 
+
+    <argument android:name ="displayWord"
+        app:nullable="false" />
 
 </navigation>
