@@ -50,7 +50,11 @@ data class Word  (
     @ColumnInfo(name = "date")
     val date:String,
     @ColumnInfo(name  = "catParent")
-      val catParent: Int? = 0
+    val catParent: Int? = 0,
+     @ColumnInfo(name = "test")
+
+     val test : Boolean = true
+
 
 ):Serializable
     /*:Serializable{
