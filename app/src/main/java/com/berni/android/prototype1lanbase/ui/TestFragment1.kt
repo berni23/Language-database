@@ -21,10 +21,11 @@ import kotlinx.android.synthetic.main.fragment_test1.*
 class TestFragment1 : BaseFragment(),KodeinAware {
 
     override val kodein by closestKodein()
-   // private lateinit var navController: NavController
+
+    private lateinit var navController: NavController
+    private lateinit var viewModel: MainViewModel
 
     private val viewModelFactory: ViewModelFactory by instance<ViewModelFactory>()
-    private lateinit var viewModel: MainViewModel
     private var pickedWords = listOf<Word>()
     private  var wordsForTest  = listOf<Word>()
    // private var today  = Calendar.DATE
@@ -32,11 +33,8 @@ class TestFragment1 : BaseFragment(),KodeinAware {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
 
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_test1, container, false)
-    }
+    ): View? { return inflater.inflate(R.layout.fragment_test1, container, false)}
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
@@ -49,11 +47,11 @@ class TestFragment1 : BaseFragment(),KodeinAware {
 
         btn_testReady.setOnClickListener{
 
-            //val bundle = bundleOf("pickedWords" to pickedWords)
+            val bundle = bundleOf("pickedWords" to pickedWords)
 
             Toast.makeText(context, "let's do it!", Toast.LENGTH_SHORT).show()
 
-           // navController.navigate(R.id.actionWordsList, bundle)
+            navController.navigate(R.id.actionWordsList, bundle)
 
         }
     }

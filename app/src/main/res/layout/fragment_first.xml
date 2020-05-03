@@ -17,6 +17,21 @@
 
     </androidx.recyclerview.widget.RecyclerView>-->
 
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/VguideCard"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.5" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/HguideCard"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.5" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view_cats"
         android:layout_marginTop = "70dp"
@@ -26,15 +41,16 @@
     </androidx.recyclerview.widget.RecyclerView>
 
      <androidx.cardview.widget.CardView
-        android:visibility = "gone"
-        android:id="@+id/recycler_view_newCat"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
 
+         android:windowSoftInputMode="stateUnchanged"
+         android:visibility = "gone"
+         android:id="@+id/recycler_view_newCat"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         app:layout_constraintBottom_toBottomOf="@id/HguideCard"
+         app:layout_constraintEnd_toStartOf="@id/VguideCard"
+         app:layout_constraintStart_toEndOf="@id/VguideCard"
+         app:layout_constraintTop_toTopOf="@id/HguideCard">
 
          <EditText
              android:hint="@string/hint_newCat"
@@ -97,7 +113,6 @@
         app:layout_constraintTop_toTopOf="@id/HguideBtn"
         app:backgroundTint="#1EC3D8"
         android:focusable="true" />
-
 
     <include
         android:id = "@+id/toolbar"

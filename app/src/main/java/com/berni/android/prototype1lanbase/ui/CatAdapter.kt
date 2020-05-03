@@ -26,8 +26,6 @@ class CatAdapter(private val cats: List<Cat>,private val words : List<Word>?, pr
 ) : RecyclerView.Adapter<CatAdapter.CatViewHolder>(),
     View.OnCreateContextMenuListener, CoroutineScope {
 
-    val wordNames  = mutableListOf<String>()
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CatViewHolder {
 
         // get all the wordNames from all the words
@@ -42,6 +40,8 @@ class CatAdapter(private val cats: List<Cat>,private val words : List<Word>?, pr
 
     override fun getItemCount() = cats.size
     override fun onBindViewHolder(holder: CatViewHolder, position: Int) {
+
+        val wordNames  = mutableListOf<String>()
 
         //  holder.view.setOnCreateContextMenuListener(this)
 

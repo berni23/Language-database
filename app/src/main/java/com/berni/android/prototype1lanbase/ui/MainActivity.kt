@@ -1,6 +1,7 @@
 package com.berni.android.prototype1lanbase.ui
 
 
+import android.content.Context
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.berni.android.prototype1lanbase.R
@@ -17,13 +18,16 @@ class MainActivity : AppCompatActivity() {
 
 
     }
+
+    fun getAppContext(): Context {
+        return getApplicationContext()
+
+    }
+
 }
 
 
-      /**  fun getAppContext(): Context {
-          return getApplicationContext()
 
-       **/
 
 
 
