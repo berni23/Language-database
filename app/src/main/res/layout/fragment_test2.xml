@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/fragment_test2"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.Test2Fragment">
+
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/VguideView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.2" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/HguideView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.4" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/HguideImage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.429" />
+
+    <ImageView
+        android:id="@+id/space"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_minus_black_24dp"
+        android:layout_marginStart="10dp"
+        app:layout_constraintBottom_toBottomOf="@id/HguideImage"
+        app:layout_constraintStart_toEndOf="@id/wordTest_textView"/>
+
+    <TextView
+        android:id="@+id/wordTest_textView"
+        android:fontFamily = "@font/lato_bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize = "30sp"
+        android:text="Word"
+        app:layout_constraintBottom_toBottomOf="@id/HguideView"
+        app:layout_constraintEnd_toEndOf="@id/VguideView"
+        app:layout_constraintStart_toStartOf="@id/VguideView"
+        app:layout_constraintTop_toTopOf="@id/HguideView" />
+
+
+
+    <EditText
+        android:id="@+id/wordTest_editext"
+        android:fontFamily = "@font/lato_regular"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="250dp"
+        android:textSize = "30sp"
+        android:text="translation"
+        app:layout_constraintBottom_toBottomOf="@id/HguideView"
+        app:layout_constraintEnd_toEndOf="@id/VguideView"
+        app:layout_constraintStart_toEndOf="@id/space"
+        app:layout_constraintTop_toTopOf="@id/HguideView" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/VguideBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.75" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/HguideBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.8" />
+
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+
+        android:id="@+id/btn_nextTestWord"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:focusable="true"
+        android:src="@drawable/ic_arrow_forward_black_24dp"
+        app:backgroundTint="@color/colorButton3"
+        app:layout_constraintBottom_toBottomOf="@id/HguideBtn"
+        app:layout_constraintEnd_toStartOf="@id/VguideBtn"
+        app:layout_constraintStart_toEndOf="@id/VguideBtn"
+        app:layout_constraintTop_toTopOf="@id/HguideBtn"/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/VguideCounter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.9" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/HguideCounter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.95" />
+
+    <TextView
+        android:id="@+id/counterTest_textView"
+        android:fontFamily = "@font/lato_light"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize = "20sp"
+        android:text="0/15"
+        app:layout_constraintBottom_toBottomOf="@id/HguideCounter"
+        app:layout_constraintEnd_toEndOf="@id/VguideCounter"
+        app:layout_constraintStart_toStartOf="@id/VguideCounter"
+        app:layout_constraintTop_toTopOf="@id/HguideCounter" />
+
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

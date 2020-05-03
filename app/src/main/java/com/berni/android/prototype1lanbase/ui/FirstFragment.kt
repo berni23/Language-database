@@ -46,7 +46,7 @@ class FirstFragment : BaseFragment(),KodeinAware {
     private lateinit var viewModel: MainViewModel
     private lateinit var navController: NavController
 
-    private var _allWords = listOf<Word>()
+    private var _allWords = mutableListOf<Word>()
     private var _allCats = listOf<Cat>()
     private var displayedCats = listOf<Cat>()
 
@@ -76,7 +76,9 @@ class FirstFragment : BaseFragment(),KodeinAware {
             _allCats = it
             displayedCats = _allCats
 
-            runBlocking(Dispatchers.Default) { _allWords = viewModel.getAllWords() }
+            runBlocking(Dispatchers.Default) { _allWords =
+                viewModel.getAllWords()
+            }
             recycler_view_cats.layoutManager =
                 StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
             recycler_view_cats.adapter = CatAdapter(it, _allWords, viewModel, this.coroutineContext)
@@ -92,13 +94,7 @@ class FirstFragment : BaseFragment(),KodeinAware {
             imm!!.showSoftInput(editText_newCat, InputMethodManager.SHOW_IMPLICIT)
 
 
-
             recycler_view_newCat.visibility = View.VISIBLE
-
-
-
-
-
 
         }
 

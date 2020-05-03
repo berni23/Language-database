@@ -21,17 +21,16 @@ import kotlinx.coroutines.runBlocking
 import kotlin.coroutines.CoroutineContext
 
 
-class CatAdapter(private val cats: List<Cat>,private val words : List<Word>?, private val viewModel: MainViewModel,
+class CatAdapter(private val cats: List<Cat>, private var words : MutableList<Word>?, private val viewModel: MainViewModel,
                  override val coroutineContext: CoroutineContext
 ) : RecyclerView.Adapter<CatAdapter.CatViewHolder>(),
     View.OnCreateContextMenuListener, CoroutineScope {
 
+    private  var shareWords =  words
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CatViewHolder {
 
-        // get all the wordNames from all the words
-        return CatViewHolder(
-            LayoutInflater.from(parent.context).inflate(R.layout.adapter_cat, parent, false)
-        )
+        return CatViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.adapter_cat, parent, false))
     }
 
     override fun onCreateContextMenu(menu: ContextMenu, v: View?, menuInfo: ContextMenuInfo?) {
@@ -41,16 +40,23 @@ class CatAdapter(private val cats: List<Cat>,private val words : List<Word>?, pr
     override fun getItemCount() = cats.size
     override fun onBindViewHolder(holder: CatViewHolder, position: Int) {
 
-        val wordNames  = mutableListOf<String>()
+        var wordNames  = mutableListOf<String>()
+        var i = 0
 
         //  holder.view.setOnCreateContextMenuListener(this)
 
-        words?.reversed()?.forEach {
+        words?.forEach {
 
             if (it.catParent == cats[position].catId) {
                 wordNames.add(it.wordName)
+
+              //  shareWords?.removeAt(i-1)
             }
+
+            i+=1
         }
+
+        if (wordNames.isNotEmpty()) {wordNames = wordNames.reversed() as MutableList<String>}
 
          val lastAdded: List<String?>
          val numWords: Int

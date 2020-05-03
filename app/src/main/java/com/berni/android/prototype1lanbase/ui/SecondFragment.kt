@@ -57,9 +57,7 @@ class SecondFragment : BaseFragment(),KodeinAware {
         super.onViewCreated(view, savedInstanceState)
 
         navController = Navigation.findNavController(view)
-
         (activity as AppCompatActivity).supportActionBar?.title = cat.catName
-
         viewModel = ViewModelProvider(this, viewModelFactory).get(MainViewModel::class.java)
 
         btn_save.setOnClickListener {
@@ -102,13 +100,13 @@ class SecondFragment : BaseFragment(),KodeinAware {
              var bool = true
              var id = wordId(cat.catId.toString(),theWord)
 
-            runBlocking(Dispatchers.Default) { bool = viewModel.validWordId(id) }
+            runBlocking(Dispatchers.Default) {bool = viewModel.validWordId(cat.catId.toString(),theWord) }
 
             if(bool) {
 
             launch{
 
-                val word = Word(id,theWord,translation1,example1,translation_example1,definition,date.toString(),cat.catId)
+                val word = Word(theWord,translation1,example1,translation_example1,definition,date.toString(),cat.catId)
                 viewModel.addWord(word)
 
             }   }

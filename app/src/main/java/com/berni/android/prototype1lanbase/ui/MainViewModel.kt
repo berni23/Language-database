@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.berni.android.prototype1lanbase.db.Cat
+import com.berni.android.prototype1lanbase.db.CatWords
 import com.berni.android.prototype1lanbase.db.Repository
 import com.berni.android.prototype1lanbase.db.Word
 
@@ -20,7 +21,7 @@ class MainViewModel(private val repos: Repository ) : ViewModel(){
 
     suspend fun updateCat(oldName:String,newName:String) = repos.updateCat(oldName, newName)
 
-    suspend fun getAllWords(): List<Word> {return repos.getAllWords()}
+    suspend fun getAllWords(): MutableList<Word> {return repos.getAllWords()}
 
     fun deleteWordsInCat(currentCatId :Int) = repos.deleteWordsInCat(currentCatId)
 
@@ -32,13 +33,15 @@ class MainViewModel(private val repos: Repository ) : ViewModel(){
 
     fun validCatName(catName: String) : Boolean {return repos.validCatName(catName).isEmpty() }
 
-    fun validWordId(wordId:String): Boolean {return repos.validWordId(wordId).isEmpty()}
+    fun validWordId(catName: String,wordName:String): Boolean {return repos.validWordId(catName,wordName).isEmpty()}
 
     val allCats: LiveData<List<Cat>> = repos.getAllCats()
 
     val allWords : LiveData<List<Word>> = repos.getAllWordsLive()
 
     suspend fun wordsForTest() : List<Word> = repos.wordsForTest()
+
+    fun catsWithWords() : LiveData<List<CatWords>>  = repos.catsWithWords()
 
     // not used functions
 

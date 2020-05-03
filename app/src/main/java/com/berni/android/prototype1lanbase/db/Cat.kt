@@ -5,16 +5,17 @@ import android.os.Parcelable
 import java.io.Serializable
 import kotlin.properties.Delegates
 
-/**data class CatWords(
+@Entity
+data class CatWords(
 
     @Embedded
     val cat: Cat,
+
     @Relation(
         parentColumn = "catName",
         entityColumn = "catParent")
 
-    val words: List<Word>
-)**/
+    val words: List<Word>)
 
 @Entity
 data class Cat(
@@ -23,8 +24,6 @@ data class Cat(
     val catName: String,
     @ColumnInfo(name = "catDate")
     val catDate: String,
-   // @ColumnInfo(name = "catNum")
-  //  val catNum: String?,
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "catId")
     val catId: Int = 0
@@ -34,9 +33,6 @@ data class Cat(
 @Entity
 data class Word  (
 
-    // word id made out of catName + wordName . Function in Tools.kt
-    @PrimaryKey(autoGenerate = false)
-    val wordId: String,
     @ColumnInfo(name  = "wordName")
     val wordName: String,
     @ColumnInfo(name  = "translation")
@@ -61,7 +57,12 @@ data class Word  (
     val lastOk: Int = 10
 
 
-):Serializable
+):Serializable {
+
+    @PrimaryKey(autoGenerate = true)
+    var wordId: Int = 0
+}
+
     /*:Serializable{
     @PrimaryKey(autoGenerate = true)
     var wordId: Int = 0}

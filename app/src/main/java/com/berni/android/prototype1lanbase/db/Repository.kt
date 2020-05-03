@@ -18,17 +18,19 @@ interface Repository{
 
         suspend fun updateCat(oldName:String,newName:String) {catDao.updateCat(oldName,newName)}
 
-        suspend fun getAllWords (): List<Word> {return catDao.getAllWords()}
+        suspend fun getAllWords (): MutableList<Word> {return catDao.getAllWords()}
 
         fun getAllCats () : LiveData<List<Cat>> {return catDao.getAllCats()}
 
         fun validCatName(catName: String) : List<Cat> {return catDao.validCatName(catName)}
 
-        fun validWordId(wordId:String): List<Word> {return catDao.validWordId(wordId)}
+        fun validWordId(catName: String,wordName:String): List<Word> {return catDao.validWordId(catName,wordName)}
 
         fun getAllWordsLive(): LiveData<List<Word>> {return catDao.getAllWordsLive()}
 
         fun wordsInCat(currentCatId: Int) : LiveData<List<Word>> {return catDao.wordsInCat(currentCatId)}
+
+        fun catsWithWords() : LiveData<List<CatWords>> {return  catDao.catsWithWords()}
 
         fun deleteWordsInCat(currentCatId: Int)  {catDao.deleteWordsInCat(currentCatId)}
 

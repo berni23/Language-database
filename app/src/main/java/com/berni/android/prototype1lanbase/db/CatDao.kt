@@ -3,7 +3,6 @@ package com.berni.android.prototype1lanbase.db
 import androidx.lifecycle.LiveData
 import androidx.room.*
 
-
 @Dao
 interface CatDao {
 
@@ -22,7 +21,7 @@ interface CatDao {
     //get all words
 
     @Query("SELECT* FROM Word ORDER BY wordId DESC")
-    fun getAllWords() : List<Word>
+    fun getAllWords() : MutableList<Word>
 
     //get all words using live data
 
@@ -34,6 +33,10 @@ interface CatDao {
     @Query("SELECT* FROM Word WHERE catParent LIKE :category")
     fun wordsInCat(category: Int) : LiveData<List<Word>>
 
+    @Transaction
+    @Query("SELECT * FROM CatWords")
+    fun catsWithWords() : LiveData<List<CatWords>>
+
     //check if the catname has already been used or not
 
     @Query("SELECT* FROM Cat WHERE catName=:newName" )
@@ -41,8 +44,8 @@ interface CatDao {
 
     //  check if wordId has already been used or not
 
-    @Query("SELECT* FROM Word WHERE wordId=:newId" )
-    fun validWordId(newId: String?): List<Word>
+    @Query("SELECT* FROM Word WHERE wordName=:newName AND catParent=:cat" )
+    fun validWordId(cat: String?,newName: String?): List<Word>
 
     //update the whole word object
     @Update
@@ -84,7 +87,6 @@ interface CatDao {
     @Query("SELECT* FROM Word WHERE catParent LIKE :category ORDER BY wordName")
     fun wordsInCatAlphabetic(category: String) : LiveData<List<Word>>
 
-
     //get words with example
 
     @Query("SELECT* FROM Word WHERE catParent LIKE :category AND example IS NOT NULL ")
@@ -98,5 +100,7 @@ interface CatDao {
 
     //-----------------------------------------------------------------------
     //-----------------------------------------------------------------------
+
+
 
 }

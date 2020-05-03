@@ -14,10 +14,14 @@
         <action
             android:id="@+id/actionAddCat"
             app:destination="@id/SecondFragment" />
+
         <action
             android:id="@+id/actionTest1"
             app:destination="@id/testFragment1" />
+
     </fragment>
+
+
     <fragment
         android:id="@+id/SecondFragment"
         android:name="com.berni.android.prototype1lanbase.ui.SecondFragment"
@@ -35,28 +39,36 @@
             app:destination="@id/wordsListFragment" />
 
     </fragment>
+
     <fragment
         android:id="@+id/wordsListFragment"
         android:name="com.berni.android.prototype1lanbase.ui.WordsListFragment"
         android:label="fragment_words_list"
         tools:layout="@layout/fragment_words_list" >
+
         <action
             android:id="@+id/actionEditWord"
             app:destination="@id/editWordFragment" />
         <action
             android:id="@+id/actionDisplayWord"
             app:destination="@id/displayWordFragment" />
+
     </fragment>
-    <argument android:name = "categoryName"
+
+    <argument
+        android:name = "categoryName"
         app:nullable="true"
         android:defaultValue="@null"/>
+
     <fragment
         android:id="@+id/editWordFragment"
         android:name="com.berni.android.prototype1lanbase.ui.EditWordFragment"
         android:label="fragment_edit_word"
         tools:layout="@layout/fragment_edit_word" />
 
-    <argument android:name ="word"
+    <argument
+
+        android:name ="word"
         app:argType="com.berni.android.prototype1lanbase.db.Word"
         app:nullable="false" />
 
@@ -66,18 +78,35 @@
         android:label="fragment_display_word"
         tools:layout="@layout/fragment_display_word" />
 
-    <argument android:name ="displayWord"
+    <argument
+        android:name ="displayWord"
         app:argType="com.berni.android.prototype1lanbase.db.Word"
         app:nullable="false" />
 
     <fragment
         android:id="@+id/testFragment1"
-        android:name="com.berni.android.prototype1lanbase.ui.TestFragment1"
+        android:name="com.berni.android.prototype1lanbase.ui.Test1Fragment"
         android:label="fragment_test1"
-        tools:layout="@layout/fragment_test1" />
+        tools:layout="@layout/fragment_test1" >
+
+        <action
+            android:id="@+id/actionStartTest"
+            app:destination="@id/test2Fragment" />
+
+    </fragment>
 
 
-    <argument android:name ="displayWord"
+    <fragment
+        android:id="@+id/test2Fragment"
+        android:name="com.berni.android.prototype1lanbase.ui.Test2Fragment"
+        android:label="fragment_test2"
+        tools:layout="@layout/fragment_test2" />
+
+
+    <argument
+
+        android:name ="testWords"
         app:nullable="false" />
+
 
 </navigation>

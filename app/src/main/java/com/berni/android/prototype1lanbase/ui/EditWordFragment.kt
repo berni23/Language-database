@@ -88,20 +88,12 @@ class EditWordFragment : BaseFragment(), KodeinAware {
 
                 }
 
-                val id = wordId(catId.toString(),name)
-
             launch(Dispatchers.Default){
 
-                val updatedWord = Word(id,name,trans,ex,transEx,def,word.date,catId)
+                val updatedWord = Word(name,trans,ex,transEx,def,word.date,catId)
+                viewModel.deleteWord(word)
+                viewModel.addWord(updatedWord)
 
-                if (id==word.wordId)  {viewModel.updateWord(updatedWord)}
-
-                else {
-
-                    viewModel.deleteWord(word)
-                    viewModel.addWord(updatedWord)
-                }
-             }
 
             Toast.makeText(it.context,"editing word properties...",Toast.LENGTH_SHORT).show()
 

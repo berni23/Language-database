@@ -18,7 +18,7 @@ import kotlinx.android.synthetic.main.fragment_test1.*
 /**
  * A simple [Fragment] subclass.
  */
-class TestFragment1 : BaseFragment(),KodeinAware {
+class Test1Fragment : BaseFragment(),KodeinAware {
 
     override val kodein by closestKodein()
 
@@ -26,7 +26,6 @@ class TestFragment1 : BaseFragment(),KodeinAware {
     private lateinit var viewModel: MainViewModel
 
     private val viewModelFactory: ViewModelFactory by instance<ViewModelFactory>()
-    private var pickedWords = listOf<Word>()
     private  var wordsForTest  = listOf<Word>()
    // private var today  = Calendar.DATE
 
@@ -43,7 +42,7 @@ class TestFragment1 : BaseFragment(),KodeinAware {
         wordsForTest= arguments?.get("listWords") as MutableList<Word>
         viewModel = ViewModelProvider(this, viewModelFactory).get(MainViewModel::class.java)
 
-        pickedWords = ranWords()
+        val pickedWords = ranWords()
 
         btn_testReady.setOnClickListener{
 
@@ -51,7 +50,7 @@ class TestFragment1 : BaseFragment(),KodeinAware {
 
             Toast.makeText(context, "let's do it!", Toast.LENGTH_SHORT).show()
 
-            navController.navigate(R.id.actionWordsList, bundle)
+            navController.navigate(R.id.actionStartTest, bundle)
 
         }
     }

@@ -58,7 +58,8 @@
 
  <EditText
         android:id="@+id/word_editText"
-         android:layout_marginHorizontal="10dp"
+        android:fontFamily = "@font/lato_regular"
+        android:layout_marginHorizontal="10dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:autofillHints="word"
@@ -71,6 +72,7 @@
 
     <EditText
         android:id="@+id/trans1_editText"
+        android:fontFamily = "@font/lato_regular"
         android:layout_marginTop="20dp"
         android:layout_marginHorizontal="10dp"
         android:layout_marginBottom="20dp"
@@ -99,6 +101,7 @@
 
     <EditText
      android:id="@+id/ex1_editText"
+     android:fontFamily = "@font/lato_regular"
      android:layout_width="wrap_content"
      android:layout_height="wrap_content"
      android:layout_marginTop="20dp"
@@ -129,6 +132,7 @@
 
         <EditText
             android:id="@+id/ex1Trans_editText"
+            android:fontFamily = "@font/lato_regular"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
@@ -153,6 +157,7 @@
 
             <EditText
                 android:id="@+id/definition_editText"
+                android:fontFamily = "@font/lato_regular"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
