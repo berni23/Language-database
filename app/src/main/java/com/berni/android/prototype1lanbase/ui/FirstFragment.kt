@@ -19,6 +19,7 @@ import androidx.navigation.Navigation
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.berni.android.prototype1lanbase.R
 import com.berni.android.prototype1lanbase.db.Cat
+import com.berni.android.prototype1lanbase.db.CatWords
 import com.berni.android.prototype1lanbase.db.Test
 import com.berni.android.prototype1lanbase.db.Word
 import com.berni.android.prototype1lanbase.hideKeyboard
@@ -33,7 +34,6 @@ import org.kodein.di.generic.instance
 import java.text.SimpleDateFormat
 import java.util.*
 
-
 /**
  * A simple [Fragment] subclass as the default destination in the navigation.
  */
@@ -46,9 +46,9 @@ class FirstFragment : BaseFragment(),KodeinAware {
     private lateinit var viewModel: MainViewModel
     private lateinit var navController: NavController
 
-    private var _allWords = mutableListOf<Word>()
-    private var _allCats = listOf<Cat>()
-    private var displayedCats = listOf<Cat>()
+    private var _allWords = listOf<Word>()
+    private var _allCats = listOf<CatWords>()
+    private var displayedCats = listOf<CatWords>()
 
     override fun onCreateView(
 
@@ -71,17 +71,15 @@ class FirstFragment : BaseFragment(),KodeinAware {
         recycler_view_cats.setHasFixedSize(true)
         viewModel = ViewModelProvider(this, viewModelFactory).get(MainViewModel::class.java)
 
-        viewModel.allCats.observe(viewLifecycleOwner, Observer<List<Cat>> {
+        viewModel.catsWithWords().observe(viewLifecycleOwner, Observer<List<CatWords>> {
 
             _allCats = it
             displayedCats = _allCats
 
-            runBlocking(Dispatchers.Default) { _allWords =
-                viewModel.getAllWords()
-            }
+
             recycler_view_cats.layoutManager =
                 StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
-            recycler_view_cats.adapter = CatAdapter(it, _allWords, viewModel, this.coroutineContext)
+            recycler_view_cats.adapter = CatAdapter(it, viewModel, this.coroutineContext)
 
         })
 
@@ -127,7 +125,6 @@ class FirstFragment : BaseFragment(),KodeinAware {
                     viewModel.addCat(cat)
                 }
 
-                Toast.makeText(context, "category name accepted", Toast.LENGTH_SHORT).show()
             } else {
                 editText_newCat.error = " category already exists"
                 editText_newCat.requestFocus()
@@ -161,11 +158,11 @@ class FirstFragment : BaseFragment(),KodeinAware {
                     displayedCats = _allCats
                 } else {
 
-                    val newCatsList = mutableListOf<Cat>()
+                    val newCatsList = mutableListOf<CatWords>()
 
                     displayedCats.forEach {
 
-                        if (it.catName.startsWith(newText)) {
+                        if (it.cat.catName.startsWith(newText)) {
 
                             newCatsList.add(it)
                         }
@@ -176,7 +173,7 @@ class FirstFragment : BaseFragment(),KodeinAware {
                 recycler_view_cats.layoutManager =
                     StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
                 recycler_view_cats.adapter =
-                    CatAdapter(displayedCats, _allWords, viewModel, coroutineContext)
+                    CatAdapter(displayedCats, viewModel, coroutineContext)
                 return false
             }
         })
@@ -188,9 +185,14 @@ class FirstFragment : BaseFragment(),KodeinAware {
         when (item.itemId) {
             R.id.item_test -> {
 
+                viewModel = ViewModelProvider(this, viewModelFactory).get(MainViewModel::class.java)
+
+                runBlocking(Dispatchers.Default){  _allWords  = viewModel.getAllWords()  }
+
                 Test.setCounter()
-                val wordsNotAcquired =
-                    _allWords.filter { !it.acquired } // words yet to be acquired by user's memory
+
+                val wordsNotAcquired = _allWords.filter { !it.acquired } // words yet to be acquired by user's memory
+
                 var wordsForTest = listOf<Word>()
 
                 if (Test.number >= 2) {
@@ -246,7 +248,6 @@ class FirstFragment : BaseFragment(),KodeinAware {
             getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
         inputMethodManager.showSoftInput(view, 0)
     }
-
 
     fun Fragment.showKeyboard() {
         view.let { activity?.showKeyboard(it) }

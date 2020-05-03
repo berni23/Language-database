@@ -34,7 +34,7 @@ interface CatDao {
     fun wordsInCat(category: Int) : LiveData<List<Word>>
 
     @Transaction
-    @Query("SELECT * FROM CatWords")
+    @Query("SELECT * FROM Cat")
     fun catsWithWords() : LiveData<List<CatWords>>
 
     //check if the catname has already been used or not

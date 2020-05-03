@@ -5,14 +5,13 @@ import android.os.Parcelable
 import java.io.Serializable
 import kotlin.properties.Delegates
 
-@Entity
 data class CatWords(
 
     @Embedded
     val cat: Cat,
 
     @Relation(
-        parentColumn = "catName",
+        parentColumn = "catId",
         entityColumn = "catParent")
 
     val words: List<Word>)

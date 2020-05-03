@@ -30,10 +30,8 @@ class LanApplication() : Application(), KodeinAware {
         bind() from provider  {ViewModelFactory(instance()) }
         bind() from singleton {String()}
         bind() from provider {Cat(instance<String>(),instance<String>())}
-        bind() from provider { Word(instance<String>(),instance<String>(),instance(),instance(),instance(),instance(),instance()) }
-
-
-
+        bind() from provider { Word(instance<String>(),instance<String>(),instance<String>(),instance<String>(),instance<String>(),instance<String>()) }
+        
       //  bind<Fragment>() with singleton {Fragment()}
 
       //  No binding found for bind<String>() with ?<FirstFragment>().? { ? }

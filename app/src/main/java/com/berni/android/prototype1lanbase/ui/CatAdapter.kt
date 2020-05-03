@@ -11,7 +11,9 @@ import androidx.navigation.Navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.berni.android.prototype1lanbase.R
 import com.berni.android.prototype1lanbase.db.Cat
+import com.berni.android.prototype1lanbase.db.CatWords
 import com.berni.android.prototype1lanbase.db.Word
+import com.berni.android.prototype1lanbase.wordId
 import kotlinx.android.synthetic.main.adapter_cat.view.*
 
 import kotlinx.coroutines.CoroutineScope
@@ -21,12 +23,11 @@ import kotlinx.coroutines.runBlocking
 import kotlin.coroutines.CoroutineContext
 
 
-class CatAdapter(private val cats: List<Cat>, private var words : MutableList<Word>?, private val viewModel: MainViewModel,
+class CatAdapter(private val cats: List<CatWords>, private val viewModel: MainViewModel,
                  override val coroutineContext: CoroutineContext
 ) : RecyclerView.Adapter<CatAdapter.CatViewHolder>(),
     View.OnCreateContextMenuListener, CoroutineScope {
 
-    private  var shareWords =  words
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CatViewHolder {
 
@@ -40,37 +41,22 @@ class CatAdapter(private val cats: List<Cat>, private var words : MutableList<Wo
     override fun getItemCount() = cats.size
     override fun onBindViewHolder(holder: CatViewHolder, position: Int) {
 
-        var wordNames  = mutableListOf<String>()
-        var i = 0
+       // var wordNames  = mutableListOf<String>()
 
-        //  holder.view.setOnCreateContextMenuListener(this)
+        val lastAdded: List<String?>
+        val numWords: Int
 
-        words?.forEach {
+        holder.view.text_view_title.setText(cats[position].cat.catName)
 
-            if (it.catParent == cats[position].catId) {
-                wordNames.add(it.wordName)
+        var wordNames = cats[position].words.sortedBy {it.wordId }
 
-              //  shareWords?.removeAt(i-1)
-            }
-
-            i+=1
-        }
-
-        if (wordNames.isNotEmpty()) {wordNames = wordNames.reversed() as MutableList<String>}
-
-         val lastAdded: List<String?>
-         val numWords: Int
-
-        holder.view.text_view_title.setText(cats[position].catName)
-
-         lastAdded = listOf(wordNames.getOrNull(0),
-         wordNames.getOrNull(1),
-         wordNames.getOrNull(2)
+         lastAdded = listOf(wordNames.getOrNull(0)?.wordName,
+         wordNames.getOrNull(1)?.wordName,
+         wordNames.getOrNull(2)?.wordName
 
          )
 
         numWords = wordNames.size
-
         var lastAdditions = "last additions: "
 
         if (lastAdded.elementAt(0)== null) {
@@ -87,17 +73,11 @@ class CatAdapter(private val cats: List<Cat>, private var words : MutableList<Wo
 
         }
 
-        holder.view.text_view_date.text =  " created  on ${cats[position].catDate}"
-
-        // editing the corresponding info to the text views
-
-       // TODO() :  enable category name editting
-
-        // holder.view.text_view_title.setImeActionLabel("Custom text", KeyEvent.KEYCODE_ENTER)
+        holder.view.text_view_date.text =  " created  on ${cats[position].cat.catDate}"
 
         holder.view.setOnClickListener {
 
-            val bundle = bundleOf("categoryName" to cats[position])
+            val bundle = bundleOf("categoryName" to cats[position].cat)
             findNavController(it).navigate(R.id.actionAddCat, bundle)
         }
 
@@ -112,11 +92,11 @@ class CatAdapter(private val cats: List<Cat>, private var words : MutableList<Wo
 
                         launch(Dispatchers.Default){
 
-                            viewModel.deleteWordsInCat(cats[position].catId)
-                            viewModel.deleteCat(cats[position])
+                            viewModel.deleteWordsInCat(cats[position].cat.catId)
+                            viewModel.deleteCat(cats[position].cat)
 
                         }
-                     Toast.makeText(v?.context, "deleting  category ${cats[position].catName}..", Toast.LENGTH_SHORT).show()
+                     Toast.makeText(v?.context, "deleting  category ${cats[position].cat.catName}..", Toast.LENGTH_SHORT).show()
                     }
 
                     setNegativeButton("No") { _, _ ->
@@ -150,7 +130,7 @@ class CatAdapter(private val cats: List<Cat>, private var words : MutableList<Wo
 
                         var bool = true
                         runBlocking(Dispatchers.Default){bool = viewModel.validCatName(renamed) }
-                        if(bool) {launch(Dispatchers.Default){ viewModel.updateCat(cats[position].catName,renamed) }  }
+                        if(bool) {launch(Dispatchers.Default){viewModel.updateCat(cats[position].cat.catName,renamed) }  }
 
                         else
                         {
@@ -160,7 +140,6 @@ class CatAdapter(private val cats: List<Cat>, private var words : MutableList<Wo
                         }
 
                         val renameWords = mutableListOf<Word>()
-
                     }
 
                     setNegativeButton("Cancel") { _, _ ->
@@ -174,15 +153,8 @@ class CatAdapter(private val cats: List<Cat>, private var words : MutableList<Wo
                 true
             }
         }
-
     }
     class CatViewHolder(val view: View) : RecyclerView.ViewHolder(view)
 }
-
-
-
-
-
-
 
 

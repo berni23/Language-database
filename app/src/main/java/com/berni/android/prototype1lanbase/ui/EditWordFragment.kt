@@ -28,7 +28,7 @@ class EditWordFragment : BaseFragment(), KodeinAware {
 
     private val viewModelFactory: ViewModelFactory by instance<ViewModelFactory>()
     private lateinit var viewModel: MainViewModel
-    private  lateinit var word :Word
+    private lateinit var word: Word
 
     //private lateinit var navController: NavController
 
@@ -49,7 +49,7 @@ class EditWordFragment : BaseFragment(), KodeinAware {
 
         super.onViewCreated(view, savedInstanceState)
         (activity as AppCompatActivity).supportActionBar?.title = word.wordName
-        viewModel  = ViewModelProvider(this, viewModelFactory).get(MainViewModel::class.java)
+        viewModel = ViewModelProvider(this, viewModelFactory).get(MainViewModel::class.java)
 
         // mandatory fields
 
@@ -59,45 +59,46 @@ class EditWordFragment : BaseFragment(), KodeinAware {
 
         //optional fields
 
-        editEx1_editText.setText(word.ex1?:"")
-        editEx1Trans_editText.setText(word.trans_ex1?:"")
-        editDefinition_editText.setText(word.definition?:"")
+        editEx1_editText.setText(word.ex1 ?: "")
+        editEx1Trans_editText.setText(word.trans_ex1 ?: "")
+        editDefinition_editText.setText(word.definition ?: "")
 
-        edit_btn_save.setOnClickListener{
+        edit_btn_save.setOnClickListener {
 
-                val catId = word.catParent!!
-                val name = editWord_editText.text?.toString()?.trim()
-                val trans =editTrans1_editText.text?.toString()?.trim()
-                val ex = editEx1_editText.text?.toString()?.trim()
-                val transEx = editEx1Trans_editText.text?.toString()?.trim()
-                val def = editDefinition_editText.text?.toString()?.trim()
+            val catId = word.catParent!!
+            val name = editWord_editText.text?.toString()?.trim()
+            val trans = editTrans1_editText.text?.toString()?.trim()
+            val ex = editEx1_editText.text?.toString()?.trim()
+            val transEx = editEx1Trans_editText.text?.toString()?.trim()
+            val def = editDefinition_editText.text?.toString()?.trim()
 
-                if (name!!.isEmpty()) {
+            if (name!!.isEmpty()) {
 
-                    editWord_editText.error = "word required"
-                    editWord_editText.requestFocus()
-                    return@setOnClickListener
+                editWord_editText.error = "word required"
+                editWord_editText.requestFocus()
+                return@setOnClickListener
 
-                }
+            }
 
-                if (trans!!.isEmpty()) {
+            if (trans!!.isEmpty()) {
 
-                    editTrans1_editText.error = "translation required"
-                    editTrans1_editText.requestFocus()
-                    return@setOnClickListener
+                editTrans1_editText.error = "translation required"
+                editTrans1_editText.requestFocus()
+                return@setOnClickListener
 
-                }
+            }
 
-            launch(Dispatchers.Default){
+            launch(Dispatchers.Default) {
 
-                val updatedWord = Word(name,trans,ex,transEx,def,word.date,catId)
+                val updatedWord = Word(name, trans, ex, transEx, def, word.date, catId)
                 viewModel.deleteWord(word)
                 viewModel.addWord(updatedWord)
 
 
-            Toast.makeText(it.context,"editing word properties...",Toast.LENGTH_SHORT).show()
+                Toast.makeText(it.context, "editing word properties...", Toast.LENGTH_SHORT).show()
+
+            }
 
         }
-
     }
 }
