@@ -67,10 +67,8 @@ class FirstFragment : BaseFragment(),KodeinAware {
         (activity as AppCompatActivity).supportActionBar?.title = "Language Database"
 
         navController = Navigation.findNavController(view)
-
         recycler_view_cats.setHasFixedSize(true)
         viewModel = ViewModelProvider(this, viewModelFactory).get(MainViewModel::class.java)
-
         viewModel.catsWithWords().observe(viewLifecycleOwner, Observer<List<CatWords>> {
 
             _allCats = it
@@ -90,8 +88,6 @@ class FirstFragment : BaseFragment(),KodeinAware {
             newCatName = null
             val imm: InputMethodManager? = getSystemService<InputMethodManager>(it.context,InputMethodManager::class.java)
             imm!!.showSoftInput(editText_newCat, InputMethodManager.SHOW_IMPLICIT)
-
-
             recycler_view_newCat.visibility = View.VISIBLE
 
         }
@@ -114,13 +110,11 @@ class FirstFragment : BaseFragment(),KodeinAware {
 
             var bool = true
 
-            runBlocking(Dispatchers.Default) { bool = viewModel.validCatName(newCatName!!) }
+            runBlocking(Dispatchers.Default) {bool = viewModel.validCatName(newCatName!!)}
 
             if (bool) {
 
                 launch(Dispatchers.Default) {
-
-                    //val  num = viewModel.maxNum()
                     val cat = Cat(newCatName!!, currentDate)
                     viewModel.addCat(cat)
                 }

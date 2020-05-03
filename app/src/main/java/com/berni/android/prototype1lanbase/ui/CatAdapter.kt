@@ -48,13 +48,15 @@ class CatAdapter(private val cats: List<CatWords>, private val viewModel: MainVi
 
         holder.view.text_view_title.setText(cats[position].cat.catName)
 
-        var wordNames = cats[position].words.sortedBy {it.wordId }
+        var wordNames = cats[position].words.sortedBy {it.wordId }.reversed()
 
-         lastAdded = listOf(wordNames.getOrNull(0)?.wordName,
-         wordNames.getOrNull(1)?.wordName,
-         wordNames.getOrNull(2)?.wordName
+         lastAdded = listOf(
 
-         )
+                    wordNames.getOrNull(0)?.wordName,
+                    wordNames.getOrNull(1)?.wordName,
+                    wordNames.getOrNull(2)?.wordName
+
+         ).reversed()
 
         numWords = wordNames.size
         var lastAdditions = "last additions: "
