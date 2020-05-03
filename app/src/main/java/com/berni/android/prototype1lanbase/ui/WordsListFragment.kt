@@ -73,6 +73,7 @@ class WordsListFragment : BaseFragment(), KodeinAware {
             // setting up info for the info box in top of words list, several cases to be accounted for
 
             lastAdded = listOf(
+
                 displayedWords.getOrNull(0),
                 displayedWords.getOrNull(1),
                 displayedWords.getOrNull(2)

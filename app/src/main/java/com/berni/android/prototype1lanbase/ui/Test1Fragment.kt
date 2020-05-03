@@ -11,6 +11,7 @@ import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
+import androidx.navigation.Navigation
 import org.kodein.di.generic.instance
 import kotlinx.android.synthetic.main.fragment_test1.*
 
@@ -25,7 +26,7 @@ class Test1Fragment : BaseFragment(),KodeinAware {
     private lateinit var navController: NavController
     private lateinit var viewModel: MainViewModel
 
-    private val viewModelFactory: ViewModelFactory by instance<ViewModelFactory>()
+    private  val viewModelFactory: ViewModelFactory by instance<ViewModelFactory>()
     private  var wordsForTest  = listOf<Word>()
    // private var today  = Calendar.DATE
 
@@ -39,6 +40,8 @@ class Test1Fragment : BaseFragment(),KodeinAware {
 
         super.onViewCreated(view, savedInstanceState)
 
+        navController = Navigation.findNavController(view)
+
         wordsForTest= arguments?.get("listWords") as MutableList<Word>
         viewModel = ViewModelProvider(this, viewModelFactory).get(MainViewModel::class.java)
 
@@ -47,11 +50,8 @@ class Test1Fragment : BaseFragment(),KodeinAware {
         btn_testReady.setOnClickListener{
 
             val bundle = bundleOf("pickedWords" to pickedWords)
-
-            Toast.makeText(context, "let's do it!", Toast.LENGTH_SHORT).show()
-
             navController.navigate(R.id.actionStartTest, bundle)
-
+            Toast.makeText(context, "let's do it!", Toast.LENGTH_SHORT).show()
         }
     }
 

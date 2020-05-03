@@ -100,13 +100,33 @@
         android:id="@+id/test2Fragment"
         android:name="com.berni.android.prototype1lanbase.ui.Test2Fragment"
         android:label="fragment_test2"
-        tools:layout="@layout/fragment_test2" />
+        tools:layout="@layout/fragment_test2">
+
+        <action
+            android:id="@+id/actionTestFinished"
+            app:destination="@id/test3Fragment"/>
+    </fragment>
+
+    <argument
+
+        android:name ="testWords"
+        app:nullable="false" />
+    <fragment
+        android:id="@+id/test3Fragment"
+        android:name="com.berni.android.prototype1lanbase.Test3Fragment"
+        android:label="fragment_test3"
+        tools:layout="@layout/fragment_test3" />
 
 
     <argument
 
         android:name ="testWords"
         app:nullable="false" />
+
+    <argument
+
+        android:name = "resultTest"
+        app:nullable= "false"/>
 
 
 </navigation>

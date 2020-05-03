@@ -7,36 +7,28 @@
     android:layout_height="match_parent"
     tools:context=".ui.Test2Fragment">
 
-
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/VguideView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.2" />
+        app:layout_constraintGuide_percent="0.5" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/HguideView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.4" />
+        app:layout_constraintGuide_percent="0.5" />
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/HguideImage"
+    <LinearLayout
+        app:layout_constraintBottom_toBottomOf="@id/HguideView"
+        app:layout_constraintEnd_toEndOf="@id/VguideView"
+        app:layout_constraintStart_toStartOf="@id/VguideView"
+        app:layout_constraintTop_toTopOf="@id/HguideView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.429" />
-
-    <ImageView
-        android:id="@+id/space"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_minus_black_24dp"
-        android:layout_marginStart="10dp"
-        app:layout_constraintBottom_toBottomOf="@id/HguideImage"
-        app:layout_constraintStart_toEndOf="@id/wordTest_textView"/>
+        android:orientation="vertical">
 
     <TextView
         android:id="@+id/wordTest_textView"
@@ -44,26 +36,26 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize = "30sp"
-        android:text="Word"
-        app:layout_constraintBottom_toBottomOf="@id/HguideView"
-        app:layout_constraintEnd_toEndOf="@id/VguideView"
-        app:layout_constraintStart_toStartOf="@id/VguideView"
-        app:layout_constraintTop_toTopOf="@id/HguideView" />
+        android:layout_marginBottom="100dp"
+        android:text="@string/word" />
 
-
+       <!-- <ImageView
+            android:id="@+id/space"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_minus_black_24dp"
+            android:marginTop = "20sp"/>-->
 
     <EditText
         android:id="@+id/wordTest_editext"
         android:fontFamily = "@font/lato_regular"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="250dp"
-        android:textSize = "30sp"
-        android:text="translation"
-        app:layout_constraintBottom_toBottomOf="@id/HguideView"
-        app:layout_constraintEnd_toEndOf="@id/VguideView"
-        app:layout_constraintStart_toEndOf="@id/space"
-        app:layout_constraintTop_toTopOf="@id/HguideView" />
+        android:singleLine="true"
+        android:textSize = "20sp"
+        android:hint = "write the correct translation" />
+
+    </LinearLayout>
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/VguideBtn"
@@ -78,7 +70,6 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.8" />
-
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
 
@@ -114,14 +105,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize = "20sp"
-        android:text="0/15"
+        android:text="@string/_0_15"
         app:layout_constraintBottom_toBottomOf="@id/HguideCounter"
         app:layout_constraintEnd_toEndOf="@id/VguideCounter"
         app:layout_constraintStart_toStartOf="@id/VguideCounter"
         app:layout_constraintTop_toTopOf="@id/HguideCounter" />
-
-
-
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

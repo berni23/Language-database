@@ -6,6 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
+import androidx.navigation.NavController
+import androidx.navigation.Navigation
 import com.berni.android.prototype1lanbase.R
 import com.berni.android.prototype1lanbase.db.Cat
 import com.berni.android.prototype1lanbase.db.Word
@@ -20,6 +22,7 @@ class Test2Fragment : BaseFragment() {
 
     private var pickedWords = listOf<Word>()
     private var resultTest = arrayListOf<Boolean>()
+    private lateinit var navController: NavController
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -34,35 +37,45 @@ class Test2Fragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        navController = Navigation.findNavController(view)
         wordTest_textView.text = pickedWords[0].wordName
-
+        val len = pickedWords.size
         wordTest_editext.text.clear()
-
         var i: Int = 0
 
-        val len = pickedWords.toString()
+        counterTest_textView.text = " 0/$len"
 
         btn_nextTestWord.setOnClickListener {
 
-            if (wordTest_editext.text.isEmpty()) {
+            if (i==len-1)  {
 
-                wordTest_editext.error = "answer can't be blank"
-                wordTest_editext.requestFocus()
-                return@setOnClickListener
+                val bundle = bundleOf("pickedWords" to pickedWords,"resultTest" to resultTest)
+                navController.navigate(R.id.actionTestFinished, bundle)
 
             }
+            else {
 
-            val question = pickedWords[i].wordName.trim().toString().toLowerCase(Locale.ROOT)
-            val answer = wordTest_editext.text.trim().toString().toLowerCase(Locale.ROOT)
+                if (wordTest_editext.text.isEmpty()) {
+                    wordTest_editext.error = "answer can't be blank"
+                    wordTest_editext.requestFocus()
+                    return@setOnClickListener
+                }
 
-            if (question == answer) {resultTest.add(true) }
-            else {resultTest.add(false)}
+                val question = pickedWords[i].wordName.trim().toString().toLowerCase(Locale.ROOT)
+                val answer = wordTest_editext.text.trim().toString().toLowerCase(Locale.ROOT)
 
-            i++
+                if (question == answer) {resultTest.add(true)}
 
-            counterTest_textView.text = " ${i.toString()}/$len"
+                else {resultTest.add(false)}
+
+                i++
+
+                counterTest_textView.text = " ${(i).toString()}/$len"
+                wordTest_textView.text = pickedWords[i].wordName
+                wordTest_editext.text.clear()
 
 
+            }
 
         }
     }

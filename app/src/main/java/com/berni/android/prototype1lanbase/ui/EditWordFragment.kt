@@ -94,10 +94,9 @@ class EditWordFragment : BaseFragment(), KodeinAware {
                 viewModel.deleteWord(word)
                 viewModel.addWord(updatedWord)
 
-
-                Toast.makeText(it.context, "editing word properties...", Toast.LENGTH_SHORT).show()
-
             }
+
+            Toast.makeText(it.context, "editing word properties...", Toast.LENGTH_SHORT).show()
 
         }
     }
