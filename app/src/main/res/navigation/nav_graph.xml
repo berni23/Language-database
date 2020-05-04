@@ -105,6 +105,10 @@
         <action
             android:id="@+id/actionTestFinished"
             app:destination="@id/test3Fragment"/>
+        <action
+            android:id="@+id/actionCancelTest"
+            app:destination="@id/FirstFragment" />
+
     </fragment>
 
     <argument
@@ -113,7 +117,7 @@
         app:nullable="false" />
     <fragment
         android:id="@+id/test3Fragment"
-        android:name="com.berni.android.prototype1lanbase.Test3Fragment"
+        android:name="com.berni.android.prototype1lanbase.ui.Test3Fragment"
         android:label="fragment_test3"
         tools:layout="@layout/fragment_test3" />
 

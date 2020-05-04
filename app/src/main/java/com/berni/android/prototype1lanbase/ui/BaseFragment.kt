@@ -10,19 +10,28 @@ import kotlin.coroutines.CoroutineContext
 
 abstract class BaseFragment : Fragment(), CoroutineScope {
 
-        private lateinit var job: Job // job is a background task in coroutines
+    private lateinit var job: Job // job is a background task in coroutines
+    override val coroutineContext: CoroutineContext
+        get() = job + Dispatchers.Main
 
-        override val coroutineContext: CoroutineContext
-            get() = job + Dispatchers.Main
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
 
-        override fun onCreate(savedInstanceState: Bundle?) {
-            super.onCreate(savedInstanceState)
-
-            job = Job()
-        }
-        override fun onDestroy() {
-
-            super.onDestroy()
-            job.cancel()
-        }
+        job = Job()
     }
+
+    override fun onDestroy() {
+
+        super.onDestroy()
+        job.cancel()
+    }
+
+  /**  open fun onBackPressed(): Boolean {
+
+        return false
+    }**/
+
+
+
+
+}

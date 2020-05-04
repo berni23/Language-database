@@ -28,7 +28,6 @@ class Test1Fragment : BaseFragment(),KodeinAware {
 
     private  val viewModelFactory: ViewModelFactory by instance<ViewModelFactory>()
     private  var wordsForTest  = listOf<Word>()
-   // private var today  = Calendar.DATE
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -39,14 +38,11 @@ class Test1Fragment : BaseFragment(),KodeinAware {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
         super.onViewCreated(view, savedInstanceState)
-
         navController = Navigation.findNavController(view)
-
         wordsForTest= arguments?.get("listWords") as MutableList<Word>
         viewModel = ViewModelProvider(this, viewModelFactory).get(MainViewModel::class.java)
 
         val pickedWords = ranWords()
-
         btn_testReady.setOnClickListener{
 
             val bundle = bundleOf("pickedWords" to pickedWords)
@@ -55,10 +51,8 @@ class Test1Fragment : BaseFragment(),KodeinAware {
         }
     }
 
+      private fun ranWords(): List<Word> {
 
-      fun ranWords(): List<Word> {
-
-        //val wordsForTest = _allWords.filter {it.test==true }
         var listTest = listOf<Word>()
         if (wordsForTest.size <= 15) {listTest = wordsForTest.shuffled()
         } else {listTest = wordsForTest.shuffled().subList(0,14)}

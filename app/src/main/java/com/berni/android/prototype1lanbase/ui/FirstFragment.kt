@@ -157,7 +157,6 @@ class FirstFragment : BaseFragment(),KodeinAware {
                     displayedCats.forEach {
 
                         if (it.cat.catName.startsWith(newText)) {
-
                             newCatsList.add(it)
                         }
                     }
@@ -235,16 +234,6 @@ class FirstFragment : BaseFragment(),KodeinAware {
             }
         }
         return super.onOptionsItemSelected(item)
-    }
-
-    fun Context.showKeyboard(view: View?) {
-        val inputMethodManager =
-            getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
-        inputMethodManager.showSoftInput(view, 0)
-    }
-
-    fun Fragment.showKeyboard() {
-        view.let { activity?.showKeyboard(it) }
     }
 }
 
