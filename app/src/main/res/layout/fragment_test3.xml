@@ -21,4 +21,43 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
 
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/VguideBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.8" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/HguideBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.9" />
+
+    <TextView
+        android:id="@+id/ratioTestFinished"
+        android:layout_width="wrap_content"
+        android:textSize="30sp"
+        android:layout_height="wrap_content"
+        android:text="0/15"
+        app:layout_constraintBottom_toTopOf="@id/progressbar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+
+        android:id="@+id/btn_backToMain"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:focusable="true"
+        android:src="@drawable/ic_arrow_forward_black_24dp"
+        app:backgroundTint="@color/colorButton3"
+        app:layout_constraintBottom_toBottomOf="@id/HguideBtn"
+        app:layout_constraintEnd_toStartOf="@id/VguideBtn"
+        app:layout_constraintStart_toEndOf="@id/VguideBtn"
+        app:layout_constraintTop_toTopOf="@id/HguideBtn"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

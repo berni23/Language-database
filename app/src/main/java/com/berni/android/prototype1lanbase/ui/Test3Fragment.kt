@@ -10,6 +10,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.activity.OnBackPressedCallback
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.NavController
+import androidx.navigation.Navigation
 import com.berni.android.prototype1lanbase.R
 import com.berni.android.prototype1lanbase.db.Test
 import com.berni.android.prototype1lanbase.db.Word
@@ -31,7 +33,9 @@ class Test3Fragment : BaseFragment(),KodeinAware {
     private lateinit var viewModel: MainViewModel
     private lateinit var result: List<Boolean>
     private lateinit var testWords: List<Word>
+    private lateinit var navController: NavController
     private var today  = Calendar.DATE
+    private var i=0
 
 
     override fun onCreateView(
@@ -48,11 +52,11 @@ class Test3Fragment : BaseFragment(),KodeinAware {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        navController = Navigation.findNavController(view)
+
         var correct = 0
         viewModel = ViewModelProvider(this, viewModelFactory).get(MainViewModel::class.java)
         runBlocking(Dispatchers.Default){
-
-            var i=0
 
             testWords.forEach{
 
@@ -67,29 +71,30 @@ class Test3Fragment : BaseFragment(),KodeinAware {
                 it.lastOk = today
                 viewModel.updateWord(it)
 
+
                 i++
         }
         }
 
         Test.number+=1
-
         progressbar.progress=correct
         progressbar.max = result.size
+        ratioTestFinished.text = "$correct/${result.size}"
+        btn_backToMain.setOnClickListener{
 
-        //display test statistics
-        // tirori on answer correct
-
+            if (i==result.size) {
+                navController.navigate(R.id.actionBackToMain)
+            }
+        }
     }
 
-
-    // for the moment, back button is disabled
     override fun onAttach(context: Context) {
         super.onAttach(context)
         val callback: OnBackPressedCallback = object : OnBackPressedCallback(
-            true // default to enabled
+            true
         ) {
             override fun handleOnBackPressed() {
-
+                navController.navigate(R.id.actionBackToMain)
             }
         }
         requireActivity().onBackPressedDispatcher.addCallback(

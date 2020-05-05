@@ -115,24 +115,22 @@
 
         android:name ="testWords"
         app:nullable="false" />
+
     <fragment
         android:id="@+id/test3Fragment"
         android:name="com.berni.android.prototype1lanbase.ui.Test3Fragment"
         android:label="fragment_test3"
         tools:layout="@layout/fragment_test3" >
         <action
-            android:id="@+id/action_test3Fragment_to_FirstFragment"
+            android:id="@+id/actionBackToMain"
             app:destination="@id/FirstFragment" />
     </fragment>
 
-
     <argument
-
         android:name ="testWords"
         app:nullable="false" />
 
     <argument
-
         android:name = "resultTest"
         app:nullable= "false"/>
 
