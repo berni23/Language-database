@@ -5,6 +5,7 @@
     android:id="@+id/fragment_test2"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:windowSoftInputMode="adjustResize"
     tools:context=".ui.Test2Fragment">
 
     <androidx.constraintlayout.widget.Guideline
@@ -71,19 +72,6 @@
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.8" />
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-
-        android:id="@+id/btn_nextTestWord"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:clickable="true"
-        android:focusable="true"
-        android:src="@drawable/ic_arrow_forward_black_24dp"
-        app:backgroundTint="@color/colorButton3"
-        app:layout_constraintBottom_toBottomOf="@id/HguideBtn"
-        app:layout_constraintEnd_toStartOf="@id/VguideBtn"
-        app:layout_constraintStart_toEndOf="@id/VguideBtn"
-        app:layout_constraintTop_toTopOf="@id/HguideBtn"/>
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/VguideCounter"
@@ -110,5 +98,19 @@
         app:layout_constraintEnd_toEndOf="@id/VguideCounter"
         app:layout_constraintStart_toStartOf="@id/VguideCounter"
         app:layout_constraintTop_toTopOf="@id/HguideCounter" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+
+        android:id="@+id/btn_nextTestWord"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:focusable="true"
+        android:src="@drawable/ic_arrow_forward_black_24dp"
+        app:backgroundTint="@color/colorButton3"
+        app:layout_constraintBottom_toBottomOf="@id/HguideBtn"
+        app:layout_constraintEnd_toStartOf="@id/VguideBtn"
+        app:layout_constraintStart_toEndOf="@id/VguideBtn"
+        app:layout_constraintTop_toTopOf="@id/HguideBtn"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

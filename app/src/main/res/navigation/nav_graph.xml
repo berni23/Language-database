@@ -119,7 +119,11 @@
         android:id="@+id/test3Fragment"
         android:name="com.berni.android.prototype1lanbase.ui.Test3Fragment"
         android:label="fragment_test3"
-        tools:layout="@layout/fragment_test3" />
+        tools:layout="@layout/fragment_test3" >
+        <action
+            android:id="@+id/action_test3Fragment_to_FirstFragment"
+            app:destination="@id/FirstFragment" />
+    </fragment>
 
 
     <argument

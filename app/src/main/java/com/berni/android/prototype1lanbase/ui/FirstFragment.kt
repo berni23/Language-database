@@ -180,11 +180,13 @@ class FirstFragment : BaseFragment(),KodeinAware {
 
                 viewModel = ViewModelProvider(this, viewModelFactory).get(MainViewModel::class.java)
 
-                runBlocking(Dispatchers.Default){  _allWords  = viewModel.getAllWords()  }
+                runBlocking(Dispatchers.Default){_allWords  = viewModel.getAllWords()  }
+
+                Test.number = 0 //  temporary
 
                 Test.setCounter()
 
-                val wordsNotAcquired = _allWords.filter { !it.acquired } // words yet to be acquired by user's memory
+                val wordsNotAcquired = _allWords.filter {!it.acquired } // words yet to be acquired by user's memory
 
                 var wordsForTest = listOf<Word>()
 

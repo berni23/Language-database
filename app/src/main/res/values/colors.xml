@@ -16,6 +16,8 @@
     <color name = "colorHint4">#A19D9D</color>
     <color name = "textColor3">#616161</color>
     <color name = "textColorTrans3">#8C9EFF</color>
+    <color name = "progress_start">#8E24AA</color>
+    <color name = "progress_end">#DAAAE6</color>
 
 
 </resources>
