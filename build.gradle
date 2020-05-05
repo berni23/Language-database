@@ -9,6 +9,7 @@ buildscript {
         jcenter()
         
     }
+
     dependencies {
         classpath 'com.android.tools.build:gradle:3.6.3'
         classpath "org.jetbrains.kotlin:kotlin-serialization:$kotlin_version"
@@ -23,6 +24,7 @@ allprojects {
     repositories {
         google()
         jcenter()
+        maven { url 'https://jitpack.io' }
         
     }
 }

@@ -62,16 +62,16 @@ class Test3Fragment : BaseFragment(),KodeinAware {
 
                 if (result[i]) {
 
-                   // it.lvl += 1
+                   // it.lvl += 1 // uncoment when using app
                     correct += 1
                 }
                 if (it.lvl >= 3) {
                     it.acquired = true
                 }
 
-                //it.test = false
+                //it.test = false // uncomment when using app
                 it.lastOk = today
-                it.acquired=true // temp code, just to check how some UI updates on word acquired
+                it.acquired=true // temp code, just to check how some  views  get displayed on word acquired, delete when using app .
                 viewModel.updateWord(it)
                 i++
 

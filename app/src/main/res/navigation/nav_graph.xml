@@ -5,6 +5,11 @@
     android:id="@+id/nav_graph"
     app:startDestination="@id/FirstFragment">
 
+    <!-- app:enterAnim="@anim/slide_in_right"
+       app:exitAnim="@anim/slide_out_left"
+       app:popEnterAnim="@anim/slide_in_left"
+       app:popExitAnim="@anim/slide_out_right"-->
+
     <fragment
         android:id="@+id/FirstFragment"
         android:name="com.berni.android.prototype1lanbase.ui.FirstFragment"
@@ -13,14 +18,17 @@
 
         <action
             android:id="@+id/actionAddCat"
-            app:destination="@id/SecondFragment" />
+            app:destination="@id/SecondFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/animate_slide_out_left"
+            app:popEnterAnim="@anim/animate_slide_in_left"
+            app:popExitAnim="@anim/animate_slide_out_right" />
 
         <action
             android:id="@+id/actionTest1"
             app:destination="@id/testFragment1" />
 
     </fragment>
-
 
     <fragment
         android:id="@+id/SecondFragment"
@@ -36,6 +44,10 @@
 
         <action
             android:id="@+id/actionWordsList"
+            app:enterAnim="@anim/animate_swipe_left_enter"
+            app:exitAnim="@anim/animate_swipe_right_exit"
+            app:popExitAnim="@anim/animate_swipe_right_exit"
+            app:popEnterAnim="@anim/animate_swipe_left_enter"
             app:destination="@id/wordsListFragment" />
 
     </fragment>

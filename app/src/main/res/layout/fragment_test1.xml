@@ -38,7 +38,7 @@
         android:layout_marginBottom="20dp"
         android:layout_marginStart="15dp"
         android:textColor="@color/colorHint4"
-        android:text="Press the button once you feel confident. \nYou will dispose of 15 minutes to write\n the correct translation for fifteen words"
+        android:text="@string/info_before_test"
         android:fontFamily="@font/lato_regular"
         android:textSize="15sp"
         android:id="@+id/text_view_title"
