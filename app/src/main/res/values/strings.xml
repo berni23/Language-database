@@ -50,4 +50,12 @@
     <string name="ready">I\'m Ready!!</string>
     <string name="test">test</string>
     <string name="_0_15">0/15</string>
+
+    <!-- messages at the end of each test, depending on final score-->
+
+    <string name ="score1">excellent!!</string>
+    <string name = "score2">awesome !</string>
+    <string name = "score3" > well done!</string>
+    <string name = "score4" > good job!" </string>
+    <string name = "score5"> keep practising, surely you can do better !</string>
 </resources>

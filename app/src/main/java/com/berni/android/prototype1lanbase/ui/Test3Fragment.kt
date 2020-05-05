@@ -1,5 +1,6 @@
 package com.berni.android.prototype1lanbase.ui
 
+import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.content.Context
 import android.icu.util.Calendar
@@ -34,55 +35,62 @@ class Test3Fragment : BaseFragment(),KodeinAware {
     private lateinit var result: List<Boolean>
     private lateinit var testWords: List<Word>
     private lateinit var navController: NavController
-    private var today  = Calendar.DATE
-    private var i=0
+    private var today = Calendar.DATE
+    private var i = 0
+    private var correct: Int = 0
 
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
 
-        result= arguments?.get("resultTest") as List<Boolean>
+        result = arguments?.get("resultTest") as List<Boolean>
         testWords = arguments?.get("pickedWords") as List<Word>
         return inflater.inflate(R.layout.fragment_test3, container, false)
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         navController = Navigation.findNavController(view)
 
-        var correct = 0
-        viewModel = ViewModelProvider(this, viewModelFactory).get(MainViewModel::class.java)
-        runBlocking(Dispatchers.Default){
 
-            testWords.forEach{
+        viewModel = ViewModelProvider(this, viewModelFactory).get(MainViewModel::class.java)
+        runBlocking(Dispatchers.Default) {
+
+            testWords.forEach {
 
                 if (result[i]) {
 
                     it.lvl += 1
-                    correct+=1
+                    correct += 1
                 }
-                if(it.lvl>=3)  {it.acquired=true}
+                if (it.lvl >= 3) {
+                    it.acquired = true
+                }
 
                 //it.test = false
                 it.lastOk = today
                 viewModel.updateWord(it)
 
-
                 i++
-        }
+
+            }
         }
 
-        Test.number+=1
-        progressbar.progress=correct
+        Test.number += 1
+        progressbar.progress = correct
         progressbar.max = result.size
         ratioTestFinished.text = "$correct/${result.size}"
-        btn_backToMain.setOnClickListener{
 
-            if (i==result.size) {
+        msg()
+
+
+        btn_backToMain.setOnClickListener {
+
+            if (i == result.size) {
                 navController.navigate(R.id.actionBackToMain)
             }
         }
@@ -101,5 +109,19 @@ class Test3Fragment : BaseFragment(),KodeinAware {
             this,  // LifecycleOwner
             callback
         )
+    }
+
+    private fun msg() {
+
+        var text = resources.getString(R.string.score5)
+        val ratio: Double = correct.toDouble()/result.size.toDouble()
+
+        if (ratio==1.0) {text = resources.getString(R.string.score1) }
+        else if (ratio>=0.9)  {text = resources.getString(R.string.score2) }
+        else if (ratio>=0.7)  {text = resources.getString(R.string.score3) }
+        else if(ratio >=0.5)  {text = resources.getString(R.string.score4) }
+
+        msgTestFinished.text = text
+
     }
 }
