@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.widget.PopupMenu
+import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
@@ -43,6 +44,10 @@ class WordAdapter(private val words: List<Word>, private val viewModel: MainView
         holder.view.text_view_word.text = " ${words[position].wordName} "  // adding space at the beginning and at the end to avoid text cut
         holder.view.text_view_translation.text = " ${words[position].trans1} "
 
+        if (words[position].acquired) {holder.view.text_view_word.setTextColor(ContextCompat.getColor(holder.view.context, R.color.colorHint3))
+
+        holder.view.text_view_translation.setTextColor(ContextCompat.getColor(holder.view.context, R.color.colorHint3))}
+
         holder.view.edit_word.setOnClickListener {
 
             val popupMenu = PopupMenu(it.context,it)
@@ -53,10 +58,6 @@ class WordAdapter(private val words: List<Word>, private val viewModel: MainView
 
                         val bundle = bundleOf("word" to words[position])
                         Navigation.findNavController(it).navigate(R.id.actionEditWord, bundle)
-
-                       //  TODO(navigate to word edit fragment ( to be created) )
-
-                        Toast.makeText(it.context,"editing word ..",Toast.LENGTH_SHORT).show()
                         true
                     }
 
@@ -75,9 +76,9 @@ class WordAdapter(private val words: List<Word>, private val viewModel: MainView
                                 }
                             }
 
-                            setNegativeButton("No") { _, _ ->
+                            setNegativeButton("No") { _, _ -> }
 
-                            }}.create().show()
+                        }.create().show()
 
                         true
 

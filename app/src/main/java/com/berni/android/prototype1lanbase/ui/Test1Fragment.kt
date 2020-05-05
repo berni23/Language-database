@@ -27,7 +27,7 @@ class Test1Fragment : BaseFragment(),KodeinAware {
     private lateinit var viewModel: MainViewModel
 
     private  val viewModelFactory: ViewModelFactory by instance<ViewModelFactory>()
-    private  var wordsForTest  = listOf<Word>()
+    private lateinit var wordsForTest: List<Word>
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -39,7 +39,7 @@ class Test1Fragment : BaseFragment(),KodeinAware {
 
         super.onViewCreated(view, savedInstanceState)
         navController = Navigation.findNavController(view)
-        wordsForTest= arguments?.get("listWords") as MutableList<Word>
+        wordsForTest= arguments?.get("listWords") as List<Word>
         viewModel = ViewModelProvider(this, viewModelFactory).get(MainViewModel::class.java)
 
         val pickedWords = ranWords()
@@ -51,15 +51,12 @@ class Test1Fragment : BaseFragment(),KodeinAware {
         }
     }
 
-      private fun ranWords(): List<Word> {
+    private fun ranWords(): List<Word> {
 
-        var listTest = listOf<Word>()
-        if (wordsForTest.size <= 15) {listTest = wordsForTest.shuffled()
-        } else {listTest = wordsForTest.shuffled().subList(0,14)}
-        return listTest
-
-    }
-
+        val listTest = wordsForTest.shuffled()
+        return if (wordsForTest.size >= 15)  { listTest.subList(0,15).toList() }
+        else  { listTest }
+     }
 }
 
 

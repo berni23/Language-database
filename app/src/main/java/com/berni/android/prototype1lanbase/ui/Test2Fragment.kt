@@ -30,7 +30,7 @@ class Test2Fragment : BaseFragment(){
         savedInstanceState: Bundle?
     ): View? {
 
-        pickedWords = arguments?.get("pickedWords") as List<Word>
+        pickedWords = arguments?.get("pickedWords") as ArrayList<Word>
         return inflater.inflate(R.layout.fragment_test2, container, false)
     }
 
@@ -55,7 +55,7 @@ class Test2Fragment : BaseFragment(){
             val question = pickedWords[i].wordName.trim().toString().toLowerCase(Locale.ROOT)
             val answer = wordTest_editext.text.trim().toString().toLowerCase(Locale.ROOT)
             if (question == answer) { resultTest.add(true) }
-            else { resultTest.add(false) }
+            else {resultTest.add(false) }
 
             i++
             if (i == len) {
@@ -86,11 +86,8 @@ class Test2Fragment : BaseFragment(){
                         navController.navigate(R.id.actionCancelTest)
 
                     }
-                    setNegativeButton("No") { _, _ ->
-
-                    }
+                    setNegativeButton("No") { _, _ -> }
                 }.create().show()
-
             }
         }
         requireActivity().onBackPressedDispatcher.addCallback(
@@ -98,8 +95,6 @@ class Test2Fragment : BaseFragment(){
             callback
         )
     }
-
-
 }
 
 

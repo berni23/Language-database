@@ -2,12 +2,14 @@ package com.berni.android.prototype1lanbase.ui
 
 import android.app.Activity
 import android.content.Context
+import android.content.Intent
 import android.icu.util.Calendar
 import android.os.Bundle
 import android.view.*
 import android.view.inputmethod.InputMethodManager
 import android.widget.SearchView
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat.getSystemService
 import androidx.core.os.bundleOf
@@ -183,11 +185,11 @@ class FirstFragment : BaseFragment(),KodeinAware {
                 runBlocking(Dispatchers.Default){_allWords  = viewModel.getAllWords()  }
 
                 Test.number = 0 //  temporary
-
                 Test.setCounter()
 
                 val wordsNotAcquired = _allWords.filter {!it.acquired } // words yet to be acquired by user's memory
 
+                // wordsForTest temporary var, to be changed in all of the file for wordsNotAcquired
                 var wordsForTest = listOf<Word>()
 
                 if (Test.number >= 2) {
@@ -203,23 +205,20 @@ class FirstFragment : BaseFragment(),KodeinAware {
                 } else {
 
                     val testFalse = wordsNotAcquired.filter { !it.test }
-
                     runBlocking(Dispatchers.Default) {
 
                         testFalse.forEach {
 
                             val diff = Calendar.DATE - it.lastOk
 
-                            if (it.lvl == 1 && diff >= 3)     { it.test = true }
-
+                            if (it.lvl == 1 && diff >= 3)      {it.test = true }
                             else if (it.lvl == 2 && diff >= 7) {it.test = true }
 
                             viewModel.updateWord(it)
                         }
                     }
 
-                    viewModel =
-                        ViewModelProvider(this, viewModelFactory).get(MainViewModel::class.java)
+                    viewModel = ViewModelProvider(this, viewModelFactory).get(MainViewModel::class.java)
 
                     runBlocking(Dispatchers.Default) { wordsForTest = viewModel.wordsForTest() }
 
@@ -236,6 +235,25 @@ class FirstFragment : BaseFragment(),KodeinAware {
             }
         }
         return super.onOptionsItemSelected(item)
+    }
+
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        val callback: OnBackPressedCallback = object : OnBackPressedCallback(
+            true
+        ) {
+            override fun handleOnBackPressed() {
+                val intent = Intent(Intent.ACTION_MAIN)
+                intent.addCategory(Intent.CATEGORY_HOME)
+                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+                startActivity(intent)
+            }
+        }
+        requireActivity().onBackPressedDispatcher.addCallback(
+            this,  // LifecycleOwner
+            callback
+        )
     }
 }
 

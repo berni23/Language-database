@@ -55,8 +55,6 @@ class Test3Fragment : BaseFragment(),KodeinAware {
         super.onViewCreated(view, savedInstanceState)
 
         navController = Navigation.findNavController(view)
-
-
         viewModel = ViewModelProvider(this, viewModelFactory).get(MainViewModel::class.java)
         runBlocking(Dispatchers.Default) {
 
@@ -64,7 +62,7 @@ class Test3Fragment : BaseFragment(),KodeinAware {
 
                 if (result[i]) {
 
-                    it.lvl += 1
+                   // it.lvl += 1
                     correct += 1
                 }
                 if (it.lvl >= 3) {
@@ -73,8 +71,8 @@ class Test3Fragment : BaseFragment(),KodeinAware {
 
                 //it.test = false
                 it.lastOk = today
+                it.acquired=true // temp code, just to check how some UI updates on word acquired
                 viewModel.updateWord(it)
-
                 i++
 
             }
@@ -86,7 +84,6 @@ class Test3Fragment : BaseFragment(),KodeinAware {
         ratioTestFinished.text = "$correct/${result.size}"
 
         msg()
-
 
         btn_backToMain.setOnClickListener {
 
@@ -115,7 +112,6 @@ class Test3Fragment : BaseFragment(),KodeinAware {
 
         var text = resources.getString(R.string.score5)
         val ratio: Double = correct.toDouble()/result.size.toDouble()
-
         if (ratio==1.0) {text = resources.getString(R.string.score1) }
         else if (ratio>=0.9)  {text = resources.getString(R.string.score2) }
         else if (ratio>=0.7)  {text = resources.getString(R.string.score3) }

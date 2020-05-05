@@ -41,7 +41,7 @@
     <string name="createdOn">created on</string>
     <string name="ex1_editText">first example</string>
     <string name="translation_example">translation example (optional)</string>
-    <string name="definition_editText">definiton (optional)</string>
+    <string name="definition_editText">definition (optional)</string>
     <string name="hint_newCat">write the new category name</string>
     <string name="note">Note</string>
     <string name="no_example_provided">No example provided</string>
@@ -55,7 +55,7 @@
 
     <string name ="score1">excellent!!</string>
     <string name = "score2">awesome !</string>
-    <string name = "score3" > well done!</string>
-    <string name = "score4" > good job!" </string>
-    <string name = "score5"> keep practising, surely you can do better !</string>
+    <string name = "score3" >well done!</string>
+    <string name = "score4" >good job!" </string>
+    <string name = "score5"> Keep practising!</string>
 </resources>

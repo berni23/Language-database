@@ -1,8 +1,7 @@
 package com.berni.android.prototype1lanbase.ui
 
-import android.content.Context
+import android.content.Intent
 import android.os.Bundle
-import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
 import com.berni.android.prototype1lanbase.R
 
@@ -16,8 +15,6 @@ class MainActivity : AppCompatActivity() {
         supportActionBar?.title = " Language Database"
 
     }
-
-
 
 }
 
