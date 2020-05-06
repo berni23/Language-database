@@ -1,0 +1,16 @@
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.berni.android.prototype1lanbase.ui.EditWordFragment"
+    android:id="@+id/menu_edit_words">
+
+    <item
+        android:id = "@+id/item_backEditToWordsList"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        android:orderInCategory="1"
+        android:icon="@drawable/ic_arrow_downward_white_24dp"
+        android:title="@string/back"
+        app:showAsAction="ifRoom" />
+
+</menu>

@@ -33,7 +33,10 @@ class Test1Fragment : BaseFragment(),KodeinAware {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
 
-    ): View? { return inflater.inflate(R.layout.fragment_test1, container, false)}
+    ): View? {
+
+        setHasOptionsMenu(true)
+        return inflater.inflate(R.layout.fragment_test1, container, false)}
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
@@ -57,6 +60,23 @@ class Test1Fragment : BaseFragment(),KodeinAware {
         return if (wordsForTest.size >= 15)  { listTest.subList(0,15).toList() }
         else  { listTest }
      }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.menu_test1, menu)
+        return super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+
+        when (item.itemId) {
+
+            R.id.item_backEditToWordsList -> { navController.popBackStack() }
+
+        }
+
+        return super.onOptionsItemSelected(item)
+    }
+
 }
 
 

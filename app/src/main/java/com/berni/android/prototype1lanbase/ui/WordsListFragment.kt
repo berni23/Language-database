@@ -5,16 +5,18 @@ import android.os.Bundle
 import android.view.*
 import android.widget.SearchView
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.NavController
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.berni.android.prototype1lanbase.R
 import com.berni.android.prototype1lanbase.db.Cat
 import com.berni.android.prototype1lanbase.db.Word
 import kotlinx.android.synthetic.main.fragment_words_list.*
-import kotlinx.coroutines.launch
 import kotlinx.coroutines.*
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.closestKodein
@@ -32,6 +34,8 @@ class WordsListFragment : BaseFragment(), KodeinAware {
     private var displayedWords =  listOf<Word>()
     private var displayedWords1 =  listOf<Word>()
     private var lastAdditionDate: String? = ""
+    private lateinit var navController: NavController
+
 
     override val kodein by closestKodein()
     private val viewModelFactory: ViewModelFactory by instance<ViewModelFactory>()
@@ -51,6 +55,8 @@ class WordsListFragment : BaseFragment(), KodeinAware {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        (activity as AppCompatActivity).supportActionBar?.title = cat.catName
+        navController = Navigation.findNavController(view)
         recycler_view_words.setHasFixedSize(true)
         viewModel = ViewModelProvider(this, viewModelFactory).get(MainViewModel::class.java)
 
@@ -140,10 +146,16 @@ class WordsListFragment : BaseFragment(), KodeinAware {
 
         when (item.itemId) {
 
+            R.id.item_backToSecond -> {
+
+               // val bundle = bundleOf("categoryName" to cat)
+                navController.popBackStack()
+
+            }
+
             R.id.alphabetically -> {
 
                 displayedWords1 = sortAlphabetically()
-
                 message = "sorting by alphabetic order.."
                 Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
             }
@@ -151,7 +163,6 @@ class WordsListFragment : BaseFragment(), KodeinAware {
             R.id.last_added -> {
 
                 displayedWords1 = sortLastAdded()
-
                 message = "sorting by last added.."
                 Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
             }
@@ -159,7 +170,6 @@ class WordsListFragment : BaseFragment(), KodeinAware {
             R.id.first_added -> {
 
                 displayedWords1 = sortFirstAdded()
-
                 message = "sorting by first added.."
                 Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
             }
@@ -167,7 +177,6 @@ class WordsListFragment : BaseFragment(), KodeinAware {
             R.id.withExample -> {
 
                 displayedWords1 =  filterExample(displayedWords)
-
                 message = "filtering words with an example.."
                 Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
             }
@@ -175,7 +184,6 @@ class WordsListFragment : BaseFragment(), KodeinAware {
             R.id.noExample -> {
 
                 displayedWords1 = filterNoExample(displayedWords)
-
                 message = "filtering words without example.."
                 Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
             }
@@ -183,7 +191,6 @@ class WordsListFragment : BaseFragment(), KodeinAware {
             R.id.byLength -> {
 
                 displayedWords1 = sortByLength()
-
                 message = "sorting words by their length.."
                 Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
 
@@ -233,16 +240,14 @@ class WordsListFragment : BaseFragment(), KodeinAware {
     private fun sortAlphabetically() : List<Word>{
 
         val displayed = displayedWords.toTypedArray()
-        val alphaSorted = displayed.sortedBy { it.wordName }
-        return alphaSorted
+        return displayed.sortedBy { it.wordName }
 
     }
 
     private fun sortByLength() : List<Word> {
 
         val displayed = displayedWords.toTypedArray()
-        val lengthSorted = displayed.sortedBy { it.wordName.length}
-        return lengthSorted
+        return displayed.sortedBy { it.wordName.length}
 
         }
 

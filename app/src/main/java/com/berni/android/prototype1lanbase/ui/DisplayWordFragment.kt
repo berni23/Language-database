@@ -2,11 +2,11 @@ package com.berni.android.prototype1lanbase.ui
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.NavController
+import androidx.navigation.Navigation
 import com.berni.android.prototype1lanbase.R
 import com.berni.android.prototype1lanbase.db.Word
 import kotlinx.android.synthetic.main.fragment_display_word.*
@@ -17,6 +17,7 @@ import kotlinx.android.synthetic.main.fragment_display_word.*
 class DisplayWordFragment : BaseFragment() {
 
     private lateinit var word: Word
+    private lateinit var navController: NavController
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,7 +28,8 @@ class DisplayWordFragment : BaseFragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
+
+        setHasOptionsMenu(true)
         return inflater.inflate(R.layout.fragment_display_word, container, false)
     }
 
@@ -35,19 +37,47 @@ class DisplayWordFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
         super.onViewCreated(view, savedInstanceState)
+        navController = Navigation.findNavController(view)
         (activity as AppCompatActivity).supportActionBar?.title = word.wordName
 
         //mandatory fields
 
-        textView_displayWord.setText(" ${word.wordName} ")
-        textView_displayTranslation.setText(" ${word.trans1} ")
-        textView_displayDate.setText("added on ${word.date} ")
+        textView_displayWord.text = " ${word.wordName} "
+        textView_displayTranslation.text = " ${word.trans1} "
+        textView_displayDate.text = "added on ${word.date} "
 
         //optional fields
 
-       if (word.ex1!=null) {textView_displayEx1.setText(" ${word.ex1} ")}
-       if(word.trans_ex1!=null) {textView_displayEx1Translation.setText(" ${word.trans_ex1} ")}
-       if(word.definition!=null) {textView_displayDefinition.setText(" ${word.definition} ")}
+       if (word.ex1!=null) {
+           textView_displayEx1.text = " ${word.ex1} "
+       }
+       if(word.trans_ex1!=null) {
+           textView_displayEx1Translation.text = " ${word.trans_ex1} "
+       }
+       if(word.definition!=null) {
+           textView_displayDefinition.text = " ${word.definition} "
+       }
 
     }
+
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.menu_edit_words, menu)
+
+        return super.onCreateOptionsMenu(menu, inflater)
+    }
+
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+
+        when (item.itemId) {
+
+            R.id.item_backEditToWordsList -> { navController.popBackStack() }
+
+        }
+
+        return super.onOptionsItemSelected(item)
+    }
+
 }
+

@@ -90,7 +90,6 @@
         tools:layout="@layout/fragment_edit_word" />
 
     <argument
-
         android:name ="word"
         app:argType="com.berni.android.prototype1lanbase.db.Word"
         app:nullable="false" />

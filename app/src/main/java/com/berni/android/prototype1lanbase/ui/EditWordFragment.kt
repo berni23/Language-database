@@ -1,13 +1,13 @@
 package com.berni.android.prototype1lanbase.ui
 
 import android.os.Bundle
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.NavController
+import androidx.navigation.Navigation
 import com.berni.android.prototype1lanbase.R
 import com.berni.android.prototype1lanbase.db.Word
 import com.berni.android.prototype1lanbase.wordId
@@ -29,8 +29,7 @@ class EditWordFragment : BaseFragment(), KodeinAware {
     private val viewModelFactory: ViewModelFactory by instance<ViewModelFactory>()
     private lateinit var viewModel: MainViewModel
     private lateinit var word: Word
-
-    //private lateinit var navController: NavController
+    private lateinit var navController: NavController
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,14 +40,16 @@ class EditWordFragment : BaseFragment(), KodeinAware {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
+
+        setHasOptionsMenu(true)
         return inflater.inflate(R.layout.fragment_edit_word, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
         super.onViewCreated(view, savedInstanceState)
-        (activity as AppCompatActivity).supportActionBar?.title = word.wordName
+        (activity as AppCompatActivity).supportActionBar?.title = "edit info"
+        navController = Navigation.findNavController(view)
         viewModel = ViewModelProvider(this, viewModelFactory).get(MainViewModel::class.java)
 
         // mandatory fields
@@ -100,4 +101,22 @@ class EditWordFragment : BaseFragment(), KodeinAware {
 
         }
     }
+
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.menu_edit_words, menu)
+        return super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+
+        when (item.itemId) {
+
+            R.id.item_backEditToWordsList -> { navController.popBackStack() }
+
+        }
+
+        return super.onOptionsItemSelected(item)
+    }
+
 }

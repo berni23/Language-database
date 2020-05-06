@@ -143,7 +143,14 @@ class SecondFragment : BaseFragment(),KodeinAware {
                val bundle = bundleOf("cat" to cat)
                navController.navigate(R.id.actionWordsList, bundle)
            }
-       }
+
+               R.id.item_back -> {
+
+                   navController.popBackStack()
+
+
+               }
+           }
        return super.onOptionsItemSelected(item)
    }
 }
