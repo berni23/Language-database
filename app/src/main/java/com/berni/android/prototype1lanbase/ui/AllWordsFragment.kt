@@ -1,4 +1,3 @@
-package com.berni.android.prototype1lanbase.ui
 
 import android.annotation.SuppressLint
 import android.os.Bundle
@@ -14,8 +13,11 @@ import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.berni.android.prototype1lanbase.R
-import com.berni.android.prototype1lanbase.db.Cat
 import com.berni.android.prototype1lanbase.db.Word
+import com.berni.android.prototype1lanbase.ui.BaseFragment
+import com.berni.android.prototype1lanbase.ui.MainViewModel
+import com.berni.android.prototype1lanbase.ui.ViewModelFactory
+import com.berni.android.prototype1lanbase.ui.WordAdapter
 import kotlinx.android.synthetic.main.fragment_words_list.*
 import kotlinx.coroutines.*
 import org.kodein.di.KodeinAware
@@ -25,11 +27,11 @@ import org.kodein.di.generic.instance
 /**
  * A simple [Fragment] subclass.
  */
-class WordsListFragment : BaseFragment(), KodeinAware {
+class AllWordsFragment : BaseFragment(), KodeinAware {
 
     //lateinit var navController: NavController
 
-    private lateinit var cat: Cat
+    private lateinit var allWords: List<Word>
     private lateinit var lastAdded: List<Word?>
     private var displayedWords =  listOf<Word>()
     private var displayedWords1 =  listOf<Word>()
@@ -47,34 +49,37 @@ class WordsListFragment : BaseFragment(), KodeinAware {
     ): View? {
 
         setHasOptionsMenu(true)
-        cat = arguments?.get("cat") as Cat
-        return inflater.inflate(R.layout.fragment_words_list, container, false)
+
+
+        return inflater.inflate(R.layout.fragment_all_words, container, false)
     }
 
     @SuppressLint("SetTextI18n")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        (activity as AppCompatActivity).supportActionBar?.title = cat.catName
+        (activity as AppCompatActivity).supportActionBar?.title = "All Words"
         navController = Navigation.findNavController(view)
         recycler_view_words.setHasFixedSize(true)
         viewModel = ViewModelProvider(this, viewModelFactory).get(MainViewModel::class.java)
 
+        runBlocking(Dispatchers.Default) { allWords = viewModel.getAllWords() }
+
         // observe if the words within the category suffer any change (like edition or deletion)
 
-        viewModel.wordsInCat(cat.catId).observe(viewLifecycleOwner, Observer<List<Word>> {
+        viewModel.allWords.observe(viewLifecycleOwner, Observer<List<Word>> {
 
-        recycler_view_words.layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
+            recycler_view_words.layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
 
-           runBlocking(Dispatchers.Default){
+            runBlocking(Dispatchers.Default){
 
-               displayedWords =  it.reversed()
+                displayedWords =  it.reversed()
 
-               recycler_view_words.adapter = WordAdapter(displayedWords,viewModel,this.coroutineContext)
+                recycler_view_words.adapter = WordAdapter(displayedWords,viewModel,this.coroutineContext)
 
-           }
+            }
 
-              displayedWords1 = displayedWords
+            displayedWords1 = displayedWords
 
             // setting up info for the info box in top of words list, several cases to be accounted for
 
@@ -147,7 +152,7 @@ class WordsListFragment : BaseFragment(), KodeinAware {
 
             R.id.item_backToSecond -> {
 
-               // val bundle = bundleOf("categoryName" to cat)
+                // val bundle = bundleOf("categoryName" to cat)
                 navController.popBackStack()
 
             }
@@ -236,24 +241,24 @@ class WordsListFragment : BaseFragment(), KodeinAware {
         return displayedWords.reversed()
     }
 
-    fun sortAlphabetically() : List<Word>{
+    private fun sortAlphabetically() : List<Word>{
 
         val displayed = displayedWords.toTypedArray()
         return displayed.sortedBy { it.wordName.toLowerCase() }
 
     }
 
-     fun sortByLength() : List<Word> {
+    private fun sortByLength() : List<Word> {
 
         val displayed = displayedWords.toTypedArray()
         return displayed.sortedBy { it.wordName.length}
 
-        }
+    }
 
     /** also, for the sorting and filtering not to be applied but rather activated, the filters
-        can  perform the same way and the sorting can start with initial data and pass the first
-        X elements, where x = size of filtered list
-**/
+    can  perform the same way and the sorting can start with initial data and pass the first
+    X elements, where x = size of filtered list
+     **/
 }
 
 

@@ -22,6 +22,7 @@
         <item name="colorAccent">@color/colorAccent3</item>
         <item name="android:fontFamily">@font/lato_regular</item>
         <item name="android:statusBarColor">@color/colorPrimaryDark3</item>
+       <item name="actionOverflowButtonStyle">@style/MyCustomTheme.OverFlow</item>
 
     </style>
 
@@ -33,13 +34,16 @@
    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
-
 <style name="MyActionButtonOverflow" parent="android:style/Widget.Holo.Light.ActionButton.Overflow">
     <item name="android:src">@drawable/ic_item</item>
     <item name="android:background">?android:attr/actionBarItemBackground</item>
     <item name="android:contentDescription">"Lala"</item>
 </style>
 
+
+<style name="MyCustomTheme.OverFlow" parent="@style/Widget.AppCompat.ActionButton.Overflow" >
+        <item name="android:src">@drawable/ic_more_vert_white_24dp</item>-
+    </style>
 
 
 </resources>

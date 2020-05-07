@@ -182,7 +182,7 @@ class FirstFragment : BaseFragment(),KodeinAware {
 
                 viewModel = ViewModelProvider(this, viewModelFactory).get(MainViewModel::class.java)
 
-                runBlocking(Dispatchers.Default){_allWords  = viewModel.getAllWords()  }
+                runBlocking(Dispatchers.Default){_allWords  = viewModel.getAllWords()}
 
                 Test.number = 0 //  temporary
                 Test.setCounter()
@@ -190,6 +190,7 @@ class FirstFragment : BaseFragment(),KodeinAware {
                 val wordsNotAcquired = _allWords.filter {!it.acquired } // words yet to be acquired by user's memory
 
                 // wordsForTest temporary var, to be changed in all of the file for wordsNotAcquired
+
                 var wordsForTest = listOf<Word>()
 
                 if (Test.number >= 2) {
@@ -219,7 +220,6 @@ class FirstFragment : BaseFragment(),KodeinAware {
                     }
 
                     viewModel = ViewModelProvider(this, viewModelFactory).get(MainViewModel::class.java)
-
                     runBlocking(Dispatchers.Default) { wordsForTest = viewModel.wordsForTest() }
 
                     if (wordsForTest.size <= 5) {
@@ -233,10 +233,16 @@ class FirstFragment : BaseFragment(),KodeinAware {
                     }
                 }
             }
+
+            R.id.item_all-> {
+
+                runBlocking(Dispatchers.Default){_allWords  = viewModel.getAllWords()}
+                navController.navigate(R.id.action_FirstFragment_to_allWordsFragment,bundleOf("allWords" to _allWords ))
+
+            }
         }
         return super.onOptionsItemSelected(item)
     }
-
 
     override fun onAttach(context: Context) {
         super.onAttach(context)

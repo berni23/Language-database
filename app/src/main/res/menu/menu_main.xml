@@ -22,10 +22,15 @@
     <item
         android:id="@+id/item_info"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-        android:icon="@drawable/ic_info_outline_black_24dp"
+        android:icon="@drawable/ic_info_outline_white_24dp"
         android:orderInCategory="3"
-        android:iconTint="@color/white"
-        android:title="@string/info"
-        app:showAsAction="always|withText"/>
+        android:title="@string/statistics"/>
+
+    <item
+        android:id="@+id/item_all"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        android:icon="@drawable/ic_info_outline_white_24dp"
+        android:orderInCategory="2"
+        android:title="@string/show_all_words"/>
 
 </menu>

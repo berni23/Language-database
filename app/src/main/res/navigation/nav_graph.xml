@@ -31,6 +31,9 @@
             app:popExitAnim="@anim/animate_slide_down_exit"
             app:popEnterAnim="@anim/animate_slide_down_enter"
             app:destination="@id/testFragment1" />
+        <action
+            android:id="@+id/action_FirstFragment_to_allWordsFragment"
+            app:destination="@id/allWordsFragment" />
 
     </fragment>
 
@@ -142,11 +145,11 @@
             app:exitAnim="@anim/animate_fade_exit"
             app:destination="@id/FirstFragment" />
 
-    </fragment>
-
     <argument
         android:name ="testWords"
         app:nullable="false" />
+
+    </fragment>
 
     <fragment
         android:id="@+id/test3Fragment"
@@ -158,7 +161,6 @@
             app:exitAnim="@anim/animate_zoom_exit"
             android:id="@+id/actionBackToMain"
             app:destination="@id/FirstFragment" />
-    </fragment>
 
     <argument
         android:name ="testWords"
@@ -167,5 +169,14 @@
     <argument
         android:name = "resultTest"
         app:nullable= "false"/>
+
+    </fragment>
+    <fragment
+        android:id="@+id/allWordsFragment"
+        android:name="AllWordsFragment"
+        android:label="AllWordsFragment">
+
+
+    </fragment>
 
 </navigation>

@@ -53,11 +53,13 @@
 
     <!-- messages at the end of each test, depending on final score-->
 
-    <string name ="score1">excellent!!</string>
-    <string name = "score2">awesome !</string>
-    <string name = "score3" >well done!</string>
-    <string name = "score4" >good job!" </string>
-    <string name = "score5"> Keep practising!</string>
+    <string name="score1">excellent!!</string>
+    <string name="score2">awesome !</string>
+    <string name="score3">well done!</string>
+    <string name="score4">good job!" </string>
+    <string name="score5"> Keep practising!</string>
     <string name="info_before_test">Press the button once you feel confident. \nYou will dispose of 15 minutes to write\n the correct translation for some words</string>
     <string name="back">back</string>
+    <string name="statistics">statistics</string>
+    <string name="show_all_words">show all words</string>
 </resources>
