@@ -3,9 +3,11 @@ package com.berni.android.prototype1lanbase.ui
 import android.app.AlertDialog
 import android.content.Context
 import android.os.Bundle
+import android.os.CountDownTimer
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
@@ -15,6 +17,8 @@ import com.berni.android.prototype1lanbase.R
 import com.berni.android.prototype1lanbase.db.Word
 import kotlinx.android.synthetic.main.fragment_test2.*
 import java.util.*
+import java.util.concurrent.TimeUnit
+
 
 /**
  * A simple [Fragment] subclass.
@@ -36,6 +40,8 @@ class Test2Fragment : BaseFragment(){
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        timer.start()
 
         navController = Navigation.findNavController(view)
         wordTest_textView.text = pickedWords[0].wordName
@@ -62,6 +68,8 @@ class Test2Fragment : BaseFragment(){
 
                 val bundle = bundleOf("pickedWords" to pickedWords, "resultTest" to resultTest)
                 navController.navigate(R.id.actionTestFinished, bundle)
+                timer.cancel()
+
             } else {
                 counterTest_textView.text = " $i/$len"
                 wordTest_textView.text = pickedWords[i].wordName
@@ -85,6 +93,8 @@ class Test2Fragment : BaseFragment(){
 
                         navController.navigate(R.id.actionCancelTest)
 
+                        timer.cancel()
+
                     }
                     setNegativeButton("No") { _, _ -> }
                 }.create().show()
@@ -95,6 +105,40 @@ class Test2Fragment : BaseFragment(){
             callback
         )
     }
+
+    private val timer = object: CountDownTimer(60000,1000) {
+        override fun onTick(millis: Long) {
+
+
+            timerTest_textView.let{timerTest_textView.text =  String.format("%02d : %02d ",
+                TimeUnit.MILLISECONDS.toMinutes(millis),
+                TimeUnit.MILLISECONDS.toSeconds(millis) -
+                        TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(millis)))}
+        }
+
+
+
+        override fun onFinish() {
+
+            Toast.makeText(context,"time's up!",Toast.LENGTH_SHORT).show()
+
+
+            val diff = pickedWords.size -resultTest.size
+
+            if (diff >0) {
+                for (i in 0..diff) {
+
+                    resultTest.add(false)
+
+                }
+
+            }
+            val bundle = bundleOf("pickedWords" to pickedWords, "resultTest" to resultTest)
+            navController.navigate(R.id.actionTestFinished, bundle)
+
+        }
+    }
+
 }
 
 

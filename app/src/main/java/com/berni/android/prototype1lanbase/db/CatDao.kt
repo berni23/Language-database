@@ -78,25 +78,6 @@ interface CatDao {
     @Query("SELECT * FROM Word WHERE test=1" )
     fun wordsForTest(): List<Word>
 
-    //-----------------------------------------------------------------------
-    // queries not used anymore
-    //-----------------------------------------------------------------------
-
-    //get from a given category, ordering alphabetically
-
-    @Query("SELECT* FROM Word WHERE catParent LIKE :category ORDER BY wordName")
-    fun wordsInCatAlphabetic(category: String) : LiveData<List<Word>>
-
-    //get words with example
-
-    @Query("SELECT* FROM Word WHERE catParent LIKE :category AND example IS NOT NULL ")
-    fun filterExample(category:String) :LiveData<List<Word>>
-
-    //get words with no example
-
-    @Query("SELECT* FROM Word WHERE catParent LIKE :category AND example IS NULL ")
-    fun filterNoExample(category:String) : LiveData<List<Word>>
-
 
     //-----------------------------------------------------------------------
     //-----------------------------------------------------------------------

@@ -62,4 +62,6 @@
     <string name="back">back</string>
     <string name="statistics">statistics</string>
     <string name="show_all_words">show all words</string>
+    <string name="words_acquired">words acquired</string>
+    <string name="not_acquired">not acquired</string>
 </resources>

@@ -162,6 +162,8 @@
             android:id="@+id/actionBackToMain"
             app:destination="@id/FirstFragment" />
 
+    </fragment>
+
     <argument
         android:name ="testWords"
         app:nullable="false" />
@@ -170,12 +172,10 @@
         android:name = "resultTest"
         app:nullable= "false"/>
 
-    </fragment>
     <fragment
         android:id="@+id/allWordsFragment"
         android:name="AllWordsFragment"
         android:label="AllWordsFragment">
-
 
     </fragment>
 

@@ -73,6 +73,35 @@
                 android:title="@string/noExample"
                 app:showAsAction="never"/>
 
+            <item
+                android:id="@+id/withDefinition"
+                android:orderInCategory="1"
+                android:title="@string/withDefinition"
+                app:showAsAction="never"/>
+
+
+            <item
+                android:id="@+id/noDefinition"
+                android:orderInCategory="1"
+                android:title="@string/noDefinition"
+                app:showAsAction="never"/>
+
+
+            <item
+                android:id="@+id/acquired"
+                android:orderInCategory="1"
+                android:title="@string/words_acquired"
+                app:showAsAction="never"/>
+
+
+            <item
+                android:id="@+id/notAcquired"
+                android:orderInCategory="1"
+                android:title="@string/not_acquired"
+                app:showAsAction="never"/>
+
+
+
 
         </menu>
 
@@ -85,8 +114,8 @@
         android:icon="@drawable/ic_arrow_back_black_24dp"
         android:orderInCategory="0"
         android:iconTint="@color/white"
-        android:title="@string/info"
-        app:showAsAction="always|withText"/>
+        android:title="@string/back"
+        app:showAsAction="always"/>
 
 </menu>
 

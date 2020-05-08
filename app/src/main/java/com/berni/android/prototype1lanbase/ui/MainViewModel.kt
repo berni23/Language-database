@@ -42,15 +42,6 @@ class MainViewModel(private val repos: Repository ) : ViewModel(){
     suspend fun wordsForTest() : List<Word> = repos.wordsForTest()
 
     fun catsWithWords() : LiveData<List<CatWords>>  = repos.catsWithWords()
-
-    // not used functions
-
-    fun wordsInCatAlphabetic(currentCatName: String) = repos.wordsInCatAlphabetic(currentCatName)
-
-    fun filterExample(currentCatName: String)  = repos.filterExample(currentCatName)
-
-    fun filterNoExample(currentCatName:String) = repos.filterNoExample(currentCatName)
-
 }
 
 

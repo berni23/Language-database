@@ -140,7 +140,6 @@ class FirstFragment : BaseFragment(),KodeinAware {
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-
         inflater.inflate(R.menu.menu_main, menu)
         val searchView: SearchView = menu.findItem(R.id.item_search).actionView as SearchView
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
@@ -189,7 +188,6 @@ class FirstFragment : BaseFragment(),KodeinAware {
 
                 val wordsNotAcquired = _allWords.filter {!it.acquired } // words yet to be acquired by user's memory
 
-                // wordsForTest temporary var, to be changed in all of the file for wordsNotAcquired
 
                 var wordsForTest = listOf<Word>()
 

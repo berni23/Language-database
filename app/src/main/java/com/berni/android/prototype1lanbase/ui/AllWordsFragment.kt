@@ -12,7 +12,7 @@ import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.berni.android.prototype1lanbase.R
+import com.berni.android.prototype1lanbase.*
 import com.berni.android.prototype1lanbase.db.Word
 import com.berni.android.prototype1lanbase.ui.BaseFragment
 import com.berni.android.prototype1lanbase.ui.MainViewModel
@@ -122,7 +122,6 @@ class AllWordsFragment : BaseFragment(), KodeinAware {
             }
 
             override fun onQueryTextChange(newText: String?): Boolean {
-
                 val newWordsList = mutableListOf<Word>()
 
                 displayedWords1.forEach {
@@ -151,36 +150,33 @@ class AllWordsFragment : BaseFragment(), KodeinAware {
         when (item.itemId) {
 
             R.id.item_backToSecond -> {
-
-                // val bundle = bundleOf("categoryName" to cat)
                 navController.popBackStack()
-
             }
 
             R.id.alphabetically -> {
 
-                displayedWords1 = sortAlphabetically()
+                displayedWords1 = sortAlphabetically(displayedWords)
                 message = "sorting by alphabetic order.."
                 Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
             }
 
             R.id.last_added -> {
 
-                displayedWords1 = sortLastAdded()
+                displayedWords1 = sortLastAdded(displayedWords)
                 message = "sorting by last added.."
                 Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
             }
 
             R.id.first_added -> {
 
-                displayedWords1 = sortFirstAdded()
+                displayedWords1 = sortFirstAdded(displayedWords)
                 message = "sorting by first added.."
                 Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
             }
 
             R.id.withExample -> {
 
-                displayedWords1 =  filterExample(displayedWords)
+                displayedWords1 = filterExample(displayedWords)
                 message = "filtering words with an example.."
                 Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
             }
@@ -194,8 +190,38 @@ class AllWordsFragment : BaseFragment(), KodeinAware {
 
             R.id.byLength -> {
 
-                displayedWords1 = sortByLength()
+                displayedWords1 = sortByLength(displayedWords)
                 message = "sorting words by their length.."
+                Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
+
+            }
+
+            R.id.withDefinition -> {
+
+                displayedWords1 = filterDefinition(displayedWords)
+                message = "filtering words without definition.."
+                Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
+            }
+
+            R.id.noDefinition -> {
+
+                displayedWords1 = filterNoDefinition(displayedWords)
+                message = "filtering words with definition.."
+                Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
+
+            }
+
+            R.id.acquired ->{
+
+                displayedWords1 = filterAcquired(displayedWords)
+                message = "filtering words already acquired.."
+                Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
+            }
+
+            R.id.notAcquired ->{
+
+                displayedWords1 = filterNotAcquired(displayedWords)
+                message = "filtering words not acquired.."
                 Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
 
             }
@@ -205,55 +231,6 @@ class AllWordsFragment : BaseFragment(), KodeinAware {
         return super.onOptionsItemSelected(item)
     }
 
-    private fun filterNoExample(toFilter: List<Word>): List<Word> {
-
-        val filtered = mutableListOf<Word>()
-
-        toFilter.forEach {
-            if (it.ex1.isNullOrEmpty()) {
-                filtered.add(it)
-            }
-        }
-
-        return filtered
-    }
-
-    private fun filterExample(toFilter: List<Word>): List<Word> {
-
-        val filtered = mutableListOf<Word>()
-
-        toFilter.forEach {
-            if (it.ex1 != null) {
-                filtered.add(it)
-            }
-        }
-        return filtered
-    }
-
-    private fun sortLastAdded(): List<Word> {
-
-        return displayedWords
-
-    }
-
-    private fun sortFirstAdded() : List<Word>{
-
-        return displayedWords.reversed()
-    }
-
-    private fun sortAlphabetically() : List<Word>{
-
-        val displayed = displayedWords.toTypedArray()
-        return displayed.sortedBy { it.wordName.toLowerCase() }
-
-    }
-
-    private fun sortByLength() : List<Word> {
-
-        val displayed = displayedWords.toTypedArray()
-        return displayed.sortedBy { it.wordName.length}
-
-    }
 
     /** also, for the sorting and filtering not to be applied but rather activated, the filters
     can  perform the same way and the sorting can start with initial data and pass the first

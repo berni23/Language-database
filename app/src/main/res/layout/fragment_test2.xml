@@ -55,7 +55,8 @@
         android:layout_height="wrap_content"
         android:singleLine="true"
         android:textSize = "20sp"
-        android:hint = "write the correct translation" />
+        android:hint = "write the correct translation"
+        android:autofillHints="" />
 
     </LinearLayout>
 
@@ -99,6 +100,34 @@
         app:layout_constraintEnd_toEndOf="@id/VguideCounter"
         app:layout_constraintStart_toStartOf="@id/VguideCounter"
         app:layout_constraintTop_toTopOf="@id/HguideCounter" />
+
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/VguideTimer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.8" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/HguideTimer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.15" />
+
+    <TextView
+        android:id="@+id/timerTest_textView"
+        android:fontFamily = "@font/lato_light"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize = "20sp"
+        android:text="timer"
+        app:layout_constraintBottom_toBottomOf="@id/HguideTimer"
+        app:layout_constraintEnd_toEndOf="@id/VguideTimer"
+        app:layout_constraintStart_toStartOf="@id/VguideTimer"
+        app:layout_constraintTop_toTopOf="@id/HguideTimer" />
+
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
 

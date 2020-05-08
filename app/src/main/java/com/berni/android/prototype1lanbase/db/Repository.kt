@@ -42,11 +42,6 @@ interface Repository{
 
         // methods not used for the moment
 
-        fun wordsInCatAlphabetic(currentCatName: String) :  LiveData<List<Word>> {return catDao.wordsInCatAlphabetic(currentCatName)}
-
-        fun filterExample(currentCatName: String) :  LiveData<List<Word>> {return catDao.filterExample(currentCatName)}
-
-        fun filterNoExample(currentCatName:String) : LiveData<List<Word>> {return catDao.filterNoExample(currentCatName)}
 
     }
 
