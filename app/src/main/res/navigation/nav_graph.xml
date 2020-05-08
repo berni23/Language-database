@@ -33,6 +33,10 @@
             app:destination="@id/testFragment1" />
         <action
             android:id="@+id/action_FirstFragment_to_allWordsFragment"
+            app:enterAnim="@anim/animate_swipe_left_enter"
+            app:exitAnim="@anim/animate_swipe_right_exit"
+            app:popExitAnim="@anim/animate_swipe_right_exit"
+            app:popEnterAnim="@anim/animate_swipe_left_enter"
             app:destination="@id/allWordsFragment" />
 
     </fragment>
