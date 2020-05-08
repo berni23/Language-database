@@ -63,8 +63,7 @@ class AllWordsFragment : BaseFragment(), KodeinAware {
         recycler_view_words.setHasFixedSize(true)
         viewModel = ViewModelProvider(this, viewModelFactory).get(MainViewModel::class.java)
 
-        runBlocking(Dispatchers.Default) { allWords = viewModel.getAllWords() }
-
+        allWords =  arguments?.get("allWords") as List<Word>
         // observe if the words within the category suffer any change (like edition or deletion)
 
         viewModel.allWords.observe(viewLifecycleOwner, Observer<List<Word>> {

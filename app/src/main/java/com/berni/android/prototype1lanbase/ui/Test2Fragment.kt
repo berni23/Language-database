@@ -121,17 +121,14 @@ class Test2Fragment : BaseFragment(){
         override fun onFinish() {
 
             Toast.makeText(context,"time's up!",Toast.LENGTH_SHORT).show()
-
-
             val diff = pickedWords.size -resultTest.size
 
             if (diff >0) {
-                for (i in 0..diff) {
+                for (i in 1..diff) {
 
                     resultTest.add(false)
 
                 }
-
             }
             val bundle = bundleOf("pickedWords" to pickedWords, "resultTest" to resultTest)
             navController.navigate(R.id.actionTestFinished, bundle)

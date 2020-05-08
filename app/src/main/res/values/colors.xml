@@ -18,6 +18,8 @@
     <color name = "textColorTrans3">#8C9EFF</color>
     <color name = "progress_start">#8E24AA</color>
     <color name = "progress_end">#DAAAE6</color>
+    <color name = "colorWord3"> #616161</color>
+    <color name = "colorTrans3"> #8C9EFF</color>
 
 
 </resources>

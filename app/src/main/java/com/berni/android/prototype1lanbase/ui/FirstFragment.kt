@@ -188,7 +188,6 @@ class FirstFragment : BaseFragment(),KodeinAware {
 
                 val wordsNotAcquired = _allWords.filter {!it.acquired } // words yet to be acquired by user's memory
 
-
                 var wordsForTest = listOf<Word>()
 
                 if (Test.number >= 2) {
@@ -205,14 +204,11 @@ class FirstFragment : BaseFragment(),KodeinAware {
 
                     val testFalse = wordsNotAcquired.filter { !it.test }
                     runBlocking(Dispatchers.Default) {
-
                         testFalse.forEach {
 
                             val diff = Calendar.DATE - it.lastOk
-
                             if (it.lvl == 1 && diff >= 3)      {it.test = true }
                             else if (it.lvl == 2 && diff >= 7) {it.test = true }
-
                             viewModel.updateWord(it)
                         }
                     }

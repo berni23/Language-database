@@ -114,19 +114,29 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.15" />
+        app:layout_constraintGuide_percent="0.20" />
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:windowSoftInputMode="adjustNothing"
+        app:layout_constraintBottom_toBottomOf="@id/HguideTimer"
+        app:layout_constraintEnd_toEndOf="@id/VguideTimer"
+        app:layout_constraintStart_toStartOf="@id/VguideTimer"
+        app:layout_constraintTop_toTopOf="@id/HguideTimer">
 
     <TextView
         android:id="@+id/timerTest_textView"
+        android:layout_gravity="center"
         android:fontFamily = "@font/lato_light"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize = "20sp"
         android:text="timer"
-        app:layout_constraintBottom_toBottomOf="@id/HguideTimer"
-        app:layout_constraintEnd_toEndOf="@id/VguideTimer"
-        app:layout_constraintStart_toStartOf="@id/VguideTimer"
-        app:layout_constraintTop_toTopOf="@id/HguideTimer" />
+        />
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
 
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton

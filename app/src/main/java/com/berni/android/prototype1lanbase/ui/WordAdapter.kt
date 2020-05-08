@@ -31,7 +31,7 @@ class WordAdapter(private val words: List<Word>, private val viewModel: MainView
 
         return WordViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.adapter_word,parent,false))
 
-        }
+    }
 
     override fun getItemCount() = words.size
 
@@ -39,14 +39,19 @@ class WordAdapter(private val words: List<Word>, private val viewModel: MainView
 
     override fun onBindViewHolder(holder: WordViewHolder, position: Int) {
 
-      //  wordNameList?.add(words[position].wordName)
+        //  wordNameList?.add(words[position].wordName)
 
         holder.view.text_view_word.text = " ${words[position].wordName} "  // adding space at the beginning and at the end to avoid text cut
         holder.view.text_view_translation.text = " ${words[position].trans1} "
 
-        if (words[position].acquired) {holder.view.text_view_word.setTextColor(ContextCompat.getColor(holder.view.context, R.color.colorHint3))
+        if (words[position].acquired==true) {
 
-        holder.view.text_view_translation.setTextColor(ContextCompat.getColor(holder.view.context, R.color.colorHint3))}
+            holder.view.text_view_word.setTextColor(ContextCompat.getColor(holder.view.context, R.color.colorHint3))
+            holder.view.text_view_translation.setTextColor(ContextCompat.getColor(holder.view.context, R.color.colorHint3))}
+
+        else {
+            holder.view.text_view_word.setTextColor(ContextCompat.getColor(holder.view.context, R.color.colorWord3))
+            holder.view.text_view_translation.setTextColor(ContextCompat.getColor(holder.view.context, R.color.colorTrans3))}
 
         holder.view.edit_word.setOnClickListener {
 
@@ -69,7 +74,7 @@ class WordAdapter(private val words: List<Word>, private val viewModel: MainView
 
                             setPositiveButton("Yes") { _, _ ->
 
-                               runBlocking(Dispatchers.Default){
+                                runBlocking(Dispatchers.Default){
 
                                     viewModel.deleteWord(words[position])
 
@@ -84,7 +89,7 @@ class WordAdapter(private val words: List<Word>, private val viewModel: MainView
 
                     }
                     else -> false
-            }
+                }
             }
 
             popupMenu.inflate(R.menu.menu_single_word)
@@ -101,4 +106,6 @@ class WordAdapter(private val words: List<Word>, private val viewModel: MainView
 
     class WordViewHolder(val view: View) : RecyclerView.ViewHolder(view)
 
-    }
+}
+
+

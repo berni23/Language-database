@@ -61,7 +61,7 @@ class Test3Fragment : BaseFragment(),KodeinAware {
             testWords.forEach {
 
                 if (result[i]) {
-                    it.lvl += 1 // uncoment when using app
+                    it.lvl += 1 // uncomment when using app
                     correct += 1
                 }
                 if (it.lvl >= 3) {

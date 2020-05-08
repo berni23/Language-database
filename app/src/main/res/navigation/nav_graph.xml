@@ -179,4 +179,8 @@
 
     </fragment>
 
+    <argument
+        android:name ="allWords"
+        app:nullable="false" />
+
 </navigation>
