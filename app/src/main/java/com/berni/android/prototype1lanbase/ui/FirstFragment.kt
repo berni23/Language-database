@@ -1,6 +1,5 @@
 package com.berni.android.prototype1lanbase.ui
 
-import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.icu.util.Calendar
@@ -31,7 +30,6 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.closestKodein
-import org.kodein.di.generic.contextFinder
 import org.kodein.di.generic.instance
 import java.text.SimpleDateFormat
 import java.util.*
@@ -180,14 +178,12 @@ class FirstFragment : BaseFragment(),KodeinAware {
             R.id.item_test -> {
 
                 viewModel = ViewModelProvider(this, viewModelFactory).get(MainViewModel::class.java)
-
                 runBlocking(Dispatchers.Default){_allWords  = viewModel.getAllWords()}
 
                 Test.number = 0 //  temporary
                 Test.setCounter()
 
                 val wordsNotAcquired = _allWords.filter {!it.acquired } // words yet to be acquired by user's memory
-
                 var wordsForTest = listOf<Word>()
 
                 if (Test.number >= 2) {
@@ -230,9 +226,13 @@ class FirstFragment : BaseFragment(),KodeinAware {
 
             R.id.item_all-> {
 
-                runBlocking(Dispatchers.Default){_allWords  = viewModel.getAllWords()}
-                navController.navigate(R.id.action_FirstFragment_to_allWordsFragment,bundleOf("allWords" to _allWords ))
+                navController.navigate(R.id.action_FirstFragment_to_allWordsFragment)
 
+            }
+
+            R.id.item_statistics -> {
+
+                navController.navigate(R.id.actionStatistics)
             }
         }
         return super.onOptionsItemSelected(item)

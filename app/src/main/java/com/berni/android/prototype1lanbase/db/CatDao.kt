@@ -37,6 +37,10 @@ interface CatDao {
     @Query("SELECT * FROM Cat")
     fun catsWithWords() : LiveData<List<CatWords>>
 
+    @Transaction
+    @Query("SELECT * FROM Cat")
+    fun catsNwords() : List<CatWords>
+
     //check if the catname has already been used or not
 
     @Query("SELECT* FROM Cat WHERE catName=:newName" )
@@ -50,9 +54,7 @@ interface CatDao {
     //update the whole word object
     @Update
     fun updateWord(word: Word)
-
     //update just the category name, keeping the rest of the parameters the same
-
     @Query("UPDATE Cat SET catName=:newName WHERE catName = :oldName")
     fun updateCat(oldName:String?,newName:String?)
 
@@ -78,10 +80,7 @@ interface CatDao {
     @Query("SELECT * FROM Word WHERE test=1" )
     fun wordsForTest(): List<Word>
 
-
     //-----------------------------------------------------------------------
     //-----------------------------------------------------------------------
-
-
 
 }

@@ -20,7 +20,7 @@
         app:showAsAction="ifRoom" />
 
     <item
-        android:id="@+id/item_info"
+        android:id="@+id/item_statistics"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
         android:icon="@drawable/ic_info_outline_white_24dp"
         android:orderInCategory="3"

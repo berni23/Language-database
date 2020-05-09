@@ -8,6 +8,7 @@ import com.berni.android.prototype1lanbase.db.Cat
 import com.berni.android.prototype1lanbase.db.CatWords
 import com.berni.android.prototype1lanbase.db.Repository
 import com.berni.android.prototype1lanbase.db.Word
+import java.util.Collections.list
 
 // Main view model for everything related with accessing or updating database
 
@@ -42,6 +43,26 @@ class MainViewModel(private val repos: Repository ) : ViewModel(){
     suspend fun wordsForTest() : List<Word> = repos.wordsForTest()
 
     fun catsWithWords() : LiveData<List<CatWords>>  = repos.catsWithWords()
+
+    fun catsNWords() : List<CatWords> = repos.catsNwords()
+
+
+   suspend fun counterAcquired() : List<Int> {
+
+        val words = repos.getAllWords()
+
+       var int1 = 0
+       var int2 = 0
+
+        words.forEach{
+
+            if (it.acquired) {int1++}
+            else             {int2++}
+
+        }
+
+       return listOf(int1,int2)
+    }
 }
 
 

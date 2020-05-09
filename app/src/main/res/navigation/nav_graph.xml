@@ -38,6 +38,9 @@
             app:popExitAnim="@anim/animate_swipe_right_exit"
             app:popEnterAnim="@anim/animate_swipe_left_enter"
             app:destination="@id/allWordsFragment" />
+        <action
+            android:id="@+id/actionStatistics"
+            app:destination="@id/statisticsFragment" />
 
     </fragment>
 
@@ -186,5 +189,10 @@
     <argument
         android:name ="allWords"
         app:nullable="false" />
+    <fragment
+        android:id="@+id/statisticsFragment"
+        android:name="com.berni.android.prototype1lanbase.ui.StatisticsFragment"
+        android:label="fragment_statistics"
+        tools:layout="@layout/fragment_statistics" />
 
 </navigation>

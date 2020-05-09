@@ -30,7 +30,6 @@ import java.util.*
 class SecondFragment : BaseFragment(),KodeinAware {
 
     override val kodein by closestKodein()
-
     private val viewModelFactory: ViewModelFactory by instance<ViewModelFactory>()
     private lateinit var viewModel: MainViewModel
     private lateinit var cat: Cat
@@ -38,7 +37,6 @@ class SecondFragment : BaseFragment(),KodeinAware {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         cat= arguments?.get("categoryName") as Cat
 
     }
@@ -145,10 +143,7 @@ class SecondFragment : BaseFragment(),KodeinAware {
            }
 
                R.id.item_back -> {
-
                    navController.popBackStack()
-
-
                }
            }
        return super.onOptionsItemSelected(item)

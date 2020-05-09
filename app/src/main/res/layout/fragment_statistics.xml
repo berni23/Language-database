@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/frameLayout3"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.StatisticsFragment">
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/HguideView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent='0.90' />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/VguideView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.10" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/HguideWord"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent='0.5' />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/VguideWord"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.50" />
+
+    <!-- <ScrollView
+        android:scrollbars="none"
+        android:paddingVertical="100dp"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@id/HguideWord"
+        app:layout_constraintEnd_toEndOf="@id/VguideWord"
+        app:layout_constraintStart_toStartOf="@id/VguideWord"
+        app:layout_constraintTop_toTopOf="@id/HguideWord">-->
+
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/Hrect1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent='0.5' />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/Vrect1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.67" />
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:padding="10dp"
+        app:cardCornerRadius="5dp"
+        app:layout_constraintBottom_toBottomOf="@id/Hrect1"
+        app:layout_constraintEnd_toEndOf="@id/Vrect1"
+        app:layout_constraintStart_toStartOf="@id/Vrect1"
+        app:layout_constraintTop_toTopOf="@id/Hrect1">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginBottom="5dp"
+            android:fontFamily="@font/lato_light_italic"
+            android:text='Number of words \n per group' />
+
+    </androidx.cardview.widget.CardView>
+
+   <!-- <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/appCompatButton"
+        android:layout_width="match_parent"
+        android:layout_height="27dp"
+        android:backgroundTint="@color/colorPrimary3"
+        android:buttonTint="@color/colorPrimary3"
+        android:clickable="false"
+        android:foregroundTint="@color/colorPrimary3"
+        android:shadowColor="@color/colorPrimary3"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="@id/Hrect1"
+        app:layout_constraintEnd_toEndOf="@id/Vrect1"
+        app:layout_constraintStart_toStartOf="@id/Vrect1"
+        app:layout_constraintTop_toTopOf="@id/Hrect1" />-->
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.anychart.AnyChartView
+            android:layout_marginTop="20dp"
+            android:id="@+id/pieChart"
+            android:layout_width="250dp"
+            android:layout_height="250dp" />
+
+        <com.anychart.AnyChartView
+            android:layout_marginTop="28dp"
+            android:id="@+id/pieChartAcquired"
+            android:layout_width="250dp"
+            android:layout_height="250dp" />
+
+    </LinearLayout>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/Hrect2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent='0.95' />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/Vrect2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.72" />
+
+    <androidx.cardview.widget.CardView
+        app:cardCornerRadius="5dp"
+        android:layout_margin="10dp"
+        android:padding = "10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@id/Hrect2"
+        app:layout_constraintEnd_toEndOf="@id/Vrect2"
+        app:layout_constraintStart_toStartOf="@id/Vrect2"
+        app:layout_constraintTop_toTopOf="@id/Hrect2">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:fontFamily="@font/lato_light_italic"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="5dp"
+            android:text = 'words acquired vs yet to \n be learnt'
+            android:layout_height="wrap_content"/>
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/Hbutton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent='0.15' />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/Vbutton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.87" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:textAllCaps="false"
+        android:backgroundTint="@color/colorAccent3"
+        android:fontFamily="@font/lato_light_italic"
+        android:text="time progress"
+        android:textSize="13sp"
+        app:layout_constraintBottom_toBottomOf="@id/Hbutton"
+        app:layout_constraintEnd_toEndOf="@id/Vbutton"
+        app:layout_constraintStart_toStartOf="@id/Vbutton"
+        app:layout_constraintTop_toTopOf="@id/Hbutton"
+        tools:ignore="SmallSp" />
+
+
+    <!-- <androidx.appcompat.widget.AppCompatButton
+         android:id="@+id/nextPlots"
+         android:layout_width="50dp"
+         android:layout_height="50dp"
+         android:backgroundTint="@color/colorPrimary3"
+         android:buttonTint="@color/colorPrimary3"
+         android:clickable="false"
+         android:foregroundTint="@color/colorPrimary3"
+         android:shadowColor="@color/colorPrimary3"
+         android:visibility="visible"
+         app:layout_constraintBottom_toBottomOf="@id/Hrect2"
+         app:layout_constraintEnd_toEndOf="@id/Vrect2"
+         app:layout_constraintStart_toStartOf="@id/Vrect2"
+         app:layout_constraintTop_toTopOf="@id/Hrect2" />-->
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
