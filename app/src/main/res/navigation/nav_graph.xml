@@ -193,6 +193,15 @@
         android:id="@+id/statisticsFragment"
         android:name="com.berni.android.prototype1lanbase.ui.StatisticsFragment"
         android:label="fragment_statistics"
-        tools:layout="@layout/fragment_statistics" />
+        tools:layout="@layout/fragment_statistics" >
+        <action
+            android:id="@+id/actionTimeProgress"
+            app:destination="@id/statistics2Fragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/statistics2Fragment"
+        android:name="com.berni.android.prototype1lanbase.ui.Statistics2Fragment"
+        android:label="fragment_statistics2"
+        tools:layout="@layout/fragment_statistics2" />
 
 </navigation>

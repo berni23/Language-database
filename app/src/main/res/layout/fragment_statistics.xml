@@ -45,7 +45,6 @@
         app:layout_constraintStart_toStartOf="@id/VguideWord"
         app:layout_constraintTop_toTopOf="@id/HguideWord">-->
 
-
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/Hrect1"
         android:layout_width="wrap_content"
@@ -59,7 +58,6 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.67" />
-
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"
@@ -176,19 +174,19 @@
         app:layout_constraintGuide_percent="0.87" />
 
     <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnTimeProgress"
         android:layout_width="wrap_content"
-        android:layout_height="40dp"
+        android:layout_height="wrap_content"
         android:textAllCaps="false"
         android:backgroundTint="@color/colorAccent3"
         android:fontFamily="@font/lato_light_italic"
-        android:text="time progress"
+        android:text="click for \n time progress"
         android:textSize="13sp"
         app:layout_constraintBottom_toBottomOf="@id/Hbutton"
         app:layout_constraintEnd_toEndOf="@id/Vbutton"
         app:layout_constraintStart_toStartOf="@id/Vbutton"
         app:layout_constraintTop_toTopOf="@id/Hbutton"
         tools:ignore="SmallSp" />
-
 
     <!-- <androidx.appcompat.widget.AppCompatButton
          android:id="@+id/nextPlots"
@@ -204,7 +202,5 @@
          app:layout_constraintEnd_toEndOf="@id/Vrect2"
          app:layout_constraintStart_toStartOf="@id/Vrect2"
          app:layout_constraintTop_toTopOf="@id/Hrect2" />-->
-
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

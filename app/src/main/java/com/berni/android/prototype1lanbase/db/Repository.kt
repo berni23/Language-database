@@ -1,5 +1,6 @@
 package com.berni.android.prototype1lanbase.db
 
+import android.icu.util.Calendar
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 
@@ -20,6 +21,10 @@ interface Repository{
 
         suspend fun getAllWords (): MutableList<Word> {return catDao.getAllWords()}
 
+        suspend fun  orderMonths():List<Word> {return catDao.orderMonths()}
+
+        suspend fun counterMonths(month: Int):List<Word> {return catDao.counterMonths(month)}
+
         fun getAllCats () : LiveData<List<Cat>> {return catDao.getAllCats()}
 
         fun validCatName(catName: String) : List<Cat> {return catDao.validCatName(catName)}
@@ -30,11 +35,11 @@ interface Repository{
 
         fun wordsInCat(currentCatId: Int) : LiveData<List<Word>> {return catDao.wordsInCat(currentCatId)}
 
-        fun catsWithWords() : LiveData<List<CatWords>> {return  catDao.catsWithWords()}
+        fun catsWithWords() : LiveData<List<CatWords>> {return catDao.catsWithWords()}
 
-        fun catsNwords() : List<CatWords>  {return catDao.catsNwords()}
+        fun catsNwords() : List<CatWords> {return catDao.catsNwords()}
 
-        fun deleteWordsInCat(currentCatId: Int)  {catDao.deleteWordsInCat(currentCatId)}
+        fun deleteWordsInCat(currentCatId: Int) {catDao.deleteWordsInCat(currentCatId)}
 
         fun deleteCat(currentCat:Cat) {catDao.deleteCat(currentCat)}
 
@@ -43,7 +48,6 @@ interface Repository{
         suspend fun wordsForTest(): List<Word> {return catDao.wordsForTest()}
 
         // methods not used for the moment
-
 
     }
 

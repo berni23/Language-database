@@ -74,7 +74,6 @@ class FirstFragment : BaseFragment(),KodeinAware {
             _allCats = it
             displayedCats = _allCats
 
-
             recycler_view_cats.layoutManager =
                 StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
             recycler_view_cats.adapter = CatAdapter(it, viewModel, this.coroutineContext)
@@ -100,7 +99,6 @@ class FirstFragment : BaseFragment(),KodeinAware {
             newCatName = editText_newCat.text.toString().trim()
             val currentDate: String =
                 SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(Date())
-
             if (newCatName!!.isEmpty()) {
 
                 editText_newCat.error = "category required"
@@ -225,13 +223,10 @@ class FirstFragment : BaseFragment(),KodeinAware {
             }
 
             R.id.item_all-> {
-
                 navController.navigate(R.id.action_FirstFragment_to_allWordsFragment)
-
             }
 
             R.id.item_statistics -> {
-
                 navController.navigate(R.id.actionStatistics)
             }
         }

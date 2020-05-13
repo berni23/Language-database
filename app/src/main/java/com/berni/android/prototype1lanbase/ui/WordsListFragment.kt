@@ -64,19 +64,16 @@ class WordsListFragment : BaseFragment(), KodeinAware {
         // observe if the words within the category suffer any change (like edition or deletion)
 
         viewModel.wordsInCat(cat.catId).observe(viewLifecycleOwner, Observer<List<Word>> {
-
         recycler_view_words.layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
 
            runBlocking(Dispatchers.Default){
 
                displayedWords =  it.reversed()
-
                recycler_view_words.adapter = WordAdapter(displayedWords,viewModel,this.coroutineContext)
 
            }
 
               displayedWords1 = displayedWords
-
             // setting up info for the info box in top of words list, several cases to be accounted for
 
             lastAdded = listOf(
@@ -118,15 +115,12 @@ class WordsListFragment : BaseFragment(), KodeinAware {
             }
 
             override fun onQueryTextChange(newText: String?): Boolean {
-
                 val newWordsList = mutableListOf<Word>()
 
                 displayedWords1.forEach {
 
                     if (it.wordName.startsWith(newText!!)) {
-
                         newWordsList.add(it)
-
                     }
                 }
 
@@ -225,7 +219,6 @@ class WordsListFragment : BaseFragment(), KodeinAware {
         recycler_view_words.adapter = WordAdapter(displayedWords1,viewModel,this.coroutineContext)
         return super.onOptionsItemSelected(item)
     }
-
 
     /** also, for the sorting and filtering not to be applied but rather activated, the filters
         can  perform the same way and the sorting can start with initial data and pass the first

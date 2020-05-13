@@ -2,11 +2,17 @@ package com.berni.android.prototype1lanbase
 
 import android.app.Activity
 import android.content.Context
+import android.icu.text.TimeZoneFormat.getInstance
+import android.os.Build
 import android.view.View
 import android.view.inputmethod.InputMethodManager
+import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import com.berni.android.prototype1lanbase.db.Word
+import java.time.ZonedDateTime
 import java.util.*
+import java.util.Calendar.getInstance
+import java.util.Currency.getInstance
 
 // generate  word id, so words have to be unique within the same category but
 // can be duplicated if in different categories .
@@ -108,8 +114,6 @@ fun filterNotAcquired(toFilter: List<Word>): List<Word> {
 
 }
 
-
-
 fun sortLastAdded(displayedWords: List<Word>): List<Word> {
 
     return displayedWords
@@ -131,7 +135,22 @@ fun sortAlphabetically(displayedWords: List<Word>) : List<Word>{
 fun sortByLength(displayedWords: List<Word>) : List<Word> {
 
     val displayed = displayedWords.toTypedArray()
-    return displayed.sortedBy { it.wordName.length}
+    return displayed.sortedBy {it.wordName.length}
 
 }
+
+
+//number of months between two dates
+
+@RequiresApi(Build.VERSION_CODES.O)
+fun monthsBetweenDates(startDate: ZonedDateTime?, endDate: ZonedDateTime?): Int {
+
+    var monthsBetween: Int =0
+    monthsBetween += endDate?.monthValue?.minus(startDate?.monthValue!!)!!
+    monthsBetween += (endDate.year.minus(startDate?.year!!)* 12)
+    return monthsBetween
+}
+
+
+
 

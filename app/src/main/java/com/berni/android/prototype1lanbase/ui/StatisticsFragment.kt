@@ -10,6 +10,8 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.NavController
+import androidx.navigation.Navigation
 import com.anychart.APIlib
 import com.anychart.AnyChart
 import com.anychart.AnyChartView
@@ -35,11 +37,13 @@ class StatisticsFragment : BaseFragment(), KodeinAware
 
 {
 
+
     override val kodein by closestKodein()
     private val viewModelFactory: ViewModelFactory by instance<ViewModelFactory>()
     private lateinit var viewModel: MainViewModel
     private lateinit var catsNwords :List<CatWords>
     private lateinit var counterAcquired: List<Int>
+    private lateinit var navController: NavController
     private var numWords :Int = 0
 
     override fun onCreateView(
@@ -53,13 +57,19 @@ class StatisticsFragment : BaseFragment(), KodeinAware
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
+        navController = Navigation.findNavController(view)
         viewModel = ViewModelProvider(this, viewModelFactory).get(MainViewModel::class.java)
        runBlocking(Dispatchers.Default) {
+
            catsNwords = viewModel.catsNWords()
            counterAcquired = viewModel.counterAcquired()
 
        }
+
+        btnTimeProgress.setOnClickListener{
+
+            navController.navigate(R.id.actionTimeProgress)
+        }
 
         pieChartAcquired()
         setupPieChart()
@@ -101,8 +111,8 @@ class StatisticsFragment : BaseFragment(), KodeinAware
 
         val dataEntries = ArrayList<DataEntry>()
 
-            dataEntries.add(ValueDataEntry("words acquired",counterAcquired[0]))
-            dataEntries.add(ValueDataEntry("words not acquired",counterAcquired[1]))
+        dataEntries.add(ValueDataEntry("words acquired",counterAcquired[0]))
+        dataEntries.add(ValueDataEntry("words not acquired",counterAcquired[1]))
 
         pie2.data(dataEntries)
         pieChartAcquired.setChart(pie2)

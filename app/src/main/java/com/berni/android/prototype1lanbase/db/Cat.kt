@@ -1,8 +1,14 @@
 package com.berni.android.prototype1lanbase.db
 
+import android.icu.util.Calendar
+import android.icu.util.Calendar.MONTH
+
 import androidx.room.*
 import android.os.Parcelable
+import org.kodein.di.generic.M
 import java.io.Serializable
+import java.time.YearMonth
+import java.time.ZonedDateTime
 import kotlin.properties.Delegates
 
 data class CatWords(
@@ -53,8 +59,9 @@ data class Word  (
     @ColumnInfo(name ="lvl" )
     var lvl:Int = 0,
     @ColumnInfo(name  ="lastOK")
-    var lastOk: Int = 10
-
+    var lastOk: Int = 10,
+    @ColumnInfo(name="month")
+    var month: ZonedDateTime? = null
 
 ):Serializable {
 

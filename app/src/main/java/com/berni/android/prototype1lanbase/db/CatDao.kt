@@ -1,5 +1,6 @@
 package com.berni.android.prototype1lanbase.db
 
+import android.icu.util.Calendar
 import androidx.lifecycle.LiveData
 import androidx.room.*
 
@@ -32,6 +33,12 @@ interface CatDao {
 
     @Query("SELECT* FROM Word WHERE catParent LIKE :category")
     fun wordsInCat(category: Int) : LiveData<List<Word>>
+
+    @Query("SELECT* FROM Word WHERE month like :month" )
+    fun counterMonths(month: Int?) :List<Word>
+
+    @Query("SELECT* FROM Word ORDER BY month ASC ")
+    fun orderMonths():List<Word>
 
     @Transaction
     @Query("SELECT * FROM Cat")

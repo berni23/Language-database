@@ -1,15 +1,17 @@
 package com.berni.android.prototype1lanbase.ui
 
+import android.os.Build
 import android.os.Bundle
 import android.view.*
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
-import androidx.navigation.findNavController
+import androidx.room.TypeConverter
 import com.berni.android.prototype1lanbase.R
 import com.berni.android.prototype1lanbase.db.Cat
 import com.berni.android.prototype1lanbase.db.Word
@@ -22,6 +24,8 @@ import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.closestKodein
 import org.kodein.di.generic.instance
 import java.text.SimpleDateFormat
+import java.time.LocalDateTime
+import java.time.ZonedDateTime
 import java.util.*
 
 /**
@@ -51,6 +55,7 @@ class SecondFragment : BaseFragment(),KodeinAware {
         return inflater.inflate(R.layout.fragment_second, container, false)
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -104,10 +109,17 @@ class SecondFragment : BaseFragment(),KodeinAware {
 
             launch{
 
-                val word = Word(theWord,translation1,example1,translation_example1,definition,date.toString(),cat.catId)
+                val word = Word(theWord,translation1,example1,translation_example1,definition,date.toString(),cat.catId,
+                    month = ZonedDateTime.now())
                 viewModel.addWord(word)
 
-            }   }
+<<<<<<< Updated upstream
+            }    }
+=======
+            }
+               // Toast.makeText(context, "${ZonedDateTime.now().monthValue}",Toast.LENGTH_SHORT).show()
+            }
+>>>>>>> Stashed changes
 
             else {
 
@@ -148,6 +160,23 @@ class SecondFragment : BaseFragment(),KodeinAware {
            }
        return super.onOptionsItemSelected(item)
    }
+
+    object LocalDateTimeConverter {
+        @RequiresApi(Build.VERSION_CODES.O)
+        @TypeConverter
+        fun toDate(dateString: String?): LocalDateTime? {
+            return if (dateString == null) {
+                null
+            } else {
+                LocalDateTime.parse(dateString)
+            }
+        }
+
+        @TypeConverter
+        fun toDateString(date: LocalDateTime?): String? {
+            return date?.toString()
+        }
+    }
 }
 
 
