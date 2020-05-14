@@ -61,7 +61,7 @@ data class Word  (
     @ColumnInfo(name  ="lastOK")
     var lastOk: Int = 10,
     @ColumnInfo(name="month")
-    var month: ZonedDateTime? = null
+    var month: String? = null
 
 ):Serializable {
 

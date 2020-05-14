@@ -29,26 +29,7 @@ class MainViewModel(private val repos: Repository ) : ViewModel() {
     suspend fun getAllWords(): MutableList<Word> {
         return repos.getAllWords()
     }
-    suspend fun orderMonths(): List<Word> {
-        return repos.orderMonths()
-    }
-
-    @RequiresApi(Build.VERSION_CODES.O)
-    suspend fun counterMonths(month: Int, year:Int): Int {
-        var counter = 0
-        repos.counterMonths(month).forEach {
-            if (month==it!!.month?.monthValue && year ==it!!.month?.year ) {
-                counter++
-            }
-        }
-        return counter
-    }
-
-    suspend fun monthsRange(): List<ZonedDateTime?> {
-
-
-        return listOf(repos.orderMonths().first().month,repos.orderMonths().last().month)
-    }
+    suspend fun orderMonths(): MutableList<String> { return repos.orderMonths() }
 
     fun deleteWordsInCat(currentCatId: Int) = repos.deleteWordsInCat(currentCatId)
 

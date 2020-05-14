@@ -72,6 +72,7 @@ class SecondFragment : BaseFragment(),KodeinAware {
             val theWord = word_editText.text.toString().trim()
             val translation1 = trans1_editText.text.toString().trim()
             val date =  SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(Date())
+            val date2 =  SimpleDateFormat("MM/yyyy", Locale.getDefault()).format(Date())
 
             // optional blanks
 
@@ -110,16 +111,13 @@ class SecondFragment : BaseFragment(),KodeinAware {
             launch{
 
                 val word = Word(theWord,translation1,example1,translation_example1,definition,date.toString(),cat.catId,
-                    month = ZonedDateTime.now())
+                    month = translation1)
                 viewModel.addWord(word)
 
-<<<<<<< Updated upstream
+
             }    }
-=======
-            }
+
                // Toast.makeText(context, "${ZonedDateTime.now().monthValue}",Toast.LENGTH_SHORT).show()
-            }
->>>>>>> Stashed changes
 
             else {
 

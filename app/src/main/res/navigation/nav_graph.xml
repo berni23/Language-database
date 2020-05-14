@@ -195,13 +195,13 @@
         android:label="fragment_statistics"
         tools:layout="@layout/fragment_statistics" >
         <action
-            android:id="@+id/actionTimeProgress"
-            app:destination="@id/statistics2Fragment" />
+            android:id="@+id/actionTimeLine"
+            app:destination="@id/statistics3Fragment" />
     </fragment>
     <fragment
-        android:id="@+id/statistics2Fragment"
-        android:name="com.berni.android.prototype1lanbase.ui.Statistics2Fragment"
-        android:label="fragment_statistics2"
-        tools:layout="@layout/fragment_statistics2" />
+        android:id="@+id/statistics3Fragment"
+        android:name="com.berni.android.prototype1lanbase.ui.Statistics3Fragment"
+        android:label="fragment_statistics3"
+        tools:layout="@layout/fragment_statistics3" />
 
 </navigation>
