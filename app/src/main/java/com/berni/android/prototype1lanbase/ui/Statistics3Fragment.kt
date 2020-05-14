@@ -48,7 +48,6 @@ class Statistics3Fragment : BaseFragment(),KodeinAware {
         navController = Navigation.findNavController(view)
         viewModel = ViewModelProvider(this, viewModelFactory).get(MainViewModel::class.java)
         APIlib.getInstance().setActiveAnyChartView(lineChart)
-        labelsG1.text =  "number of words daily added ,\n last 100 active days"
 
         var lineDays = AnyChart.line()
         var days = mutableListOf<String>()

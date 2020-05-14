@@ -227,7 +227,18 @@ class FirstFragment : BaseFragment(),KodeinAware {
             }
 
             R.id.item_statistics -> {
-                navController.navigate(R.id.actionStatistics)
+
+                if (_allWords.size<10) {
+
+                    Toast.makeText(context, "To few words in order to display statistics",Toast.LENGTH_SHORT).show()
+
+                }
+                else {
+
+                    navController.navigate(R.id.actionStatistics)
+
+                }
+
             }
         }
         return super.onOptionsItemSelected(item)

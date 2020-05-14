@@ -60,7 +60,7 @@
 
         <TextView
             android:id="@+id/labelsG2"
-            android:text = "number of words added \n, last 100 active days"
+            android:text = "number of words daily added \n, last 100 active days"
             android:layout_width="wrap_content"
             android:fontFamily="@font/lato_light_italic"
             android:layout_marginTop="5dp"

@@ -50,10 +50,9 @@ class Statistics4Fragment : BaseFragment(),KodeinAware {
         navController = Navigation.findNavController(view)
         viewModel = ViewModelProvider(this, viewModelFactory).get(MainViewModel::class.java)
         APIlib.getInstance().setActiveAnyChartView(lineChart3)
-        labelsG2.text ="number of monthly daily added ,\n last 6 active months"
-        var lineMonths = AnyChart.line()
+        val lineMonths = AnyChart.line()
         var months = mutableListOf<String>()
-        var dataMonths = ArrayList<DataEntry>()
+        val dataMonths = ArrayList<DataEntry>()
 
         runBlocking(Dispatchers.Default) {months = viewModel.orderMonths() }
 

@@ -61,7 +61,7 @@
             android:id="@+id/labelsG1"
             android:layout_width="wrap_content"
             android:fontFamily="@font/lato_light_italic"
-            android:text = "number of words added \n, last 6 active months"
+            android:text = "number of words monthly added \n, last 6 active months"
             android:layout_marginTop="5dp"
             android:layout_marginBottom="5dp"
             android:layout_marginStart="7dp"
