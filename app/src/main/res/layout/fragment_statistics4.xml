@@ -9,7 +9,7 @@
     android:id="@+id/frameLayout4">
 
     <androidx.appcompat.widget.LinearLayoutCompat
-        android:visibility="visible"
+        android:id="@+id/layout2"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -18,19 +18,20 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
 
-    <com.anychart.AnyChartView
-        android:layout_marginTop="120dp"
-        android:id="@+id/lineChart"
-        android:layout_width="320dp"
-        android:layout_height="250dp" />
-
-       <com.anychart.AnyChartView
-            android:layout_marginTop="10dp"
-            android:id="@+id/lineChart2"
+        <com.anychart.AnyChartView
+            android:layout_marginTop="120dp"
+            android:id="@+id/lineChart3"
             android:layout_width="320dp"
             android:layout_height="250dp" />
 
-        </androidx.appcompat.widget.LinearLayoutCompat>
+        <com.anychart.AnyChartView
+            android:layout_marginTop="10dp"
+            android:id="@+id/lineChart4"
+            android:layout_width="320dp"
+            android:layout_height="250dp" />
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/Hrect2"
@@ -58,10 +59,10 @@
         app:layout_constraintTop_toTopOf="@id/Hrect2">
 
         <TextView
-            android:id="@+id/labelsG1"
+            android:id="@+id/labelsG2"
+            android:text = "number of words added \n, last 100 active days"
             android:layout_width="wrap_content"
             android:fontFamily="@font/lato_light_italic"
-            android:text = "number of words added \n, last 6 active months"
             android:layout_marginTop="5dp"
             android:layout_marginBottom="5dp"
             android:layout_marginStart="7dp"
@@ -86,12 +87,12 @@
 
     <androidx.appcompat.widget.AppCompatButton
 
-        android:id="@+id/changeGraphs"
+        android:id="@+id/changeGraphs2"
         android:textAllCaps="false"
         android:textSize="13sp"
         android:fontFamily="@font/lato_light_italic"
         android:backgroundTint="@color/colorAccent3"
-        android:text = "press for \n daily view"
+        android:text = "press for \n monthly view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="@id/Hbutton"

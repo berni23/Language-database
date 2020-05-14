@@ -1,18 +1,23 @@
 package com.berni.android.prototype1lanbase.ui
 
 
+import android.opengl.Visibility
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.GONE
 import android.view.ViewGroup
 import kotlinx.android.synthetic.main.fragment_statistics3.*
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.NavController
+import androidx.navigation.Navigation
 import com.anychart.APIlib
 import com.anychart.AnyChart
 import com.anychart.chart.common.dataentry.DataEntry
 import com.anychart.chart.common.dataentry.ValueDataEntry
 import com.anychart.charts.Cartesian
 import com.berni.android.prototype1lanbase.R
+import kotlinx.android.synthetic.main.fragment_statistics3.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
 import org.kodein.di.KodeinAware
@@ -25,6 +30,7 @@ class Statistics3Fragment : BaseFragment(),KodeinAware {
 
     override val kodein by closestKodein()
     private val viewModelFactory: ViewModelFactory by instance<ViewModelFactory>()
+    private lateinit var navController: NavController
     private lateinit var viewModel: MainViewModel
 
     override fun onCreateView(
@@ -37,33 +43,47 @@ class Statistics3Fragment : BaseFragment(),KodeinAware {
         return inflater.inflate(R.layout.fragment_statistics3, container, false)
     }
 
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
-        APIlib.getInstance().setActiveAnyChartView(lineChart)
-        val line: Cartesian = AnyChart.line()
-        var months = mutableListOf<String>()
-        val data =  ArrayList<DataEntry>()
-
+        navController = Navigation.findNavController(view)
         viewModel = ViewModelProvider(this, viewModelFactory).get(MainViewModel::class.java)
-        runBlocking(Dispatchers.Default) { months  = viewModel.orderMonths() }
+        APIlib.getInstance().setActiveAnyChartView(lineChart)
+        labelsG1.text =  "number of words daily added ,\n last 100 active days"
 
-        months.sort()
-        months.sortBy{it.substring(3,7).toInt()}
-        var counter  = months.groupingBy{it}.eachCount().toList()
-        if (counter.size>6)  {counter = counter.takeLast(6)}
+        var lineDays = AnyChart.line()
+        var days = mutableListOf<String>()
+        var dataDays = ArrayList<DataEntry>()
+
+        runBlocking(Dispatchers.Default) {
+
+            days = viewModel.orderDays()}
+
+
+        days.sort()
+        days.sortBy{it.substring(3,5).toInt()}
+        days.sortBy{it.substring(6,10).toInt()}
+
+        var counter = days.groupingBy { it }.eachCount().toList()
+        if (counter.size > 100) {
+            counter = counter.takeLast(100)
+        }
 
         counter.toMap()
-        counter.forEach{
+        counter.forEach {dataDays.add(ValueDataEntry(it.first, it.second)) }
+        lineDays.data(dataDays)
+        lineChart.setChart(lineDays)
+        changeGraphs.setOnClickListener{
 
-            data.add(ValueDataEntry(it.first,it.second))
+            navController.navigate(R.id.actionMonthlyView)
 
-        }
-        
-        line.data(data)
-        lineChart.setChart(line)
+            }
+
         super.onViewCreated(view, savedInstanceState)
+        }
+
     }
+
+
 
     /**var theList = myArray
 
@@ -102,7 +122,7 @@ class Statistics3Fragment : BaseFragment(),KodeinAware {
     }
 }
 **/
-}
+
 
 
 

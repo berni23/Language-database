@@ -31,6 +31,8 @@ class MainViewModel(private val repos: Repository ) : ViewModel() {
     }
     suspend fun orderMonths(): MutableList<String> { return repos.orderMonths() }
 
+    suspend fun orderDays(): MutableList<String> {return repos.orderDates()}
+
     fun deleteWordsInCat(currentCatId: Int) = repos.deleteWordsInCat(currentCatId)
 
     fun deleteCat(currentCat: Cat) = repos.deleteCat(currentCat)

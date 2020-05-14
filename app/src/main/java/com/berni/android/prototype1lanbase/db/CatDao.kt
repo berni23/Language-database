@@ -40,6 +40,9 @@ interface CatDao {
     @Query("SELECT month FROM Word ORDER BY month ASC ")
     fun orderMonths(): MutableList<String>
 
+    @Query("SELECT date FROM Word ORDER BY date ASC ")
+    fun orderDays(): MutableList<String>
+
     @Transaction
     @Query("SELECT * FROM Cat")
     fun catsWithWords() : LiveData<List<CatWords>>

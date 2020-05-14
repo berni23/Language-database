@@ -202,6 +202,17 @@
         android:id="@+id/statistics3Fragment"
         android:name="com.berni.android.prototype1lanbase.ui.Statistics3Fragment"
         android:label="fragment_statistics3"
-        tools:layout="@layout/fragment_statistics3" />
-
+        tools:layout="@layout/fragment_statistics3" >
+        <action
+            android:id="@+id/actionMonthlyView"
+            app:destination="@id/statistics4Fragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/statistics4Fragment"
+        android:name="com.berni.android.prototype1lanbase.ui.Statistics4Fragment"
+        android:label="Statistics4Fragment" >
+        <action
+            android:id="@+id/actionDailyView"
+            app:destination="@id/statistics3Fragment" />
+    </fragment>
 </navigation>

@@ -31,7 +31,6 @@ import org.kodein.di.generic.instance
  */
 class StatisticsFragment : BaseFragment(), KodeinAware
 
-
 {
 
     override val kodein by closestKodein()
