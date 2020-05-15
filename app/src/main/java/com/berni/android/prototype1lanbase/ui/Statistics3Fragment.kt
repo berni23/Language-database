@@ -1,12 +1,12 @@
 package com.berni.android.prototype1lanbase.ui
 
 
+import android.content.Context
 import android.opengl.Visibility
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
+import android.view.*
 import android.view.View.GONE
-import android.view.ViewGroup
+import androidx.activity.OnBackPressedCallback
 import kotlinx.android.synthetic.main.fragment_statistics3.*
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
@@ -39,7 +39,7 @@ class Statistics3Fragment : BaseFragment(),KodeinAware {
         savedInstanceState: Bundle?
     ): View? {
 
-        // Inflate the layout for this fragment
+        setHasOptionsMenu(true)
         return inflater.inflate(R.layout.fragment_statistics3, container, false)
     }
 
@@ -72,7 +72,6 @@ class Statistics3Fragment : BaseFragment(),KodeinAware {
         days.sort()
         days.sortBy { it.substring(3, 5).toInt() }
         days.sortBy { it.substring(6, 10).toInt() }
-
         return days
     }
 
@@ -86,7 +85,35 @@ class Statistics3Fragment : BaseFragment(),KodeinAware {
             return dataDays
 
         }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        val callback: OnBackPressedCallback = object : OnBackPressedCallback(
+            true
+        ) {
+            override fun handleOnBackPressed() {
+                navController.navigate(R.id.actionBackToMainS3)
+            }
+        }
+        requireActivity().onBackPressedDispatcher.addCallback(
+            this,  // LifecycleOwner
+            callback
+        )
     }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.menu_s3, menu)
+        return super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+
+        when (item.itemId) {R.id.item_backS3 -> {navController.popBackStack()} }
+
+        return super.onOptionsItemSelected(item)
+    }
+}
+
 
 
 

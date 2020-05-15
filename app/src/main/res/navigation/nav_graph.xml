@@ -5,7 +5,6 @@
     android:id="@+id/nav_graph"
     app:startDestination="@id/FirstFragment">
 
-
     <fragment
         android:id="@+id/FirstFragment"
         android:name="com.berni.android.prototype1lanbase.ui.FirstFragment"
@@ -166,7 +165,7 @@
         <action
             app:enterAnim="@anim/animate_zoom_enter"
             app:exitAnim="@anim/animate_zoom_exit"
-            android:id="@+id/actionBackToMain"
+            android:id="@+id/actionBackToMainTestFinished"
             app:destination="@id/FirstFragment" />
 
     </fragment>
@@ -189,14 +188,25 @@
     <argument
         android:name ="allWords"
         app:nullable="false" />
+
     <fragment
         android:id="@+id/statisticsFragment"
         android:name="com.berni.android.prototype1lanbase.ui.StatisticsFragment"
         android:label="fragment_statistics"
         tools:layout="@layout/fragment_statistics" >
+
         <action
             android:id="@+id/actionTimeLine"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/animate_slide_out_left"
+            app:popEnterAnim="@anim/animate_slide_in_left"
+            app:popExitAnim="@anim/animate_slide_out_right"
             app:destination="@id/statistics3Fragment" />
+        <action
+            android:id="@+id/action_BackToMainS1"
+            app:enterAnim="@anim/animate_slide_in_left"
+            app:exitAnim="@anim/animate_slide_out_right"
+            app:destination="@id/FirstFragment" />
     </fragment>
     <fragment
         android:id="@+id/statistics3Fragment"
@@ -207,7 +217,7 @@
             android:id="@+id/actionMonthlyView"
             app:destination="@id/statistics4Fragment" />
         <action
-            android:id="@+id/action_statistics3Fragment_to_FirstFragment"
+            android:id="@+id/actionBackToMainS3"
             app:destination="@id/FirstFragment" />
     </fragment>
     <fragment
@@ -215,10 +225,14 @@
         android:name="com.berni.android.prototype1lanbase.ui.Statistics4Fragment"
         android:label="Statistics4Fragment" >
         <action
-            android:id="@+id/actionDailyView"
-            app:destination="@id/statistics3Fragment" />
-        <action
-            android:id="@+id/action_statistics4Fragment_to_FirstFragment"
+            android:id="@+id/actionBackToMainS4"
             app:destination="@id/FirstFragment" />
+        <action
+            android:id="@+id/action_BackToS1"
+            app:enterAnim="@anim/animate_slide_in_left"
+            app:exitAnim="@anim/animate_slide_out_right"
+            app:popEnterAnim="@anim/slide_in_right"
+            app:popExitAnim="@anim/animate_slide_out_left"
+            app:destination="@id/statisticsFragment" />
     </fragment>
 </navigation>

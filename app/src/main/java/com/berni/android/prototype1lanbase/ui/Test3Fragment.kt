@@ -87,7 +87,7 @@ class Test3Fragment : BaseFragment(),KodeinAware {
         btn_backToMain.setOnClickListener {
 
             if (i == result.size) {
-                navController.navigate(R.id.actionBackToMain)
+                navController.navigate(R.id.actionBackToMainTestFinished)
             }
         }
     }
@@ -98,7 +98,7 @@ class Test3Fragment : BaseFragment(),KodeinAware {
             true
         ) {
             override fun handleOnBackPressed() {
-                navController.navigate(R.id.actionBackToMain)
+                navController.navigate(R.id.actionBackToMainTestFinished)
             }
         }
         requireActivity().onBackPressedDispatcher.addCallback(

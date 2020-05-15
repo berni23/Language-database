@@ -2,10 +2,10 @@ package com.berni.android.prototype1lanbase.ui
 
 
 
+import android.content.Context
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
+import androidx.activity.OnBackPressedCallback
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
@@ -35,6 +35,7 @@ class Statistics4Fragment : BaseFragment(),KodeinAware {
         savedInstanceState: Bundle?
     ): View? {
 
+        setHasOptionsMenu(true)
         return inflater.inflate(R.layout.fragment_statistics4, container, false)
     }
 
@@ -45,16 +46,12 @@ class Statistics4Fragment : BaseFragment(),KodeinAware {
         APIlib.getInstance().setActiveAnyChartView(lineChart3)
         val lineMonths = AnyChart.line()
         val dataMonths = dataMonths(sortMonths())
-
-
         lineMonths.data(dataMonths)
         lineChart3.setChart(lineMonths)
 
-        changeGraphs2.setOnClickListener{ navController.navigate(R.id.actionDailyView) }
+        changeGraphs2.setOnClickListener{navController.popBackStack() }
         super.onViewCreated(view, savedInstanceState)
         }
-
-
 
     private fun sortMonths(): MutableList<String> {
 
@@ -77,13 +74,37 @@ class Statistics4Fragment : BaseFragment(),KodeinAware {
             counterMonths.forEach {dataMonths.add(ValueDataEntry(it.first, it.second)) }
             return dataMonths
 
-
         }
 
-
-
-
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        val callback: OnBackPressedCallback = object : OnBackPressedCallback(
+            true
+        ) {
+            override fun handleOnBackPressed() {
+                navController.navigate(R.id.actionBackToMainS4)
+            }
+        }
+        requireActivity().onBackPressedDispatcher.addCallback(
+            this,  // LifecycleOwner
+            callback
+        )
     }
+
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.menu_s3, menu)
+        return super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+
+        when (item.itemId) {R.id.item_backS3 -> {navController.navigate(R.id.action_BackToS1)} }
+
+        return super.onOptionsItemSelected(item)
+    }
+}
+
 
 
 /**var theList = myArray

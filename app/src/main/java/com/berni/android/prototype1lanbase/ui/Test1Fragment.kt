@@ -58,7 +58,7 @@ class Test1Fragment : BaseFragment(),KodeinAware {
 
         val listTest = wordsForTest.shuffled()
         return if (wordsForTest.size >= 15)  { listTest.subList(0,15).toList() }
-        else  { listTest }
+        else  {listTest}
      }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {

@@ -1,12 +1,10 @@
 package com.berni.android.prototype1lanbase.ui
 
 import android.os.Bundle
-import android.view.Gravity
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
@@ -44,14 +42,18 @@ class StatisticsFragment : BaseFragment(), KodeinAware
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
+
+        setHasOptionsMenu(true)
         return inflater.inflate(R.layout.fragment_statistics, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+
+
         navController = Navigation.findNavController(view)
+        (activity as AppCompatActivity).supportActionBar?.title = "Statistics"
         viewModel = ViewModelProvider(this, viewModelFactory).get(MainViewModel::class.java)
        runBlocking(Dispatchers.Default) {
 
@@ -94,18 +96,28 @@ class StatisticsFragment : BaseFragment(), KodeinAware
     private fun pieChartAcquired() {
 
         APIlib.getInstance().setActiveAnyChartView(pieChartAcquired)
-
         val pie2: Pie = AnyChart.pie()
         pie2.legend(false)
-       // pie2.title("Words acquired vs yet to be learnt")
-
         val dataEntries = ArrayList<DataEntry>()
-
         dataEntries.add(ValueDataEntry("words acquired",counterAcquired[0]))
         dataEntries.add(ValueDataEntry("words not acquired",counterAcquired[1]))
-
         pie2.data(dataEntries)
         pieChartAcquired.setChart(pie2)
 
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.menu_s1, menu)
+        return super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+
+        when (item.itemId) {
+
+            R.id.item_backToMainS1 -> {navController.popBackStack()}
+        }
+
+        return super.onOptionsItemSelected(item)
     }
 }

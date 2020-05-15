@@ -92,7 +92,6 @@ class Test2Fragment : BaseFragment(){
                     setPositiveButton("Yes") { _, _ ->
 
                         navController.navigate(R.id.actionCancelTest)
-
                         timer.cancel()
 
                     }
@@ -115,7 +114,6 @@ class Test2Fragment : BaseFragment(){
                 TimeUnit.MILLISECONDS.toSeconds(millis) -
                         TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(millis)))}
         }
-
 
 
         override fun onFinish() {
