@@ -105,7 +105,7 @@ class Test2Fragment : BaseFragment(){
         )
     }
 
-    private val timer = object: CountDownTimer(60000,1000) {
+    private val timer = object: CountDownTimer(900000,1000) {
         override fun onTick(millis: Long) {
 
 

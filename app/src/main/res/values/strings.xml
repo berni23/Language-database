@@ -64,4 +64,5 @@
     <string name="show_all_words">show all words</string>
     <string name="words_acquired">words acquired</string>
     <string name="not_acquired">not acquired</string>
+    <string name="how_the_app_works">how the app works</string>
 </resources>

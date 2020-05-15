@@ -145,25 +145,27 @@ class FirstFragment : BaseFragment(),KodeinAware {
 
             override fun onQueryTextChange(newText: String?): Boolean {
 
-                if (newText.isNullOrEmpty()) {
-                    displayedCats = _allCats
-                } else {
+                var newCatsList = mutableListOf<CatWords>()
+                Toast.makeText(context,newText,Toast.LENGTH_SHORT).show()
+                if (newText.isNullOrEmpty()) {displayedCats = _allCats }
 
-                    val newCatsList = mutableListOf<CatWords>()
+                else {
+
+                     newCatsList = mutableListOf<CatWords>()
 
                     displayedCats.forEach {
 
-                        if (it.cat.catName.startsWith(newText)) {
+                        if (it.cat.catName.startsWith(newText.trim())) {
                             newCatsList.add(it)
                         }
                     }
 
-                    displayedCats = newCatsList
+                   // displayedCats = newCatsList
                 }
                 recycler_view_cats.layoutManager =
                     StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
                 recycler_view_cats.adapter =
-                    CatAdapter(displayedCats, viewModel, coroutineContext)
+                    CatAdapter(newCatsList, viewModel, coroutineContext)
                 return false
             }
         })
@@ -175,17 +177,13 @@ class FirstFragment : BaseFragment(),KodeinAware {
         when (item.itemId) {
             R.id.item_test -> {
 
-                 var _allWords = listOf<Word>()
-
+                var _allWords = listOf<Word>()
                 viewModel = ViewModelProvider(this, viewModelFactory).get(MainViewModel::class.java)
                 runBlocking(Dispatchers.Default){_allWords  = viewModel.getAllWords()}
-
                 Test.number = 0 //  temporary
                 Test.setCounter()
-
                 val wordsNotAcquired = _allWords.filter {!it.acquired } // words yet to be acquired by user's memory
                 var wordsForTest = listOf<Word>()
-
                 if (Test.number >= 2) {
 
                     val message = "You have already made two tests today, try tomorrow!!  =)"
