@@ -21,11 +21,9 @@ interface Repository{
 
         suspend fun getAllWords (): MutableList<Word> {return catDao.getAllWords()}
 
-        suspend fun  orderMonths():MutableList<String> {return catDao.orderMonths()}
-
         suspend fun orderDates(): MutableList<String> { return catDao.orderDays()}
 
-        suspend fun counterMonths(month: Int): List<Word> {return catDao.counterMonths(month)}
+        suspend fun counterWords(): Int {return catDao.getAllWords().size}
 
         fun getAllCats () : LiveData<List<Cat>> {return catDao.getAllCats()}
 

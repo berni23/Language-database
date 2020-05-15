@@ -72,17 +72,16 @@ class SecondFragment : BaseFragment(),KodeinAware {
             val theWord = word_editText.text.toString().trim()
             val translation1 = trans1_editText.text.toString().trim()
             val date =  SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(Date())
-            val date2 =  SimpleDateFormat("MM/yyyy", Locale.getDefault()).format(Date())
 
             // optional blanks
 
             var example1 : String? = ex1_editText.text.toString().trim()
-            var translation_example1 : String? = ex1Trans_editText.text.toString().trim()
+            var translationExample1 : String? = ex1Trans_editText.text.toString().trim()
             var definition : String? = definition_editText.text.toString().trim()
 
 
             if(example1!!.isEmpty()) {example1 =null}
-            if(translation_example1!!.isEmpty()) {translation_example1 =null}
+            if(translationExample1!!.isEmpty()) {translationExample1 =null}
             if(definition!!.isEmpty()) {definition=null}
 
             if (theWord.isEmpty()) {
@@ -90,7 +89,6 @@ class SecondFragment : BaseFragment(),KodeinAware {
                 word_editText.error = "word required"
                 word_editText.requestFocus()
                 return@setOnClickListener
-
             }
 
             if (translation1.isEmpty()) {
@@ -110,14 +108,12 @@ class SecondFragment : BaseFragment(),KodeinAware {
 
             launch{
 
-                val word = Word(theWord,translation1,example1,translation_example1,definition,date.toString(),cat.catId,
-                    month = translation1)
+                val word = Word(theWord,translation1,example1,translationExample1,definition,date.toString(),cat.catId)
                 viewModel.addWord(word)
 
 
-            }    }
-
-               // Toast.makeText(context, "${ZonedDateTime.now().monthValue}",Toast.LENGTH_SHORT).show()
+             }
+            }
 
             else {
 

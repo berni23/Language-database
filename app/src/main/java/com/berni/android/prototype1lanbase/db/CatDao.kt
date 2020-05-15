@@ -34,11 +34,6 @@ interface CatDao {
     @Query("SELECT* FROM Word WHERE catParent LIKE :category")
     fun wordsInCat(category: Int) : LiveData<List<Word>>
 
-    @Query("SELECT* FROM Word WHERE month like :month" )
-    fun counterMonths(month: Int?) :List<Word>
-
-    @Query("SELECT month FROM Word ORDER BY month ASC ")
-    fun orderMonths(): MutableList<String>
 
     @Query("SELECT date FROM Word ORDER BY date ASC ")
     fun orderDays(): MutableList<String>

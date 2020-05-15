@@ -1,13 +1,11 @@
 package com.berni.android.prototype1lanbase.ui
 
 
-import android.opengl.Visibility
+
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
-import android.view.View.GONE
 import android.view.ViewGroup
-import kotlinx.android.synthetic.main.fragment_statistics3.*
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
@@ -15,7 +13,6 @@ import com.anychart.APIlib
 import com.anychart.AnyChart
 import com.anychart.chart.common.dataentry.DataEntry
 import com.anychart.chart.common.dataentry.ValueDataEntry
-import com.anychart.charts.Cartesian
 import com.berni.android.prototype1lanbase.R
 import kotlinx.android.synthetic.main.fragment_statistics4.*
 import kotlinx.coroutines.Dispatchers
@@ -23,7 +20,6 @@ import kotlinx.coroutines.runBlocking
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.closestKodein
 import org.kodein.di.generic.instance
-import java.util.*
 import kotlin.collections.ArrayList
 
 class Statistics4Fragment : BaseFragment(),KodeinAware {
@@ -32,8 +28,6 @@ class Statistics4Fragment : BaseFragment(),KodeinAware {
     private val viewModelFactory: ViewModelFactory by instance<ViewModelFactory>()
     private lateinit var viewModel: MainViewModel
     private lateinit var navController: NavController
-    var boolGraph = true
-
 
     override fun onCreateView(
 
@@ -41,7 +35,6 @@ class Statistics4Fragment : BaseFragment(),KodeinAware {
         savedInstanceState: Bundle?
     ): View? {
 
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_statistics4, container, false)
     }
 
@@ -51,30 +44,44 @@ class Statistics4Fragment : BaseFragment(),KodeinAware {
         viewModel = ViewModelProvider(this, viewModelFactory).get(MainViewModel::class.java)
         APIlib.getInstance().setActiveAnyChartView(lineChart3)
         val lineMonths = AnyChart.line()
-        var months = mutableListOf<String>()
-        val dataMonths = ArrayList<DataEntry>()
+        val dataMonths = dataMonths(sortMonths())
 
-        runBlocking(Dispatchers.Default) {months = viewModel.orderMonths() }
-
-        months.sort()
-        months.sortBy {it.substring(3, 7).toInt() }
-        var counterMonths = months.groupingBy { it }.eachCount().toList()
-        if (counterMonths.size > 6) {counterMonths = counterMonths.takeLast(6) }
-
-        counterMonths.toMap()
-        counterMonths.forEach { dataMonths.add(ValueDataEntry(it.first, it.second)) }
 
         lineMonths.data(dataMonths)
         lineChart3.setChart(lineMonths)
 
-        changeGraphs2.setOnClickListener{
-
-            navController.navigate(R.id.actionDailyView)
-
-            }
-
+        changeGraphs2.setOnClickListener{ navController.navigate(R.id.actionDailyView) }
         super.onViewCreated(view, savedInstanceState)
         }
+
+
+
+    private fun sortMonths(): MutableList<String> {
+
+        var date = listOf<String>()
+        var months = mutableListOf<String>()
+        runBlocking(Dispatchers.Default) { date = viewModel.orderDays() }
+        date.forEach { months.add(it.substring(3, it.lastIndex+1)) }
+        months.sort()
+        months.sortBy {it.substring(3,7).toInt() }
+        return months
+
+    }
+
+        private fun dataMonths(months: List<String>): ArrayList<DataEntry> {
+
+            val dataMonths = ArrayList<DataEntry>()
+            var counterMonths = months.groupingBy {it}.eachCount().toList()
+            if (counterMonths.size > 6) {counterMonths = counterMonths.takeLast(6) }
+            counterMonths.toMap()
+            counterMonths.forEach {dataMonths.add(ValueDataEntry(it.first, it.second)) }
+            return dataMonths
+
+
+        }
+
+
+
 
     }
 

@@ -5,10 +5,6 @@
     android:id="@+id/nav_graph"
     app:startDestination="@id/FirstFragment">
 
-    <!-- app:enterAnim="@anim/slide_in_right"
-       app:exitAnim="@anim/slide_out_left"
-       app:popEnterAnim="@anim/slide_in_left"
-       app:popExitAnim="@anim/slide_out_right"-->
 
     <fragment
         android:id="@+id/FirstFragment"
@@ -40,6 +36,10 @@
             app:destination="@id/allWordsFragment" />
         <action
             android:id="@+id/actionStatistics"
+            app:enterAnim="@anim/animate_slide_down_enter"
+            app:exitAnim="@anim/animate_slide_down_exit"
+            app:popExitAnim="@anim/animate_slide_up_exit"
+            app:popEnterAnim="@anim/animate_slide_up_enter"
             app:destination="@id/statisticsFragment" />
 
     </fragment>
@@ -206,6 +206,9 @@
         <action
             android:id="@+id/actionMonthlyView"
             app:destination="@id/statistics4Fragment" />
+        <action
+            android:id="@+id/action_statistics3Fragment_to_FirstFragment"
+            app:destination="@id/FirstFragment" />
     </fragment>
     <fragment
         android:id="@+id/statistics4Fragment"
@@ -214,5 +217,8 @@
         <action
             android:id="@+id/actionDailyView"
             app:destination="@id/statistics3Fragment" />
+        <action
+            android:id="@+id/action_statistics4Fragment_to_FirstFragment"
+            app:destination="@id/FirstFragment" />
     </fragment>
 </navigation>

@@ -32,7 +32,6 @@ import org.kodein.di.generic.instance
 class StatisticsFragment : BaseFragment(), KodeinAware
 
 {
-
     override val kodein by closestKodein()
     private val viewModelFactory: ViewModelFactory by instance<ViewModelFactory>()
     private lateinit var viewModel: MainViewModel
@@ -69,7 +68,6 @@ class StatisticsFragment : BaseFragment(), KodeinAware
         pieChartAcquired()
         setupPieChart()
         Toast.makeText(context,"Press the charts to get more information about them ",Toast.LENGTH_LONG).show()
-
     }
 
     private fun setupPieChart() {

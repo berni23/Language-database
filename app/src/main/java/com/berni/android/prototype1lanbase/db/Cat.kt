@@ -59,9 +59,7 @@ data class Word  (
     @ColumnInfo(name ="lvl" )
     var lvl:Int = 0,
     @ColumnInfo(name  ="lastOK")
-    var lastOk: Int = 10,
-    @ColumnInfo(name="month")
-    var month: String? = null
+    var lastOk: Int = 10
 
 ):Serializable {
 

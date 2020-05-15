@@ -46,7 +46,6 @@ class FirstFragment : BaseFragment(),KodeinAware {
     private lateinit var viewModel: MainViewModel
     private lateinit var navController: NavController
 
-    private var _allWords = listOf<Word>()
     private var _allCats = listOf<CatWords>()
     private var displayedCats = listOf<CatWords>()
 
@@ -79,6 +78,7 @@ class FirstFragment : BaseFragment(),KodeinAware {
             recycler_view_cats.adapter = CatAdapter(it, viewModel, this.coroutineContext)
 
         })
+
 
         btn_add.setOnClickListener {
 
@@ -175,6 +175,8 @@ class FirstFragment : BaseFragment(),KodeinAware {
         when (item.itemId) {
             R.id.item_test -> {
 
+                 var _allWords = listOf<Word>()
+
                 viewModel = ViewModelProvider(this, viewModelFactory).get(MainViewModel::class.java)
                 runBlocking(Dispatchers.Default){_allWords  = viewModel.getAllWords()}
 
@@ -228,17 +230,21 @@ class FirstFragment : BaseFragment(),KodeinAware {
 
             R.id.item_statistics -> {
 
-                if (_allWords.size<10) {
+                var counter : Int = 0
 
-                    Toast.makeText(context, "To few words in order to display statistics",Toast.LENGTH_SHORT).show()
+                runBlocking(Dispatchers.Default){counter  = viewModel.counterWords()}
+
+                if (counter<10) {
+
+                    Toast.makeText(context, "Add some more words in order to display statistics",Toast.LENGTH_SHORT).show()
 
                 }
+
                 else {
 
                     navController.navigate(R.id.actionStatistics)
 
                 }
-
             }
         }
         return super.onOptionsItemSelected(item)

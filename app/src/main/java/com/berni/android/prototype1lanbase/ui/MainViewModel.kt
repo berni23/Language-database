@@ -1,18 +1,12 @@
 package com.berni.android.prototype1lanbase.ui
 
 
-import android.icu.util.Calendar
-import android.os.Build
-import androidx.annotation.RequiresApi
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.berni.android.prototype1lanbase.db.Cat
 import com.berni.android.prototype1lanbase.db.CatWords
 import com.berni.android.prototype1lanbase.db.Repository
 import com.berni.android.prototype1lanbase.db.Word
-import java.time.ZonedDateTime
-import java.util.Collections.list
 
 // Main view model for everything related with accessing or updating database
 
@@ -26,12 +20,11 @@ class MainViewModel(private val repos: Repository ) : ViewModel() {
 
     suspend fun updateCat(oldName: String, newName: String) = repos.updateCat(oldName, newName)
 
-    suspend fun getAllWords(): MutableList<Word> {
-        return repos.getAllWords()
-    }
-    suspend fun orderMonths(): MutableList<String> { return repos.orderMonths() }
+    suspend fun getAllWords(): MutableList<Word> { return repos.getAllWords() }
 
     suspend fun orderDays(): MutableList<String> {return repos.orderDates()}
+
+    suspend fun counterWords() : Int {return repos.counterWords()}
 
     fun deleteWordsInCat(currentCatId: Int) = repos.deleteWordsInCat(currentCatId)
 
@@ -41,13 +34,9 @@ class MainViewModel(private val repos: Repository ) : ViewModel() {
 
     fun wordsInCat(currentCatId: Int) = repos.wordsInCat(currentCatId)
 
-    fun validCatName(catName: String): Boolean {
-        return repos.validCatName(catName).isEmpty()
-    }
+    fun validCatName(catName: String): Boolean { return repos.validCatName(catName).isEmpty() }
 
-    fun validWordId(catName: String, wordName: String): Boolean {
-        return repos.validWordId(catName, wordName).isEmpty()
-    }
+    fun validWordId(catName: String, wordName: String): Boolean { return repos.validWordId(catName, wordName).isEmpty() }
 
     val allCats: LiveData<List<Cat>> = repos.getAllCats()
 
@@ -67,11 +56,8 @@ class MainViewModel(private val repos: Repository ) : ViewModel() {
 
         words.forEach {
 
-            if (it.acquired) {
-                int1++
-            } else {
-                int2++
-            }
+            if (it.acquired) { int1++ }
+            else { int2++ }
         }
         return listOf(int1, int2)
     }
