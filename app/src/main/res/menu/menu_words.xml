@@ -11,8 +11,6 @@
         android:title="@string/search"
         app:showAsAction="always"
         app:actionViewClass="android.widget.SearchView"/>
-
-
     <item
         android:id="@+id/item_sort"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
@@ -28,7 +26,6 @@
                 android:orderInCategory="0"
                 android:title="@string/last_added"
                 app:showAsAction="never" />
-
             <item
                 android:id="@+id/first_added"
                 android:orderInCategory="0"
@@ -39,7 +36,6 @@
                 android:orderInCategory="1"
                 android:title="@string/alphabetically"
                 app:showAsAction="never" />
-
             <item
                 android:id="@+id/byLength"
                 android:orderInCategory="2"
@@ -47,9 +43,7 @@
                 app:showAsAction="never"/>
 
         </menu>
-
     </item>
-
     <item
         android:id="@+id/item_filter"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
@@ -66,62 +60,41 @@
                 android:orderInCategory="0"
                 android:title="@string/withExample"
                 app:showAsAction="never"/>
-
             <item
                 android:id="@+id/noExample"
                 android:orderInCategory="1"
                 android:title="@string/noExample"
                 app:showAsAction="never"/>
-
             <item
                 android:id="@+id/withDefinition"
                 android:orderInCategory="1"
                 android:title="@string/withDefinition"
                 app:showAsAction="never"/>
-
-
             <item
                 android:id="@+id/noDefinition"
                 android:orderInCategory="1"
                 android:title="@string/noDefinition"
                 app:showAsAction="never"/>
-
-
             <item
                 android:id="@+id/acquired"
                 android:orderInCategory="1"
                 android:title="@string/words_acquired"
                 app:showAsAction="never"/>
-
-
             <item
                 android:id="@+id/notAcquired"
                 android:orderInCategory="1"
                 android:title="@string/not_acquired"
                 app:showAsAction="never"/>
-
-
-
-
         </menu>
-
     </item>
-
-
     <item
         android:id="@+id/item_backToSecond"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
         android:icon="@drawable/ic_arrow_back_black_24dp"
         android:orderInCategory="0"
-        android:iconTint="@color/white"
         android:title="@string/back"
         app:showAsAction="always"/>
-
 </menu>
-
-
-
-
     <!--
     <style name="MyActionButtonOverflow" parent="android:style/Widget.Holo.Light.ActionButton.Overflow">
         <item name="android:src">@drawable/ic_item</item>

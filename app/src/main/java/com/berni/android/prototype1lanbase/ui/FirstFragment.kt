@@ -1,5 +1,4 @@
 package com.berni.android.prototype1lanbase.ui
-
 import android.content.Context
 import android.content.Intent
 import android.icu.util.Calendar
@@ -41,13 +40,11 @@ class FirstFragment : BaseFragment(),KodeinAware {
 
     private var newCatName: String? = null
     override val kodein by closestKodein()
-
     private val viewModelFactory: ViewModelFactory by instance<ViewModelFactory>()
     private lateinit var viewModel: MainViewModel
     private lateinit var navController: NavController
-
     private var _allCats = listOf<CatWords>()
-    private var displayedCats = listOf<CatWords>()
+    private var displayedCats = mutableListOf<CatWords>()
 
     override fun onCreateView(
 
@@ -55,6 +52,7 @@ class FirstFragment : BaseFragment(),KodeinAware {
         savedInstanceState: Bundle?
 
     ): View? {
+
 
         setHasOptionsMenu(true)
         return inflater.inflate(R.layout.fragment_first, container, false)
@@ -64,21 +62,25 @@ class FirstFragment : BaseFragment(),KodeinAware {
         super.onViewCreated(view, savedInstanceState)
 
         (activity as AppCompatActivity).supportActionBar?.title = "Language Database"
-
         navController = Navigation.findNavController(view)
         recycler_view_cats.setHasFixedSize(true)
         viewModel = ViewModelProvider(this, viewModelFactory).get(MainViewModel::class.java)
         viewModel.catsWithWords().observe(viewLifecycleOwner, Observer<List<CatWords>> {
 
             _allCats = it
-            displayedCats = _allCats
+            displayedCats = _allCats as MutableList<CatWords>
+            if(_allCats.isEmpty()) {
 
-            recycler_view_cats.layoutManager =
-                StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
+                launch(Dispatchers.Default) {
+
+                    val date = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(Date())
+                    val cat = Cat("Example",date)
+                    viewModel.addCat(cat)
+                }
+            }
+            recycler_view_cats.layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
             recycler_view_cats.adapter = CatAdapter(it, viewModel, this.coroutineContext)
-
         })
-
 
         btn_add.setOnClickListener {
 
@@ -107,7 +109,6 @@ class FirstFragment : BaseFragment(),KodeinAware {
             }
 
             var bool = true
-
             runBlocking(Dispatchers.Default) {bool = viewModel.validCatName(newCatName!!)}
 
             if (bool) {
@@ -145,27 +146,21 @@ class FirstFragment : BaseFragment(),KodeinAware {
 
             override fun onQueryTextChange(newText: String?): Boolean {
 
-                var newCatsList = mutableListOf<CatWords>()
                 Toast.makeText(context,newText,Toast.LENGTH_SHORT).show()
-                if (newText.isNullOrEmpty()) {displayedCats = _allCats }
+                if (newText.isNullOrEmpty()) { displayedCats = _allCats as MutableList<CatWords> }
 
                 else {
 
-                     newCatsList = mutableListOf<CatWords>()
-
-                    displayedCats.forEach {
+                    displayedCats = mutableListOf<CatWords>()
+                    _allCats.forEach {
 
                         if (it.cat.catName.startsWith(newText.trim())) {
-                            newCatsList.add(it)
+                           displayedCats.add(it)
                         }
                     }
-
-                   // displayedCats = newCatsList
                 }
-                recycler_view_cats.layoutManager =
-                    StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
-                recycler_view_cats.adapter =
-                    CatAdapter(newCatsList, viewModel, coroutineContext)
+                recycler_view_cats.layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
+                recycler_view_cats.adapter = CatAdapter(displayedCats, viewModel, coroutineContext)
                 return false
             }
         })
@@ -214,6 +209,7 @@ class FirstFragment : BaseFragment(),KodeinAware {
 
                         val message = "Please add some more words or wait some days"
                         Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
+
                     } else {
 
                         val bundle = bundleOf("listWords" to wordsForTest)
@@ -229,22 +225,12 @@ class FirstFragment : BaseFragment(),KodeinAware {
             R.id.item_statistics -> {
 
                 var counter : Int = 0
-
                 runBlocking(Dispatchers.Default){counter  = viewModel.counterWords()}
-
-                if (counter<10) {
-
-                    Toast.makeText(context, "Add some more words in order to display statistics",Toast.LENGTH_SHORT).show()
-
-                }
-
-                else {
-
-                    navController.navigate(R.id.actionStatistics)
-
-                }
+                if (counter<10) { Toast.makeText(context, "Add some more words in order to display statistics",Toast.LENGTH_SHORT).show() }
+                else { navController.navigate(R.id.actionStatistics) }
             }
         }
+
         return super.onOptionsItemSelected(item)
     }
 

@@ -123,9 +123,7 @@ class WordsListFragment : BaseFragment(), KodeinAware {
                         newWordsList.add(it)
                     }
                 }
-
-                displayedWords1 = newWordsList
-                recycler_view_words.adapter = WordAdapter(displayedWords1,viewModel,coroutineContext)
+                recycler_view_words.adapter = WordAdapter(newWordsList,viewModel,coroutineContext)
                 return false
             }
 
