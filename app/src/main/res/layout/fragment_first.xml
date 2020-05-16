@@ -9,15 +9,29 @@
     android:id="@+id/fragmentFirst"
     tools:context=".ui.FirstFragment">
 
-    <!--
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/VguideArrow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.6" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler_view_menu"
-        android:layout_marginTop = "70dp"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/HguideArrow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.75" />
 
-    </androidx.recyclerview.widget.RecyclerView>-->
+<ImageView
+    android:id="@+id/arr"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="100dp"
+    app:layout_constraintBottom_toBottomOf="@id/HguideArrow"
+    app:layout_constraintEnd_toStartOf="@id/VguideArrow"
+    app:layout_constraintStart_toEndOf="@id/VguideArrow"
+    app:layout_constraintTop_toTopOf="@id/HguideArrow" />
 
 
     <androidx.constraintlayout.widget.Guideline
