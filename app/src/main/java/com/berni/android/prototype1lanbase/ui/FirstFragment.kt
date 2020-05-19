@@ -29,7 +29,6 @@ import com.berni.android.prototype1lanbase.db.Test
 import com.berni.android.prototype1lanbase.db.Word
 import com.berni.android.prototype1lanbase.hideKeyboard
 import kotlinx.android.synthetic.main.fragment_first.*
-
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
@@ -77,8 +76,6 @@ class FirstFragment : BaseFragment(),KodeinAware {
         }
 
         anim1.start()
-
-
         // arr.startAnimation(animArrow)
         //arr.animate()
         (activity as AppCompatActivity).supportActionBar?.title = "Language Database"

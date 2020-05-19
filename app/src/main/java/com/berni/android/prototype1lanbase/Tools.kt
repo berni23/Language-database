@@ -114,16 +114,9 @@ fun filterNotAcquired(toFilter: List<Word>): List<Word> {
 
 }
 
-fun sortLastAdded(displayedWords: List<Word>): List<Word> {
+fun sortLastAdded(displayedWords: List<Word>): List<Word> { return displayedWords }
 
-    return displayedWords
-
-}
-
- fun sortFirstAdded(displayedWords: List<Word>) : List<Word>{
-
-    return displayedWords.reversed()
-}
+fun sortFirstAdded(displayedWords: List<Word>) : List<Word>{ return displayedWords.reversed() }
 
 fun sortAlphabetically(displayedWords: List<Word>) : List<Word>{
 
@@ -150,7 +143,4 @@ fun monthsBetweenDates(startDate: ZonedDateTime?, endDate: ZonedDateTime?): Int 
     monthsBetween += (endDate.year.minus(startDate?.year!!)* 12)
     return monthsBetween
 }
-
-
-
 

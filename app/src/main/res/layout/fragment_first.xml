@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout
-
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -8,7 +7,6 @@
     android:layout_height="match_parent"
     android:id="@+id/fragmentFirst"
     tools:context=".ui.FirstFragment">
-
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/VguideArrow"
         android:layout_width="wrap_content"
@@ -23,6 +21,8 @@
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.75" />
 
+
+
 <ImageView
     android:id="@+id/arr"
     android:layout_width="wrap_content"
@@ -32,7 +32,6 @@
     app:layout_constraintEnd_toStartOf="@id/VguideArrow"
     app:layout_constraintStart_toEndOf="@id/VguideArrow"
     app:layout_constraintTop_toTopOf="@id/HguideArrow" />
-
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/VguideCard"
