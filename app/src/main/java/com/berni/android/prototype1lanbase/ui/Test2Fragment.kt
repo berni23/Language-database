@@ -93,7 +93,6 @@ class Test2Fragment : BaseFragment(){
 
                         navController.navigate(R.id.actionCancelTest)
                         timer.cancel()
-
                     }
                     setNegativeButton("No") { _, _ -> }
                 }.create().show()

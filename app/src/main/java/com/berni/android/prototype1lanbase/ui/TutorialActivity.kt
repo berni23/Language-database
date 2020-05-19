@@ -16,19 +16,20 @@ class TutorialActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_tutorial)
+        setSupportActionBar(findViewById(R.id.toolbar))
+        supportActionBar?.title = " Language Database"
 
         btn_tutorial_next.setOnClickListener {
 
             if (msg) {
 
+                msg = false
                 val string: String = getString(R.string.tutorial_m3)
                 tutorial_t1.text = string
                 tutorial_t2.text = ""
                 tutorial_t3.text = ""
-                msg = false
 
             } else {
-
                 Tutorial.firstTime = false
                 val intent = Intent(this, MainActivity::class.java)
                 startActivity(intent)

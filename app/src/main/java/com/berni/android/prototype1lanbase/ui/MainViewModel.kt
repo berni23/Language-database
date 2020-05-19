@@ -30,6 +30,8 @@ class MainViewModel(private val repos: Repository ) : ViewModel() {
 
     fun deleteCat(currentCat: Cat) = repos.deleteCat(currentCat)
 
+    fun anyCat() = repos.anyCat()
+
     fun deleteWord(currentWord: Word) = repos.deleteWord(currentWord)
 
     fun wordsInCat(currentCatId: Int) = repos.wordsInCat(currentCatId)

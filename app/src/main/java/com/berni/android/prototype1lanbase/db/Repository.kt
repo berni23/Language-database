@@ -19,11 +19,13 @@ interface Repository{
 
         suspend fun updateCat(oldName:String,newName:String) {catDao.updateCat(oldName,newName)}
 
-        suspend fun getAllWords (): MutableList<Word> {return catDao.getAllWords()}
+        suspend fun getAllWords(): MutableList<Word> {return catDao.getAllWords()}
 
         suspend fun orderDates(): MutableList<String> { return catDao.orderDays()}
 
         suspend fun counterWords(): Int {return catDao.getAllWords().size}
+
+        fun anyCat() : Boolean { return catDao.catsNwords().isEmpty() }
 
         fun getAllCats () : LiveData<List<Cat>> {return catDao.getAllCats()}
 

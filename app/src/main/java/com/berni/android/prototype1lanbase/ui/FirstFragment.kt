@@ -16,12 +16,14 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.content.ContextCompat.getSystemService
 import androidx.core.os.bundleOf
+import androidx.core.view.marginBottom
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
+import com.anychart.core.ui.Center
 import com.berni.android.prototype1lanbase.R
 import com.berni.android.prototype1lanbase.db.Cat
 import com.berni.android.prototype1lanbase.db.CatWords
@@ -44,14 +46,14 @@ import java.util.concurrent.TimeUnit
  */
 class FirstFragment : BaseFragment(),KodeinAware {
 
-    private var newCatName: String? = null
     override val kodein by closestKodein()
     private val viewModelFactory: ViewModelFactory by instance<ViewModelFactory>()
-    private lateinit var viewModel: MainViewModel
-    private lateinit var navController: NavController
+    private var firstCat: Boolean = Tutorial.firstCat
+    private var newCatName: String? = null
     private var _allCats = listOf<CatWords>()
     private var displayedCats = mutableListOf<CatWords>()
-    var boolArr = true
+    private lateinit var viewModel: MainViewModel
+    private lateinit var navController: NavController
 
     override fun onCreateView(
 
@@ -66,47 +68,45 @@ class FirstFragment : BaseFragment(),KodeinAware {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        //val animArrow = AnimationUtils.loadAnimation(context,R.drawable.anim_arrow)
-       // arr.setBackgroundResource(R.drawable.anim_arrow)
 
-        val anim1: AnimationDrawable
-        val ArrImage = arr.apply {
-            setBackgroundResource(R.drawable.anim_arrow)
-             anim1 = background as AnimationDrawable
-        }
-
-        anim1.start()
-        // arr.startAnimation(animArrow)
-        //arr.animate()
         (activity as AppCompatActivity).supportActionBar?.title = "Language Database"
         navController = Navigation.findNavController(view)
         recycler_view_cats.setHasFixedSize(true)
         viewModel = ViewModelProvider(this, viewModelFactory).get(MainViewModel::class.java)
+        runBlocking(Dispatchers.Default){firstCat = viewModel.anyCat()}
+        if (firstCat) {
+
+            val anim1: AnimationDrawable
+            arr.apply {
+                setBackgroundResource(R.drawable.anim_arrow)
+                anim1 = background as AnimationDrawable
+            }
+
+            anim1.start()
+
+           /** launch(Dispatchers.Default) {
+                val date = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(Date())
+                val cat = Cat("Example", date)
+                viewModel.addCat(cat)
+            }**/
+
+            val toast: Toast = Toast.makeText(context,"Press the button + in order to create a new category",Toast.LENGTH_LONG)
+            toast.setGravity(Gravity.CENTER, 0,0)
+            toast.show()
+        }
         viewModel.catsWithWords().observe(viewLifecycleOwner, Observer<List<CatWords>> {
 
-            _allCats = it
-            displayedCats = _allCats as MutableList<CatWords>
-            if (_allCats.isEmpty()) {
-
-                launch(Dispatchers.Default) {
-
-                    val date = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(Date())
-                    val cat = Cat("Example", date)
-                    viewModel.addCat(cat)
-                }
-            }
-            recycler_view_cats.layoutManager =
-                StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
-            recycler_view_cats.adapter = CatAdapter(it, viewModel, this.coroutineContext)
+        _allCats = it
+        displayedCats = _allCats as MutableList<CatWords>
+        recycler_view_cats.layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
+        recycler_view_cats.adapter = CatAdapter(it, viewModel, this.coroutineContext)
         })
 
         btn_add.setOnClickListener {
-
             editText_newCat.text.clear()
             editText_newCat.requestFocus()
             newCatName = null
-            val imm: InputMethodManager? =
-                getSystemService<InputMethodManager>(it.context, InputMethodManager::class.java)
+            val imm: InputMethodManager? = getSystemService<InputMethodManager>(it.context, InputMethodManager::class.java)
             imm!!.showSoftInput(editText_newCat, InputMethodManager.SHOW_IMPLICIT)
             recycler_view_newCat.visibility = View.VISIBLE
 
@@ -118,8 +118,7 @@ class FirstFragment : BaseFragment(),KodeinAware {
             //TODO( window disappears on screen rotated. probably fixed with creation of viewmodel or using a binding method)
 
             newCatName = editText_newCat.text.toString().trim()
-            val currentDate: String =
-                SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(Date())
+            val currentDate: String =SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(Date())
             if (newCatName!!.isEmpty()) {
 
                 editText_newCat.error = "category required"
@@ -145,11 +144,22 @@ class FirstFragment : BaseFragment(),KodeinAware {
             }
 
             recycler_view_newCat.visibility = View.GONE
-            Toast.makeText(context, "category $newCatName successfully created", Toast.LENGTH_SHORT)
-                .show()
             editText_newCat.text.clear()
-            hideKeyboard()
 
+            if (firstCat) {
+
+                val toast: Toast = Toast.makeText(context,"Well done!! Now, you can press on the category to add some words :)",Toast.LENGTH_LONG)
+                toast.setGravity(Gravity.CENTER, 0,0)
+                Tutorial.firstCat = false
+                firstCat = false
+
+                toast.show()
+                arr.y = 100F
+                arr.rotation = 180F
+            }
+
+            else {Toast.makeText(context, "category $newCatName successfully created", Toast.LENGTH_SHORT).show()}
+            hideKeyboard()
         }
 
         recycler_view_newCat.visibility = View.GONE
@@ -197,9 +207,9 @@ class FirstFragment : BaseFragment(),KodeinAware {
                 runBlocking(Dispatchers.Default) { _allWords = viewModel.getAllWords() }
                 Test.number = 0 //  temporary
                 Test.setCounter()
-                val wordsNotAcquired =
-                    _allWords.filter { !it.acquired } // words yet to be acquired by user's memory
+                val wordsNotAcquired = _allWords.filter {!it.acquired } // words yet to be acquired by user's memory
                 var wordsForTest = listOf<Word>()
+
                 if (Test.number >= 2) {
 
                     val message = "You have already made two tests today, try tomorrow!!  =)"
@@ -243,9 +253,7 @@ class FirstFragment : BaseFragment(),KodeinAware {
                 }
             }
 
-            R.id.item_all -> {
-                navController.navigate(R.id.action_FirstFragment_to_allWordsFragment)
-            }
+            R.id.item_all -> { navController.navigate(R.id.action_FirstFragment_to_allWordsFragment) }
 
             R.id.item_statistics -> {
 
@@ -283,50 +291,9 @@ class FirstFragment : BaseFragment(),KodeinAware {
             callback
         )
     }
-
-    private val timer = object : CountDownTimer(800, 800) {
-        override fun onTick(millis: Long) {
-
-        }
-
-
-        override fun onFinish() {
-
-            if(boolArr)
-
-            {
-
-
-
-
-                boolArr = false
-
-            }
-
-            else
-
-            {
-
-                arr.setImageDrawable( ContextCompat.getDrawable(
-                    context!!, // Context
-                    R.drawable.ic_arrow2_anim) )
-
-                boolArr = true
-
-            }
-
-
-
-
-
-
-
-
-
-        }
-    }.start()
-
 }
+
+
 
 
 

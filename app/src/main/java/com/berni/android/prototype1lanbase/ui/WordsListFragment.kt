@@ -2,6 +2,7 @@ package com.berni.android.prototype1lanbase.ui
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.os.CountDownTimer
 import android.view.*
 import android.widget.SearchView
 import android.widget.Toast
@@ -16,12 +17,14 @@ import androidx.recyclerview.widget.RecyclerView
 import com.berni.android.prototype1lanbase.*
 import com.berni.android.prototype1lanbase.db.Cat
 import com.berni.android.prototype1lanbase.db.Word
+import kotlinx.android.synthetic.main.fragment_test2.*
 import kotlinx.android.synthetic.main.fragment_words_list.*
 import kotlinx.coroutines.*
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.closestKodein
 import org.kodein.di.generic.instance
 import java.util.*
+import java.util.concurrent.TimeUnit
 
 /**
  * A simple [Fragment] subclass.
@@ -35,6 +38,7 @@ class WordsListFragment : BaseFragment(), KodeinAware {
     private var displayedWords =  listOf<Word>()
     private var displayedWords1 =  listOf<Word>()
     private var lastAdditionDate: String? = ""
+    private var firstView = Tutorial.firstListWordView
     private lateinit var navController: NavController
 
 
@@ -56,10 +60,23 @@ class WordsListFragment : BaseFragment(), KodeinAware {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+
+
         (activity as AppCompatActivity).supportActionBar?.title = cat.catName
         navController = Navigation.findNavController(view)
         recycler_view_words.setHasFixedSize(true)
         viewModel = ViewModelProvider(this, viewModelFactory).get(MainViewModel::class.java)
+
+
+        if(firstView) {
+
+            val toast: Toast =  Toast.makeText(context, "here you have all the added words on the group", Toast.LENGTH_LONG)
+            toast.setGravity(Gravity.CENTER, 0,0)
+            toast.show()
+
+            timerToast.start()
+
+        }
 
         // observe if the words within the category suffer any change (like edition or deletion)
 
@@ -222,6 +239,51 @@ class WordsListFragment : BaseFragment(), KodeinAware {
         can  perform the same way and the sorting can start with initial data and pass the first
         X elements, where x = size of filtered list
 **/
+
+    private val timerToast = object: CountDownTimer(5000,5000) {
+
+
+        override fun onFinish() {
+
+            val toast: Toast =  Toast.makeText(context, "select one of the menu options for searching, filtering and sorting  some words", Toast.LENGTH_LONG)
+            toast.setGravity(Gravity.CENTER, 0,0)
+            toast.show()
+            timerToast2.start()
+
+        }
+
+        override fun onTick(millisUntilFinished: Long) {}
+    }
+
+    private val timerToast2 = object: CountDownTimer(5000,5000) {
+        
+        override fun onFinish() {
+
+            val toast: Toast =  Toast.makeText(context, "Press the word to see it's information displayed ", Toast.LENGTH_LONG)
+            toast.setGravity(Gravity.CENTER, 0,0)
+            toast.show()
+            timerToast3.start()
+        }
+        override fun onTick(millisUntilFinished: Long) {}
+    }
+
+    private val timerToast3 = object: CountDownTimer(5000,5000) {
+
+        override fun onFinish() {
+
+            val toast: Toast =  Toast.makeText(context, " with the menu item on the right of each  word you " +
+                "will be able to edit it or add information .", Toast.LENGTH_LONG)
+            toast.setGravity(Gravity.CENTER, 0,0)
+            toast.show()
+            Tutorial.firstListWordView = false
+        }
+        override fun onTick(millisUntilFinished: Long) {}
+    }
+
+}
+
+
+
 }
 
 

@@ -77,10 +77,9 @@
         app:layout_constraintTop_toTopOf="parent"
         android:alpha = "0.5"/>
 
-
-    <include
+   <!-- <include
         android:id = "@+id/toolbar"
-        layout = "@layout/toolbar"/>
+        layout = "@layout/toolbar"/>-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 
