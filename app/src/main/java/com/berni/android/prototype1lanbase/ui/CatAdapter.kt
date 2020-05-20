@@ -46,9 +46,9 @@ class CatAdapter(private val cats: List<CatWords>, private val viewModel: MainVi
         val lastAdded: List<String?>
         val numWords: Int
 
-        holder.view.text_view_title.setText(cats[position].cat.catName)
+        holder.view.text_view_title.text = cats[position].cat.catName
 
-        var wordNames = cats[position].words.sortedBy {it.wordId }.reversed()
+        val wordNames = cats[position].words.sortedBy {it.wordId }.reversed()
 
          lastAdded = listOf(
 
@@ -56,7 +56,8 @@ class CatAdapter(private val cats: List<CatWords>, private val viewModel: MainVi
                     wordNames.getOrNull(1)?.wordName,
                     wordNames.getOrNull(2)?.wordName
 
-         ).reversed()
+         )
+
 
         numWords = wordNames.size
         var lastAdditions = "last additions: "
@@ -67,7 +68,7 @@ class CatAdapter(private val cats: List<CatWords>, private val viewModel: MainVi
             holder.view.text_view_numWords.text = ""
                                                                 }
         else {
-            lastAdded.reversed().forEach {if (it != null)  lastAdditions += " ${it}," }
+            lastAdded.forEach {if (it != null)  lastAdditions += " ${it}," }
             lastAdditions = lastAdditions.dropLast(1)  // drop the last comma of the string
 
             holder.view.text_view_last_additions.text = lastAdditions
