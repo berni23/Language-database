@@ -39,7 +39,7 @@ interface Repository{
 
         fun catsWithWords() : LiveData<List<CatWords>> {return catDao.catsWithWords()}
 
-        fun catsNwords() : List<CatWords> {return catDao.catsNwords()}
+        fun catsNwords() : MutableList<CatWords> {return catDao.catsNwords()}
 
         fun deleteWordsInCat(currentCatId: Int) {catDao.deleteWordsInCat(currentCatId)}
 

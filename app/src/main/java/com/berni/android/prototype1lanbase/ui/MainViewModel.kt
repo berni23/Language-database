@@ -48,7 +48,7 @@ class MainViewModel(private val repos: Repository ) : ViewModel() {
 
     fun catsWithWords(): LiveData<List<CatWords>> = repos.catsWithWords()
 
-    fun catsNWords(): List<CatWords> = repos.catsNwords()
+    fun catsNWords(): MutableList<CatWords> = repos.catsNwords()
 
     suspend fun counterAcquired(): List<Int> {
 

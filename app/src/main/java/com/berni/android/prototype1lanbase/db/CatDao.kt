@@ -44,7 +44,7 @@ interface CatDao {
 
     @Transaction
     @Query("SELECT * FROM Cat")
-    fun catsNwords() : List<CatWords>
+    fun catsNwords() : MutableList<CatWords>
 
     //check if the catname has already been used or not
 
