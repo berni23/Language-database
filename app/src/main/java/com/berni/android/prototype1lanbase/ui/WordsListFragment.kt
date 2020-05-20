@@ -102,7 +102,7 @@ class WordsListFragment : BaseFragment(), KodeinAware {
             )
 
             lastAdditionDate = displayedWords.getOrNull(0)?.date
-            var lastAdditions = "Last additions: "
+            var lastAdditions =  resources.getString(R.string.last_additions)
             lastAdded.forEach {
                 if (it?.wordName != null) {
                     lastAdditions += " ${it.wordName},"
@@ -110,13 +110,13 @@ class WordsListFragment : BaseFragment(), KodeinAware {
             }
             lastAdditions = lastAdditions.dropLast(1)  // drop the last comma of the string
             if (lastAdded.elementAt(0)?.wordName == null) {
-                lastAdditions = "No words added yet"
+                lastAdditions = resources.getString(R.string.no_words_added_yet)
             }
-            val stringLastAdditionDate = "Last addition on $lastAdditionDate"
+            val stringLastAdditionDate = "${resources.getString(R.string.last_added_on)} $lastAdditionDate"
 
             // editing the corresponding info to the textviews
 
-            text_view_numWords.text = " ${recycler_view_words.adapter?.itemCount?:0} words"
+            text_view_numWords.text = " ${recycler_view_words.adapter?.itemCount?:0} ${resources.getString(R.string.words)}"
             lastAdditionDate?.let { text_view_lastDate.text = stringLastAdditionDate }
             text_view_last_additions.text = lastAdditions
 
@@ -163,42 +163,42 @@ class WordsListFragment : BaseFragment(), KodeinAware {
             R.id.alphabetically -> {
 
                 displayedWords1 = sortAlphabetically(displayedWords)
-                message = "sorting by alphabetic order.."
+                message =  resources.getString(R.string.sorting_alphabet)
                 Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
             }
 
             R.id.last_added -> {
 
                 displayedWords1 = sortLastAdded(displayedWords)
-                message = "sorting by last added.."
+                message = resources.getString(R.string.sorting_last_added)
                 Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
             }
 
             R.id.first_added -> {
 
                 displayedWords1 = sortFirstAdded(displayedWords)
-                message = "sorting by first added.."
+                message = resources.getString(R.string.sorting_first_added)
                 Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
             }
 
             R.id.withExample -> {
 
                 displayedWords1 =  filterExample(displayedWords)
-                message = "filtering words with an example.."
+                message = resources.getString(R.string.filtering_ex)
                 Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
             }
 
             R.id.noExample -> {
 
                 displayedWords1 = filterNoExample(displayedWords)
-                message = "filtering words without example.."
+                message =  resources.getString(R.string.filtering_no_ex)
                 Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
             }
 
             R.id.byLength -> {
 
                 displayedWords1 = sortByLength(displayedWords)
-                message = "sorting words by their length.."
+                message =  resources.getString(R.string.sorting_length)
                 Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
 
             }
@@ -206,27 +206,27 @@ class WordsListFragment : BaseFragment(), KodeinAware {
             R.id.withDefinition ->{
 
                 displayedWords1 = filterDefinition(displayedWords)
-                message = "filtering words with a definition.."
+                message =  resources.getString(R.string.filtering_definition)
                 Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
             }
 
             R.id.noDefinition ->{
 
                 displayedWords1 = filterNoDefinition(displayedWords)
-                message = "filtering words without definition.."
+                message =  resources.getString(R.string.filtering_no_definition)
                 Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
             }
             R.id.acquired ->{
 
                 displayedWords1 = filterAcquired(displayedWords)
-                message = "filtering words already acquired.."
+                message =  resources.getString(R.string.filtering_acquired)
                 Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
             }
 
             R.id.notAcquired ->{
 
                 displayedWords1 = filterNotAcquired(displayedWords)
-                message = "filtering words not acquired.."
+                message =  resources.getString(R.string.filtering_not_acquired)
                 Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
 
             }
@@ -245,7 +245,7 @@ class WordsListFragment : BaseFragment(), KodeinAware {
 
         override fun onFinish() {
 
-            val toast: Toast =  Toast.makeText(context, "select one of the menu options for searching, filtering and sorting  some words", Toast.LENGTH_LONG)
+            val toast: Toast =  Toast.makeText(context, resources.getString(R.string.msg_timerToast1), Toast.LENGTH_LONG)
             toast.setGravity(Gravity.CENTER, 0,0)
             toast.show()
             timerToast2.start()
@@ -259,7 +259,7 @@ class WordsListFragment : BaseFragment(), KodeinAware {
         
         override fun onFinish() {
 
-            val toast: Toast =  Toast.makeText(context, "Press the word to see it's information displayed ", Toast.LENGTH_LONG)
+            val toast: Toast =  Toast.makeText(context,resources.getString(R.string.msg_timerToast2), Toast.LENGTH_LONG)
             toast.setGravity(Gravity.CENTER, 0,0)
             toast.show()
             timerToast3.start()
@@ -271,8 +271,7 @@ class WordsListFragment : BaseFragment(), KodeinAware {
 
         override fun onFinish() {
 
-            val toast: Toast =  Toast.makeText(context, " with the menu item on the right of each  word you " +
-                "will be able to edit it or add information .", Toast.LENGTH_LONG)
+            val toast: Toast =  Toast.makeText(context, resources.getString(R.string.msg_timerToast3), Toast.LENGTH_LONG)
             toast.setGravity(Gravity.CENTER, 0,0)
             toast.show()
 

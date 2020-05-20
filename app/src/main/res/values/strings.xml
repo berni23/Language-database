@@ -1,4 +1,7 @@
 <resources>
+
+
+
     <string name="app_name">Database</string>
     <string name="action_settings">Settings</string>
     <!-- Strings used for fragments for navigation -->
@@ -6,7 +9,6 @@
     <string name="second_fragment_label">Second Fragment</string>
     <string name="next">Next</string>
     <string name="previous">Previous</string>
-
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
 
@@ -63,10 +65,72 @@
     <string name="statistics">statistics</string>
     <string name="show_all_words">show all words</string>
     <string name="words_acquired">words acquired</string>
+    <string name = "words_not_acquired">words not acquired</string>
     <string name="not_acquired">not acquired</string>
     <string name="how_the_app_works">how the app works</string>
     <string name="m2_tutorial">Let me explain you how it works! \n:)</string>
     <string name="hi">HI!</string>
     <string name="m1_tutorial">It seems it\'s your first time using WoS</string>
     <string name="tutorial_m3">This is a basic language app, where you can store and practice with your own vocabulary by creating groups of words, adding info and testing them \n \n let\'s get started!!</string>
+    <string name="no_words_added">no words added</string>
+    <string name ="words">words</string>
+    <string name ="are_you_sure">Are you sure?</string>
+    <string name ="you_cannot_undo">you cannot undo this operation</string>
+    <string name = "yes">Yes</string>
+    <string name = "deleting_cat">deleting category</string>
+    <string name = "no">No</string>
+    <string name = "edit_cat">edit category name</string>
+    <string name = "modify">modify</string>
+    <string name = "new_name_required">new name required</string>
+    <string name = "name_already_exists">name already exists</string>
+    <string name = "renaming">renaming..</string>
+    <string name = "cat_required">category required</string>
+    <string name = "cat_already_exists">category already exists</string>
+    <string name = "cat_name_rejected">category name rejected</string>
+    <string name = "msg_first_cat_created">Well done!! Now, you can press on the category to add some words :)</string>
+    <string name = "successfully_created">successfully created</string>
+    <string name = "msg_first_btn_pressed">Press the button + in order to create a new category</string>
+    <string name = "max_tests_today_reached">You have already made two tests today, try tomorrow!!  =)</string>
+    <string name ="add_more_words">Please add some more words in order to make a test</string>
+    <string name = "add_or_wait">Please add some more words or wait some days</string>
+    <string name = "add_more_words_statistics">Add some more words in order to display statistics</string>
+    <string name = "S2_first_word">write a word in the language you want to learn  and its corresponding translation "</string>
+    <string name = "word_required">word required</string>
+    <string name = "trans_required">translation required </string>
+    <string name = "word_exists">word already exists</string>
+    <string name = "S2_first_word_added">you got your first word =) , \n \n press the upper right option menu to see it displayed</string>
+    <string name = "word_successfully_added">word successfully added</string>
+    <string name="no_words_added_yet">no words added yet</string>
+    <string name="sorting_alphabet">sorting by alphabetic order..</string>
+    <string name="sorting_last_added">sorting by last added..</string>
+    <string name="sorting_first_added">sorting by first added..</string>
+    <string name="filtering_ex">filtering words with an example..</string>
+    <string name="filtering_no_ex">filtering words without example..</string>
+    <string name="sorting_length">sorting words by their length..</string>
+    <string name="filtering_definition">filtering words with a definition..</string>
+    <string name="filtering_no_definition">filtering words without definition..</string>
+    <string name="filtering_acquired">filtering words already acquired..</string>
+    <string name="filtering_not_acquired">filtering words not acquired..</string>
+    <string name = "msg_timerToast1">select one of the menu options for searching, filtering and sorting  some words</string>
+    <string name = "msg_timerToast2">Press the word to see it\'s information displayed</string>
+    <string name = "msg_timerToast3">with the menu item on the right of each  word you will be able to edit it or add information .</string>
+    <string name = "added_on">added on</string>
+    <string name ="edit_info">edit info</string>
+    <string name= "editing_word_properties">editing word properties..</string>
+    <string name = "lets_do_it">let\'s do it!</string>
+    <string name= "answer_can_not_be_blank">answer can\'t be blank</string>
+    <string name = "test_will_be_canceled">the test will be canceled and the progress lost</string>
+    <string name = "time_up">time\'s up!</string>
+    <string name="arrow_tutorial">arrow tutorial</string>
+    <string name="menu_edit_or_delete_word">menu edit or delete word</string>
+    <string name="write_the_correct_translation">write the correct translation</string>
+    <string name="timer">timer</string>
+    <string name = "msg1_statistics1">Press the charts to get more information about them </string>
+    <string name="number_of_words_n_per_group">Number of words \n per group</string>
+    <string name="click_for_n_time_progress">click for \n time progress</string>
+    <string name="words_acquired_vs_yet_to_n_be_learnt">words acquired vs yet to \n be learnt</string>
+    <string name="number_of_words_daily_added_n_last_100_active_days">number of words daily added,\n last 100 active days</string>
+    <string name="press_for_n_monthly_view">press for \n monthly view</string>
+    <string name="number_of_words_monthly_added_n_last_6_active_months">number of words monthly added, \n last 6 active months</string>
+    <string name="press_for_n_daily_view">press for \n daily view</string>
 </resources>

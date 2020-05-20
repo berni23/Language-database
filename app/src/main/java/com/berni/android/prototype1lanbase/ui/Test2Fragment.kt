@@ -1,5 +1,6 @@
 package com.berni.android.prototype1lanbase.ui
 
+import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.content.Context
 import android.os.Bundle
@@ -38,6 +39,7 @@ class Test2Fragment : BaseFragment(){
         return inflater.inflate(R.layout.fragment_test2, container, false)
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -53,7 +55,7 @@ class Test2Fragment : BaseFragment(){
         btn_nextTestWord.setOnClickListener {
 
             if (wordTest_editext.text.isEmpty()) {
-                wordTest_editext.error = "answer can't be blank"
+                wordTest_editext.error = resources.getString(R.string.answer_can_not_be_blank)
                 wordTest_editext.requestFocus()
                 return@setOnClickListener
             }
@@ -87,14 +89,14 @@ class Test2Fragment : BaseFragment(){
 
                 var bool: Boolean? = true
                 AlertDialog.Builder(activity!!).apply {
-                    setTitle("Are you sure?")
-                    setMessage("the test will be canceled and the progress lost")
-                    setPositiveButton("Yes") { _, _ ->
+                    setTitle(resources.getString(R.string.are_you_sure))
+                    setMessage(resources.getString(R.string.test_will_be_canceled))
+                    setPositiveButton(resources.getString(R.string.yes)) { _, _ ->
 
                         navController.navigate(R.id.actionCancelTest)
                         timer.cancel()
                     }
-                    setNegativeButton("No") { _, _ -> }
+                    setNegativeButton(resources.getString(R.string.no)) { _, _ -> }
                 }.create().show()
             }
         }
@@ -117,7 +119,7 @@ class Test2Fragment : BaseFragment(){
 
         override fun onFinish() {
 
-            Toast.makeText(context,"time's up!",Toast.LENGTH_SHORT).show()
+            Toast.makeText(context,resources.getString(R.string.time_up),Toast.LENGTH_SHORT).show()
             val diff = pickedWords.size -resultTest.size
 
             if (diff >0) {

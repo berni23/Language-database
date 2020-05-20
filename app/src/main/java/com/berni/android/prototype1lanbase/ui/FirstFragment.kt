@@ -103,7 +103,7 @@ class FirstFragment : BaseFragment(),KodeinAware {
             val currentDate: String =SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(Date())
             if (newCatName!!.isEmpty()) {
 
-                editText_newCat.error = "category required"
+                editText_newCat.error = resources.getString(R.string.cat_required)
                 editText_newCat.requestFocus()
                 return@setOnClickListener
             }
@@ -119,9 +119,9 @@ class FirstFragment : BaseFragment(),KodeinAware {
                 }
 
             } else {
-                editText_newCat.error = " category already exists"
+                editText_newCat.error = resources.getString(R.string.cat_already_exists)
                 editText_newCat.requestFocus()
-                Toast.makeText(context, "category name rejected", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, resources.getString(R.string.cat_name_rejected), Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
@@ -130,7 +130,7 @@ class FirstFragment : BaseFragment(),KodeinAware {
 
             if (firstCat) {
 
-                val toast: Toast = Toast.makeText(context,"Well done!! Now, you can press on the category to add some words :)",Toast.LENGTH_LONG)
+                val toast: Toast = Toast.makeText(context,resources.getString(R.string.msg_first_cat_created),Toast.LENGTH_LONG)
                 toast.setGravity(Gravity.CENTER, 0,0)
                 Tutorial.firstCat = false
                 firstCat = false
@@ -139,7 +139,8 @@ class FirstFragment : BaseFragment(),KodeinAware {
                 arr.rotation = 180F
             }
 
-            else {Toast.makeText(context, "category $newCatName successfully created", Toast.LENGTH_SHORT).show()}
+            else {Toast.makeText(context, " ${resources.getString(R.string.category)} $newCatName" +
+                    "  ${resources.getString(R.string.successfully_created)}", Toast.LENGTH_SHORT).show()}
             hideKeyboard()
         }
 
@@ -161,7 +162,7 @@ class FirstFragment : BaseFragment(),KodeinAware {
             viewModel.addCat(cat)
             }**/
 
-            val toast: Toast = Toast.makeText(context,"Press the button + in order to create a new category",Toast.LENGTH_LONG)
+            val toast: Toast = Toast.makeText(context,resources.getString(R.string.msg_first_btn_pressed),Toast.LENGTH_LONG)
             toast.setGravity(Gravity.CENTER, 0,0)
             toast.show()
         }
@@ -214,12 +215,12 @@ class FirstFragment : BaseFragment(),KodeinAware {
 
                 if (Test.number >= 2) {
 
-                    val message = "You have already made two tests today, try tomorrow!!  =)"
+                    val message = resources.getString(R.string.max_tests_today_reached)
                     Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
 
                 } else if (_allWords.size <= 5) {
 
-                    val message = "Please add some more words in order to make a test"
+                    val message = resources.getString(R.string.add_more_words)
                     Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
 
                 } else {
@@ -244,7 +245,7 @@ class FirstFragment : BaseFragment(),KodeinAware {
 
                     if (wordsForTest.size <= 5) {
 
-                        val message = "Please add some more words or wait some days"
+                        val message = resources.getString(R.string.add_or_wait)
                         Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
 
                     } else {
@@ -264,7 +265,7 @@ class FirstFragment : BaseFragment(),KodeinAware {
                 if (counter < 10) {
                     Toast.makeText(
                         context,
-                        "Add some more words in order to display statistics",
+                        resources.getString(R.string.add_more_words_statistics),
                         Toast.LENGTH_SHORT
                     ).show()
                 } else {

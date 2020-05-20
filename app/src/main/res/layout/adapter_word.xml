@@ -57,6 +57,7 @@
 
 
         <ImageView
+            android:contentDescription="@string/menu_edit_or_delete_word"
             android:id="@+id/edit_word"
             android:layout_width="20dp"
             android:layout_height="20dp"
@@ -70,39 +71,6 @@
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-
-          <!--  <ImageView
-                android:id="@+id/ivRowEdit"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_margin="7dp"
-                android:src="@drawable/ic_edit"
-                android:tint="#9E9E9E" />-->
-
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.cardview.widget.CardView>
-<!---
-    <TextView
-        android:id="@+id/text_view_word"
-        android:textAppearance="@style/Base.TextAppearance.AppCompat.Headline"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="TextView"
-        android:fontFamily = "@font/dancing_regular"
-        android:layout_marginStart="10dp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toEndOf="@id/dot"/>
-
-    <ImageView
-        android:id="@+id/dot"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="11dp"
-        app:srcCompat="@drawable/ic_brightness_1_black_24dp"
-        app:layout_constraintTop_toTopOf="parent"
-
-        app:layout_constraintStart_toStartOf="parent"/>
-
-</androidx.constraintlayout.widget.ConstraintLayout>-->

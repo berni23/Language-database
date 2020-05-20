@@ -50,12 +50,13 @@
 
     <EditText
         android:id="@+id/wordTest_editext"
+        android:inputType="text"
         android:fontFamily = "@font/lato_regular"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:singleLine="true"
         android:textSize = "20sp"
-        android:hint = "write the correct translation"
+        android:hint = "@string/write_the_correct_translation"
         android:autofillHints="" />
 
     </LinearLayout>
@@ -133,7 +134,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize = "20sp"
-        android:text="timer"
+        android:text="@string/timer"
         />
 
     </androidx.appcompat.widget.LinearLayoutCompat>

@@ -79,7 +79,7 @@
             android:layout_marginEnd="5dp"
             android:layout_marginBottom="5dp"
             android:fontFamily="@font/lato_light_italic"
-            android:text='Number of words \n per group' />
+            android:text="@string/number_of_words_n_per_group" />
 
     </androidx.cardview.widget.CardView>
 
@@ -154,7 +154,7 @@
             android:layout_marginBottom="5dp"
             android:layout_marginStart="5dp"
             android:layout_marginEnd="5dp"
-            android:text = 'words acquired vs yet to \n be learnt'
+            android:text = "@string/words_acquired_vs_yet_to_n_be_learnt"
             android:layout_height="wrap_content"/>
 
     </androidx.cardview.widget.CardView>
@@ -180,7 +180,7 @@
         android:textAllCaps="false"
         android:backgroundTint="@color/colorAccent3"
         android:fontFamily="@font/lato_light_italic"
-        android:text="click for \n time progress"
+        android:text="@string/click_for_n_time_progress"
         android:textSize="13sp"
         app:layout_constraintBottom_toBottomOf="@id/Hbutton"
         app:layout_constraintEnd_toEndOf="@id/Vbutton"

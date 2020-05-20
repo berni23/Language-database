@@ -1,5 +1,6 @@
 package com.berni.android.prototype1lanbase.ui
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
@@ -45,10 +46,11 @@ class EditWordFragment : BaseFragment(), KodeinAware {
         return inflater.inflate(R.layout.fragment_edit_word, container, false)
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
         super.onViewCreated(view, savedInstanceState)
-        (activity as AppCompatActivity).supportActionBar?.title = "edit info"
+        (activity as AppCompatActivity).supportActionBar?.title = resources.getString(R.string.edit_info)
         navController = Navigation.findNavController(view)
         viewModel = ViewModelProvider(this, viewModelFactory).get(MainViewModel::class.java)
 
@@ -56,7 +58,7 @@ class EditWordFragment : BaseFragment(), KodeinAware {
 
         editWord_editText.setText(word.wordName)
         editTrans1_editText.setText(word.trans1)
-        editDate.setText("added on ${word.date}")
+        editDate.setText("${resources.getString(R.string.added_on)} ${word.date}")
 
         //optional fields
 
@@ -75,7 +77,7 @@ class EditWordFragment : BaseFragment(), KodeinAware {
 
             if (name!!.isEmpty()) {
 
-                editWord_editText.error = "word required"
+                editWord_editText.error = resources.getString(R.string.word_required)
                 editWord_editText.requestFocus()
                 return@setOnClickListener
 
@@ -83,7 +85,7 @@ class EditWordFragment : BaseFragment(), KodeinAware {
 
             if (trans!!.isEmpty()) {
 
-                editTrans1_editText.error = "translation required"
+                editTrans1_editText.error =resources.getString(R.string.trans_required)
                 editTrans1_editText.requestFocus()
                 return@setOnClickListener
 
@@ -97,7 +99,7 @@ class EditWordFragment : BaseFragment(), KodeinAware {
 
             }
 
-            Toast.makeText(it.context, "editing word properties...", Toast.LENGTH_SHORT).show()
+            Toast.makeText(it.context, resources.getString(R.string.editing_word_properties), Toast.LENGTH_SHORT).show()
 
         }
     }

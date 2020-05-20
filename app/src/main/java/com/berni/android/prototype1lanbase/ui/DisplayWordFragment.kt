@@ -44,7 +44,7 @@ class DisplayWordFragment : BaseFragment() {
 
         textView_displayWord.text = " ${word.wordName} "
         textView_displayTranslation.text = " ${word.trans1} "
-        textView_displayDate.text = "added on ${word.date} "
+        textView_displayDate.text = "${resources.getString(R.string.added_on)} ${word.date} "
 
         //optional fields
 

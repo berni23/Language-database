@@ -50,7 +50,7 @@ class Test1Fragment : BaseFragment(),KodeinAware {
 
             val bundle = bundleOf("pickedWords" to pickedWords)
             navController.navigate(R.id.actionStartTest, bundle)
-            Toast.makeText(context, "let's do it!", Toast.LENGTH_SHORT).show()
+            Toast.makeText(context, resources.getString(R.string.lets_do_it), Toast.LENGTH_SHORT).show()
         }
     }
 

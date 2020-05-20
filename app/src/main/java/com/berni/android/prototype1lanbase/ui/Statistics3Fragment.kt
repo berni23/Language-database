@@ -2,10 +2,8 @@ package com.berni.android.prototype1lanbase.ui
 
 
 import android.content.Context
-import android.opengl.Visibility
 import android.os.Bundle
 import android.view.*
-import android.view.View.GONE
 import androidx.activity.OnBackPressedCallback
 import kotlinx.android.synthetic.main.fragment_statistics3.*
 import androidx.lifecycle.ViewModelProvider
@@ -15,15 +13,12 @@ import com.anychart.APIlib
 import com.anychart.AnyChart
 import com.anychart.chart.common.dataentry.DataEntry
 import com.anychart.chart.common.dataentry.ValueDataEntry
-import com.anychart.charts.Cartesian
 import com.berni.android.prototype1lanbase.R
-import kotlinx.android.synthetic.main.fragment_statistics3.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.closestKodein
 import org.kodein.di.generic.instance
-import java.util.*
 import kotlin.collections.ArrayList
 
 class Statistics3Fragment : BaseFragment(),KodeinAware {
@@ -77,7 +72,7 @@ class Statistics3Fragment : BaseFragment(),KodeinAware {
 
      private fun dataEntries(days: List<String>): ArrayList<DataEntry> {
 
-            var dataDays = ArrayList<DataEntry>()
+            val dataDays = ArrayList<DataEntry>()
             var counter = days.groupingBy { it }.eachCount().toList()
             if (counter.size > 100) {  counter = counter.takeLast(100) }
             counter.toMap()

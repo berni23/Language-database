@@ -6,8 +6,6 @@ import android.os.CountDownTimer
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.berni.android.prototype1lanbase.ui.WordsListFragment.*
-import android.widget.Toast
 import androidx.appcompat.widget.PopupMenu
 import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
@@ -19,7 +17,6 @@ import kotlinx.android.synthetic.main.adapter_word.view.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
-import java.util.*
 import kotlin.coroutines.CoroutineContext
 
 // WordInCat
@@ -72,10 +69,10 @@ class WordAdapter(private val words: List<Word>, private val viewModel: MainView
                     R.id.delete_word -> {
 
                         AlertDialog.Builder(it.context).apply {
-                            setTitle("Are you sure?")
-                            setMessage("You cannot undo this operation")
+                            setTitle(holder.itemView.context.getString(R.string.are_you_sure))
+                            setMessage(holder.itemView.context.getString(R.string.you_cannot_undo))
 
-                            setPositiveButton("Yes") { _, _ ->
+                            setPositiveButton(holder.itemView.context.getString(R.string.yes)) { _, _ ->
 
                                 runBlocking(Dispatchers.Default){
 
@@ -84,7 +81,7 @@ class WordAdapter(private val words: List<Word>, private val viewModel: MainView
                                 }
                             }
 
-                            setNegativeButton("No") { _, _ -> }
+                            setNegativeButton(holder.itemView.context.getString(R.string.no)) { _, _ -> }
 
                         }.create().show()
 
@@ -114,7 +111,7 @@ class WordAdapter(private val words: List<Word>, private val viewModel: MainView
 
     class WordViewHolder(val view: View) : RecyclerView.ViewHolder(view)
 
-    fun stopTimers(){ timers.forEach{ it.cancel() } }
+    private fun stopTimers(){ timers.forEach{ it.cancel() } }
 
 }
 

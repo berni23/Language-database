@@ -69,7 +69,7 @@ class StatisticsFragment : BaseFragment(), KodeinAware
 
         pieChartAcquired()
         setupPieChart()
-        Toast.makeText(context,"Press the charts to get more information about them ",Toast.LENGTH_LONG).show()
+        Toast.makeText(context,resources.getString(R.string.msg1_statistics1),Toast.LENGTH_LONG).show()
     }
 
     private fun setupPieChart() {
@@ -99,8 +99,8 @@ class StatisticsFragment : BaseFragment(), KodeinAware
         val pie2: Pie = AnyChart.pie()
         pie2.legend(false)
         val dataEntries = ArrayList<DataEntry>()
-        dataEntries.add(ValueDataEntry("words acquired",counterAcquired[0]))
-        dataEntries.add(ValueDataEntry("words not acquired",counterAcquired[1]))
+        dataEntries.add(ValueDataEntry(resources.getString(R.string.words_acquired),counterAcquired[0]))
+        dataEntries.add(ValueDataEntry(resources.getString(R.string.words_not_acquired),counterAcquired[1]))
         pie2.data(dataEntries)
         pieChartAcquired.setChart(pie2)
 

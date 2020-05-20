@@ -68,8 +68,7 @@ class SecondFragment : BaseFragment(),KodeinAware {
         if (firstWord)
 
         {
-            val toast: Toast = Toast.makeText(context,"write a word in the language you want to learn " +
-                    "  and its corresponding translation ",Toast.LENGTH_LONG)
+            val toast: Toast = Toast.makeText(context, resources.getString(R.string.S2_first_word),Toast.LENGTH_LONG)
             toast.setGravity(Gravity.CENTER, 0,0)
             toast.show()
 
@@ -105,14 +104,14 @@ class SecondFragment : BaseFragment(),KodeinAware {
 
             if (theWord.isEmpty()) {
 
-                word_editText.error = "word required"
+                word_editText.error =  resources.getString(R.string.word_required)
                 word_editText.requestFocus()
                 return@setOnClickListener
             }
 
             if (translation1.isEmpty()) {
 
-                trans1_editText.error = "translation required"
+                trans1_editText.error =resources.getString(R.string.trans_required)
                 trans1_editText.requestFocus()
                 return@setOnClickListener
 
@@ -135,7 +134,7 @@ class SecondFragment : BaseFragment(),KodeinAware {
 
             else {
 
-                  word_editText.error = "word already exists"
+                  word_editText.error = resources.getString(R.string.word_exists)
                   word_editText.requestFocus()
                   return@setOnClickListener
             }
@@ -152,8 +151,7 @@ class SecondFragment : BaseFragment(),KodeinAware {
                 Tutorial.firstListWordView = true
                 firstWord = false
 
-                val toast: Toast =  Toast.makeText(context, "you got your first word =) , \n \n press the upper right " +
-                        "option menu to see it displayed", Toast.LENGTH_LONG)
+                val toast: Toast =  Toast.makeText(context, resources.getString(R.string.S2_first_word_added), Toast.LENGTH_LONG)
                 toast.setGravity(Gravity.CENTER, 0,0)
                 toast.show()
 
@@ -161,7 +159,7 @@ class SecondFragment : BaseFragment(),KodeinAware {
 
             }
 
-            else {Toast.makeText(context, "word successfully added", Toast.LENGTH_LONG).show() }
+            else {Toast.makeText(context,  resources.getString(R.string.word_successfully_added), Toast.LENGTH_LONG).show() }
 
         }
     }

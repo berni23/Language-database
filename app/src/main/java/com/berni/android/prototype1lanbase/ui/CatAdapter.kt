@@ -1,5 +1,6 @@
 package com.berni.android.prototype1lanbase.ui
 
+import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.view.*
 import android.view.ContextMenu.ContextMenuInfo
@@ -20,6 +21,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
+import org.kodein.di.generic.contextFinder
 import kotlin.coroutines.CoroutineContext
 
 
@@ -39,6 +41,7 @@ class CatAdapter(private val cats: List<CatWords>, private val viewModel: MainVi
     }
 
     override fun getItemCount() = cats.size
+    @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: CatViewHolder, position: Int) {
 
        // var wordNames  = mutableListOf<String>()
@@ -60,11 +63,10 @@ class CatAdapter(private val cats: List<CatWords>, private val viewModel: MainVi
 
 
         numWords = wordNames.size
-        var lastAdditions = "last additions: "
-
+        var lastAdditions =holder.itemView.context.getString(R.string.last_additions)
         if (lastAdded.elementAt(0)== null) {
 
-            holder.view.text_view_last_additions.text = "no words added"
+            holder.view.text_view_last_additions.text =  holder.itemView.context.getString(R.string.no_words_added)
             holder.view.text_view_numWords.text = ""
                                                                 }
         else {
@@ -72,11 +74,10 @@ class CatAdapter(private val cats: List<CatWords>, private val viewModel: MainVi
             lastAdditions = lastAdditions.dropLast(1)  // drop the last comma of the string
 
             holder.view.text_view_last_additions.text = lastAdditions
-            holder.view.text_view_numWords.text= " $numWords words"
-
+            holder.view.text_view_numWords.text=" $numWords + ${holder.itemView.context.getString(R.string.words)}"
         }
 
-        holder.view.text_view_date.text =  " created  on ${cats[position].cat.catDate}"
+        holder.view.text_view_date.text =  " ${holder.itemView.context.getString(R.string.createdOn)} ${cats[position].cat.catDate}"
 
         holder.view.setOnClickListener {
 
@@ -86,12 +87,12 @@ class CatAdapter(private val cats: List<CatWords>, private val viewModel: MainVi
 
         holder.view.setOnCreateContextMenuListener { menu: ContextMenu?, v: View?, menuInfo: ContextMenuInfo? ->
 
-            menu?.add("delete")?.setOnMenuItemClickListener {
+            menu?.add(holder.itemView.context.getString(R.string.delete))?.setOnMenuItemClickListener {
 
                 AlertDialog.Builder(v?.context).apply {
-                    setTitle("Are you sure?")
-                    setMessage("You cannot undo this operation")
-                    setPositiveButton("Yes") { _, _ ->
+                    setTitle(holder.itemView.context.getString(R.string.are_you_sure))
+                    setMessage(holder.itemView.context.getString(R.string.you_cannot_undo))
+                    setPositiveButton(holder.itemView.context.getString(R.string.yes)) { _, _ ->
 
                         launch(Dispatchers.Default){
 
@@ -99,16 +100,16 @@ class CatAdapter(private val cats: List<CatWords>, private val viewModel: MainVi
                             viewModel.deleteCat(cats[position].cat)
 
                         }
-                     Toast.makeText(v?.context, "deleting  category ${cats[position].cat.catName}..", Toast.LENGTH_SHORT).show()
+                     Toast.makeText(v?.context, "${holder.itemView.context.getString(R.string.deleting_cat)} ${cats[position].cat.catName}..", Toast.LENGTH_SHORT).show()
                     }
 
-                    setNegativeButton("No") { _, _ ->
+                    setNegativeButton(holder.itemView.context.getString(R.string.no)) { _, _ ->
 
                     }}.create().show()
 
                 true
             }
-            menu?.add("rename")?.setOnMenuItemClickListener {
+            menu?.add(holder.itemView.context.getString(R.string.rename))?.setOnMenuItemClickListener {
 
                 AlertDialog.Builder(v?.context).apply {
 
@@ -118,15 +119,15 @@ class CatAdapter(private val cats: List<CatWords>, private val viewModel: MainVi
                     input.layoutParams = lp
                     this.setView(input)
 
-                    setTitle("edit category name")
+                    setTitle(holder.itemView.context.getString(R.string.edit_cat))
                    // setMessage("You cannot undo this operation")
 
-                    setPositiveButton("modify") { _, _ ->
+                    setPositiveButton(holder.itemView.context.getString(R.string.modify)) { _, _ ->
 
                         val renamed = input.text.toString().trim()
                         if (renamed.isEmpty()) {
 
-                            input.error = "new name required"
+                            input.error = holder.itemView.context.getString(R.string.new_name_required)
                             input.requestFocus()
                             return@setPositiveButton
                         }
@@ -137,7 +138,7 @@ class CatAdapter(private val cats: List<CatWords>, private val viewModel: MainVi
 
                         else
                         {
-                            input.error = " name already exists"
+                            input.error = holder.itemView.context.getString(R.string.name_already_exists)
                             input.requestFocus()
                             return@setPositiveButton
                         }
@@ -145,14 +146,14 @@ class CatAdapter(private val cats: List<CatWords>, private val viewModel: MainVi
                         val renameWords = mutableListOf<Word>()
                     }
 
-                    setNegativeButton("Cancel") { _, _ ->
+                    setNegativeButton(holder.itemView.context.getString(R.string.cancel)) { _, _ ->
 
                     }}.create().show()
 
                 holder.view.text_view_title.isFocusable = true
                 holder.view.text_view_title.isFocusableInTouchMode = true
 
-                Toast.makeText(v?.context, "renaming..", Toast.LENGTH_SHORT).show()
+                Toast.makeText(v?.context, holder.itemView.context.getString(R.string.renaming), Toast.LENGTH_SHORT).show()
                 true
             }
         }

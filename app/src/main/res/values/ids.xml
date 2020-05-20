@@ -2,4 +2,5 @@
 <resources>
     <item name="delete" type="id" />
     <item name="rename" type="id" />
+    <item name="msg1_statistics1" type="id" />
 </resources>
