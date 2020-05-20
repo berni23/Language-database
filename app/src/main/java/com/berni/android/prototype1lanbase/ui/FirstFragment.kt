@@ -73,7 +73,9 @@ class FirstFragment : BaseFragment(),KodeinAware {
         navController = Navigation.findNavController(view)
         recycler_view_cats.setHasFixedSize(true)
         viewModel = ViewModelProvider(this, viewModelFactory).get(MainViewModel::class.java)
-        runBlocking(Dispatchers.Default){firstCat = viewModel.anyCat()}
+
+
+       // runBlocking(Dispatchers.Default){firstCat = viewModel.anyCat()}
         if (firstCat) {
 
             val anim1: AnimationDrawable
@@ -152,7 +154,6 @@ class FirstFragment : BaseFragment(),KodeinAware {
                 toast.setGravity(Gravity.CENTER, 0,0)
                 Tutorial.firstCat = false
                 firstCat = false
-
                 toast.show()
                 arr.y = 100F
                 arr.rotation = 180F

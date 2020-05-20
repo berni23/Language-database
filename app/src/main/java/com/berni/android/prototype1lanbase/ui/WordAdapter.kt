@@ -2,9 +2,11 @@ package com.berni.android.prototype1lanbase.ui
 
 import android.annotation.SuppressLint
 import android.app.AlertDialog
+import android.os.CountDownTimer
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.berni.android.prototype1lanbase.ui.WordsListFragment.*
 import android.widget.Toast
 import androidx.appcompat.widget.PopupMenu
 import androidx.core.content.ContextCompat
@@ -17,15 +19,14 @@ import kotlinx.android.synthetic.main.adapter_word.view.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
+import java.util.*
 import kotlin.coroutines.CoroutineContext
 
 // WordInCat
 
-class WordAdapter(private val words: List<Word>, private val viewModel: MainViewModel, override val coroutineContext: CoroutineContext):
+class WordAdapter(private val words: List<Word>, private val viewModel: MainViewModel, private val timers:List<CountDownTimer>, override val coroutineContext: CoroutineContext):
 
       RecyclerView.Adapter<WordAdapter.WordViewHolder>(), CoroutineScope   {
-
-    //var wordNameList:MutableList<String>? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): WordViewHolder {
 
@@ -44,7 +45,7 @@ class WordAdapter(private val words: List<Word>, private val viewModel: MainView
         holder.view.text_view_word.text = " ${words[position].wordName} "  // adding space at the beginning and at the end to avoid text cut
         holder.view.text_view_translation.text = " ${words[position].trans1} "
 
-        if (words[position].acquired==true) {
+        if (words[position].acquired) {
 
             holder.view.text_view_word.setTextColor(ContextCompat.getColor(holder.view.context, R.color.colorHint3))
             holder.view.text_view_translation.setTextColor(ContextCompat.getColor(holder.view.context, R.color.colorHint3))}
@@ -63,7 +64,9 @@ class WordAdapter(private val words: List<Word>, private val viewModel: MainView
 
                         val bundle = bundleOf("word" to words[position])
                         Navigation.findNavController(it).navigate(R.id.actionEditWord, bundle)
+                        stopTimers()
                         true
+
                     }
 
                     R.id.delete_word -> {
@@ -101,10 +104,17 @@ class WordAdapter(private val words: List<Word>, private val viewModel: MainView
             val bundle = bundleOf("displayWord" to words[position])
             Navigation.findNavController(it).navigate(R.id.actionDisplayWord, bundle)
 
+            stopTimers()
+
+
+
+
         }
     }
 
     class WordViewHolder(val view: View) : RecyclerView.ViewHolder(view)
+
+    fun stopTimers(){ timers.forEach{ it.cancel() } }
 
 }
 

@@ -1,11 +1,13 @@
 package com.berni.android.prototype1lanbase.ui
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.view.*
 import android.widget.SearchView
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -61,7 +63,6 @@ class WordsListFragment : BaseFragment(), KodeinAware {
         super.onViewCreated(view, savedInstanceState)
 
 
-
         (activity as AppCompatActivity).supportActionBar?.title = cat.catName
         navController = Navigation.findNavController(view)
         recycler_view_words.setHasFixedSize(true)
@@ -86,7 +87,7 @@ class WordsListFragment : BaseFragment(), KodeinAware {
            runBlocking(Dispatchers.Default){
 
                displayedWords =  it.reversed()
-               recycler_view_words.adapter = WordAdapter(displayedWords,viewModel,this.coroutineContext)
+               recycler_view_words.adapter = WordAdapter(displayedWords,viewModel,listOf(timerToast,timerToast2,timerToast3),this.coroutineContext)
 
            }
 
@@ -140,7 +141,7 @@ class WordsListFragment : BaseFragment(), KodeinAware {
                         newWordsList.add(it)
                     }
                 }
-                recycler_view_words.adapter = WordAdapter(newWordsList,viewModel,coroutineContext)
+                recycler_view_words.adapter = WordAdapter(newWordsList,viewModel,listOf(timerToast,timerToast2,timerToast3),coroutineContext)
                 return false
             }
 
@@ -156,7 +157,7 @@ class WordsListFragment : BaseFragment(), KodeinAware {
 
             R.id.item_backToSecond -> {
                 navController.popBackStack()
-
+                stopTimers()
             }
 
             R.id.alphabetically -> {
@@ -231,7 +232,7 @@ class WordsListFragment : BaseFragment(), KodeinAware {
             }
         }
 
-        recycler_view_words.adapter = WordAdapter(displayedWords1,viewModel,this.coroutineContext)
+        recycler_view_words.adapter = WordAdapter(displayedWords1,viewModel,listOf(timerToast,timerToast2,timerToast3),coroutineContext)
         return super.onOptionsItemSelected(item)
     }
 
@@ -241,7 +242,6 @@ class WordsListFragment : BaseFragment(), KodeinAware {
 **/
 
     private val timerToast = object: CountDownTimer(5000,5000) {
-
 
         override fun onFinish() {
 
@@ -275,15 +275,35 @@ class WordsListFragment : BaseFragment(), KodeinAware {
                 "will be able to edit it or add information .", Toast.LENGTH_LONG)
             toast.setGravity(Gravity.CENTER, 0,0)
             toast.show()
+
+            firstView = false
             Tutorial.firstListWordView = false
         }
         override fun onTick(millisUntilFinished: Long) {}
     }
 
+
+    private fun stopTimers() {
+
+        timerToast.cancel()
+        timerToast2.cancel()
+        timerToast3.cancel()
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        val callback: OnBackPressedCallback = object : OnBackPressedCallback(
+            true // default to enabled
+        ) {
+            override fun handleOnBackPressed() {
+
+                navController.popBackStack()
+                stopTimers()
+            }
+        }
+        requireActivity().onBackPressedDispatcher.addCallback(
+            this,  // LifecycleOwner
+            callback
+        )
+    }
 }
-
-
-
-}
-
-
