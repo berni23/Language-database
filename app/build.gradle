@@ -7,7 +7,6 @@ apply plugin: 'kotlinx-serialization'
 
 android {
     compileSdkVersion 29
-
     defaultConfig {
         applicationId "com.berni.android.prototype1lanbase"
         minSdkVersion 25
@@ -15,7 +14,6 @@ android {
         versionCode 1
         multiDexEnabled = true
         versionName "1.0"
-
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -70,7 +68,6 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
     implementation 'android.arch.lifecycle:extensions:1.1.1'
 
-
     //kodein injection
 
     implementation "org.kodein.di:kodein-di-generic-jvm:$kodein_version"
@@ -91,6 +88,9 @@ dependencies {
     //chart library
 
     implementation 'com.github.AnyChart:AnyChart-Android:1.1.2'
-
     implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
+
+    //library for accessing internet
+
+    androidTestImplementation'com.android.support.test:runner:0.5'
 }

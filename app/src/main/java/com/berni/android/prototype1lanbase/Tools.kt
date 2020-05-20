@@ -131,8 +131,6 @@ fun sortByLength(displayedWords: List<Word>) : List<Word> {
     return displayed.sortedBy {it.wordName.length}
 
 }
-
-
 //number of months between two dates
 
 @RequiresApi(Build.VERSION_CODES.O)

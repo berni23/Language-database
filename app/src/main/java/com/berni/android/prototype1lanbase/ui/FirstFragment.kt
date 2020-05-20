@@ -4,26 +4,20 @@ import android.content.Intent
 import android.graphics.drawable.AnimationDrawable
 import android.icu.util.Calendar
 import android.os.Bundle
-import android.os.CountDownTimer
 import android.view.*
-import android.view.animation.AnimationUtils
 import android.view.inputmethod.InputMethodManager
-import android.widget.ImageView
 import android.widget.SearchView
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
 import androidx.core.content.ContextCompat.getSystemService
 import androidx.core.os.bundleOf
-import androidx.core.view.marginBottom
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
-import com.anychart.core.ui.Center
 import com.berni.android.prototype1lanbase.R
 import com.berni.android.prototype1lanbase.db.Cat
 import com.berni.android.prototype1lanbase.db.CatWords
@@ -39,8 +33,6 @@ import org.kodein.di.android.x.closestKodein
 import org.kodein.di.generic.instance
 import java.text.SimpleDateFormat
 import java.util.*
-import java.util.concurrent.TimeUnit
-
 /**
  * A simple [Fragment] subclass as the default destination in the navigation.
  */
@@ -48,7 +40,7 @@ class FirstFragment : BaseFragment(),KodeinAware {
 
     override val kodein by closestKodein()
     private val viewModelFactory: ViewModelFactory by instance<ViewModelFactory>()
-    private var firstCat: Boolean = Tutorial.firstCat
+    private var firstCat: Boolean = true
     private var newCatName: String? = null
     private var _allCats = listOf<CatWords>()
     private var displayedCats = mutableListOf<CatWords>()
@@ -74,9 +66,7 @@ class FirstFragment : BaseFragment(),KodeinAware {
         recycler_view_cats.setHasFixedSize(true)
         viewModel = ViewModelProvider(this, viewModelFactory).get(MainViewModel::class.java)
 
-
-       // runBlocking(Dispatchers.Default){firstCat = viewModel.anyCat()}
-
+        runBlocking(Dispatchers.Default){firstCat = viewModel.anyCat()}
         viewModel.catsWithWords().observe(viewLifecycleOwner, Observer<List<CatWords>> {
         _allCats = it
         displayedCats = _allCats as MutableList<CatWords>
@@ -96,8 +86,6 @@ class FirstFragment : BaseFragment(),KodeinAware {
 
         btnCancel.setOnClickListener { recycler_view_newCat.visibility = View.GONE }
         btnCreate.setOnClickListener {
-
-            //TODO( window disappears on screen rotated. probably fixed with creation of viewmodel or using a binding method)
 
             newCatName = editText_newCat.text.toString().trim()
             val currentDate: String =SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(Date())
@@ -156,12 +144,6 @@ class FirstFragment : BaseFragment(),KodeinAware {
 
             anim1.start()
 
-            /** launch(Dispatchers.Default) {
-            val date = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(Date())
-            val cat = Cat("Example", date)
-            viewModel.addCat(cat)
-            }**/
-
             val toast: Toast = Toast.makeText(context,resources.getString(R.string.msg_first_btn_pressed),Toast.LENGTH_LONG)
             toast.setGravity(Gravity.CENTER, 0,0)
             toast.show()
@@ -181,6 +163,7 @@ class FirstFragment : BaseFragment(),KodeinAware {
                 Toast.makeText(context, newText, Toast.LENGTH_SHORT).show()
                 if (newText.isNullOrEmpty()) {
                     displayedCats = _allCats as MutableList<CatWords>
+
                 } else {
 
                     displayedCats = mutableListOf<CatWords>()
@@ -207,7 +190,11 @@ class FirstFragment : BaseFragment(),KodeinAware {
 
                 var _allWords = listOf<Word>()
                 viewModel = ViewModelProvider(this, viewModelFactory).get(MainViewModel::class.java)
-                runBlocking(Dispatchers.Default) { _allWords = viewModel.getAllWords() }
+                runBlocking(Dispatchers.Default) {
+
+                    _allWords = viewModel.getAllWords()
+
+                }
                 Test.number = 0 //  temporary
                 Test.setCounter()
                 val wordsNotAcquired = _allWords.filter {!it.acquired } // words yet to be acquired by user's memory
@@ -256,11 +243,11 @@ class FirstFragment : BaseFragment(),KodeinAware {
                 }
             }
 
-            R.id.item_all -> { navController.navigate(R.id.action_FirstFragment_to_allWordsFragment) }
+            R.id.item_all -> {navController.navigate(R.id.action_FirstFragment_to_allWordsFragment) }
 
             R.id.item_statistics -> {
 
-                var counter: Int = 0
+                var counter = 0
                 runBlocking(Dispatchers.Default) { counter = viewModel.counterWords() }
                 if (counter < 10) {
                     Toast.makeText(

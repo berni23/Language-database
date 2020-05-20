@@ -11,17 +11,12 @@ import androidx.core.os.bundleOf
 import androidx.navigation.Navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.berni.android.prototype1lanbase.R
-import com.berni.android.prototype1lanbase.db.Cat
 import com.berni.android.prototype1lanbase.db.CatWords
-import com.berni.android.prototype1lanbase.db.Word
-import com.berni.android.prototype1lanbase.wordId
 import kotlinx.android.synthetic.main.adapter_cat.view.*
-
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
-import org.kodein.di.generic.contextFinder
 import kotlin.coroutines.CoroutineContext
 
 
@@ -45,12 +40,10 @@ class CatAdapter(private val cats: List<CatWords>, private val viewModel: MainVi
     override fun onBindViewHolder(holder: CatViewHolder, position: Int) {
 
        // var wordNames  = mutableListOf<String>()
-
         val lastAdded: List<String?>
         val numWords: Int
 
         holder.view.text_view_title.text = cats[position].cat.catName
-
         val wordNames = cats[position].words.sortedBy {it.wordId }.reversed()
 
          lastAdded = listOf(
@@ -58,34 +51,30 @@ class CatAdapter(private val cats: List<CatWords>, private val viewModel: MainVi
                     wordNames.getOrNull(0)?.wordName,
                     wordNames.getOrNull(1)?.wordName,
                     wordNames.getOrNull(2)?.wordName
-
          )
-
 
         numWords = wordNames.size
         var lastAdditions =holder.itemView.context.getString(R.string.last_additions)
         if (lastAdded.elementAt(0)== null) {
 
             holder.view.text_view_last_additions.text =  holder.itemView.context.getString(R.string.no_words_added)
-            holder.view.text_view_numWords.text = ""
-                                                                }
+            holder.view.text_view_numWords.text = "" }
+
         else {
             lastAdded.forEach {if (it != null)  lastAdditions += " ${it}," }
             lastAdditions = lastAdditions.dropLast(1)  // drop the last comma of the string
-
             holder.view.text_view_last_additions.text = lastAdditions
-            holder.view.text_view_numWords.text=" $numWords + ${holder.itemView.context.getString(R.string.words)}"
+            holder.view.text_view_numWords.text=" $numWords ${holder.itemView.context.getString(R.string.words)}"
         }
 
         holder.view.text_view_date.text =  " ${holder.itemView.context.getString(R.string.createdOn)} ${cats[position].cat.catDate}"
-
         holder.view.setOnClickListener {
 
             val bundle = bundleOf("categoryName" to cats[position].cat)
             findNavController(it).navigate(R.id.actionAddCat, bundle)
         }
 
-        holder.view.setOnCreateContextMenuListener { menu: ContextMenu?, v: View?, menuInfo: ContextMenuInfo? ->
+        holder.view.setOnCreateContextMenuListener {menu: ContextMenu?, v: View?, menuInfo: ContextMenuInfo? ->
 
             menu?.add(holder.itemView.context.getString(R.string.delete))?.setOnMenuItemClickListener {
 
@@ -143,7 +132,6 @@ class CatAdapter(private val cats: List<CatWords>, private val viewModel: MainVi
                             return@setPositiveButton
                         }
 
-                        val renameWords = mutableListOf<Word>()
                     }
 
                     setNegativeButton(holder.itemView.context.getString(R.string.cancel)) { _, _ ->

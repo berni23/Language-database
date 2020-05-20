@@ -3,15 +3,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.berni.android.prototype1lanbase">
 
+    <uses-permission android:name="android.permission.INTERNET"/>
     <application
-        android:name=".LanApplication"
+        android:name=".LanApplication3"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.TutorialActivity"></activity>
+        <activity android:name=".ui.TutorialActivity" />
         <activity
             android:name=".ui.MainActivity"
             android:label="@string/app_name"
@@ -19,7 +20,6 @@
             tools:ignore="LockedOrientationActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
