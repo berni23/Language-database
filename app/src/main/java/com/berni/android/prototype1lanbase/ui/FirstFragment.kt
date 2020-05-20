@@ -76,28 +76,8 @@ class FirstFragment : BaseFragment(),KodeinAware {
 
 
        // runBlocking(Dispatchers.Default){firstCat = viewModel.anyCat()}
-        if (firstCat) {
 
-            val anim1: AnimationDrawable
-            arr.apply {
-                setBackgroundResource(R.drawable.anim_arrow)
-                anim1 = background as AnimationDrawable
-            }
-
-            anim1.start()
-
-           /** launch(Dispatchers.Default) {
-                val date = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(Date())
-                val cat = Cat("Example", date)
-                viewModel.addCat(cat)
-            }**/
-
-            val toast: Toast = Toast.makeText(context,"Press the button + in order to create a new category",Toast.LENGTH_LONG)
-            toast.setGravity(Gravity.CENTER, 0,0)
-            toast.show()
-        }
         viewModel.catsWithWords().observe(viewLifecycleOwner, Observer<List<CatWords>> {
-
         _allCats = it
         displayedCats = _allCats as MutableList<CatWords>
         recycler_view_cats.layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
@@ -164,6 +144,27 @@ class FirstFragment : BaseFragment(),KodeinAware {
         }
 
         recycler_view_newCat.visibility = View.GONE
+
+        if (firstCat) {
+
+            val anim1: AnimationDrawable
+            arr.apply {
+                setBackgroundResource(R.drawable.anim_arrow)
+                anim1 = background as AnimationDrawable
+            }
+
+            anim1.start()
+
+            /** launch(Dispatchers.Default) {
+            val date = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(Date())
+            val cat = Cat("Example", date)
+            viewModel.addCat(cat)
+            }**/
+
+            val toast: Toast = Toast.makeText(context,"Press the button + in order to create a new category",Toast.LENGTH_LONG)
+            toast.setGravity(Gravity.CENTER, 0,0)
+            toast.show()
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
