@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 10,
-    "identityHash": "8f7cb3245238cee966d4dfb8b160811a",
+    "identityHash": "20d11dfff3b3bbb1f1aeabf4b316d71b",
     "entities": [
       {
         "tableName": "Word",
@@ -92,7 +92,7 @@
       },
       {
         "tableName": "Cat",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`catName` TEXT NOT NULL, `catDate` TEXT NOT NULL, `catId` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `tag` TEXT NOT NULL)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`catName` TEXT NOT NULL, `catDate` TEXT NOT NULL, `catId` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL)",
         "fields": [
           {
             "fieldPath": "catName",
@@ -111,12 +111,6 @@
             "columnName": "catId",
             "affinity": "INTEGER",
             "notNull": true
-          },
-          {
-            "fieldPath": "tag",
-            "columnName": "tag",
-            "affinity": "TEXT",
-            "notNull": true
           }
         ],
         "primaryKey": {
@@ -132,7 +126,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '8f7cb3245238cee966d4dfb8b160811a')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '20d11dfff3b3bbb1f1aeabf4b316d71b')"
     ]
   }
 }

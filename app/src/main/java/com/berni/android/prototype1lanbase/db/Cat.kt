@@ -25,9 +25,10 @@ data class Cat(
     val catDate: String,
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "catId")
-    val catId: Int = 0,
-    @ColumnInfo(name="tag")
-    var tag:String = "hi"
+    val catId: Int = 0
+
+    //@ColumnInfo(name="tag")
+   // var tag:String = "hi"
 
 ):Serializable
 

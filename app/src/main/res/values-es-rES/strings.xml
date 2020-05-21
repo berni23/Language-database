@@ -118,6 +118,6 @@
         <string name="press_for_n_monthly_view">pulsa para ver el progreso mensual</string>
         <string name="number_of_words_monthly_added_n_last_6_active_months">número de palabras añadidas mensualmente, \n últimos seis meses</string>
         <string name="press_for_n_daily_view">pulsa para ver el progreso diario</string>
-        <string name ="all_the_words_added_on_the_group">aqui puedes ver todas las palabras añadidas en el grupo</string>
+        <string name ="all_the_words_added_on_the_group">aquí puedes ver todas las palabras añadidas en el grupo</string>
 
     </resources>

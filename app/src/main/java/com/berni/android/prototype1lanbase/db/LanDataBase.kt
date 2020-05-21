@@ -34,14 +34,14 @@ abstract class LanDataBase : RoomDatabase() {
                 }
             }**/
 
-           private val MIGRATION_9_10 = object : Migration(9, 10) {
+          /** private val MIGRATION_9_10 = object : Migration(9, 10) {
                override fun migrate(database: SupportSQLiteDatabase) {
                    database.execSQL(
                        "ALTER TABLE Cat ADD COLUMN tag TEXT NOT NULL DEFAULT ''"
                    )
 
                }
-           }
+           }**/
 
             @Volatile
             private var instance: LanDataBase? = null
@@ -59,7 +59,9 @@ abstract class LanDataBase : RoomDatabase() {
                     context.applicationContext,
                   LanDataBase::class.java,
                     "Lan.db"
-                ) .addMigrations(MIGRATION_9_10).build()
-            //fun getInstance(catDao: CatDao): CatDao { return catDao }
+                ) .build()
+
+        //.addMigrations(MIGRATION_9_10).build()
+
         }
 }
