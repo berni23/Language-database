@@ -11,7 +11,7 @@
         <string name="last_additions">addiciones recientes:</string>
         <string name="last_added_on">ultima edición el</string>
         <string name="_40_words">40 palabras</string>
-        <string name="first_added">orden de edición</string>
+        <string name="first_added">añadidos recientemente</string>
         <string name="translation">traducción</string>
         <string name="example">ejemplo (opcional)</string>
         <string name="withExample">palabras con ejemplo</string>
@@ -32,15 +32,14 @@
         <string name="ex1_editText">primer ejemplo</string>
         <string name="translation_example">traducción del ejemplo</string>
         <string name="definition_editText">definición (opcional)</string>
-        <string name="hint_newCat">escribe el nombre de la nueva categoría</string>
+        <string name="hint_newCat">escribe el nombre del grupo</string>
         <string name="note">nota</string>
         <string name="no_example_provided">Ningún ejemplo facilitado</string>
         <string name="no_example_translation_provided">Ninguna traducción facilitada</string>
         <string name="no_definition_provided">Ninguna definición facilitada</string>
         <string name="ready">Listo!</string>
         <string name="test">test</string>
-        <string name="_0_15">0/15</string>
-        <string name="score1">excelente!</string>
+    <string name="score1">excelente!</string>
         <string name="score2">fantástico!</string>
         <string name="score3">bien hecho!</string>
         <string name="score4">buen trabajo!</string>
@@ -86,12 +85,12 @@
         <string name="S2_first_word_added">Ya tienes tu primera palabra =), \n \n pulsa la opcón situada arriba ala derecha para verla</string>
         <string name="word_successfully_added">Palabra creada con éxito</string>
         <string name="no_words_added_yet">Ningua palabra añadida aún</string>
-        <string name="sorting_alphabet">Ordenar por orden alfabético</string>
+        <string name="sorting_alphabet">ordenar por orden alfabético</string>
         <string name="sorting_last_added">ordenar por añadidos anterior</string>
         <string name="sorting_first_added">ordenar por añadidos primero</string>
         <string name="filtering_ex">filtrar palbras con ejemplo</string>
         <string name="filtering_no_ex">filtrar palabras sin ejemplo</string>
-        <string name="sorting_length">filtrar palabras por tamaño</string>
+        <string name="sorting_length">ordenar palabras por tamaño</string>
         <string name="filtering_definition">filtrar palabras con definición</string>
         <string name="filtering_no_definition">filtrar palabras sin definición</string>
         <string name="filtering_acquired">filtrar palabras ya aprendidas</string>
@@ -106,18 +105,17 @@
         <string name="answer_can_not_be_blank">debes dar una respuesta válida</string>
         <string name="test_will_be_canceled">El test será cancelado y se perderá el progreso</string>
         <string name="time_up">tiempo finalizado!</string>
-        <string name="arrow_tutorial">tutorial flecha</string>
-        <string name="menu_edit_or_delete_word">menu para editar o borrar una palabra</string>
+    <string name="menu_edit_or_delete_word">menu para editar o borrar una palabra</string>
         <string name="write_the_correct_translation">escribe la traducción correcta</string>
         <string name="timer">tiempo</string>
         <string name="msg1_statistics1">Pulsa en el gráfico para obtener más información</string>
         <string name="number_of_words_n_per_group">Número de palabras \n por grupo</string>
         <string name="click_for_n_time_progress">pulsa para ver \n tu progreso</string>
-        <string name="words_acquired_vs_yet_to_n_be_learnt">palabras aprendidas vs pendientes de aprender</string>
+        <string name="words_acquired_vs_yet_to_n_be_learnt">palabras aprendidas vs \n pendientes de aprender</string>
         <string name="number_of_words_daily_added_n_last_100_active_days">número de palabras añadidas por día \n últimos 100 días activos</string>
-        <string name="press_for_n_monthly_view">pulsa para ver el progreso mensual</string>
+        <string name="press_for_n_monthly_view">pulsa para  ver el \n progreso mensual</string>
         <string name="number_of_words_monthly_added_n_last_6_active_months">número de palabras añadidas mensualmente, \n últimos seis meses</string>
-        <string name="press_for_n_daily_view">pulsa para ver el progreso diario</string>
+        <string name="press_for_n_daily_view">pulsa para ver el \n progreso diario</string>
         <string name ="all_the_words_added_on_the_group">aquí puedes ver todas las palabras añadidas en el grupo</string>
 
     </resources>

@@ -47,7 +47,6 @@
     <string name="no_definition_provided">no definition provided</string>
     <string name="ready">I\'m Ready!!</string>
     <string name="test">test</string>
-    <string name="_0_15">0/15</string>
 
     <!-- messages at the end of each test, depending on final score-->
     <string name="score1">excellent!!</string>
@@ -55,7 +54,7 @@
     <string name="score3">well done!</string>
     <string name="score4">good job!" </string>
     <string name="score5"> Keep practising!</string>
-    <string name="info_before_test">Press the button once you feel confident. \nYou will dispose of 15 minutes to write\n the correct translation for some words</string>
+    <string name="info_before_test">Press the button once you feel confident.  You will dispose of 15 minutes to write the correct translation for some words</string>
     <string name="back">back</string>
     <string name="statistics">statistics</string>
     <string name="show_all_words">show all words</string>
@@ -116,7 +115,7 @@
     <string name= "answer_can_not_be_blank">answer can\'t be blank</string>
     <string name = "test_will_be_canceled">the test will be canceled and the progress lost</string>
     <string name = "time_up">time\'s up!</string>
-    <string name="arrow_tutorial">arrow tutorial</string>
+    <string name="arrow_tutorial" translatable="false">arrow tutorial</string>
     <string name="menu_edit_or_delete_word">menu edit or delete word</string>
     <string name="write_the_correct_translation">write the correct translation</string>
     <string name="timer">timer</string>
