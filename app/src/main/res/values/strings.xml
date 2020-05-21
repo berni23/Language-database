@@ -3,14 +3,14 @@
     <string name="app_name">Database</string>
     <string name="action_settings">Settings</string>
     <!-- Strings used for fragments for navigation -->
-    <string name="first_fragment_label">First Fragment</string>
-    <string name="second_fragment_label">Second Fragment</string>
-    <string name="next">Next</string>
-    <string name="previous">Previous</string>
-    <string name="hello_first_fragment">Hello first fragment</string>
-    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="action_sort" />
+    <string name="first_fragment_label" translatable="false">First Fragment</string>
+    <string name="second_fragment_label" translatable="false">Second Fragment</string>
+    <string name="next" translatable="false">Next</string>
+    <string name="previous" translatable="false">Previous</string>
+    <string name="hello_first_fragment" translatable="false">Hello first fragment</string>
+    <string name="hello_second_fragment" translatable="false">Hello second fragment. Arg: %1$s</string>
+    <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
+    <string name="action_sort" translatable="false" />
     <string name="action_sortBy">sort by</string>
     <string name="last_added">sort by last added</string>
     <string name="alphabetically">sort alphabetically</string>
@@ -27,7 +27,7 @@
     <string name="noExample">no example</string>
     <string name="noDefinition">no definition</string>
     <string name="create">create</string>
-    <string name="cancel">Cancel</string>
+    <string name="cancel">cancel</string>
     <string name="go_to_words_list">go to words list</string>
     <string name="sort_by_length">sort by length</string>
     <string name="delete">delete</string>
@@ -128,4 +128,5 @@
     <string name="press_for_n_monthly_view">press for \n monthly view</string>
     <string name="number_of_words_monthly_added_n_last_6_active_months">number of words monthly added, \n last 6 active months</string>
     <string name="press_for_n_daily_view">press for \n daily view</string>
+    <string name ="all_the_words_added_on_the_group">here you have all the added words on the group"</string>
 </resources>

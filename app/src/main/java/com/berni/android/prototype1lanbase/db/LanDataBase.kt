@@ -43,7 +43,6 @@ abstract class LanDataBase : RoomDatabase() {
                }
            }
 
-
             @Volatile
             private var instance: LanDataBase? = null
 

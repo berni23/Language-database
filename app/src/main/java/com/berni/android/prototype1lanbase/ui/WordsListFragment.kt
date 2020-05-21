@@ -71,7 +71,8 @@ class WordsListFragment : BaseFragment(), KodeinAware {
 
         if(firstView) {
 
-            val toast: Toast =  Toast.makeText(context, "here you have all the added words on the group", Toast.LENGTH_LONG)
+           // resources.getString(R.string.last_added_on)
+            val toast: Toast =  Toast.makeText(context, "", Toast.LENGTH_LONG)
             toast.setGravity(Gravity.CENTER, 0,0)
             toast.show()
 
