@@ -1,18 +1,48 @@
 package com.berni.android.prototype1lanbase.db
 
 import android.content.Context
-import androidx.room.Database
-import androidx.room.Room
-import androidx.room.RoomDatabase
+import androidx.room.*
+import androidx.room.migration.Migration
+import androidx.sqlite.db.SupportSQLiteDatabase
 
 
-@Database(entities = [Word::class, Cat::class],version = 9, exportSchema = false)
+@Database(entities = [Word::class, Cat::class],version = 10, exportSchema = true)
 
 abstract class LanDataBase : RoomDatabase() {
 
     abstract fun catDao(): CatDao
 
+    //(catName, catDate, catId,tag)
         companion object {
+
+           /** private val MIGRATION_9_10 = object : Migration(9, 10) {
+                override fun migrate(database: SupportSQLiteDatabase) {
+                    database.execSQL("""
+                CREATE TABLE new_Cat (
+                     catName TEXT,
+                     catDate TEXT,
+                     catId INTEGER PRIMARY KEY NOT NULL,
+                     tag TEXT NOT NULL DEFAULT ''
+                )
+                """.trimIndent())
+                    database.execSQL("""
+                INSERT INTO new_Cat (catName, catDate, catId,tag)
+                SELECT catName, catDate,catId, tag FROM Cat
+                """.trimIndent())
+                    database.execSQL("DROP TABLE Cat")
+                    database.execSQL("ALTER TABLE new_Cat RENAME TO Cat")
+                }
+            }**/
+
+           private val MIGRATION_9_10 = object : Migration(9, 10) {
+               override fun migrate(database: SupportSQLiteDatabase) {
+                   database.execSQL(
+                       "ALTER TABLE Cat ADD COLUMN tag TEXT NOT NULL DEFAULT ''"
+                   )
+
+               }
+           }
+
 
             @Volatile
             private var instance: LanDataBase? = null
@@ -30,8 +60,7 @@ abstract class LanDataBase : RoomDatabase() {
                     context.applicationContext,
                   LanDataBase::class.java,
                     "Lan.db"
-                )
-                    .build()
+                ) .addMigrations(MIGRATION_9_10).build()
             //fun getInstance(catDao: CatDao): CatDao { return catDao }
         }
 }

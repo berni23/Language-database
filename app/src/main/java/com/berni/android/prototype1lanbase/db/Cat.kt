@@ -1,15 +1,9 @@
 package com.berni.android.prototype1lanbase.db
 
-import android.icu.util.Calendar
-import android.icu.util.Calendar.MONTH
-
 import androidx.room.*
-import android.os.Parcelable
-import org.kodein.di.generic.M
+import androidx.room.migration.Migration
+import androidx.sqlite.db.SupportSQLiteDatabase
 import java.io.Serializable
-import java.time.YearMonth
-import java.time.ZonedDateTime
-import kotlin.properties.Delegates
 
 data class CatWords(
 
@@ -31,9 +25,20 @@ data class Cat(
     val catDate: String,
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "catId")
-    val catId: Int = 0
+    val catId: Int = 0,
+    @ColumnInfo(name="tag")
+    var tag:String = "hi"
 
 ):Serializable
+
+   /** { val MIGRATION_9_10 = object : Migration(9, 10) {
+        override fun migrate(database: SupportSQLiteDatabase) {
+            database.execSQL(
+                "ALTER TABLE Song ADD COLUMN tag TEXT NOT NULL DEFAULT ''")
+        }
+    }
+   }**/
+
 
 @Entity
 data class Word  (
@@ -61,10 +66,13 @@ data class Word  (
     @ColumnInfo(name  ="lastOK")
     var lastOk: Int = 10
 
+
 ):Serializable {
 
     @PrimaryKey(autoGenerate = true)
     var wordId: Int = 0
+
+    // Migration from 1 to 2, Room 2.1.0
 }
 
     /*:Serializable{

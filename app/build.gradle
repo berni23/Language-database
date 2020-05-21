@@ -15,6 +15,19 @@ android {
         multiDexEnabled = true
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = ["room.schemaLocation":
+                                     "$projectDir/schemas".toString()]
+
+            }
+        }
+    }
+
+    sourceSets {
+        // Adds exported schema location as test app assets.
+        androidTest.assets.srcDirs += files("$projectDir/schemas".toString())
     }
 
     buildTypes {
@@ -92,5 +105,9 @@ dependencies {
 
     //library for accessing internet
 
-    androidTestImplementation'com.android.support.test:runner:0.5'
+    androidTestImplementation'com.android.support.test:runner:1.0.2'
+
+    //room migration testing
+
+    testImplementation "androidx.room:room-testing:2.2.5"
 }
