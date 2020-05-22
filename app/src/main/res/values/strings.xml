@@ -27,7 +27,7 @@
     <string name="noExample">no example</string>
     <string name="noDefinition">no definition</string>
     <string name="create">create</string>
-    <string name="cancel">cancel</string>
+    <string name="cancel">Cancel</string>
     <string name="go_to_words_list">go to words list</string>
     <string name="sort_by_length">sort by length</string>
     <string name="delete">delete</string>
@@ -127,12 +127,12 @@
     <string name="number_of_words_monthly_added_n_last_6_active_months">number of words monthly added, \n last 6 active months</string>
     <string name="press_for_n_daily_view">press for \n daily view</string>
     <string name="all_the_words_added_on_the_group">here you have all the added words on the group</string>
-    <string name = "about_app">About the app:</string>
+    <string name ="about_app">About the app:</string>
     <string name="about_app_text">Wos is a basic language app that allows the user to store its own vocabulary lists and practise with it .</string>
     <string name="about_tests">Tests:</string>
     <string name="about_tests_text">The app disposes of a system of tests for which up to 15 word are randomly picked and the user has to provide the correct translation. If the user answer is right, the word will not\nappear in the tests again for some days. When the user has repeatedly answered with the right translation, the word will be marked as acquired, \nand will no longer appear on the test. On top of that, it will appear as grey in the words list.</string>
     <string name="about_word_groups">Word groups:</string>
     <string name="about_word_groups_text">The structure of this app is similar to a notes app, with the difference that this up handles the words using a database, and hence you can perform actions like sorting, filtering searching and editing words. Each added word will poses certain properties, like translation, definition,example and example translation, and are accessible by clicking on top of the word.</string>
     <string name="about_statistics">Statistics</string>
-    <string name="about_statistics_text">On the top right menu of the main screen, you will find an statistics option, where you can see the distribution of word per group, as well as how many words have been acquired vs how many are still to be learnt. On top of that, you can also check the number of words added per day or month.</string>
+    <string name="about_statistics_text">On the top right menu of the main screen, you will find an statistics option where you can see the distribution of word per group, as well as how many are still to be learnt. On top of that, you can also check the number of words added per day or month.</string>
 </resources>

@@ -116,6 +116,25 @@
         <string name="number_of_words_monthly_added_n_last_6_active_months">número de palabras añadidas mensualmente, \n últimos seis meses</string>
         <string name="press_for_n_daily_view">pulsa para ver el \n progreso diario</string>
         <string name="all_the_words_added_on_the_group">aquí puedes ver todas las palabras añadidas en el grupo</string>
-        <string name="about_app">Sobre la app:</string>
+
+    <string name="about_app">Sobre la app:</string>
+    <string name="about_app_text">Wos és una app de idiomas que permite que el usuario guarde su propio vocabulario en listas y pueda practicarlo</string>
+    <string name="about_tests">Tests:</string>
+    <string name="about_tests_text">La app dispone de un sistema de tests, en el cual 15 palabras són seleccionadas de forma aleatoria y el usuario
+        ha de dar la traducción correcta. Si la respostuesta és acertada, la palabra no aparecerá más en los tests durante unos días.
+        Cuando el usuario haya dado la respuesta correcta varias veces,la palabra será marcada como adquirida, \n y no saldrá
+        més en los tests. Además, aparecerá de color gris en la lista de palabras.</string>
+
+    <string name="about_word_groups">Grupos de palabras:</string>
+    <string name="about_word_groups_text">La estructura de la app és similar a la de un bloc de notas, con la diferéncia  que
+    esta app guarda las palabras usando una base de datos, y por tanto puedes ordenarlas, filtrarlas, buscar palabras
+     en concreto o editarlas. Cada palabra añadida tiene ciertas propiedades como por ejemplo su traducción,
+    definición, ejemplo y traducción del ejemplo, y són accessibles clicando encima de la palabra.</string>
+    <string name="about_statistics">Estadísticas</string>
+    <string name="about_statistics_text">A la parte superior derecha del menú encontrarás
+    la opcion de ir a estadísticas, dónde puedes ver la distribución de palabras por grupo,
+    así como cuantas te has aprendido ya vs cuantas quedan por aprender. Además,
+    también puedes comprobar cuantas palabras añades diariamente o mensualmente.</string>
+
 
 </resources>

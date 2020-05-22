@@ -117,19 +117,11 @@
     <string name="press_for_n_daily_view">prem per \n veure\'n el progrés diari</string>
     <string name="all_the_words_added_on_the_group">aqui pots veure totes les paraules afegides al grup</string>
     <string name="about_app">Sobre la app:</string>
-    <string name="about_app_text">Wos és una app de idiomes la qual permet que l\'usuari guardi el seu propi vocabulari en llistes i pugui practicar-lo</string>
-
+    <string name="about_app_text">Wos és una app de idiomes la qual permet que l\'usuari guardi el seu propi vocabulari en llistes i pugui practicar\-lo</string>
     <string name="about_tests">Tests:</string>
-    <string name="about_tests_text">La app disposa de un sistema de test la qual 15 paraules són seleccionades de forma aleatòria i l\'usuari n\'ha de proveïr la
-    traducció correcta. Si la resposta és bona, la paraula no apareixerà als tests durant uns dies. Quan l\'usuari n'ha donat la resposta correcta varies vegades,
-    la paraula serà marcada com a adquirida, \n i no apareixerà més als tests. A més, apareixerà de color gris a la llista de paraules.</string>
-
-
-
-    <string name="about_word_groups">Word groups:</string>
-    <string name="about_word_groups_text">The structure of this app is similar to a notes app, with the difference that this up handles the words using a database, and hence you can perform actions like sorting, filtering searching and editing words. Each added word will poses certain properties, like translation, definition,example and example translation, and are accessible by clicking on top of the word.</string>
-    <string name="about_statistics">Statistics</string>
-    <string name="about_statistics_text">On the top right me>
-
-
+    <string name="about_tests_text">La app disposa d\'un sistema de test la qual 15 paraules són seleccionades de forma aleatòria i l\'usuari n\'ha de proveïr latraducció correcta. Si la resposta és bona, la paraula no apareixerà als tests durant uns dies. Quan l\'usuari n\'ha donat la resposta correcta varies vegades,la paraula serà marcada com a adquirida \n i no apareixerà més als tests. A més, apareixerà de color gris a la llista de paraules.</string>
+    <string name="about_word_groups">Grups de paraules:</string>
+    <string name="about_word_groups_text">L\'estructura de la app és similar a la de un bloc de notes, amb la diferència que aquesta app guarda les paraules a través d\' una base de dades, i per tant pots ordenar\-les, filtrar\-les, buscar paraulesconcretes o editar\-les. Cada paraula afegida té certes propietats com per exemple la traducció corresponent, definició, example i traducció del exemple, i són accessibles clicant sobre la paraula.</string>
+    <string name="about_statistics">Estadístiques</string>
+    <string name="about_statistics_text">A la part superior dreta del menú trobarásl \'item estadístiques, a on pots veure la distribució de paraules per grup, així com quantes n\'has aprés vs quantes queden per aprendre. A més,també pots comprovar quantes paraules afegeixes diariament o mensualment.</string>
 </resources>
