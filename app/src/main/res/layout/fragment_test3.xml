@@ -53,7 +53,7 @@
         android:layout_width="wrap_content"
         android:textSize="20sp"
         android:layout_height="wrap_content"
-        android:text="@string/_0_15"
+        android:text="0/15"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

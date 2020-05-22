@@ -25,7 +25,6 @@ class CatAdapter(private val cats: List<CatWords>, private val viewModel: MainVi
 ) : RecyclerView.Adapter<CatAdapter.CatViewHolder>(),
     View.OnCreateContextMenuListener, CoroutineScope {
 
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CatViewHolder {
 
         return CatViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.adapter_cat, parent, false))
@@ -74,7 +73,7 @@ class CatAdapter(private val cats: List<CatWords>, private val viewModel: MainVi
             findNavController(it).navigate(R.id.actionAddCat, bundle)
         }
 
-        holder.view.setOnCreateContextMenuListener {menu: ContextMenu?, v: View?, menuInfo: ContextMenuInfo? ->
+        holder.view.setOnCreateContextMenuListener { menu: ContextMenu?, v: View?, _: ContextMenuInfo? ->
 
             menu?.add(holder.itemView.context.getString(R.string.delete))?.setOnMenuItemClickListener {
 
@@ -109,7 +108,6 @@ class CatAdapter(private val cats: List<CatWords>, private val viewModel: MainVi
                     this.setView(input)
 
                     setTitle(holder.itemView.context.getString(R.string.edit_cat))
-                   // setMessage("You cannot undo this operation")
 
                     setPositiveButton(holder.itemView.context.getString(R.string.modify)) { _, _ ->
 
@@ -131,7 +129,6 @@ class CatAdapter(private val cats: List<CatWords>, private val viewModel: MainVi
                             input.requestFocus()
                             return@setPositiveButton
                         }
-
                     }
 
                     setNegativeButton(holder.itemView.context.getString(R.string.cancel)) { _, _ ->

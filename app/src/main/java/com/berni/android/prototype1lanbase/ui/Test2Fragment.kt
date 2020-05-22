@@ -87,7 +87,7 @@ class Test2Fragment : BaseFragment(){
         ) {
             override fun handleOnBackPressed() {
 
-                var bool: Boolean? = true
+               // var bool: Boolean? = true
                 AlertDialog.Builder(activity!!).apply {
                     setTitle(resources.getString(R.string.are_you_sure))
                     setMessage(resources.getString(R.string.test_will_be_canceled))

@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
     <resources>
         <string name="app_name">DatabaseTrial</string>
         <string name="action_settings">Opciones</string>
@@ -39,19 +38,19 @@
         <string name="no_definition_provided">Ninguna definición facilitada</string>
         <string name="ready">Listo!</string>
         <string name="test">test</string>
-    <string name="score1">excelente!</string>
+        <string name="score1">excelente!</string>
         <string name="score2">fantástico!</string>
         <string name="score3">bien hecho!</string>
         <string name="score4">buen trabajo!</string>
         <string name="score5">sigue practicando!</string>
-        <string name="info_before_test">"Pulsa el botón cuando quieras empezar, dispones de 15 minutos para escribir la traducción para algunas palabras "</string>
+        <string name="info_before_test">Pulsa el botón cuando quieras empezar, dispones de 15 minutos para escribir la traducción para algunas palabras</string>
         <string name="back">volver</string>
         <string name="statistics">estadísticas</string>
         <string name="show_all_words">mostrar todas las palabras</string>
         <string name="words_acquired">palabras aprendidas</string>
         <string name="words_not_acquired">palabras por aprender</string>
         <string name="not_acquired">no aprendidas aún</string>
-        <string name="how_the_app_works">funcionamiento de la app</string>
+        <string name="how_the_app_works">info sobre la app</string>
         <string name="m2_tutorial">Deja que te enseñe como funciona! :)</string>
         <string name="hi">Buenas !</string>
         <string name="m1_tutorial">Parece que és la primera vez que usas Wos</string>
@@ -74,7 +73,7 @@
         <string name="msg_first_cat_created">Bien hecho! Ahora puedes clicar encima de la categoría para añadir palabras :)</string>
         <string name="successfully_created">creada con éxito</string>
         <string name="msg_first_btn_pressed">Pulsa el botón + para crear una nueva categoría</string>
-        <string name="max_tests_today_reached">Ya has realizado dos tests hoy, prueba mañana !</string>
+        <string name="max_tests_today_reached">Ya has realizado dos tests hoy, prueba mañana!</string>
         <string name="add_more_words">Por favor, añade más palabras para poder realizar tests</string>
         <string name="add_or_wait">Por favor, añade más palabras o espera unos días para poder realizar tests</string>
         <string name="add_more_words_statistics">Por favor, añade más palabras para poder visualizar estadísticas</string>
@@ -105,7 +104,7 @@
         <string name="answer_can_not_be_blank">debes dar una respuesta válida</string>
         <string name="test_will_be_canceled">El test será cancelado y se perderá el progreso</string>
         <string name="time_up">tiempo finalizado!</string>
-    <string name="menu_edit_or_delete_word">menu para editar o borrar una palabra</string>
+        <string name="menu_edit_or_delete_word">menu para editar o borrar una palabra</string>
         <string name="write_the_correct_translation">escribe la traducción correcta</string>
         <string name="timer">tiempo</string>
         <string name="msg1_statistics1">Pulsa en el gráfico para obtener más información</string>
@@ -116,6 +115,7 @@
         <string name="press_for_n_monthly_view">pulsa para  ver el \n progreso mensual</string>
         <string name="number_of_words_monthly_added_n_last_6_active_months">número de palabras añadidas mensualmente, \n últimos seis meses</string>
         <string name="press_for_n_daily_view">pulsa para ver el \n progreso diario</string>
-        <string name ="all_the_words_added_on_the_group">aquí puedes ver todas las palabras añadidas en el grupo</string>
+        <string name="all_the_words_added_on_the_group">aquí puedes ver todas las palabras añadidas en el grupo</string>
+        <string name="about_app">Sobre la app:</string>
 
-    </resources>
+</resources>

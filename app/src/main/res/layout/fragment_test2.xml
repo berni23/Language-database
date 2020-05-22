@@ -96,12 +96,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize = "20sp"
-        android:text="@string/_0_15"
+        android:text="0/15"
         app:layout_constraintBottom_toBottomOf="@id/HguideCounter"
         app:layout_constraintEnd_toEndOf="@id/VguideCounter"
         app:layout_constraintStart_toStartOf="@id/VguideCounter"
-        app:layout_constraintTop_toTopOf="@id/HguideCounter" />
-
+        app:layout_constraintTop_toTopOf="@id/HguideCounter"/>
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/VguideTimer"
@@ -138,7 +137,6 @@
         />
 
     </androidx.appcompat.widget.LinearLayoutCompat>
-
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
 

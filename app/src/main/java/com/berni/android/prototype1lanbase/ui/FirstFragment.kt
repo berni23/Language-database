@@ -244,7 +244,7 @@ class FirstFragment : BaseFragment(),KodeinAware {
             }
 
             R.id.item_all -> {navController.navigate(R.id.action_FirstFragment_to_allWordsFragment) }
-
+            R.id.item_infoApp ->{navController.navigate(R.id.actionInfo)}
             R.id.item_statistics -> {
 
                 var counter = 0

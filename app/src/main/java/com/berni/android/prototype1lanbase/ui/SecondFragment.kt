@@ -118,7 +118,7 @@ class SecondFragment : BaseFragment(),KodeinAware {
             }
 
              var bool = true
-             var id = wordId(cat.catId.toString(),theWord)
+             //var id = wordId(cat.catId.toString(),theWord)
 
             runBlocking(Dispatchers.Default) {bool = viewModel.validWordId(cat.catId.toString(),theWord) }
 

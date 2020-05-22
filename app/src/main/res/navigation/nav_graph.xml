@@ -40,6 +40,9 @@
             app:popExitAnim="@anim/animate_slide_up_exit"
             app:popEnterAnim="@anim/animate_slide_up_enter"
             app:destination="@id/statisticsFragment" />
+        <action
+            android:id="@+id/actionInfo"
+            app:destination="@id/infoFragment" />
 
     </fragment>
 
@@ -235,4 +238,8 @@
             app:popExitAnim="@anim/animate_slide_out_left"
             app:destination="@id/statisticsFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/infoFragment"
+        android:name="com.berni.android.prototype1lanbase.ui.InfoFragment"
+        android:label="InfoFragment" />
 </navigation>
