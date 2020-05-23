@@ -160,7 +160,6 @@ class FirstFragment : BaseFragment(),KodeinAware {
 
             override fun onQueryTextChange(newText: String?): Boolean {
 
-                Toast.makeText(context, newText, Toast.LENGTH_SHORT).show()
                 if (newText.isNullOrEmpty()) {
                     displayedCats = _allCats as MutableList<CatWords>
 

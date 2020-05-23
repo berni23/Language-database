@@ -7,7 +7,7 @@
         <string name="alphabetically">alfabeticamente</string>
         <string name="sort">ordenar</string>
         <string name="info">información</string>
-        <string name="last_additions">addiciones recientes:</string>
+        <string name="last_additions">adiciones recientes:</string>
         <string name="last_added_on">ultima edición el</string>
         <string name="_40_words">40 palabras</string>
         <string name="first_added">añadidos recientemente</string>
@@ -27,7 +27,7 @@
         <string name="search">buscar</string>
         <string name="category">categoría</string>
         <string name="word">palabra</string>
-        <string name="createdOn">"creada el "</string>
+        <string name="createdOn">creada el</string>
         <string name="ex1_editText">primer ejemplo</string>
         <string name="translation_example">traducción del ejemplo</string>
         <string name="definition_editText">definición (opcional)</string>
@@ -43,7 +43,8 @@
         <string name="score3">bien hecho!</string>
         <string name="score4">buen trabajo!</string>
         <string name="score5">sigue practicando!</string>
-        <string name="info_before_test">Pulsa el botón cuando quieras empezar, dispones de 15 minutos para escribir la traducción para algunas palabras</string>
+        <string name="info_before_test">Pulsa el botón cuando quieras empezar, dispones de 15 minutos para escribir la
+traducción para algunas palabras</string>
         <string name="back">volver</string>
         <string name="statistics">estadísticas</string>
         <string name="show_all_words">mostrar todas las palabras</string>
@@ -68,34 +69,34 @@
         <string name="name_already_exists">este nombre ya existe</string>
         <string name="renaming">renombrando..</string>
         <string name="cat_required">se requiere categoría</string>
-        <string name="cat_already_exists">ésta categoría ya existe</string>
+        <string name="cat_already_exists">esta categoría ya existe</string>
         <string name="cat_name_rejected">nombre rechazado</string>
-        <string name="msg_first_cat_created">Bien hecho! Ahora puedes clicar encima de la categoría para añadir palabras :)</string>
+        <string name="msg_first_cat_created">Bien hecho! Ahora puedes pulsar encima de la categoría para añadir palabras :)</string>
         <string name="successfully_created">creada con éxito</string>
         <string name="msg_first_btn_pressed">Pulsa el botón + para crear una nueva categoría</string>
-        <string name="max_tests_today_reached">Ya has realizado dos tests hoy, prueba mañana!</string>
+        <string name="max_tests_today_reached">Ya has realizado dos tests hoy, prueba mañana otra vez!</string>
         <string name="add_more_words">Por favor, añade más palabras para poder realizar tests</string>
-        <string name="add_or_wait">Por favor, añade más palabras o espera unos días para poder realizar tests</string>
+        <string name="add_or_wait">Por favor, añade más palabras o espera unos días para poder realizar tests de nuevo</string>
         <string name="add_more_words_statistics">Por favor, añade más palabras para poder visualizar estadísticas</string>
         <string name="S2_first_word">Escribe una palabra en la lengua que deseas aprender así como su traducción</string>
         <string name="word_required">Se require una palabra o expresión</string>
         <string name="trans_required">Se requiere la traducción</string>
         <string name="word_exists">Esta palabra ya existe</string>
-        <string name="S2_first_word_added">Ya tienes tu primera palabra =), \n \n pulsa la opcón situada arriba ala derecha para verla</string>
+        <string name="S2_first_word_added">Ya tienes tu primera palabra =), \n \n pulsa la opcón situada arriba a la derecha para verla</string>
         <string name="word_successfully_added">Palabra creada con éxito</string>
         <string name="no_words_added_yet">Ningua palabra añadida aún</string>
         <string name="sorting_alphabet">ordenar por orden alfabético</string>
-        <string name="sorting_last_added">ordenar por añadidos anterior</string>
+        <string name="sorting_last_added">ordenar por ultimos añadidos</string>
         <string name="sorting_first_added">ordenar por añadidos primero</string>
-        <string name="filtering_ex">filtrar palbras con ejemplo</string>
+        <string name="filtering_ex">filtrar palabras con ejemplo</string>
         <string name="filtering_no_ex">filtrar palabras sin ejemplo</string>
         <string name="sorting_length">ordenar palabras por tamaño</string>
         <string name="filtering_definition">filtrar palabras con definición</string>
         <string name="filtering_no_definition">filtrar palabras sin definición</string>
         <string name="filtering_acquired">filtrar palabras ya aprendidas</string>
         <string name="filtering_not_acquired">filtrar palabras aún por aprender</string>
-        <string name="msg_timerToast1">selecciona una de las opciones del menu para busqueda, filtro o orden de las palabras</string>
-        <string name="msg_timerToast2">pulsa una palabra para ver la información</string>
+        <string name="msg_timerToast1">selecciona una de las opciones del menu para búsqueda, filtro o orden de las palabras</string>
+        <string name="msg_timerToast2">pulsa una palabra para ver la información correspondiente</string>
         <string name="msg_timerToast3">añade o edita la info con el menú situado a la derecha de cada palabra</string>
         <string name="added_on">"añadido el "</string>
         <string name="edit_info">editar info</string>
@@ -104,37 +105,36 @@
         <string name="answer_can_not_be_blank">debes dar una respuesta válida</string>
         <string name="test_will_be_canceled">El test será cancelado y se perderá el progreso</string>
         <string name="time_up">tiempo finalizado!</string>
-        <string name="menu_edit_or_delete_word">menu para editar o borrar una palabra</string>
+        <string name="menu_edit_or_delete_word">menú para editar o borrar una palabra</string>
         <string name="write_the_correct_translation">escribe la traducción correcta</string>
         <string name="timer">tiempo</string>
         <string name="msg1_statistics1">Pulsa en el gráfico para obtener más información</string>
         <string name="number_of_words_n_per_group">Número de palabras \n por grupo</string>
         <string name="click_for_n_time_progress">pulsa para ver \n tu progreso</string>
         <string name="words_acquired_vs_yet_to_n_be_learnt">palabras aprendidas vs \n pendientes de aprender</string>
-        <string name="number_of_words_daily_added_n_last_100_active_days">número de palabras añadidas por día \n últimos 100 días activos</string>
+        <string name="number_of_words_daily_added_n_last_100_active_days">número de palabras añadidas por día, \n últimos 100 días activos</string>
         <string name="press_for_n_monthly_view">pulsa para  ver el \n progreso mensual</string>
-        <string name="number_of_words_monthly_added_n_last_6_active_months">número de palabras añadidas mensualmente, \n últimos seis meses</string>
+        <string name="number_of_words_monthly_added_n_last_6_active_months">número de palabras añadidas \n mensualmente, últimos seis meses</string>
         <string name="press_for_n_daily_view">pulsa para ver el \n progreso diario</string>
         <string name="all_the_words_added_on_the_group">aquí puedes ver todas las palabras añadidas en el grupo</string>
 
     <string name="about_app">Sobre la app:</string>
-    <string name="about_app_text">Wos és una app de idiomas que permite que el usuario guarde su propio vocabulario en listas y pueda practicarlo</string>
+    <string name="about_app_text">Wos es una app de idiomas que permite que el usuario guarde su propio vocabulario en listas y pueda practicarlo</string>
     <string name="about_tests">Tests:</string>
-    <string name="about_tests_text">La app dispone de un sistema de tests, en el cual 15 palabras són seleccionadas de forma aleatoria y el usuario
+    <string name="about_tests_text">La app dispone de un sistema de tests, por el cual 15 palabras són seleccionadas de forma aleatoria y el usuario
         ha de dar la traducción correcta. Si la respostuesta és acertada, la palabra no aparecerá más en los tests durante unos días.
         Cuando el usuario haya dado la respuesta correcta varias veces,la palabra será marcada como adquirida, \n y no saldrá
-        més en los tests. Además, aparecerá de color gris en la lista de palabras.</string>
+        más en los tests. Además, aparecerá de color gris en la lista de palabras.</string>
 
     <string name="about_word_groups">Grupos de palabras:</string>
-    <string name="about_word_groups_text">La estructura de la app és similar a la de un bloc de notas, con la diferéncia  que
+    <string name="about_word_groups_text">La estructura de la app es similar a la de un bloc de notas, con la diferéncia que
     esta app guarda las palabras usando una base de datos, y por tanto puedes ordenarlas, filtrarlas, buscar palabras
      en concreto o editarlas. Cada palabra añadida tiene ciertas propiedades como por ejemplo su traducción,
-    definición, ejemplo y traducción del ejemplo, y són accessibles clicando encima de la palabra.</string>
+    definición, ejemplo y traducción del ejemplo, y són accesibles pulsando encima de la palabra.</string>
     <string name="about_statistics">Estadísticas</string>
-    <string name="about_statistics_text">A la parte superior derecha del menú encontrarás
-    la opcion de ir a estadísticas, dónde puedes ver la distribución de palabras por grupo,
+    <string name="about_statistics_text">En la parte superior derecha del menú encontrarás
+    la opción de ir a estadísticas, dónde puedes ver la distribución de palabras por grupo,
     así como cuantas te has aprendido ya vs cuantas quedan por aprender. Además,
     también puedes comprobar cuantas palabras añades diariamente o mensualmente.</string>
-
-
+    <string name = "msg_firstView">Aquí puedes ver las palabras añadidas</string>
 </resources>

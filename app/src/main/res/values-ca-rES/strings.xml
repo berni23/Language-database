@@ -7,12 +7,12 @@
     <string name="alphabetically">alfabèticament</string>
     <string name="sort">ordenar</string>
     <string name="info">informació</string>
-    <string name="last_additions">ultimes addicions:</string>
+    <string name="last_additions">ultims afegits:</string>
     <string name="last_added_on">última addició al</string>
     <string name="_40_words">40 paraules</string>
     <string name="first_added">afegits recentment</string>
     <string name="translation">traducció</string>
-    <string name="example">exa</string>
+    <string name="example">exemple</string>
     <string name="withExample">paraules amb exemple</string>
     <string name="withDefinition">paraules sense exemple</string>
     <string name="noExample">sense exemple</string>
@@ -38,7 +38,7 @@
     <string name="no_definition_provided">Cap definició proveïda</string>
     <string name="ready">Estic preparat !</string>
     <string name="test">"test "</string>
-    <string name="score1">excelent!</string>
+    <string name="score1">excel·lent!</string>
     <string name="score2">fantástic</string>
     <string name="score3">molt bé!</string>
     <string name="score4">bona feina!</string>
@@ -49,11 +49,11 @@
     <string name="show_all_words">mostrar totes les paraules</string>
     <string name="words_acquired">paraules apreses</string>
     <string name="words_not_acquired">paraules per aprendre</string>
-    <string name="not_acquired">encara no aprés</string>
+    <string name="not_acquired">encara no apreses</string>
     <string name="how_the_app_works">funcionament de la app</string>
     <string name="m2_tutorial">Deixa\'m que te\'n expliqui el funcionament! :)</string>
     <string name="hi">Bones!</string>
-    <string name="m1_tutorial">Sembla ser el teu primer com fent servir WoS</string>
+    <string name="m1_tutorial">Sembla que és el teu primer com fent servir WoS</string>
     <string name="tutorial_m3">"Wos és una app disenyada per tal de guardar i practicar vocabulari creant grups de paraules, afegint-hi informació i fent tests. "</string>
     <string name="no_words_added">Cap paraula afegida</string>
     <string name="words">paraules</string>
@@ -67,7 +67,7 @@
     <string name="new_name_required">introdueix un nom</string>
     <string name="name_already_exists">aquest grup ja existeix</string>
     <string name="renaming">renombrant..</string>
-    <string name="cat_required">categoria necessária</string>
+    <string name="cat_required">categoría necessária</string>
     <string name="cat_already_exists">aquesta categoría ja existeix</string>
     <string name="cat_name_rejected">nom rebutjat</string>
     <string name="msg_first_cat_created">Ben fet! Ara pots premer a la categoría per tal d\'afegir paraules</string>
@@ -124,4 +124,5 @@
     <string name="about_word_groups_text">L\'estructura de la app és similar a la de un bloc de notes, amb la diferència que aquesta app guarda les paraules a través d\' una base de dades, i per tant pots ordenar\-les, filtrar\-les, buscar paraulesconcretes o editar\-les. Cada paraula afegida té certes propietats com per exemple la traducció corresponent, definició, example i traducció del exemple, i són accessibles clicant sobre la paraula.</string>
     <string name="about_statistics">Estadístiques</string>
     <string name="about_statistics_text">A la part superior dreta del menú trobarásl \'item estadístiques, a on pots veure la distribució de paraules per grup, així com quantes n\'has aprés vs quantes queden per aprendre. A més,també pots comprovar quantes paraules afegeixes diariament o mensualment.</string>
+    <string name = "msg_firstView">Aqui pots veure les paraules afegides</string>
 </resources>

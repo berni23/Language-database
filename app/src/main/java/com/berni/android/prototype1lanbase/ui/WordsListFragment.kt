@@ -72,7 +72,7 @@ class WordsListFragment : BaseFragment(), KodeinAware {
         if(firstView) {
 
            // resources.getString(R.string.last_added_on)
-            val toast: Toast =  Toast.makeText(context, "", Toast.LENGTH_LONG)
+            val toast: Toast =  Toast.makeText(context, "Here you can see the added words", Toast.LENGTH_LONG)
             toast.setGravity(Gravity.CENTER, 0,0)
             toast.show()
 

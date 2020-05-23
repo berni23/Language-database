@@ -103,15 +103,11 @@ class WordAdapter(private val words: List<Word>, private val viewModel: MainView
 
             stopTimers()
 
-
-
-
         }
     }
 
     class WordViewHolder(val view: View) : RecyclerView.ViewHolder(view)
-
-    private fun stopTimers(){ timers.forEach{ it.cancel() } }
+    private fun stopTimers(){timers.forEach{it.cancel()}}
 
 }
 
