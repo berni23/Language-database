@@ -1,10 +1,13 @@
 package com.berni.android.prototype1lanbase.ui
 
 
+import android.annotation.SuppressLint
 import android.content.Context
+import android.os.Build
 import android.os.Bundle
 import android.view.*
 import androidx.activity.OnBackPressedCallback
+import androidx.annotation.RequiresApi
 import kotlinx.android.synthetic.main.fragment_statistics3.*
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
@@ -19,7 +22,9 @@ import kotlinx.coroutines.runBlocking
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.closestKodein
 import org.kodein.di.generic.instance
+import java.time.temporal.ChronoUnit
 import kotlin.collections.ArrayList
+import org.threeten.bp.LocalDateTime
 
 class Statistics3Fragment : BaseFragment(),KodeinAware {
 
@@ -38,6 +43,8 @@ class Statistics3Fragment : BaseFragment(),KodeinAware {
         return inflater.inflate(R.layout.fragment_statistics3, container, false)
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
+    @SuppressLint("NewApi")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
         navController = Navigation.findNavController(view)
@@ -50,11 +57,15 @@ class Statistics3Fragment : BaseFragment(),KodeinAware {
         lineDays.data(dataDays)
         lineChart.setChart(lineDays)
 
-        changeGraphs.setOnClickListener{
+        changeGraphs.setOnClickListener{ navController.navigate(R.id.actionMonthlyView) }
 
-            navController.navigate(R.id.actionMonthlyView)
 
-            }
+       /** var date1 = LocalDateTime.now()
+        var date2 = date1.plusDays(-2)
+        println(date1.until(date2,ChronoUnit.DAYS))
+
+       **/
+
 
         super.onViewCreated(view, savedInstanceState)
         }

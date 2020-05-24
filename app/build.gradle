@@ -70,7 +70,6 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
     implementation 'android.arch.lifecycle:extensions:1.1.1'
 
-
     //kodein injection
 
     implementation "org.kodein.di:kodein-di-generic-jvm:$kodein_version"
@@ -92,5 +91,7 @@ dependencies {
 
     implementation 'com.github.AnyChart:AnyChart-Android:1.1.2'
 
-    implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
+    //implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
+
+    implementation 'com.jakewharton.threetenabp:threetenabp:1.2.4'
 }
