@@ -3,7 +3,6 @@ package com.berni.android.prototype1lanbase.ui
 import android.graphics.drawable.AnimationDrawable
 import android.os.Build
 import android.os.Bundle
-import android.os.CountDownTimer
 import android.view.*
 import android.widget.Toast
 import androidx.annotation.RequiresApi
@@ -13,14 +12,10 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
-import androidx.room.TypeConverter
 import com.berni.android.prototype1lanbase.R
 import com.berni.android.prototype1lanbase.db.Cat
 import com.berni.android.prototype1lanbase.db.Word
-import com.berni.android.prototype1lanbase.wordId
-import kotlinx.android.synthetic.main.fragment_first.*
 import kotlinx.android.synthetic.main.fragment_second.*
-import kotlinx.android.synthetic.main.fragment_test2.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
@@ -28,10 +23,7 @@ import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.closestKodein
 import org.kodein.di.generic.instance
 import java.text.SimpleDateFormat
-import java.time.LocalDateTime
-import java.time.ZonedDateTime
 import java.util.*
-import java.util.concurrent.TimeUnit
 
 /**
  * A simple [Fragment] subclass as the second destination in the navigation.
@@ -40,7 +32,7 @@ class SecondFragment : BaseFragment(),KodeinAware {
 
     override val kodein by closestKodein()
     private val viewModelFactory: ViewModelFactory by instance<ViewModelFactory>()
-    var firstWord  = Tutorial.firstWord
+    var firstWord  = true
     private lateinit var viewModel: MainViewModel
     private lateinit var cat: Cat
     private lateinit var navController: NavController
@@ -63,7 +55,11 @@ class SecondFragment : BaseFragment(),KodeinAware {
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-       // runBlocking{firstWord = viewModel.anyCat()}
+
+        navController = Navigation.findNavController(view)
+        (activity as AppCompatActivity).supportActionBar?.title = cat.catName
+        viewModel = ViewModelProvider(this, viewModelFactory).get(MainViewModel::class.java)
+        runBlocking(Dispatchers.Default){firstWord = viewModel.anyCat()}
 
         if (firstWord)
 
@@ -80,19 +76,15 @@ class SecondFragment : BaseFragment(),KodeinAware {
             anim1.start()
         }
 
-        navController = Navigation.findNavController(view)
-        (activity as AppCompatActivity).supportActionBar?.title = cat.catName
-        viewModel = ViewModelProvider(this, viewModelFactory).get(MainViewModel::class.java)
-
         btn_save.setOnClickListener {
 
             //TODO() http request for auto -completion of all the blanks except for the 'word'
-
             // required blanks
 
             val theWord = word_editText.text.toString().trim()
             val translation1 = trans1_editText.text.toString().trim()
             val date =  SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(Date())
+
             // optional blanks
 
             var example1 : String? = ex1_editText.text.toString().trim()
@@ -118,8 +110,6 @@ class SecondFragment : BaseFragment(),KodeinAware {
             }
 
              var bool = true
-             //var id = wordId(cat.catId.toString(),theWord)
-
             runBlocking(Dispatchers.Default) {bool = viewModel.validWordId(cat.catId.toString(),theWord) }
 
             if(bool) {
@@ -128,7 +118,6 @@ class SecondFragment : BaseFragment(),KodeinAware {
 
                 val word = Word(theWord,translation1,example1,translationExample1,definition,date.toString(),cat.catId)
                 viewModel.addWord(word)
-
              }
             }
 
@@ -160,10 +149,8 @@ class SecondFragment : BaseFragment(),KodeinAware {
             }
 
             else {Toast.makeText(context,  resources.getString(R.string.word_successfully_added), Toast.LENGTH_LONG).show() }
-
         }
     }
-
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
 
         super.onCreateOptionsMenu(menu, inflater)
@@ -186,7 +173,7 @@ class SecondFragment : BaseFragment(),KodeinAware {
        return super.onOptionsItemSelected(item)
    }
 
-    object LocalDateTimeConverter {
+   /*** object LocalDateTimeConverter {
         @RequiresApi(Build.VERSION_CODES.O)
         @TypeConverter
         fun toDate(dateString: String?): LocalDateTime? {
@@ -202,6 +189,7 @@ class SecondFragment : BaseFragment(),KodeinAware {
             return date?.toString()
         }
     }
+   **/
 }
 
 

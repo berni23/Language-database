@@ -35,15 +35,6 @@
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.50" />
 
-    <!-- <ScrollView
-        android:scrollbars="none"
-        android:paddingVertical="100dp"
-        android:layout_width="350dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="@id/HguideWord"
-        app:layout_constraintEnd_toEndOf="@id/VguideWord"
-        app:layout_constraintStart_toStartOf="@id/VguideWord"
-        app:layout_constraintTop_toTopOf="@id/HguideWord">-->
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/Hrect1"
@@ -134,7 +125,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.72" />
+        app:layout_constraintGuide_percent="0.70" />
 
     <androidx.cardview.widget.CardView
         app:cardCornerRadius="5dp"

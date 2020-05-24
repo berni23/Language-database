@@ -115,7 +115,7 @@
     <string name="press_for_n_monthly_view">prem per \n veure el progrés mensual</string>
     <string name="number_of_words_monthly_added_n_last_6_active_months">nombre de paraules afegides mensualment, \n, útlims 6 mesos actius</string>
     <string name="press_for_n_daily_view">prem per \n veure\'n el progrés diari</string>
-    <string name="all_the_words_added_on_the_group">aqui pots veure totes les paraules afegides al grup</string>
+    <string name="all_the_words_added_on_the_group">aqui pots veure totes les paraules afegides al grup .</string>
     <string name="about_app">Sobre la app:</string>
     <string name="about_app_text">Wos és una app de idiomes la qual permet que l\'usuari guardi el seu propi vocabulari en llistes i pugui practicar\-lo</string>
     <string name="about_tests">Tests:</string>
@@ -123,6 +123,8 @@
     <string name="about_word_groups">Grups de paraules:</string>
     <string name="about_word_groups_text">L\'estructura de la app és similar a la de un bloc de notes, amb la diferència que aquesta app guarda les paraules a través d\' una base de dades, i per tant pots ordenar\-les, filtrar\-les, buscar paraulesconcretes o editar\-les. Cada paraula afegida té certes propietats com per exemple la traducció corresponent, definició, example i traducció del exemple, i són accessibles clicant sobre la paraula.</string>
     <string name="about_statistics">Estadístiques</string>
-    <string name="about_statistics_text">A la part superior dreta del menú trobarásl \'item estadístiques, a on pots veure la distribució de paraules per grup, així com quantes n\'has aprés vs quantes queden per aprendre. A més,també pots comprovar quantes paraules afegeixes diariament o mensualment.</string>
+    <string name="about_statistics_text">A la part superior dreta del menú trobarás l\'item estadístiques, a on pots veure la distribució de paraules per grup, així com quantes n\'has aprés vs quantes queden per aprendre. A més,també pots comprovar quantes paraules afegeixes diariament o mensualment.</string>
     <string name = "msg_firstView">Aqui pots veure les paraules afegides</string>
+    <string name = "all_words">Totes les paraules</string>
+
 </resources>

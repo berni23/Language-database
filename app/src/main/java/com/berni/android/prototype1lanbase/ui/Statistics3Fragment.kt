@@ -50,13 +50,10 @@ class Statistics3Fragment : BaseFragment(),KodeinAware {
         lineDays.data(dataDays)
         lineChart.setChart(lineDays)
 
-        changeGraphs.setOnClickListener{
-
-            navController.navigate(R.id.actionMonthlyView)
-
-            }
-
+        changeGraphs.setOnClickListener{ navController.navigate(R.id.actionMonthlyView) }
         super.onViewCreated(view, savedInstanceState)
+
+
         }
 
 

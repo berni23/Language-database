@@ -86,7 +86,7 @@ traducción para algunas palabras</string>
         <string name="word_successfully_added">Palabra creada con éxito</string>
         <string name="no_words_added_yet">Ningua palabra añadida aún</string>
         <string name="sorting_alphabet">ordenar por orden alfabético</string>
-        <string name="sorting_last_added">ordenar por ultimos añadidos</string>
+        <string name="sorting_last_added">ordenar por últimos añadidos</string>
         <string name="sorting_first_added">ordenar por añadidos primero</string>
         <string name="filtering_ex">filtrar palabras con ejemplo</string>
         <string name="filtering_no_ex">filtrar palabras sin ejemplo</string>
@@ -137,4 +137,5 @@ traducción para algunas palabras</string>
     así como cuantas te has aprendido ya vs cuantas quedan por aprender. Además,
     también puedes comprobar cuantas palabras añades diariamente o mensualmente.</string>
     <string name = "msg_firstView">Aquí puedes ver las palabras añadidas</string>
+    <string name = "all_words">Todas las palabras</string>
 </resources>

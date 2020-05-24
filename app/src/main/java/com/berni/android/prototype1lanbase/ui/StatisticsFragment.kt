@@ -50,10 +50,8 @@ class StatisticsFragment : BaseFragment(), KodeinAware
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
-
         navController = Navigation.findNavController(view)
-        (activity as AppCompatActivity).supportActionBar?.title = "Statistics"
+        (activity as AppCompatActivity).supportActionBar?.title = resources.getString(R.string.statistics)
         viewModel = ViewModelProvider(this, viewModelFactory).get(MainViewModel::class.java)
        runBlocking(Dispatchers.Default) {
 
@@ -62,11 +60,7 @@ class StatisticsFragment : BaseFragment(), KodeinAware
 
        }
 
-        btnTimeProgress.setOnClickListener{
-
-            navController.navigate(R.id.actionTimeLine)
-        }
-
+        btnTimeProgress.setOnClickListener{ navController.navigate(R.id.actionTimeLine) }
         pieChartAcquired()
         setupPieChart()
         Toast.makeText(context,resources.getString(R.string.msg1_statistics1),Toast.LENGTH_LONG).show()

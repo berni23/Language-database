@@ -39,7 +39,6 @@ class AllWordsFragment : BaseFragment(), KodeinAware {
     private var lastAdditionDate: String? = ""
     private lateinit var navController: NavController
 
-
     override val kodein by closestKodein()
     private val viewModelFactory: ViewModelFactory by instance<ViewModelFactory>()
     private lateinit var viewModel: MainViewModel
@@ -50,8 +49,6 @@ class AllWordsFragment : BaseFragment(), KodeinAware {
     ): View? {
 
         setHasOptionsMenu(true)
-
-
         return inflater.inflate(R.layout.fragment_all_words, container, false)
     }
 
@@ -59,13 +56,11 @@ class AllWordsFragment : BaseFragment(), KodeinAware {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        (activity as AppCompatActivity).supportActionBar?.title = "All Words"
+        (activity as AppCompatActivity).supportActionBar?.title =  resources.getString(R.string.all_words)
+
         navController = Navigation.findNavController(view)
         recycler_view_words.setHasFixedSize(true)
         viewModel = ViewModelProvider(this, viewModelFactory).get(MainViewModel::class.java)
-
-       // allWords =  arguments?.get("allWords") as List<Word>
-        // observe if the words within the category suffer any change (like edition or deletion)
 
         viewModel.allWords.observe(viewLifecycleOwner, Observer<List<Word>> {
 
@@ -74,14 +69,11 @@ class AllWordsFragment : BaseFragment(), KodeinAware {
             runBlocking(Dispatchers.Default){
 
                 displayedWords =  it.reversed()
-
                 recycler_view_words.adapter = WordAdapter(displayedWords,viewModel,listOf<CountDownTimer>(),this.coroutineContext)
 
             }
 
             displayedWords1 = displayedWords
-
-            // setting up info for the info box in top of words list, several cases to be accounted for
 
             lastAdded = listOf(
 
@@ -91,7 +83,7 @@ class AllWordsFragment : BaseFragment(), KodeinAware {
             )
 
             lastAdditionDate = displayedWords.getOrNull(0)?.date
-            var lastAdditions = "Last additions: "
+            var lastAdditions =  resources.getString(R.string.last_additions)
             lastAdded.forEach {
                 if (it?.wordName != null) {
                     lastAdditions += " ${it.wordName},"
@@ -99,13 +91,13 @@ class AllWordsFragment : BaseFragment(), KodeinAware {
             }
             lastAdditions = lastAdditions.dropLast(1)  // drop the last comma of the string
             if (lastAdded.elementAt(0)?.wordName == null) {
-                lastAdditions = "No words added yet"
+                lastAdditions =  resources.getString(R.string.no_words_added_yet)
             }
-            val stringLastAdditionDate = "Last addition on $lastAdditionDate"
+            val stringLastAdditionDate = "${resources.getString(R.string.last_added_on)} $lastAdditionDate"
 
             // editing the corresponding info to the textviews
 
-            text_view_numWords.text = " ${recycler_view_words.adapter?.itemCount?:0} words"
+            text_view_numWords.text = " ${recycler_view_words.adapter?.itemCount?:0} ${resources.getString(R.string.words)}"
             lastAdditionDate?.let { text_view_lastDate.text = stringLastAdditionDate }
             text_view_last_additions.text = lastAdditions
 
@@ -126,11 +118,7 @@ class AllWordsFragment : BaseFragment(), KodeinAware {
 
                 displayedWords1.forEach {
 
-                    if (it.wordName.startsWith(newText!!)) {
-
-                        newWordsList.add(it)
-
-                    }
+                    if (it.wordName.startsWith(newText!!)) { newWordsList.add(it) }
                 }
 
                 displayedWords1 = newWordsList
@@ -142,10 +130,10 @@ class AllWordsFragment : BaseFragment(), KodeinAware {
         return super.onCreateOptionsMenu(menu, inflater)
     }
 
+
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
 
         val message: String?
-
         when (item.itemId) {
 
             R.id.item_backToSecond -> {
@@ -155,86 +143,78 @@ class AllWordsFragment : BaseFragment(), KodeinAware {
             R.id.alphabetically -> {
 
                 displayedWords1 = sortAlphabetically(displayedWords)
-                message = "sorting by alphabetic order.."
+                message =  resources.getString(R.string.sorting_alphabet)
                 Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
             }
 
             R.id.last_added -> {
 
                 displayedWords1 = sortLastAdded(displayedWords)
-                message = "sorting by last added.."
+                message = resources.getString(R.string.sorting_last_added)
                 Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
             }
 
             R.id.first_added -> {
 
                 displayedWords1 = sortFirstAdded(displayedWords)
-                message = "sorting by first added.."
+                message = resources.getString(R.string.sorting_first_added)
                 Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
             }
 
             R.id.withExample -> {
 
-                displayedWords1 = filterExample(displayedWords)
-                message = "filtering words with an example.."
+                displayedWords1 =  filterExample(displayedWords)
+                message = resources.getString(R.string.filtering_ex)
                 Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
             }
 
             R.id.noExample -> {
 
                 displayedWords1 = filterNoExample(displayedWords)
-                message = "filtering words without example.."
+                message =  resources.getString(R.string.filtering_no_ex)
                 Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
             }
 
             R.id.byLength -> {
 
                 displayedWords1 = sortByLength(displayedWords)
-                message = "sorting words by their length.."
+                message =  resources.getString(R.string.sorting_length)
                 Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
 
             }
 
-            R.id.withDefinition -> {
+            R.id.withDefinition ->{
 
                 displayedWords1 = filterDefinition(displayedWords)
-                message = "filtering words without definition.."
+                message =  resources.getString(R.string.filtering_definition)
                 Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
             }
 
-            R.id.noDefinition -> {
+            R.id.noDefinition ->{
 
                 displayedWords1 = filterNoDefinition(displayedWords)
-                message = "filtering words with definition.."
+                message =  resources.getString(R.string.filtering_no_definition)
                 Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
-
             }
-
             R.id.acquired ->{
 
                 displayedWords1 = filterAcquired(displayedWords)
-                message = "filtering words already acquired.."
+                message =  resources.getString(R.string.filtering_acquired)
                 Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
             }
 
             R.id.notAcquired ->{
 
                 displayedWords1 = filterNotAcquired(displayedWords)
-                message = "filtering words not acquired.."
+                message =  resources.getString(R.string.filtering_not_acquired)
                 Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
 
             }
         }
 
-        recycler_view_words.adapter = WordAdapter(displayedWords1,viewModel,listOf<CountDownTimer>(),this.coroutineContext)
+        recycler_view_words.adapter = WordAdapter(displayedWords1,viewModel,listOf<CountDownTimer>(),coroutineContext)
         return super.onOptionsItemSelected(item)
     }
-
-
-    /** also, for the sorting and filtering not to be applied but rather activated, the filters
-    can  perform the same way and the sorting can start with initial data and pass the first
-    X elements, where x = size of filtered list
-     **/
 }
 
 

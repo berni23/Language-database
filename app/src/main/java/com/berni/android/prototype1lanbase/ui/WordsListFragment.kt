@@ -72,7 +72,7 @@ class WordsListFragment : BaseFragment(), KodeinAware {
         if(firstView) {
 
            // resources.getString(R.string.last_added_on)
-            val toast: Toast =  Toast.makeText(context, "Here you can see the added words", Toast.LENGTH_LONG)
+            val toast: Toast =  Toast.makeText(context, resources.getString(R.string.msg_firstView), Toast.LENGTH_LONG)
             toast.setGravity(Gravity.CENTER, 0,0)
             toast.show()
 
@@ -115,7 +115,6 @@ class WordsListFragment : BaseFragment(), KodeinAware {
             }
             val stringLastAdditionDate = "${resources.getString(R.string.last_added_on)} $lastAdditionDate"
 
-            // editing the corresponding info to the textviews
 
             text_view_numWords.text = " ${recycler_view_words.adapter?.itemCount?:0} ${resources.getString(R.string.words)}"
             lastAdditionDate?.let { text_view_lastDate.text = stringLastAdditionDate }

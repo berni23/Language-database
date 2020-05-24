@@ -3,13 +3,8 @@
     <string name="app_name">Database</string>
     <string name="action_settings">Settings</string>
     <!-- Strings used for fragments for navigation -->
-    <string name="first_fragment_label" translatable="false">First Fragment</string>
-    <string name="second_fragment_label" translatable="false">Second Fragment</string>
     <string name="next" translatable="false">Next</string>
     <string name="previous" translatable="false">Previous</string>
-    <string name="hello_first_fragment" translatable="false">Hello first fragment</string>
-    <string name="hello_second_fragment" translatable="false">Hello second fragment. Arg: %1$s</string>
-    <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
     <string name="action_sort" translatable="false" />
     <string name="action_sortBy">sort by</string>
     <string name="last_added">sort by last added</string>
@@ -136,4 +131,5 @@
     <string name="about_statistics">Statistics</string>
     <string name="about_statistics_text">On the top right menu of the main screen, you will find an statistics option where you can see the distribution of word per group, as well as how many are still to be learnt. On top of that, you can also check the number of words added per day or month.</string>
     <string name = "msg_firstView">Here you can see the added words</string>
+    <string name = "all_words">All words</string>
 </resources>
