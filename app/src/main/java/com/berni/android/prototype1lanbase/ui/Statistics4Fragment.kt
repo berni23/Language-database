@@ -4,6 +4,7 @@ package com.berni.android.prototype1lanbase.ui
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import androidx.activity.OnBackPressedCallback
 import androidx.lifecycle.ViewModelProvider
@@ -14,12 +15,19 @@ import com.anychart.AnyChart
 import com.anychart.chart.common.dataentry.DataEntry
 import com.anychart.chart.common.dataentry.ValueDataEntry
 import com.berni.android.prototype1lanbase.R
+import com.jakewharton.threetenabp.AndroidThreeTen
 import kotlinx.android.synthetic.main.fragment_statistics4.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.closestKodein
 import org.kodein.di.generic.instance
+import org.threeten.bp.LocalDate
+import org.threeten.bp.YearMonth
+import org.threeten.bp.format.DateTimeFormatter
+import org.threeten.bp.temporal.ChronoUnit
+import java.text.SimpleDateFormat
+import java.util.*
 import kotlin.collections.ArrayList
 
 class Statistics4Fragment : BaseFragment(),KodeinAware {
@@ -45,7 +53,7 @@ class Statistics4Fragment : BaseFragment(),KodeinAware {
         viewModel = ViewModelProvider(this, viewModelFactory).get(MainViewModel::class.java)
         APIlib.getInstance().setActiveAnyChartView(lineChart3)
         val lineMonths = AnyChart.line()
-        val dataMonths = dataMonths(sortMonths())
+        val dataMonths = arrayMonths(sortMonths() as ArrayList<String>)
         lineMonths.data(dataMonths)
         lineChart3.setChart(lineMonths)
 
@@ -56,13 +64,45 @@ class Statistics4Fragment : BaseFragment(),KodeinAware {
     private fun sortMonths(): MutableList<String> {
 
         var date = listOf<String>()
-        var months = mutableListOf<String>()
+        val months = arrayListOf<String>()
         runBlocking(Dispatchers.Default) { date = viewModel.orderDays() }
-        date.forEach { months.add(it.substring(3, it.lastIndex+1)) }
+        date.forEach {months.add(it.substring(3, it.lastIndex+1)) }
         months.sort()
         months.sortBy {it.substring(3,7).toInt() }
         return months
 
+    }
+    private fun arrayMonths(months: ArrayList<String>): ArrayList<DataEntry> {
+
+        AndroidThreeTen.init(activity)
+        val xAxis = ArrayList<String>()
+        val format1 = DateTimeFormatter.ofPattern("MM/yyyy")
+        val format2 =  DateTimeFormatter.ofPattern("dd/MM/yyyy")
+        val today = LocalDate.now().plusMonths(7)
+        val firstMonth = LocalDate.parse("01/${months[0]}",format2)
+        val dataMonth = ArrayList<DataEntry>()
+
+        var monthsPassed =  Math.abs(today.until(firstMonth, ChronoUnit.MONTHS))
+        Log.println(Log.INFO, "monthsPassed", monthsPassed.toString())
+        if (monthsPassed > 6) { monthsPassed = 6 }
+        if (monthsPassed.toInt() == 0) {
+
+            xAxis.add(format1.format(today))
+            dataMonth.add(ValueDataEntry(xAxis[0], months.count {it == xAxis[0]}))
+
+        } else {
+
+            for (i in 0..monthsPassed) {
+                xAxis.add(format1.format(today.minusMonths(i)))
+            }
+            xAxis.reverse()
+            val range =  xAxis.size-1
+            Log.println(Log.INFO, "range", range.toString())
+
+            for (i in 0..range) { dataMonth.add(ValueDataEntry(xAxis[i], months.count { it == xAxis[i] }))}
+            Log.println(Log.INFO, "xAxis.size", xAxis.size.toString())
+        }
+        return dataMonth
     }
 
         private fun dataMonths(months: List<String>): ArrayList<DataEntry> {

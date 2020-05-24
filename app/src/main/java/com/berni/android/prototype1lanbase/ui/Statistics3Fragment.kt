@@ -99,6 +99,7 @@ class Statistics3Fragment : BaseFragment(),KodeinAware {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
 
         when (item.itemId) {
+
             R.id.item_backS3 -> {
                 navController.popBackStack()
             }
@@ -116,29 +117,33 @@ class Statistics3Fragment : BaseFragment(),KodeinAware {
         val dataDays = ArrayList<DataEntry>()
         var daysPassed = abs(today.until(firstDay, ChronoUnit.DAYS))
 
-        Log.println(Log.INFO,"daysPassed",daysPassed.toString())
+        Log.println(Log.INFO, "daysPassed", daysPassed.toString())
 
-        if (daysPassed >100) {daysPassed = 100}
-        if(daysPassed.toInt()==0) {
+        if (daysPassed > 100) {
+            daysPassed = 100
+        }
+        if (daysPassed.toInt() == 0) {
 
             xAxis.add(format1.format(today))
-            dataDays.add(ValueDataEntry(xAxis[0],days.count{it == xAxis[0]}))
+            dataDays.add(ValueDataEntry(xAxis[0], days.count { it == xAxis[0] }))
 
-        }
+        } else {
 
-        else {
 
             for (i in 0..daysPassed) {
                 xAxis.add(format1.format(today.plusDays(-i)))
             }
 
             xAxis.reversed()
-            for (i in 0..xAxis.size) { dataDays.add(ValueDataEntry(xAxis[i], days.count { it == xAxis[i] })) }
-        }
+            for (i in 0..xAxis.size) {
+                dataDays.add(ValueDataEntry(xAxis[i], days.count { it == xAxis[i] }))
+            }
 
-        Log.println(Log.INFO,"xAxis.size",xAxis.size.toString())
-        return dataDays
-    }
+            Log.println(Log.INFO, "xAxis.size", xAxis.size.toString())
+
+        }
+            return dataDays
+        }
 }
 
 
