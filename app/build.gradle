@@ -101,8 +101,9 @@ dependencies {
     //chart library
 
     implementation 'com.github.AnyChart:AnyChart-Android:1.1.2'
-    implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
+    //'implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
 
+    implementation 'com.jakewharton.threetenabp:threetenabp:1.2.1'
     //library for accessing internet
 
     androidTestImplementation 'com.android.support.test:runner:1.0.2'

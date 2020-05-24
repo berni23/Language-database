@@ -17,8 +17,10 @@ import com.berni.android.prototype1lanbase.R
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
 import org.kodein.di.KodeinAware
+import org.threeten.bp.LocalDateTime
 import org.kodein.di.android.x.closestKodein
 import org.kodein.di.generic.instance
+import org.threeten.bp.temporal.ChronoUnit
 import kotlin.collections.ArrayList
 
 class Statistics3Fragment : BaseFragment(),KodeinAware {
@@ -39,6 +41,12 @@ class Statistics3Fragment : BaseFragment(),KodeinAware {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+
+        var date1 = LocalDateTime.now()
+        var date2 = date1.plusDays(-3)
+        println(date1.until(date2, ChronoUnit.DAYS))
+
+
 
         navController = Navigation.findNavController(view)
         viewModel = ViewModelProvider(this, viewModelFactory).get(MainViewModel::class.java)
@@ -92,6 +100,7 @@ class Statistics3Fragment : BaseFragment(),KodeinAware {
             callback
         )
     }
+
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.menu_s3, menu)

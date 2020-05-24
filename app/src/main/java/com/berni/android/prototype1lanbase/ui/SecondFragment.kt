@@ -136,10 +136,6 @@ class SecondFragment : BaseFragment(),KodeinAware {
 
             if(firstWord) {
 
-                Tutorial.firstWord  = false
-                Tutorial.firstListWordView = true
-                firstWord = false
-
                 val toast: Toast =  Toast.makeText(context, resources.getString(R.string.S2_first_word_added), Toast.LENGTH_LONG)
                 toast.setGravity(Gravity.CENTER, 0,0)
                 toast.show()
