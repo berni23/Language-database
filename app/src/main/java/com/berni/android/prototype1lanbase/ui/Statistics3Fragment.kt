@@ -52,6 +52,7 @@ class Statistics3Fragment : BaseFragment(),KodeinAware {
 
         var days = ArrayList<String>()
         var daysAcquired = ArrayList<String>()
+
         runBlocking(Dispatchers.Default) {
 
             daysAcquired =viewModel.orderAcquired() as ArrayList<String>
@@ -59,18 +60,22 @@ class Statistics3Fragment : BaseFragment(),KodeinAware {
 
         }
 
+        Log.println(Log.INFO,"acquired",daysAcquired.toString())
 
         APIlib.getInstance().setActiveAnyChartView(lineChart)
 
         val lineDays = AnyChart.line()
         val dataDays = arrayDays(sortDays(days))
-        lineDays.data(dataDays)
+       // lineDays.data(dataDays)
+        lineDays.line(dataDays)
         lineChart.setChart(lineDays)
 
+        APIlib.getInstance().setActiveAnyChartView(lineChart2)
         val lineDays2 = AnyChart.line()
         val dataDays2 = arrayDays(sortDays(daysAcquired))
-        lineDays.data(dataDays2)
+        lineDays2.data(dataDays2)
         lineChart2.setChart(lineDays2)
+        //lineChart.setChart(lineDays2)
 
         changeGraphs.setOnClickListener {navController.navigate(R.id.actionMonthlyView)}
         super.onViewCreated(view, savedInstanceState)
@@ -140,8 +145,6 @@ class Statistics3Fragment : BaseFragment(),KodeinAware {
             xAxis = xAxis.asReversed()
             val last = xAxis.size-1
             for (i in 0..last) { dataDays.add(ValueDataEntry(xAxis[i], days.count {it == xAxis[i]})) }
-
-
 
         }
             return dataDays

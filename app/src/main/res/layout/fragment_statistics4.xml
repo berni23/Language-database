@@ -21,13 +21,13 @@
         <com.anychart.AnyChartView
             android:layout_marginTop="120dp"
             android:id="@+id/lineChart3"
-            android:layout_width="320dp"
+            android:layout_width="350dp"
             android:layout_height="250dp" />
 
         <com.anychart.AnyChartView
             android:layout_marginTop="10dp"
             android:id="@+id/lineChart4"
-            android:layout_width="320dp"
+            android:layout_width="350dp"
             android:layout_height="250dp" />
 
     </androidx.appcompat.widget.LinearLayoutCompat>
@@ -38,14 +38,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent='0.61' />
+        app:layout_constraintGuide_percent='0.595' />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/Vrect2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.68" />
+        app:layout_constraintGuide_percent="0.70" />
 
     <androidx.cardview.widget.CardView
         app:cardCornerRadius="5dp"
@@ -100,4 +100,42 @@
         app:layout_constraintStart_toStartOf="@id/Vbutton"
         app:layout_constraintTop_toTopOf="@id/Hbutton"/>
 
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/Hrect3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent='0.15' />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/Vrect3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.3" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:padding="10dp"
+        app:cardCornerRadius="5dp"
+        app:layout_constraintBottom_toBottomOf="@id/Hrect3"
+        app:layout_constraintEnd_toEndOf="@id/Vrect3"
+        app:layout_constraintStart_toStartOf="@id/Vrect3"
+        app:layout_constraintTop_toTopOf="@id/Hrect3">
+
+    <TextView
+        android:id="@+id/labelsG3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="7dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="7dp"
+        android:layout_marginBottom="5dp"
+        android:fontFamily="@font/lato_light_italic"
+        android:text="@string/number_of_words_daily_added_n_last_100_active_days"/>
+    </androidx.cardview.widget.CardView>
 </androidx.constraintlayout.widget.ConstraintLayout>

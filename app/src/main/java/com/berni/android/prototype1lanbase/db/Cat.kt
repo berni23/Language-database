@@ -59,7 +59,7 @@ data class Word  (
     @ColumnInfo(name  = "catParent")
     val catParent: Int? = 0,
     @ColumnInfo(name = "acquired")
-    var acquired:Boolean  = false,
+    var acquired:Boolean  =false,
     var acquiredDate: String? = null,
     @ColumnInfo(name = "test")
     var test : Boolean = true,

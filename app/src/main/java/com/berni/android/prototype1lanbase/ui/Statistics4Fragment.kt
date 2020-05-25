@@ -16,6 +16,7 @@ import com.anychart.chart.common.dataentry.DataEntry
 import com.anychart.chart.common.dataentry.ValueDataEntry
 import com.berni.android.prototype1lanbase.R
 import com.jakewharton.threetenabp.AndroidThreeTen
+import kotlinx.android.synthetic.main.fragment_statistics3.*
 import kotlinx.android.synthetic.main.fragment_statistics4.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
@@ -51,21 +52,31 @@ class Statistics4Fragment : BaseFragment(),KodeinAware {
 
         navController = Navigation.findNavController(view)
         viewModel = ViewModelProvider(this, viewModelFactory).get(MainViewModel::class.java)
+        var date = mutableListOf<String>()
+        var dateAcquired = mutableListOf<String>()
+        runBlocking(Dispatchers.Default) {
+            date = viewModel.orderDays()
+            dateAcquired = viewModel.orderAcquired()
+        }
         APIlib.getInstance().setActiveAnyChartView(lineChart3)
         val lineMonths = AnyChart.line()
-        val dataMonths = arrayMonths(sortMonths())
+        val dataMonths = arrayMonths(sortMonths(date))
         lineMonths.data(dataMonths)
         lineChart3.setChart(lineMonths)
+
+        APIlib.getInstance().setActiveAnyChartView(lineChart4)
+        val lineMonths2 = AnyChart.line()
+        val dataMonths2 = arrayMonths(sortMonths(dateAcquired))
+        lineMonths2.data(dataMonths2)
+        lineChart4.setChart(lineMonths2)
 
         changeGraphs2.setOnClickListener{navController.popBackStack() }
         super.onViewCreated(view, savedInstanceState)
         }
 
-    private fun sortMonths(): ArrayList<String> {
+    private fun sortMonths(date: MutableList<String>): ArrayList<String> {
 
-        var date = listOf<String>()
         val months = arrayListOf<String>()
-        runBlocking(Dispatchers.Default) { date = viewModel.orderDays() }
         date.forEach {months.add(it.substring(3, it.lastIndex+1)) }
         months.sort()
         months.sortBy {it.substring(3,7).toInt() }
@@ -98,9 +109,9 @@ class Statistics4Fragment : BaseFragment(),KodeinAware {
 
             xAxis = xAxis.asReversed()
             val range =  xAxis.size-1
-            //Log.println(Log.INFO, "range", range.toString())
+
             for (i in 0..range) {dataMonth.add(ValueDataEntry(xAxis[i], months.count { it == xAxis[i] }))}
-           // Log.println(Log.INFO, "xAxis.size", xAxis.size.toString())
+
         }
         return dataMonth
     }

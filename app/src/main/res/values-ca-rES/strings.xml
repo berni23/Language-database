@@ -112,8 +112,10 @@
     <string name="click_for_n_time_progress">clicar per veure \n el teu progrés</string>
     <string name="words_acquired_vs_yet_to_n_be_learnt">paraules afegides vs paraules per afegir</string>
     <string name="number_of_words_daily_added_n_last_100_active_days">nombre de paraules afegides diàriament</string>
+    <string name="number_of_words_daily_acquired_last_100_active_days">nombre de paraules adquirides diàriamen</string>
     <string name="press_for_n_monthly_view">prem per \n veure el progrés mensual</string>
-    <string name="number_of_words_monthly_added_n_last_6_active_months">nombre de paraules afegides mensualment, \n, útlims 6 mesos actius</string>
+    <string name="number_of_words_monthly_added_n_last_6_active_months">nombre de paraules afegides mensualment</string>
+    <string name="number_of_words_monthly_acquired_n_last_6_active_months">nombre de palabras adquirides mensualment</string>
     <string name="press_for_n_daily_view">prem per \n veure\'n el progrés diari</string>
     <string name="all_the_words_added_on_the_group">aqui pots veure totes les paraules afegides al grup .</string>
     <string name="about_app">Sobre la app:</string>

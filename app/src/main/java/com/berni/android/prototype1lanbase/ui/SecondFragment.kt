@@ -116,7 +116,10 @@ class SecondFragment : BaseFragment(),KodeinAware {
 
             launch{
 
-                val word = Word(theWord,translation1,example1,translationExample1,definition,date.toString(),cat.catId)
+                val word = Word(theWord,translation1,example1,translationExample1,definition,date.toString(),cat.catId,acquiredDate = date)
+
+               // TODO(Delete acquired date)
+
                 viewModel.addWord(word)
              }
             }

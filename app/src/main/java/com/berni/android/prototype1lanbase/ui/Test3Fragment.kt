@@ -75,7 +75,8 @@ class Test3Fragment : BaseFragment(),KodeinAware {
                 it.lastOk = today
                // it.acquired=true // temp code, just to check how some  views  get displayed on word acquired, delete when using app .
                 viewModel.updateWord(it)
-                if(!result[i] && it.lvl == 0) {it.test = false }
+                if(!result[i] && it.lvl == 0) {it.test = true }
+                else {it.test = false}
                 i++
 
             }
@@ -88,12 +89,7 @@ class Test3Fragment : BaseFragment(),KodeinAware {
 
         msg()
 
-        btn_backToMain.setOnClickListener {
-
-            if (i == result.size) {
-                navController.navigate(R.id.actionBackToMainTestFinished)
-            }
-        }
+        btn_backToMain.setOnClickListener { if (i == result.size) { navController.navigate(R.id.actionBackToMainTestFinished) } }
     }
 
     override fun onAttach(context: Context) {
@@ -115,10 +111,12 @@ class Test3Fragment : BaseFragment(),KodeinAware {
 
         var text = resources.getString(R.string.score5)
         val ratio: Double = correct.toDouble()/result.size.toDouble()
-        if (ratio==1.0) {text = resources.getString(R.string.score1) }
-        else if (ratio>=0.9)  {text = resources.getString(R.string.score2) }
-        else if (ratio>=0.7)  {text = resources.getString(R.string.score3) }
-        else if(ratio >=0.5)  {text = resources.getString(R.string.score4) }
+        when {
+            ratio==1.0  ->  {text = resources.getString(R.string.score1) }
+            ratio>=0.9  ->  {text = resources.getString(R.string.score2) }
+            ratio>=0.7  ->  {text = resources.getString(R.string.score3) }
+            ratio >=0.5 ->  {text = resources.getString(R.string.score4) }
+        }
 
         msgTestFinished.text = text
 

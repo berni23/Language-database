@@ -1,57 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/frameLayout4"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".ui.Statistics3Fragment"
-    android:id="@+id/frameLayout4">
+    tools:context=".ui.Statistics3Fragment">
 
     <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/linearLayoutCompat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
         android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:orientation="vertical"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        app:layout_constraintTop_toTopOf="parent">
 
-    <com.anychart.AnyChartView
-        android:layout_marginTop="120dp"
-        android:id="@+id/lineChart"
-        android:layout_width="320dp"
-        android:layout_height="250dp" />
+        <com.anychart.AnyChartView
+            android:id="@+id/lineChart"
+            android:layout_width="350dp"
+            android:layout_height="250dp"
+            android:layout_marginTop="120dp" />
 
-       <com.anychart.AnyChartView
-            android:layout_marginTop="10dp"
+        <com.anychart.AnyChartView
             android:id="@+id/lineChart2"
-            android:layout_width="320dp"
-            android:layout_height="250dp" />
+            android:layout_width="350dp"
+            android:layout_height="250dp"
+            android:layout_marginTop="10dp" />
 
-        </androidx.appcompat.widget.LinearLayoutCompat>
+    </androidx.appcompat.widget.LinearLayoutCompat>
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/Hrect2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent='0.61' />
+        app:layout_constraintGuide_percent='0.595' />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/Vrect2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.68" />
+        app:layout_constraintGuide_percent="0.70" />
 
     <androidx.cardview.widget.CardView
-        app:cardCornerRadius="5dp"
-        android:layout_margin="10dp"
-        android:padding = "10dp"
+        android:id="@+id/cardView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:padding="10dp"
+        app:cardCornerRadius="5dp"
         app:layout_constraintBottom_toBottomOf="@id/Hrect2"
         app:layout_constraintEnd_toEndOf="@id/Vrect2"
         app:layout_constraintStart_toStartOf="@id/Vrect2"
@@ -60,13 +61,13 @@
         <TextView
             android:id="@+id/labelsG1"
             android:layout_width="wrap_content"
-            android:fontFamily="@font/lato_light_italic"
-            android:text = "@string/number_of_words_daily_added_n_last_100_active_days"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="5dp"
+            android:layout_height="wrap_content"
             android:layout_marginStart="7dp"
+            android:layout_marginTop="5dp"
             android:layout_marginEnd="7dp"
-            android:layout_height="wrap_content"/>
+            android:layout_marginBottom="5dp"
+            android:fontFamily="@font/lato_light_italic"
+            android:text="@string/number_of_words_daily_acquired_last_100_active_days" />
 
     </androidx.cardview.widget.CardView>
 
@@ -87,16 +88,55 @@
     <androidx.appcompat.widget.AppCompatButton
 
         android:id="@+id/changeGraphs"
-        android:textAllCaps="false"
-        android:textSize="13sp"
-        android:fontFamily="@font/lato_light_italic"
-        android:backgroundTint="@color/colorAccent3"
-        android:text = "@string/press_for_n_monthly_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:backgroundTint="@color/colorAccent3"
+        android:fontFamily="@font/lato_light_italic"
+        android:text="@string/press_for_n_monthly_view"
+        android:textAllCaps="false"
+        android:textSize="13sp"
         app:layout_constraintBottom_toBottomOf="@id/Hbutton"
         app:layout_constraintEnd_toEndOf="@id/Vbutton"
         app:layout_constraintStart_toStartOf="@id/Vbutton"
-        app:layout_constraintTop_toTopOf="@id/Hbutton"/>
+        app:layout_constraintTop_toTopOf="@id/Hbutton" />
+
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/Hrect3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent='0.15' />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/Vrect3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.3" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:padding="10dp"
+        app:cardCornerRadius="5dp"
+        app:layout_constraintBottom_toBottomOf="@id/Hrect3"
+        app:layout_constraintEnd_toEndOf="@id/Vrect3"
+        app:layout_constraintStart_toStartOf="@id/Vrect3"
+        app:layout_constraintTop_toTopOf="@id/Hrect3">
+
+        <TextView
+            android:id="@+id/labelsG2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="7dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="7dp"
+            android:layout_marginBottom="5dp"
+            android:fontFamily="@font/lato_light_italic"
+            android:text="@string/number_of_words_daily_added_n_last_100_active_days"/>
+    </androidx.cardview.widget.CardView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

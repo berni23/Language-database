@@ -97,7 +97,7 @@ class FirstFragment : BaseFragment(),KodeinAware {
             }
 
             var bool = true
-            runBlocking(Dispatchers.Default) { bool = viewModel.validCatName(newCatName!!) }
+            runBlocking(Dispatchers.Default) {bool = viewModel.validCatName(newCatName!!) }
 
             if (bool) {
 

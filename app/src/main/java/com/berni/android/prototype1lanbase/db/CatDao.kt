@@ -38,7 +38,7 @@ interface CatDao {
     @Query("SELECT date FROM Word ORDER BY date ASC ")
     fun orderDays(): MutableList<String>
 
-    @Query("SELECT acquiredDate NOT NULL FROM Word ORDER BY date ASC ")
+    @Query("SELECT acquiredDate FROM Word WHERE acquiredDate NOT NULL ORDER BY date ASC ")
     fun orderDaysAcquired(): MutableList<String>
 
     @Transaction

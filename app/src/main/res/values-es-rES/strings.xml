@@ -55,7 +55,7 @@ traducción para algunas palabras</string>
         <string name="m2_tutorial">Deja que te enseñe como funciona! :)</string>
         <string name="hi">Buenas !</string>
         <string name="m1_tutorial">Parece que és la primera vez que usas Wos</string>
-        <string name="tutorial_m3">Wos consiste en una simple app donde puedes guardar tu propio vocabulario y practicar con el creando grupos de palabras, añadiendo información y realizando tests.</string>
+        <string name="tutorial_m3">Wos consiste en una simple app donde puedes guardar tu propio vocabulario y practicar con él creando grupos de palabras, añadiendo información y realizando tests.</string>
         <string name="no_words_added">Ninguna palabra añadida</string>
         <string name="words">palabras</string>
         <string name="are_you_sure">Estás seguro?</string>
@@ -112,9 +112,12 @@ traducción para algunas palabras</string>
         <string name="number_of_words_n_per_group">Número de palabras \n por grupo</string>
         <string name="click_for_n_time_progress">pulsa para ver \n tu progreso</string>
         <string name="words_acquired_vs_yet_to_n_be_learnt">palabras aprendidas vs \n pendientes de aprender</string>
-        <string name="number_of_words_daily_added_n_last_100_active_days">número de palabras añadidas por día, \n últimos 100 días activos</string>
+        <string name="number_of_words_daily_added_n_last_100_active_days"> nº de palabras añadidas por día </string>
+        <string name="number_of_words_daily_acquired_last_100_active_days">nª de palabras adquiridas por día </string>
+
         <string name="press_for_n_monthly_view">pulsa para  ver el \n progreso mensual</string>
-        <string name="number_of_words_monthly_added_n_last_6_active_months">número de palabras añadidas \n mensualmente, últimos seis meses</string>
+        <string name="number_of_words_monthly_added_n_last_6_active_months">nº de palabras añadidas mensualmente</string>
+        <string name="number_of_words_monthly_acquired_n_last_6_active_months">nº de palabras adquiridas mensualmente</string>
         <string name="press_for_n_daily_view">pulsa para ver el \n progreso diario</string>
         <string name="all_the_words_added_on_the_group">aquí puedes ver todas las palabras añadidas en el grupo</string>
 
@@ -122,7 +125,7 @@ traducción para algunas palabras</string>
     <string name="about_app_text">Wos es una app de idiomas que permite que el usuario guarde su propio vocabulario en listas y pueda practicarlo</string>
     <string name="about_tests">Tests:</string>
     <string name="about_tests_text">La app dispone de un sistema de tests, por el cual 15 palabras són seleccionadas de forma aleatoria y el usuario
-        ha de dar la traducción correcta. Si la respostuesta és acertada, la palabra no aparecerá más en los tests durante unos días.
+        ha de dar la traducción correcta. Si la respuesta és acertada, la palabra no aparecerá en los tests durante unos días.
         Cuando el usuario haya dado la respuesta correcta varias veces,la palabra será marcada como adquirida, \n y no saldrá
         más en los tests. Además, aparecerá de color gris en la lista de palabras.</string>
 

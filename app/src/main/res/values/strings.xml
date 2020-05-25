@@ -117,9 +117,12 @@
     <string name="number_of_words_n_per_group">Number of words \n per group</string>
     <string name="click_for_n_time_progress">click for \n time progress</string>
     <string name="words_acquired_vs_yet_to_n_be_learnt">words acquired vs yet to \n be learnt</string>
-    <string name="number_of_words_daily_added_n_last_100_active_days">number of words daily added,\n last 100 active days</string>
+    <string name="number_of_words_daily_added_n_last_100_active_days">number of words daily added</string>
     <string name="press_for_n_monthly_view">press for \n monthly view</string>
-    <string name="number_of_words_monthly_added_n_last_6_active_months">number of words monthly added, \n last 6 active months</string>
+    <string name="number_of_words_monthly_added_n_last_6_active_months">number of words monthly added</string>
+    <string name="number_of_words_monthly_acquired_n_last_6_active_months">number of words monthly acquired</string>
+
+    <string name="number_of_words_daily_acquired_last_100_active_days">number of words daily acquired</string>
     <string name="press_for_n_daily_view">press for \n daily view</string>
     <string name="all_the_words_added_on_the_group">here you have all the added words on the group</string>
     <string name ="about_app">About the app:</string>
