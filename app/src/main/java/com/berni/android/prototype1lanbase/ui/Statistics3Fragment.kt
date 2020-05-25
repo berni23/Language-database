@@ -111,7 +111,7 @@ class Statistics3Fragment : BaseFragment(),KodeinAware {
 
         AndroidThreeTen.init(activity)
         val today = LocalDate.now()
-        val xAxis = ArrayList<String>()
+        var xAxis = mutableListOf<String>()
         val format1 = DateTimeFormatter.ofPattern("dd/MM/yyyy")
         val firstDay = LocalDate.parse(days[0], format1)
         val dataDays = ArrayList<DataEntry>()
@@ -134,14 +134,16 @@ class Statistics3Fragment : BaseFragment(),KodeinAware {
                 xAxis.add(format1.format(today.plusDays(-i)))
             }
 
-            xAxis.reversed()
-            for (i in 0..xAxis.size) {
-                dataDays.add(ValueDataEntry(xAxis[i], days.count { it == xAxis[i] }))
-            }
+            Log.println(Log.INFO, "xAxis.size", xAxis.size.toString())
+
+            xAxis = xAxis.asReversed()
+            val last = xAxis.size-1
+            for (i in 0..last) { dataDays.add(ValueDataEntry(xAxis[i], days.count {it == xAxis[i]})) }
 
             Log.println(Log.INFO, "xAxis.size", xAxis.size.toString())
 
         }
+            Log.println(Log.INFO, "dataDays.size", dataDays.size.toString())
             return dataDays
         }
 }

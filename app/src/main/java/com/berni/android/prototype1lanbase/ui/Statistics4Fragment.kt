@@ -53,7 +53,7 @@ class Statistics4Fragment : BaseFragment(),KodeinAware {
         viewModel = ViewModelProvider(this, viewModelFactory).get(MainViewModel::class.java)
         APIlib.getInstance().setActiveAnyChartView(lineChart3)
         val lineMonths = AnyChart.line()
-        val dataMonths = arrayMonths(sortMonths() as ArrayList<String>)
+        val dataMonths = arrayMonths(sortMonths())
         lineMonths.data(dataMonths)
         lineChart3.setChart(lineMonths)
 
@@ -61,7 +61,7 @@ class Statistics4Fragment : BaseFragment(),KodeinAware {
         super.onViewCreated(view, savedInstanceState)
         }
 
-    private fun sortMonths(): MutableList<String> {
+    private fun sortMonths(): ArrayList<String> {
 
         var date = listOf<String>()
         val months = arrayListOf<String>()
@@ -75,32 +75,32 @@ class Statistics4Fragment : BaseFragment(),KodeinAware {
     private fun arrayMonths(months: ArrayList<String>): ArrayList<DataEntry> {
 
         AndroidThreeTen.init(activity)
-        val xAxis = ArrayList<String>()
+        var xAxis = mutableListOf<String>()
         val format1 = DateTimeFormatter.ofPattern("MM/yyyy")
         val format2 =  DateTimeFormatter.ofPattern("dd/MM/yyyy")
-        val today = LocalDate.now().plusMonths(7)
+        val today = LocalDate.now()
+        //.plusMonths(7) ( code useful for debugging)
         val firstMonth = LocalDate.parse("01/${months[0]}",format2)
         val dataMonth = ArrayList<DataEntry>()
 
         var monthsPassed =  Math.abs(today.until(firstMonth, ChronoUnit.MONTHS))
         Log.println(Log.INFO, "monthsPassed", monthsPassed.toString())
-        if (monthsPassed > 6) { monthsPassed = 6 }
-        if (monthsPassed.toInt() == 0) {
 
+        if (monthsPassed > 6) { monthsPassed = 6 }
+
+        if (monthsPassed.toInt() == 0) {
             xAxis.add(format1.format(today))
             dataMonth.add(ValueDataEntry(xAxis[0], months.count {it == xAxis[0]}))
 
         } else {
 
-            for (i in 0..monthsPassed) {
-                xAxis.add(format1.format(today.minusMonths(i)))
-            }
-            xAxis.reverse()
-            val range =  xAxis.size-1
-            Log.println(Log.INFO, "range", range.toString())
+            for (i in 0..monthsPassed) {xAxis.add(format1.format(today.minusMonths(i))) }
 
-            for (i in 0..range) { dataMonth.add(ValueDataEntry(xAxis[i], months.count { it == xAxis[i] }))}
-            Log.println(Log.INFO, "xAxis.size", xAxis.size.toString())
+            xAxis = xAxis.asReversed()
+            val range =  xAxis.size-1
+            //Log.println(Log.INFO, "range", range.toString())
+            for (i in 0..range) {dataMonth.add(ValueDataEntry(xAxis[i], months.count { it == xAxis[i] }))}
+           // Log.println(Log.INFO, "xAxis.size", xAxis.size.toString())
         }
         return dataMonth
     }
@@ -131,7 +131,6 @@ class Statistics4Fragment : BaseFragment(),KodeinAware {
         )
     }
 
-
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.menu_s3, menu)
         return super.onCreateOptionsMenu(menu, inflater)
@@ -144,47 +143,6 @@ class Statistics4Fragment : BaseFragment(),KodeinAware {
         return super.onOptionsItemSelected(item)
     }
 }
-
-
-
-/**var theList = myArray
-
-println(theList)
-theList.sort()
-println(theList)
-theList.sortBy{it.substring(3,7).toInt()}
-println(theList)
-
-
-var dates = mutableListOf("01/01/2001","01/01/2001","30/03/2012", "30/03/2012","28/03/2013", "31/03/2012", "02/04/2012","04/02/2012","28/03/2011")
-
-
-dates.sort()
-dates.sortBy{it.substring(3,5).toInt()}
-dates.sortBy{it.substring(6,10).toInt()}
-
-
-val counter  = dates.groupingBy{it}.eachCount()
-println(counter[dates[1]])
-println(counter)
-
-dates = dates.distinct() as MutableList<String>
-println(dates)
-
-for (i in  0 until theList.lastIndex) {
-
-val n = theList.elementAt(i)
-val nPlus1 = theList.elementAt(i + 1)
-if (n.substring(3, 7) == nPlus1.substring(3, 7)) {
-if (n.substring(0, 2) > nPlus1.substring(0, 2)) {
-
-Collections.swap(theList,i,i+1)
-}
-}
-}
-}
- **/
-
 
 
 
