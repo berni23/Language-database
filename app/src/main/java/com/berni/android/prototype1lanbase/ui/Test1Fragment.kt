@@ -57,7 +57,7 @@ class Test1Fragment : BaseFragment(),KodeinAware {
     private fun ranWords(): List<Word> {
 
         val listTest = wordsForTest.shuffled()
-        return if (wordsForTest.size >= 15)  { listTest.subList(0,15).toList() }
+        return if (wordsForTest.size >= 15)  {listTest.subList(0,15).toList() }
         else  {listTest}
      }
 
@@ -68,11 +68,7 @@ class Test1Fragment : BaseFragment(),KodeinAware {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
 
-        when (item.itemId) {
-
-            R.id.item_backEditToWordsList -> { navController.popBackStack() }
-
-        }
+        when (item.itemId) {R.id.item_backEditToWordsList -> { navController.popBackStack() } }
 
         return super.onOptionsItemSelected(item)
     }

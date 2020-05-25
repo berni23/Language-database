@@ -86,7 +86,7 @@ class Statistics4Fragment : BaseFragment(),KodeinAware {
         var monthsPassed =  Math.abs(today.until(firstMonth, ChronoUnit.MONTHS))
         Log.println(Log.INFO, "monthsPassed", monthsPassed.toString())
 
-        if (monthsPassed > 6) { monthsPassed = 6 }
+        if (monthsPassed > 6) {monthsPassed = 6}
 
         if (monthsPassed.toInt() == 0) {
             xAxis.add(format1.format(today))

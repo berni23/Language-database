@@ -2,11 +2,11 @@
   "formatVersion": 1,
   "database": {
     "version": 10,
-    "identityHash": "20d11dfff3b3bbb1f1aeabf4b316d71b",
+    "identityHash": "9e12811fe6532aea5abe3396ebb497d2",
     "entities": [
       {
         "tableName": "Word",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`wordId` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `wordName` TEXT NOT NULL, `translation` TEXT NOT NULL, `example` TEXT, `translation example` TEXT, `definition` TEXT, `date` TEXT NOT NULL, `catParent` INTEGER, `acquired` INTEGER NOT NULL, `test` INTEGER NOT NULL, `lvl` INTEGER NOT NULL, `lastOK` INTEGER NOT NULL)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`wordId` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `wordName` TEXT NOT NULL, `translation` TEXT NOT NULL, `example` TEXT, `translation example` TEXT, `definition` TEXT, `date` TEXT NOT NULL, `catParent` INTEGER, `acquired` INTEGER NOT NULL, `acquiredDate` TEXT, `test` INTEGER NOT NULL, `lvl` INTEGER NOT NULL, `lastOK` INTEGER NOT NULL)",
         "fields": [
           {
             "fieldPath": "wordId",
@@ -61,6 +61,12 @@
             "columnName": "acquired",
             "affinity": "INTEGER",
             "notNull": true
+          },
+          {
+            "fieldPath": "acquiredDate",
+            "columnName": "acquiredDate",
+            "affinity": "TEXT",
+            "notNull": false
           },
           {
             "fieldPath": "test",
@@ -126,7 +132,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '20d11dfff3b3bbb1f1aeabf4b316d71b')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '9e12811fe6532aea5abe3396ebb497d2')"
     ]
   }
 }

@@ -47,27 +47,38 @@ class Statistics3Fragment : BaseFragment(),KodeinAware {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
-
         navController = Navigation.findNavController(view)
         viewModel = ViewModelProvider(this, viewModelFactory).get(MainViewModel::class.java)
+
+        var days = ArrayList<String>()
+        var daysAcquired = ArrayList<String>()
+        runBlocking(Dispatchers.Default) {
+
+            daysAcquired =viewModel.orderAcquired() as ArrayList<String>
+            days = viewModel.orderDays() as ArrayList<String>
+
+        }
+
+
         APIlib.getInstance().setActiveAnyChartView(lineChart)
 
         val lineDays = AnyChart.line()
-        val dataDays = arrayDays(sortDays())
+        val dataDays = arrayDays(sortDays(days))
         lineDays.data(dataDays)
         lineChart.setChart(lineDays)
 
-        changeGraphs.setOnClickListener { navController.navigate(R.id.actionMonthlyView) }
-        super.onViewCreated(view, savedInstanceState)
+        val lineDays2 = AnyChart.line()
+        val dataDays2 = arrayDays(sortDays(daysAcquired))
+        lineDays.data(dataDays2)
+        lineChart2.setChart(lineDays2)
 
+        changeGraphs.setOnClickListener {navController.navigate(R.id.actionMonthlyView)}
+        super.onViewCreated(view, savedInstanceState)
 
     }
 
+    private fun sortDays(days: ArrayList<String>): ArrayList<String> {
 
-    private fun sortDays(): ArrayList<String> {
-
-        var days = ArrayList<String>()
-        runBlocking(Dispatchers.Default) {days = viewModel.orderDays() as ArrayList<String> }
         days.sort()
         days.sortBy {it.substring(3, 5).toInt()}
         days.sortBy {it.substring(6, 10).toInt()}
@@ -98,12 +109,9 @@ class Statistics3Fragment : BaseFragment(),KodeinAware {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
 
-        when (item.itemId) {
+        when (item.itemId) {R.id.item_backS3 -> { navController.popBackStack() } }
 
-            R.id.item_backS3 -> {
-                navController.popBackStack()
-            }
-        }
+
         return super.onOptionsItemSelected(item)
     }
 
@@ -117,11 +125,8 @@ class Statistics3Fragment : BaseFragment(),KodeinAware {
         val dataDays = ArrayList<DataEntry>()
         var daysPassed = abs(today.until(firstDay, ChronoUnit.DAYS))
 
-        Log.println(Log.INFO, "daysPassed", daysPassed.toString())
 
-        if (daysPassed > 100) {
-            daysPassed = 100
-        }
+        if (daysPassed > 100) { daysPassed = 100 }
         if (daysPassed.toInt() == 0) {
 
             xAxis.add(format1.format(today))
@@ -130,20 +135,15 @@ class Statistics3Fragment : BaseFragment(),KodeinAware {
         } else {
 
 
-            for (i in 0..daysPassed) {
-                xAxis.add(format1.format(today.plusDays(-i)))
-            }
-
-            Log.println(Log.INFO, "xAxis.size", xAxis.size.toString())
+            for (i in 0..daysPassed) { xAxis.add(format1.format(today.plusDays(-i))) }
 
             xAxis = xAxis.asReversed()
             val last = xAxis.size-1
             for (i in 0..last) { dataDays.add(ValueDataEntry(xAxis[i], days.count {it == xAxis[i]})) }
 
-            Log.println(Log.INFO, "xAxis.size", xAxis.size.toString())
+
 
         }
-            Log.println(Log.INFO, "dataDays.size", dataDays.size.toString())
             return dataDays
         }
 }

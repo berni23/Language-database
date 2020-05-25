@@ -38,6 +38,9 @@ interface CatDao {
     @Query("SELECT date FROM Word ORDER BY date ASC ")
     fun orderDays(): MutableList<String>
 
+    @Query("SELECT acquiredDate NOT NULL FROM Word ORDER BY date ASC ")
+    fun orderDaysAcquired(): MutableList<String>
+
     @Transaction
     @Query("SELECT * FROM Cat")
     fun catsWithWords() : LiveData<List<CatWords>>
@@ -45,6 +48,7 @@ interface CatDao {
     @Transaction
     @Query("SELECT * FROM Cat")
     fun catsNwords() : MutableList<CatWords>
+
 
     //check if the catname has already been used or not
 
@@ -77,6 +81,7 @@ interface CatDao {
 
     @Query("DELETE FROM Word WHERE catParent LIKE :category")
     fun deleteWordsInCat(category: Int?)
+
 
     //---------------------------------------------------------------------
     //queries for the tests

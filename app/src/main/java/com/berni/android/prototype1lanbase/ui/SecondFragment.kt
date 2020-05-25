@@ -59,7 +59,7 @@ class SecondFragment : BaseFragment(),KodeinAware {
         navController = Navigation.findNavController(view)
         (activity as AppCompatActivity).supportActionBar?.title = cat.catName
         viewModel = ViewModelProvider(this, viewModelFactory).get(MainViewModel::class.java)
-        runBlocking(Dispatchers.Default){firstWord = viewModel.anyCat()}
+        runBlocking(Dispatchers.Default){firstWord = viewModel.anyWord()}
 
         if (firstWord)
 

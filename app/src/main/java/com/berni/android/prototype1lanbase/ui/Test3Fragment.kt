@@ -3,6 +3,7 @@ package com.berni.android.prototype1lanbase.ui
 import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.content.Context
+import android.icu.text.SimpleDateFormat
 import android.icu.util.Calendar
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -23,6 +24,7 @@ import kotlinx.android.synthetic.main.fragment_test3.*
 import kotlinx.coroutines.runBlocking
 import org.kodein.di.android.x.closestKodein
 import org.kodein.di.generic.instance
+import java.util.*
 
 /**
  * A simple [Fragment] subclass.
@@ -36,6 +38,7 @@ class Test3Fragment : BaseFragment(),KodeinAware {
     private lateinit var testWords: List<Word>
     private lateinit var navController: NavController
     private var today = Calendar.DATE
+    private val currentDate: String = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(java.util.Date())
     private var i = 0
     private var correct: Int = 0
 
@@ -66,12 +69,13 @@ class Test3Fragment : BaseFragment(),KodeinAware {
                 }
                 if (it.lvl >= 3) {
                     it.acquired = true
+                    it.acquiredDate =currentDate
                 }
 
-                it.test = false // uncomment when using app
                 it.lastOk = today
                // it.acquired=true // temp code, just to check how some  views  get displayed on word acquired, delete when using app .
                 viewModel.updateWord(it)
+                if(!result[i] && it.lvl == 0) {it.test = false }
                 i++
 
             }
