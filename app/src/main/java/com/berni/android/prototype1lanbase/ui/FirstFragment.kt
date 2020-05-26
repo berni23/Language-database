@@ -1,15 +1,21 @@
 package com.berni.android.prototype1lanbase.ui
+
 import android.content.Context
 import android.content.Intent
+import android.graphics.Color
+import android.graphics.Color.argb
 import android.graphics.drawable.AnimationDrawable
 import android.icu.util.Calendar
 import android.os.Bundle
+import android.os.CountDownTimer
 import android.view.*
 import android.view.inputmethod.InputMethodManager
 import android.widget.SearchView
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.content.res.AppCompatResources
+import androidx.core.content.ContextCompat
 import androidx.core.content.ContextCompat.getSystemService
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
@@ -31,8 +37,12 @@ import kotlinx.coroutines.runBlocking
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.closestKodein
 import org.kodein.di.generic.instance
+import java.lang.Math.abs
+import java.lang.Math.sin
 import java.text.SimpleDateFormat
 import java.util.*
+
+
 /**
  * A simple [Fragment] subclass as the default destination in the navigation.
  */
@@ -46,6 +56,10 @@ class FirstFragment : BaseFragment(),KodeinAware {
     private var displayedCats = mutableListOf<CatWords>()
     private lateinit var viewModel: MainViewModel
     private lateinit var navController: NavController
+    private var color: Int = Color.argb(255, 255, 0,0)
+    private var a :Double = 0.0
+    private var b : Int = 0
+    private var c: Double = 0.0
 
     override fun onCreateView(
 
@@ -61,11 +75,12 @@ class FirstFragment : BaseFragment(),KodeinAware {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+       // timerTestColor.start()
+
         (activity as AppCompatActivity).supportActionBar?.title = "Language Database"
         navController = Navigation.findNavController(view)
         recycler_view_cats.setHasFixedSize(true)
         viewModel = ViewModelProvider(this, viewModelFactory).get(MainViewModel::class.java)
-
         runBlocking(Dispatchers.Default){firstCat = viewModel.anyCat()}
         viewModel.catsWithWords().observe(viewLifecycleOwner, Observer<List<CatWords>> {
         _allCats = it
@@ -73,6 +88,8 @@ class FirstFragment : BaseFragment(),KodeinAware {
         recycler_view_cats.layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
         recycler_view_cats.adapter = CatAdapter(it, viewModel, this.coroutineContext)
         })
+
+
 
         btn_add.setOnClickListener {
             editText_newCat.text.clear()
@@ -162,10 +179,9 @@ class FirstFragment : BaseFragment(),KodeinAware {
 
             override fun onQueryTextChange(newText: String?): Boolean {
 
-                if (newText.isNullOrEmpty()) {
-                    displayedCats = _allCats as MutableList<CatWords>
+                if (newText.isNullOrEmpty()) { displayedCats = _allCats as MutableList<CatWords> }
 
-                } else {
+                else {
 
                     displayedCats = mutableListOf<CatWords>()
                     _allCats.forEach {
@@ -183,17 +199,16 @@ class FirstFragment : BaseFragment(),KodeinAware {
         })
 
 
-        val anim1: AnimationDrawable
-        R.id.item_test.apply {
+       //AppCompatResources.getDrawable(requireContext(), R.drawable.ic_test_black_24dp)?.setTint(color)
+        val animTest: AnimationDrawable
+        menu.findItem(R.id.item_test).actionView.apply {
+
             setBackgroundResource(R.drawable.anim_test)
-            anim1 = background as AnimationDrawable
+            animTest = background as AnimationDrawable
         }
 
-        anim1.start()
+        animTest.start()
 
-        val toast: Toast = Toast.makeText(context,resources.getString(R.string.msg_first_btn_pressed),Toast.LENGTH_LONG)
-        toast.setGravity(Gravity.CENTER, 0,0)
-        toast.show()
         return super.onCreateOptionsMenu(menu, inflater)
     }
 
@@ -231,16 +246,14 @@ class FirstFragment : BaseFragment(),KodeinAware {
                         testFalse.forEach {
 
                             val diff = Calendar.DATE - it.lastOk
-                            if (it.lvl == 1 && diff >= 3) { it.test = true }
-
-                            else if (it.lvl == 2 && diff >= 7) { it.test = true }
+                            if (it.lvl == 1 && diff >= 3) {it.test = true}
+                            else if (it.lvl == 2 && diff >= 7) {it.test = true}
 
                             viewModel.updateWord(it)
                         }
                     }
 
-                    viewModel =
-                        ViewModelProvider(this, viewModelFactory).get(MainViewModel::class.java)
+                    viewModel = ViewModelProvider(this, viewModelFactory).get(MainViewModel::class.java)
                     runBlocking(Dispatchers.Default) { wordsForTest = viewModel.wordsForTest() }
 
                     if (wordsForTest.size <= 5) {
@@ -293,6 +306,30 @@ class FirstFragment : BaseFragment(),KodeinAware {
             callback
         )
     }
+
+
+
+   /** private val timerTestColor = object: CountDownTimer(2000000,50) {
+
+        override fun onFinish() {
+
+
+        }
+
+        override fun onTick(millisUntilFinished: Long) {
+
+            a+=5
+            b = abs(255*kotlin.math.sin(a)).toInt()
+            c+=1
+
+            AppCompatResources.getDrawable(requireContext(), R.drawable.ic_test_black_24dp)?.setTint(argb(255,b,0, (c%255).toInt()))
+
+            resources.getXml(findViewById(R.id.menu_main))
+
+         //   getString(R.id.item_test).setIcon(ContextCompat.getDrawable(this, R.drawable.ic_launcher))
+        }
+
+    }.start()**/
 }
 
 

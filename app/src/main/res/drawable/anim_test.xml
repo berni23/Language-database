@@ -5,42 +5,74 @@
 
     <item
 
-        android:drawable="@drawable/ic_test_black_24dp"
-        android:duration ="200" />
+        android:drawable="@drawable/test_white"
+        android:duration ="150" />
 
     <item
 
-        android:drawable="@drawable/ic_title_white_20dp"
-        android:duration ="200" />
+        android:drawable="@drawable/test1_anim"
+        android:duration ="150" />
 
     <item
 
-        android:drawable="@drawable/ic_title_white_16dp"
-        android:duration ="200" />
+        android:drawable="@drawable/test2_anim"
+        android:duration ="150" />
 
     <item
 
-        android:drawable="@drawable/ic_title_white_12dp"
-        android:duration ="200" />
+        android:drawable="@drawable/test3_anim"
+        android:duration ="150" />
 
     <item
 
-        android:drawable="@drawable/ic_title_black_8dp"
-        android:duration ="200" />
+        android:drawable="@drawable/test4_anim"
+        android:duration ="150" />
 
     <item
 
-        android:drawable="@drawable/ic_title_white_12dp"
-        android:duration ="200" />
+        android:drawable="@drawable/test5_anim"
+        android:duration ="150" />
 
     <item
 
-        android:drawable="@drawable/ic_title_white_16dp"
-        android:duration ="200" />
+        android:drawable="@drawable/test6_anim"
+        android:duration ="150" />
 
     <item
 
-        android:drawable="@drawable/ic_title_white_20dp"
-        android:duration ="200" />
+        android:drawable="@drawable/test7_anim"
+        android:duration ="150" />
+
+
+    <item
+
+        android:drawable="@drawable/test6_anim"
+        android:duration ="150" />
+
+    <item
+
+        android:drawable="@drawable/test5_anim"
+        android:duration ="150" />
+
+    <item
+
+        android:drawable="@drawable/test4_anim"
+        android:duration ="150" />
+
+    <item
+
+        android:drawable="@drawable/test3_anim"
+        android:duration ="150" />
+
+    <item
+
+        android:drawable="@drawable/test2_anim"
+        android:duration ="150" />
+    <item
+
+        android:drawable="@drawable/test1_anim"
+        android:duration ="150" />
+
+
 
 </animation-list>

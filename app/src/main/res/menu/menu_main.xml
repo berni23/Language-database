@@ -1,6 +1,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id = "@+id/menu_main"
     tools:context="com.berni.android.prototype1lanbase.ui.FirstFragment">
 
     <item
@@ -10,14 +11,15 @@
         android:icon="@drawable/ic_search_white_24dp"
         android:title="@string/search"
         app:actionViewClass="android.widget.SearchView"
-        app:showAsAction="always" />
+        app:showAsAction="always"/>
     <item
         android:id = "@+id/item_test"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
         android:orderInCategory="1"
-        android:icon="@drawable/anim_test"
+        android:icon="@drawable/test_white"
         android:title="@string/test"
-        app:showAsAction="always|withText" />
+        app:showAsAction="always"
+        app:actionViewClass="android.widget.ImageView" />
     <item
         android:id="@+id/item_statistics"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
