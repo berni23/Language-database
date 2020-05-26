@@ -27,7 +27,7 @@ interface Repository{
 
         suspend fun counterWords(): Int {return catDao.getAllWords().size}
 
-        fun anyCat() : Boolean { return catDao.catsNwords().isEmpty() }
+        fun anyCat() : Boolean {return catDao.catsNwords().isEmpty() }
 
         fun anyWord() : Boolean { return catDao.getAllWords().isEmpty() }
 
@@ -50,6 +50,8 @@ interface Repository{
         fun deleteCat(currentCat:Cat) {catDao.deleteCat(currentCat)}
 
         fun deleteWord(currentWord: Word) {catDao.deleteWord(currentWord)}
+
+        fun getNumAcquired():Int {return catDao.getNumAcquired(false)}
 
         suspend fun wordsForTest(): List<Word> {return catDao.wordsForTest()}
 

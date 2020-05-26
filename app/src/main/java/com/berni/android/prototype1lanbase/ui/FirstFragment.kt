@@ -3,19 +3,15 @@ package com.berni.android.prototype1lanbase.ui
 import android.content.Context
 import android.content.Intent
 import android.graphics.Color
-import android.graphics.Color.argb
 import android.graphics.drawable.AnimationDrawable
 import android.icu.util.Calendar
 import android.os.Bundle
-import android.os.CountDownTimer
 import android.view.*
 import android.view.inputmethod.InputMethodManager
 import android.widget.SearchView
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.content.res.AppCompatResources
-import androidx.core.content.ContextCompat
 import androidx.core.content.ContextCompat.getSystemService
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
@@ -88,8 +84,6 @@ class FirstFragment : BaseFragment(),KodeinAware {
         recycler_view_cats.layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
         recycler_view_cats.adapter = CatAdapter(it, viewModel, this.coroutineContext)
         })
-
-
 
         btn_add.setOnClickListener {
             editText_newCat.text.clear()
@@ -198,8 +192,8 @@ class FirstFragment : BaseFragment(),KodeinAware {
             }
         })
 
-
        //AppCompatResources.getDrawable(requireContext(), R.drawable.ic_test_black_24dp)?.setTint(color)
+
         val animTest: AnimationDrawable
         menu.findItem(R.id.item_test).actionView.apply {
 

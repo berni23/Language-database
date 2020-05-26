@@ -54,6 +54,8 @@ class MainViewModel(private val repos: Repository ) : ViewModel() {
 
     fun catsNWords(): MutableList<CatWords> = repos.catsNwords()
 
+    fun getNumAcquired() : Int = repos.getNumAcquired()
+
     suspend fun counterAcquired(): List<Int> {
 
         val words = repos.getAllWords()

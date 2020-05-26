@@ -1,6 +1,5 @@
 package com.berni.android.prototype1lanbase.db
 
-import android.icu.util.Calendar
 import androidx.lifecycle.LiveData
 import androidx.room.*
 
@@ -93,4 +92,6 @@ interface CatDao {
     //-----------------------------------------------------------------------
     //-----------------------------------------------------------------------
 
+    @Query("SELECT COUNT(WordId) FROM Word WHERE acquired=:bool")
+    fun getNumAcquired(bool:Boolean): Int
 }
