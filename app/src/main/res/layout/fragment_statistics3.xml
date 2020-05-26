@@ -60,6 +60,7 @@
 
         <TextView
             android:id="@+id/labelsG1"
+            android:visibility="invisible"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="7dp"

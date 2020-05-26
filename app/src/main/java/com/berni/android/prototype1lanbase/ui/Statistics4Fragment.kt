@@ -1,12 +1,9 @@
 package com.berni.android.prototype1lanbase.ui
 
 
-
-import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.*
-import androidx.activity.OnBackPressedCallback
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
@@ -16,7 +13,6 @@ import com.anychart.chart.common.dataentry.DataEntry
 import com.anychart.chart.common.dataentry.ValueDataEntry
 import com.berni.android.prototype1lanbase.R
 import com.jakewharton.threetenabp.AndroidThreeTen
-import kotlinx.android.synthetic.main.fragment_statistics3.*
 import kotlinx.android.synthetic.main.fragment_statistics4.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
@@ -24,12 +20,11 @@ import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.closestKodein
 import org.kodein.di.generic.instance
 import org.threeten.bp.LocalDate
-import org.threeten.bp.YearMonth
 import org.threeten.bp.format.DateTimeFormatter
 import org.threeten.bp.temporal.ChronoUnit
-import java.text.SimpleDateFormat
-import java.util.*
 import kotlin.collections.ArrayList
+import kotlin.math.abs
+
 
 class Statistics4Fragment : BaseFragment(),KodeinAware {
 
@@ -52,71 +47,83 @@ class Statistics4Fragment : BaseFragment(),KodeinAware {
 
         navController = Navigation.findNavController(view)
         viewModel = ViewModelProvider(this, viewModelFactory).get(MainViewModel::class.java)
+
         var date = mutableListOf<String>()
         var dateAcquired = mutableListOf<String>()
+
         runBlocking(Dispatchers.Default) {
             date = viewModel.orderDays()
             dateAcquired = viewModel.orderAcquired()
         }
+
         APIlib.getInstance().setActiveAnyChartView(lineChart3)
         val lineMonths = AnyChart.line()
         val dataMonths = arrayMonths(sortMonths(date))
         lineMonths.data(dataMonths)
         lineChart3.setChart(lineMonths)
 
-        APIlib.getInstance().setActiveAnyChartView(lineChart4)
-        val lineMonths2 = AnyChart.line()
-        val dataMonths2 = arrayMonths(sortMonths(dateAcquired))
-        lineMonths2.data(dataMonths2)
-        lineChart4.setChart(lineMonths2)
+        if(dateAcquired.isNotEmpty())
 
-        changeGraphs2.setOnClickListener{navController.popBackStack() }
-        super.onViewCreated(view, savedInstanceState)
+        {
+            labelsG4.visibility = View.VISIBLE
+            APIlib.getInstance().setActiveAnyChartView(lineChart4)
+            val lineMonths2 = AnyChart.line()
+            val dataMonths2 = arrayMonths(sortMonths(dateAcquired))
+            lineMonths2.data(dataMonths2)
+            lineChart4.setChart(lineMonths2)
         }
+
+        changeGraphs2.setOnClickListener {navController.popBackStack()}
+        super.onViewCreated(view, savedInstanceState)
+    }
 
     private fun sortMonths(date: MutableList<String>): ArrayList<String> {
 
         val months = arrayListOf<String>()
-        date.forEach {months.add(it.substring(3, it.lastIndex+1)) }
+        date.forEach {months.add(it.substring(3,it.lastIndex + 1)) }
         months.sort()
         months.sortBy {it.substring(3,7).toInt() }
         return months
 
     }
+
     private fun arrayMonths(months: ArrayList<String>): ArrayList<DataEntry> {
 
         AndroidThreeTen.init(activity)
         var xAxis = mutableListOf<String>()
         val format1 = DateTimeFormatter.ofPattern("MM/yyyy")
-        val format2 =  DateTimeFormatter.ofPattern("dd/MM/yyyy")
+        val format2 = DateTimeFormatter.ofPattern("dd/MM/yyyy")
         val today = LocalDate.now()
         //.plusMonths(7) ( code useful for debugging)
-        val firstMonth = LocalDate.parse("01/${months[0]}",format2)
+        val firstMonth = LocalDate.parse("01/${months[0]}", format2)
         val dataMonth = ArrayList<DataEntry>()
 
-        var monthsPassed =  Math.abs(today.until(firstMonth, ChronoUnit.MONTHS))
+        var monthsPassed = abs(today.until(firstMonth, ChronoUnit.MONTHS))
         Log.println(Log.INFO, "monthsPassed", monthsPassed.toString())
-
-        if (monthsPassed > 6) {monthsPassed = 6}
+        if (monthsPassed > 6) { monthsPassed = 6 }
 
         if (monthsPassed.toInt() == 0) {
             xAxis.add(format1.format(today))
             dataMonth.add(ValueDataEntry(xAxis[0], months.count {it == xAxis[0]}))
 
+
         } else {
 
-            for (i in 0..monthsPassed) {xAxis.add(format1.format(today.minusMonths(i))) }
+            for (i in 0..monthsPassed) { xAxis.add(format1.format(today.minusMonths(i))) }
 
             xAxis = xAxis.asReversed()
-            val range =  xAxis.size-1
+            val range = xAxis.size -1
 
-            for (i in 0..range) {dataMonth.add(ValueDataEntry(xAxis[i], months.count { it == xAxis[i] }))}
+            for (i in 0..range) { dataMonth.add(ValueDataEntry(xAxis[i], months.count {it == xAxis[i]})) }
 
         }
         return dataMonth
     }
 
-        private fun dataMonths(months: List<String>): ArrayList<DataEntry> {
+}
+
+
+    /**    private fun dataMonths(months: List<String>): ArrayList<DataEntry> {
 
             val dataMonths = ArrayList<DataEntry>()
             var counterMonths = months.groupingBy {it}.eachCount().toList()
@@ -126,6 +133,8 @@ class Statistics4Fragment : BaseFragment(),KodeinAware {
             return dataMonths
 
         }
+
+    **
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -153,7 +162,7 @@ class Statistics4Fragment : BaseFragment(),KodeinAware {
 
         return super.onOptionsItemSelected(item)
     }
-}
+}**/
 
 
 

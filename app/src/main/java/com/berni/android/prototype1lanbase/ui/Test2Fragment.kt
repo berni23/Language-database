@@ -3,6 +3,7 @@ package com.berni.android.prototype1lanbase.ui
 import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.content.Context
+import android.media.MediaPlayer
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.view.LayoutInflater
@@ -20,15 +21,17 @@ import kotlinx.android.synthetic.main.fragment_test2.*
 import java.util.*
 import java.util.concurrent.TimeUnit
 
-
 /**
  * A simple [Fragment] subclass.
  */
+
 class Test2Fragment : BaseFragment(){
 
     private var pickedWords = listOf<Word>()
     private var resultTest = arrayListOf<Boolean>()
+    private lateinit var mediaPlayer: MediaPlayer
     private lateinit var navController: NavController
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -44,7 +47,7 @@ class Test2Fragment : BaseFragment(){
         super.onViewCreated(view, savedInstanceState)
 
         timer.start()
-
+        mediaPlayer = MediaPlayer.create(context,R.raw.success)
         navController = Navigation.findNavController(view)
         wordTest_textView.text = pickedWords[0].wordName
         val len = pickedWords.size
@@ -60,10 +63,20 @@ class Test2Fragment : BaseFragment(){
                 return@setOnClickListener
             }
 
-            val question = pickedWords[i].wordName.trim().toString().toLowerCase(Locale.ROOT)
+            val question = pickedWords[i].wordName.trim().toLowerCase(Locale.ROOT)
             val answer = wordTest_editext.text.trim().toString().toLowerCase(Locale.ROOT)
-            if (question == answer) { resultTest.add(true) }
-            else {resultTest.add(false) }
+
+            if (question == answer) {
+
+                mediaPlayer.start()
+                resultTest.add(true)
+                if (pickedWords[i].lvl==2){
+
+                    Toast.makeText(context,"Congrats!!, word acquired!!",Toast.LENGTH_SHORT).show()
+                }
+            }
+            else {resultTest.add(false)}
+
 
             i++
             if (i == len) {
@@ -109,13 +122,11 @@ class Test2Fragment : BaseFragment(){
     private val timer = object: CountDownTimer(900000,1000) {
         override fun onTick(millis: Long) {
 
-
             timerTest_textView.let{timerTest_textView.text =  String.format("%02d : %02d ",
                 TimeUnit.MILLISECONDS.toMinutes(millis),
                 TimeUnit.MILLISECONDS.toSeconds(millis) -
                         TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(millis)))}
         }
-
 
         override fun onFinish() {
 
@@ -126,7 +137,6 @@ class Test2Fragment : BaseFragment(){
                 for (i in 1..diff) {
 
                     resultTest.add(false)
-
                 }
             }
             val bundle = bundleOf("pickedWords" to pickedWords, "resultTest" to resultTest)

@@ -150,6 +150,8 @@ class FirstFragment : BaseFragment(),KodeinAware {
         }
     }
 
+
+
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.menu_main, menu)
         val searchView: SearchView = menu.findItem(R.id.item_search).actionView as SearchView
@@ -179,6 +181,19 @@ class FirstFragment : BaseFragment(),KodeinAware {
                 return false
             }
         })
+
+
+        val anim1: AnimationDrawable
+        R.id.item_test.apply {
+            setBackgroundResource(R.drawable.anim_test)
+            anim1 = background as AnimationDrawable
+        }
+
+        anim1.start()
+
+        val toast: Toast = Toast.makeText(context,resources.getString(R.string.msg_first_btn_pressed),Toast.LENGTH_LONG)
+        toast.setGravity(Gravity.CENTER, 0,0)
+        toast.show()
         return super.onCreateOptionsMenu(menu, inflater)
     }
 
@@ -194,7 +209,7 @@ class FirstFragment : BaseFragment(),KodeinAware {
                     _allWords = viewModel.getAllWords()
 
                 }
-                Test.number = 0 //  temporary
+                //Test.number = 0 //  temporary
                 Test.setCounter()
                 val wordsNotAcquired = _allWords.filter {!it.acquired } // words yet to be acquired by user's memory
                 var wordsForTest = listOf<Word>()
@@ -216,11 +231,10 @@ class FirstFragment : BaseFragment(),KodeinAware {
                         testFalse.forEach {
 
                             val diff = Calendar.DATE - it.lastOk
-                            if (it.lvl == 1 && diff >= 3) {
-                                it.test = true
-                            } else if (it.lvl == 2 && diff >= 7) {
-                                it.test = true
-                            }
+                            if (it.lvl == 1 && diff >= 3) { it.test = true }
+
+                            else if (it.lvl == 2 && diff >= 7) { it.test = true }
+
                             viewModel.updateWord(it)
                         }
                     }
@@ -245,7 +259,6 @@ class FirstFragment : BaseFragment(),KodeinAware {
             R.id.item_all -> {navController.navigate(R.id.action_FirstFragment_to_allWordsFragment) }
             R.id.item_infoApp ->{navController.navigate(R.id.actionInfo)}
             R.id.item_statistics -> {
-
                 var counter = 0
                 runBlocking(Dispatchers.Default) { counter = viewModel.counterWords() }
                 if (counter < 10) {

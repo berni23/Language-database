@@ -116,7 +116,7 @@ class SecondFragment : BaseFragment(),KodeinAware {
 
             launch{
 
-                val word = Word(theWord,translation1,example1,translationExample1,definition,date.toString(),cat.catId,acquiredDate = date)
+                val word = Word(theWord,translation1,example1,translationExample1,definition,date.toString(),cat.catId)
 
                // TODO(Delete acquired date)
 
@@ -147,7 +147,7 @@ class SecondFragment : BaseFragment(),KodeinAware {
 
             }
 
-            else {Toast.makeText(context,  resources.getString(R.string.word_successfully_added), Toast.LENGTH_LONG).show() }
+            else {Toast.makeText(context,  resources.getString(R.string.word_successfully_added), Toast.LENGTH_SHORT).show() }
         }
     }
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {

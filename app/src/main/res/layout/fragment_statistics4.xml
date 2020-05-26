@@ -32,7 +32,6 @@
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 
-
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/Hrect2"
         android:layout_width="wrap_content"
@@ -59,10 +58,11 @@
         app:layout_constraintTop_toTopOf="@id/Hrect2">
 
         <TextView
-            android:id="@+id/labelsG2"
+            android:id="@+id/labelsG4"
             android:layout_width="wrap_content"
             android:fontFamily="@font/lato_light_italic"
             android:text = "@string/number_of_words_monthly_added_n_last_6_active_months"
+            android:visibility="invisible"
             android:layout_marginTop="5dp"
             android:layout_marginBottom="5dp"
             android:layout_marginStart="7dp"
@@ -100,7 +100,6 @@
         app:layout_constraintStart_toStartOf="@id/Vbutton"
         app:layout_constraintTop_toTopOf="@id/Hbutton"/>
 
-
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/Hrect3"
         android:layout_width="wrap_content"
@@ -136,6 +135,6 @@
         android:layout_marginEnd="7dp"
         android:layout_marginBottom="5dp"
         android:fontFamily="@font/lato_light_italic"
-        android:text="@string/number_of_words_daily_added_n_last_100_active_days"/>
+        android:text="@string/number_of_words_monthly_added_n_last_6_active_months"/>
     </androidx.cardview.widget.CardView>
 </androidx.constraintlayout.widget.ConstraintLayout>

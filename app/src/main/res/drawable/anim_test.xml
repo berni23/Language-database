@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animation-list
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:oneshot="false">
+
+    <item
+
+        android:drawable="@drawable/ic_test_black_24dp"
+        android:duration ="200" />
+
+    <item
+
+        android:drawable="@drawable/ic_title_white_20dp"
+        android:duration ="200" />
+
+    <item
+
+        android:drawable="@drawable/ic_title_white_16dp"
+        android:duration ="200" />
+
+    <item
+
+        android:drawable="@drawable/ic_title_white_12dp"
+        android:duration ="200" />
+
+    <item
+
+        android:drawable="@drawable/ic_title_black_8dp"
+        android:duration ="200" />
+
+    <item
+
+        android:drawable="@drawable/ic_title_white_12dp"
+        android:duration ="200" />
+
+    <item
+
+        android:drawable="@drawable/ic_title_white_16dp"
+        android:duration ="200" />
+
+    <item
+
+        android:drawable="@drawable/ic_title_white_20dp"
+        android:duration ="200" />
+
+</animation-list>

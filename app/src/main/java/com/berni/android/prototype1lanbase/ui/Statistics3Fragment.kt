@@ -19,7 +19,6 @@ import com.jakewharton.threetenabp.AndroidThreeTen
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
 import org.kodein.di.KodeinAware
-import org.threeten.bp.LocalDateTime
 import org.kodein.di.android.x.closestKodein
 import org.kodein.di.generic.instance
 import org.threeten.bp.LocalDate
@@ -61,22 +60,24 @@ class Statistics3Fragment : BaseFragment(),KodeinAware {
         }
 
         Log.println(Log.INFO,"acquired",daysAcquired.toString())
-
         APIlib.getInstance().setActiveAnyChartView(lineChart)
-
         val lineDays = AnyChart.line()
         val dataDays = arrayDays(sortDays(days))
-       // lineDays.data(dataDays)
+
+
         lineDays.line(dataDays)
         lineChart.setChart(lineDays)
 
-        APIlib.getInstance().setActiveAnyChartView(lineChart2)
-        val lineDays2 = AnyChart.line()
-        val dataDays2 = arrayDays(sortDays(daysAcquired))
-        lineDays2.data(dataDays2)
-        lineChart2.setChart(lineDays2)
-        //lineChart.setChart(lineDays2)
+        if (daysAcquired.isNotEmpty()) {
 
+            labelsG1.visibility = View.VISIBLE
+            APIlib.getInstance().setActiveAnyChartView(lineChart2)
+            val lineDays2 = AnyChart.line()
+            val dataDays2 = arrayDays(sortDays(daysAcquired))
+            lineDays2.data(dataDays2)
+            lineChart2.setChart(lineDays2)
+        }
+        //lineChart.setChart(lineDays2)
         changeGraphs.setOnClickListener {navController.navigate(R.id.actionMonthlyView)}
         super.onViewCreated(view, savedInstanceState)
 
