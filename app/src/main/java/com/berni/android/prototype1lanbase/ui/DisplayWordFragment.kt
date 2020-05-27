@@ -66,9 +66,6 @@ class DisplayWordFragment : BaseFragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
 
         when (item.itemId) {R.id.item_backEditToWordsList -> { navController.popBackStack() } }
-
-
-
         return super.onOptionsItemSelected(item)
     }
 

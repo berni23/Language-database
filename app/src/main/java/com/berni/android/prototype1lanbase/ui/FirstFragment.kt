@@ -49,14 +49,13 @@ class FirstFragment : BaseFragment(),KodeinAware {
     override val kodein by closestKodein()
     private val viewModelFactory: ViewModelFactory by instance<ViewModelFactory>()
     private var firstCat: Boolean = true
-    private var notAcquired:Int = 0
+    private var notAcquired: Int = 0
     private var newCatName: String? = null
     private var _allCats = listOf<CatWords>()
     private var displayedCats = mutableListOf<CatWords>()
-   // private var bool = true
     private var b: Int = 0
     private var a: Float = 0.0F
-    private  var action: MenuItem? = null
+    private var action: MenuItem? = null
     private lateinit var viewModel: MainViewModel
     private lateinit var navController: NavController
 
@@ -79,24 +78,27 @@ class FirstFragment : BaseFragment(),KodeinAware {
         navController = Navigation.findNavController(view)
         recycler_view_cats.setHasFixedSize(true)
         viewModel = ViewModelProvider(this, viewModelFactory).get(MainViewModel::class.java)
-        runBlocking(Dispatchers.Default){
+        runBlocking(Dispatchers.Default) {
 
             firstCat = viewModel.anyCat()
-            notAcquired= viewModel.getNumAcquired(false)
+            notAcquired = viewModel.getNumAcquired(false)
 
         }
+
+        Log.i("notAcquired",notAcquired.toString())
         viewModel.catsWithWords().observe(viewLifecycleOwner, Observer<List<CatWords>> {
-        _allCats = it
-        displayedCats = _allCats as MutableList<CatWords>
-        recycler_view_cats.layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
-        recycler_view_cats.adapter = CatAdapter(it, viewModel, this.coroutineContext)
+            _allCats = it
+            displayedCats = _allCats as MutableList<CatWords>
+            recycler_view_cats.layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
+            recycler_view_cats.adapter = CatAdapter(it, viewModel, this.coroutineContext)
         })
 
         btn_add.setOnClickListener {
             editText_newCat.text.clear()
             editText_newCat.requestFocus()
             newCatName = null
-            val imm: InputMethodManager? = getSystemService<InputMethodManager>(it.context, InputMethodManager::class.java)
+            val imm: InputMethodManager? =
+                getSystemService<InputMethodManager>(it.context, InputMethodManager::class.java)
             imm!!.showSoftInput(editText_newCat, InputMethodManager.SHOW_IMPLICIT)
             recycler_view_newCat.visibility = View.VISIBLE
 
@@ -106,7 +108,7 @@ class FirstFragment : BaseFragment(),KodeinAware {
         btnCreate.setOnClickListener {
 
             newCatName = editText_newCat.text.toString().trim()
-            val currentDate: String =SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(Date())
+            val currentDate: String = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(Date())
             if (newCatName!!.isEmpty()) {
 
                 editText_newCat.error = resources.getString(R.string.cat_required)
@@ -115,7 +117,7 @@ class FirstFragment : BaseFragment(),KodeinAware {
             }
 
             var bool = true
-            runBlocking(Dispatchers.Default) {bool = viewModel.validCatName(newCatName!!) }
+            runBlocking(Dispatchers.Default) { bool = viewModel.validCatName(newCatName!!) }
 
             if (bool) {
 
@@ -136,16 +138,18 @@ class FirstFragment : BaseFragment(),KodeinAware {
 
             if (firstCat) {
 
-                val toast: Toast = Toast.makeText(context,resources.getString(R.string.msg_first_cat_created),Toast.LENGTH_LONG)
-                toast.setGravity(Gravity.CENTER, 0,0)
+                val toast: Toast = Toast.makeText(context, resources.getString(R.string.msg_first_cat_created), Toast.LENGTH_LONG)
+                toast.setGravity(Gravity.CENTER, 0, 0)
                 Tutorial.firstCat = false
                 firstCat = false
                 toast.show()
                 arr.y = 100F
                 arr.rotation = 180F
+            } else {
+                Toast.makeText(context, " ${resources.getString(R.string.category)} $newCatName" + "  ${resources.getString(
+                        R.string.successfully_created
+                    )}", Toast.LENGTH_SHORT).show()
             }
-
-            else {Toast.makeText(context, " ${resources.getString(R.string.category)} $newCatName" +"  ${resources.getString(R.string.successfully_created)}", Toast.LENGTH_SHORT).show()}
             hideKeyboard()
         }
 
@@ -160,9 +164,8 @@ class FirstFragment : BaseFragment(),KodeinAware {
             }
 
             anim1.start()
-
-            val toast: Toast = Toast.makeText(context,resources.getString(R.string.msg_first_btn_pressed),Toast.LENGTH_LONG)
-            toast.setGravity(Gravity.CENTER, 0,0)
+            val toast: Toast = Toast.makeText(context, resources.getString(R.string.msg_first_btn_pressed), Toast.LENGTH_LONG)
+            toast.setGravity(Gravity.CENTER, 0, 0)
             toast.show()
         }
     }
@@ -171,21 +174,20 @@ class FirstFragment : BaseFragment(),KodeinAware {
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.menu_main, menu)
         val searchView: SearchView = menu.findItem(R.id.item_search).actionView as SearchView
-
         action = menu.findItem(R.id.item_test)
 
-        if (action == null) {  Log.i("infoTag","nullMenu") }
-
-        else{ Log.i("infoTag","NotnullMenu") }
+        //if (action == null) {  Log.i("infoTag","nullMenu") }
+        //else{ Log.i("infoTag","NotnullMenu") }
 
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
 
-            override fun onQueryTextSubmit(query: String?): Boolean {return false}
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                return false
+            }
 
             override fun onQueryTextChange(newText: String?): Boolean {
 
                 if (newText.isNullOrEmpty()) { displayedCats = _allCats as MutableList<CatWords> }
-
                 else {
 
                     displayedCats = mutableListOf<CatWords>()
@@ -196,23 +198,20 @@ class FirstFragment : BaseFragment(),KodeinAware {
                         }
                     }
                 }
-                recycler_view_cats.layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
+
+                recycler_view_cats.layoutManager =
+                    StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
                 recycler_view_cats.adapter = CatAdapter(displayedCats, viewModel, coroutineContext)
-
-
-
                 return false
             }
-
         })
+        //AppCompatResources.getDrawable(requireContext(), R.drawable.ic_test_black_24dp)?.setTint(color)
 
+        if (Test.number <= 3 && notAcquired > 120) {
 
+            Log.i("timer","timer")
 
-       //AppCompatResources.getDrawable(requireContext(), R.drawable.ic_test_black_24dp)?.setTint(color)
-
-       if (Test.number<=3 && notAcquired>120) {timer1.start()}
-
-
+            timer1.start() }
 
         return super.onCreateOptionsMenu(menu, inflater)
     }
@@ -227,7 +226,7 @@ class FirstFragment : BaseFragment(),KodeinAware {
                 runBlocking(Dispatchers.Default) { _allWords = viewModel.getAllWords() }
                 //Test.number = 0 //  temporary
                 Test.setCounter()
-                val wordsNotAcquired = _allWords.filter {!it.acquired } // words yet to be acquired by user's memory
+                val wordsNotAcquired = _allWords.filter { !it.acquired } // words yet to be acquired by user's memory
                 var wordsForTest = listOf<Word>()
 
                 if (Test.number >= 3) {
@@ -247,8 +246,8 @@ class FirstFragment : BaseFragment(),KodeinAware {
                         testFalse.forEach {
 
                             val diff = Calendar.DATE - it.lastOk
-                            if (it.lvl == 1 && diff >= 3) {it.test = true}
-                            else if (it.lvl == 2 && diff >= 7) {it.test = true}
+                            if (it.lvl == 1 && diff >= 3) { it.test = true }
+                            else if (it.lvl == 2 && diff >= 7) { it.test = true }
                             viewModel.updateWord(it)
                         }
                     }
@@ -263,21 +262,31 @@ class FirstFragment : BaseFragment(),KodeinAware {
 
                     } else {
 
+                        AppCompatResources.getDrawable(requireContext(), R.drawable.test_white)
+                            ?.setTint(argb(255, 255, 255, 255))
+                        action?.let { action!!.setIcon(R.drawable.test_white) }
+
+                        stopTimers()
                         val bundle = bundleOf("listWords" to wordsForTest)
                         navController.navigate(R.id.actionTest1, bundle)
                     }
                 }
             }
 
-            R.id.item_all -> {
-
-                navController.navigate(R.id.action_FirstFragment_to_allWordsFragment) }
-            R.id.item_infoApp ->{navController.navigate(R.id.actionInfo)}
+            R.id.item_all -> { navController.navigate(R.id.action_FirstFragment_to_allWordsFragment) }
+            R.id.item_infoApp -> {
+                stopTimers()
+                navController.navigate(R.id.actionInfo)
+            }
             R.id.item_statistics -> {
                 var counter = 0
                 runBlocking(Dispatchers.Default) { counter = viewModel.counterWords() }
-                if (counter < 10) { Toast.makeText(context, resources.getString(R.string.add_more_words_statistics), Toast.LENGTH_SHORT).show() }
-                else { navController.navigate(R.id.actionStatistics) }
+                if (counter < 10) { Toast.makeText(context, resources.getString(R.string.add_more_words_statistics), Toast.LENGTH_SHORT).show()
+                } else {
+
+                    stopTimers()
+                    navController.navigate(R.id.actionStatistics)
+                }
             }
         }
 
@@ -302,48 +311,41 @@ class FirstFragment : BaseFragment(),KodeinAware {
         )
     }
 
+    private val timerTestColor = object : CountDownTimer(2000000, 100) {
 
-    private val timerTestColor = object: CountDownTimer(2000000,100) {
+        override fun onFinish() { timer1.start()}
 
-        override fun onFinish() {}
+
+        override fun onTick(millisUntilFinished: Long) {
+            a += 0.1F
+            b = abs(255 * kotlin.math.sin(a)).toInt()
+            // Log.i("infoTag",b.toString())
+            AppCompatResources.getDrawable(requireContext(), R.drawable.test_white)?.setTint(argb(255, 255, b, b))
+            action?.let { action!!.setIcon(R.drawable.test_white) }
+           // Log.i("infoTag", "tick")
+        }
+
+    }
+
+    private val timer1 = object : CountDownTimer(1000, 2000) {
+
+        override fun onFinish() {
+
+        }
 
         override fun onTick(millisUntilFinished: Long) {
 
-
-            a+= 0.1F
-            b = abs(255*kotlin.math.sin(a)).toInt()
-
-           // Log.i("infoTag",b.toString())
-
-
-        AppCompatResources.getDrawable(requireContext(), R.drawable.test_white)
-                ?.setTint(argb(255, 255, b, b))
-
-
-            action?.let{action!!.setIcon(R.drawable.test_white)}
-            Log.i("infoTag","tick")
         }
-
-    }.start()
-
-
-private val timer1 = object: CountDownTimer(1000,2000) {
-
-    override fun onFinish() {
-
-        timerTestColor.start()
-    }
-
-    override fun onTick(millisUntilFinished: Long) {
+        // b = abs(255*kotlin.math.sin(a)).toInt()
 
     }
-    // b = abs(255*kotlin.math.sin(a)).toInt()
+        private fun stopTimers() {
 
+            timer1.cancel()
+            timerTestColor.cancel()
+
+        }
 }
-}
-
-
-
 
 
 
