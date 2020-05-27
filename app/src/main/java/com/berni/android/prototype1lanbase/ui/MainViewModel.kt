@@ -54,9 +54,9 @@ class MainViewModel(private val repos: Repository ) : ViewModel() {
 
     fun catsNWords(): MutableList<CatWords> = repos.catsNwords()
 
-    fun getNumAcquired() : Int = repos.getNumAcquired()
+    fun getNumAcquired(bool:Boolean) : Int = repos.getNumAcquired(bool)
 
-    suspend fun counterAcquired(): List<Int> {
+   /** suspend fun counterAcquired(): List<Int> {
 
         val words = repos.getAllWords()
         var int1 = 0
@@ -68,6 +68,6 @@ class MainViewModel(private val repos: Repository ) : ViewModel() {
             else { int2++ }
         }
         return listOf(int1, int2)
-    }
+    }**/
 }
 

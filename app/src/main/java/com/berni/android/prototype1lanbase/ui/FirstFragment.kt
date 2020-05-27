@@ -2,16 +2,19 @@ package com.berni.android.prototype1lanbase.ui
 
 import android.content.Context
 import android.content.Intent
-import android.graphics.Color
+import android.graphics.Color.argb
 import android.graphics.drawable.AnimationDrawable
 import android.icu.util.Calendar
 import android.os.Bundle
+import android.os.CountDownTimer
+import android.util.Log
 import android.view.*
 import android.view.inputmethod.InputMethodManager
 import android.widget.SearchView
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.content.ContextCompat.getSystemService
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
@@ -33,10 +36,9 @@ import kotlinx.coroutines.runBlocking
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.closestKodein
 import org.kodein.di.generic.instance
-import java.lang.Math.abs
-import java.lang.Math.sin
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.math.abs
 
 
 /**
@@ -47,16 +49,18 @@ class FirstFragment : BaseFragment(),KodeinAware {
     override val kodein by closestKodein()
     private val viewModelFactory: ViewModelFactory by instance<ViewModelFactory>()
     private var firstCat: Boolean = true
+    private var notAcquired:Int = 0
     private var newCatName: String? = null
     private var _allCats = listOf<CatWords>()
     private var displayedCats = mutableListOf<CatWords>()
+   // private var bool = true
+    private var b: Int = 0
+    private var a: Float = 0.0F
+    private  var action: MenuItem? = null
     private lateinit var viewModel: MainViewModel
     private lateinit var navController: NavController
-    private var color: Int = Color.argb(255, 255, 0,0)
-    private var a :Double = 0.0
-    private var b : Int = 0
-    private var c: Double = 0.0
 
+    //private var color: Int = Color.argb(255, 255, 0,0)
     override fun onCreateView(
 
         inflater: LayoutInflater, container: ViewGroup?,
@@ -71,13 +75,16 @@ class FirstFragment : BaseFragment(),KodeinAware {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-       // timerTestColor.start()
-
         (activity as AppCompatActivity).supportActionBar?.title = "Language Database"
         navController = Navigation.findNavController(view)
         recycler_view_cats.setHasFixedSize(true)
         viewModel = ViewModelProvider(this, viewModelFactory).get(MainViewModel::class.java)
-        runBlocking(Dispatchers.Default){firstCat = viewModel.anyCat()}
+        runBlocking(Dispatchers.Default){
+
+            firstCat = viewModel.anyCat()
+            notAcquired= viewModel.getNumAcquired(false)
+
+        }
         viewModel.catsWithWords().observe(viewLifecycleOwner, Observer<List<CatWords>> {
         _allCats = it
         displayedCats = _allCats as MutableList<CatWords>
@@ -138,8 +145,7 @@ class FirstFragment : BaseFragment(),KodeinAware {
                 arr.rotation = 180F
             }
 
-            else {Toast.makeText(context, " ${resources.getString(R.string.category)} $newCatName" +
-                    "  ${resources.getString(R.string.successfully_created)}", Toast.LENGTH_SHORT).show()}
+            else {Toast.makeText(context, " ${resources.getString(R.string.category)} $newCatName" +"  ${resources.getString(R.string.successfully_created)}", Toast.LENGTH_SHORT).show()}
             hideKeyboard()
         }
 
@@ -162,14 +168,19 @@ class FirstFragment : BaseFragment(),KodeinAware {
     }
 
 
-
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.menu_main, menu)
         val searchView: SearchView = menu.findItem(R.id.item_search).actionView as SearchView
+
+        action = menu.findItem(R.id.item_test)
+
+        if (action == null) {  Log.i("infoTag","nullMenu") }
+
+        else{ Log.i("infoTag","NotnullMenu") }
+
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-            override fun onQueryTextSubmit(query: String?): Boolean {
-                return false
-            }
+
+            override fun onQueryTextSubmit(query: String?): Boolean {return false}
 
             override fun onQueryTextChange(newText: String?): Boolean {
 
@@ -185,23 +196,23 @@ class FirstFragment : BaseFragment(),KodeinAware {
                         }
                     }
                 }
-                recycler_view_cats.layoutManager =
-                    StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
+                recycler_view_cats.layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
                 recycler_view_cats.adapter = CatAdapter(displayedCats, viewModel, coroutineContext)
+
+
+
                 return false
             }
+
         })
+
+
 
        //AppCompatResources.getDrawable(requireContext(), R.drawable.ic_test_black_24dp)?.setTint(color)
 
-        val animTest: AnimationDrawable
-        menu.findItem(R.id.item_test).actionView.apply {
+       if (Test.number<=3 && notAcquired>120) {timer1.start()}
 
-            setBackgroundResource(R.drawable.anim_test)
-            animTest = background as AnimationDrawable
-        }
 
-        animTest.start()
 
         return super.onCreateOptionsMenu(menu, inflater)
     }
@@ -213,17 +224,13 @@ class FirstFragment : BaseFragment(),KodeinAware {
 
                 var _allWords = listOf<Word>()
                 viewModel = ViewModelProvider(this, viewModelFactory).get(MainViewModel::class.java)
-                runBlocking(Dispatchers.Default) {
-
-                    _allWords = viewModel.getAllWords()
-
-                }
+                runBlocking(Dispatchers.Default) { _allWords = viewModel.getAllWords() }
                 //Test.number = 0 //  temporary
                 Test.setCounter()
                 val wordsNotAcquired = _allWords.filter {!it.acquired } // words yet to be acquired by user's memory
                 var wordsForTest = listOf<Word>()
 
-                if (Test.number >= 2) {
+                if (Test.number >= 3) {
 
                     val message = resources.getString(R.string.max_tests_today_reached)
                     Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
@@ -242,7 +249,6 @@ class FirstFragment : BaseFragment(),KodeinAware {
                             val diff = Calendar.DATE - it.lastOk
                             if (it.lvl == 1 && diff >= 3) {it.test = true}
                             else if (it.lvl == 2 && diff >= 7) {it.test = true}
-
                             viewModel.updateWord(it)
                         }
                     }
@@ -263,20 +269,15 @@ class FirstFragment : BaseFragment(),KodeinAware {
                 }
             }
 
-            R.id.item_all -> {navController.navigate(R.id.action_FirstFragment_to_allWordsFragment) }
+            R.id.item_all -> {
+
+                navController.navigate(R.id.action_FirstFragment_to_allWordsFragment) }
             R.id.item_infoApp ->{navController.navigate(R.id.actionInfo)}
             R.id.item_statistics -> {
                 var counter = 0
                 runBlocking(Dispatchers.Default) { counter = viewModel.counterWords() }
-                if (counter < 10) {
-                    Toast.makeText(
-                        context,
-                        resources.getString(R.string.add_more_words_statistics),
-                        Toast.LENGTH_SHORT
-                    ).show()
-                } else {
-                    navController.navigate(R.id.actionStatistics)
-                }
+                if (counter < 10) { Toast.makeText(context, resources.getString(R.string.add_more_words_statistics), Toast.LENGTH_SHORT).show() }
+                else { navController.navigate(R.id.actionStatistics) }
             }
         }
 
@@ -302,32 +303,44 @@ class FirstFragment : BaseFragment(),KodeinAware {
     }
 
 
+    private val timerTestColor = object: CountDownTimer(2000000,100) {
 
-   /** private val timerTestColor = object: CountDownTimer(2000000,50) {
-
-        override fun onFinish() {
-
-
-        }
+        override fun onFinish() {}
 
         override fun onTick(millisUntilFinished: Long) {
 
-            a+=5
+
+            a+= 0.1F
             b = abs(255*kotlin.math.sin(a)).toInt()
-            c+=1
 
-            AppCompatResources.getDrawable(requireContext(), R.drawable.ic_test_black_24dp)?.setTint(argb(255,b,0, (c%255).toInt()))
+           // Log.i("infoTag",b.toString())
 
-            resources.getXml(findViewById(R.id.menu_main))
 
-         //   getString(R.id.item_test).setIcon(ContextCompat.getDrawable(this, R.drawable.ic_launcher))
+        AppCompatResources.getDrawable(requireContext(), R.drawable.test_white)
+                ?.setTint(argb(255, 255, b, b))
+
+
+            action?.let{action!!.setIcon(R.drawable.test_white)}
+            Log.i("infoTag","tick")
         }
 
-    }.start()**/
+    }.start()
+
+
+private val timer1 = object: CountDownTimer(1000,2000) {
+
+    override fun onFinish() {
+
+        timerTestColor.start()
+    }
+
+    override fun onTick(millisUntilFinished: Long) {
+
+    }
+    // b = abs(255*kotlin.math.sin(a)).toInt()
+
 }
-
-
-
+}
 
 
 

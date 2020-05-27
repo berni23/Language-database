@@ -48,15 +48,9 @@ class DisplayWordFragment : BaseFragment() {
 
         //optional fields
 
-       if (word.ex1!=null) {
-           textView_displayEx1.text = " ${word.ex1} "
-       }
-       if(word.trans_ex1!=null) {
-           textView_displayEx1Translation.text = " ${word.trans_ex1} "
-       }
-       if(word.definition!=null) {
-           textView_displayDefinition.text = " ${word.definition} "
-       }
+       if (word.ex1!=null) { textView_displayEx1.text = " ${word.ex1} " }
+       if(word.trans_ex1!=null) { textView_displayEx1Translation.text = " ${word.trans_ex1} " }
+       if(word.definition!=null) { textView_displayDefinition.text = " ${word.definition} " }
 
     }
 
@@ -64,17 +58,16 @@ class DisplayWordFragment : BaseFragment() {
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.menu_edit_words, menu)
 
+        menu.findItem(R.id.item_backEditToWordsList).setIcon(R.drawable.ic_arrow_downward_white_24dp)
         return super.onCreateOptionsMenu(menu, inflater)
     }
 
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
 
-        when (item.itemId) {
+        when (item.itemId) {R.id.item_backEditToWordsList -> { navController.popBackStack() } }
 
-            R.id.item_backEditToWordsList -> { navController.popBackStack() }
 
-        }
 
         return super.onOptionsItemSelected(item)
     }

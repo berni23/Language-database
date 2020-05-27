@@ -73,7 +73,7 @@
     <string name="msg_first_cat_created">Ben fet! Ara pots premer a la categoría per tal d\'afegir paraules</string>
     <string name="successfully_created">creada amb éxit</string>
     <string name="msg_first_btn_pressed">Prem el botó + per tal de crear un nou grup</string>
-    <string name="max_tests_today_reached">Ja has fet dos tests avui, prova-ho demà :)</string>
+    <string name="max_tests_today_reached">Ja has fet tres tests avui, prova-ho demà :)</string>
     <string name="add_more_words">"Si us plau, afegeix més paraules per tal de fer un test "</string>
     <string name="add_or_wait">Si us plau, afegeix més paraules o espera uns dies</string>
     <string name="add_more_words_statistics">Afegeix més paraules per tal de visualitzar estadístiques</string>

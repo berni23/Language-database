@@ -75,10 +75,10 @@
 
         <action
             android:id="@+id/actionEditWord"
-            app:enterAnim="@anim/animate_slide_down_enter"
-            app:exitAnim="@anim/animate_slide_down_exit"
-            app:popExitAnim="@anim/animate_slide_up_exit"
-            app:popEnterAnim="@anim/animate_slide_up_enter"
+            app:enterAnim="@anim/animate_slide_up_enter"
+            app:exitAnim="@anim/animate_slide_up_exit"
+            app:popExitAnim="@anim/animate_slide_down_exit"
+            app:popEnterAnim="@anim/animate_slide_down_enter"
             app:destination="@id/editWordFragment" />
         <action
             android:id="@+id/actionDisplayWord"
@@ -186,11 +186,24 @@
         android:name="AllWordsFragment"
         android:label="AllWordsFragment">
 
+        <action
+            android:id="@+id/actionEditWord"
+            app:enterAnim="@anim/animate_slide_up_enter"
+            app:exitAnim="@anim/animate_slide_up_exit"
+            app:popExitAnim="@anim/animate_slide_down_exit"
+            app:popEnterAnim="@anim/animate_slide_down_enter"
+            app:destination="@id/editWordFragment" />
+        <action
+            android:id="@+id/actionDisplayWord"
+            app:enterAnim="@anim/animate_slide_down_enter"
+            app:exitAnim="@anim/animate_slide_down_exit"
+            app:popExitAnim="@anim/animate_slide_up_exit"
+            app:popEnterAnim="@anim/animate_slide_up_enter"
+            app:destination="@id/displayWordFragment" />
+
     </fragment>
 
-    <argument
-        android:name ="allWords"
-        app:nullable="false" />
+
 
     <fragment
         android:id="@+id/statisticsFragment"

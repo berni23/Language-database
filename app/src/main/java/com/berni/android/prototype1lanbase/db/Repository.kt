@@ -51,7 +51,7 @@ interface Repository{
 
         fun deleteWord(currentWord: Word) {catDao.deleteWord(currentWord)}
 
-        fun getNumAcquired():Int {return catDao.getNumAcquired(false)}
+        fun getNumAcquired(bool:Boolean):Int {return catDao.getNumAcquired(bool)}
 
         suspend fun wordsForTest(): List<Word> {return catDao.wordsForTest()}
 

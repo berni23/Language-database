@@ -74,7 +74,7 @@ traducción para algunas palabras</string>
         <string name="msg_first_cat_created">Bien hecho! Ahora puedes pulsar encima de la categoría para añadir palabras :)</string>
         <string name="successfully_created">creada con éxito</string>
         <string name="msg_first_btn_pressed">Pulsa el botón + para crear una nueva categoría</string>
-        <string name="max_tests_today_reached">Ya has realizado dos tests hoy, prueba mañana otra vez!</string>
+        <string name="max_tests_today_reached">Ya has realizado tres tests hoy, prueba mañana otra vez!</string>
         <string name="add_more_words">Por favor, añade más palabras para poder realizar tests</string>
         <string name="add_or_wait">Por favor, añade más palabras o espera unos días para poder realizar tests de nuevo</string>
         <string name="add_more_words_statistics">Por favor, añade más palabras para poder visualizar estadísticas</string>

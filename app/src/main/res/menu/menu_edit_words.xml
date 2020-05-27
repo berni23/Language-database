@@ -9,7 +9,7 @@
         android:id = "@+id/item_backEditToWordsList"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
         android:orderInCategory="1"
-        android:icon="@drawable/ic_arrow_downward_white_24dp"
+        android:icon="@drawable/ic_arrow_upward_white_24dp"
         android:title="@string/back"
         app:showAsAction="ifRoom" />
 

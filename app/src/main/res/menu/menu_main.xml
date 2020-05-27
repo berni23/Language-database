@@ -18,8 +18,9 @@
         android:orderInCategory="1"
         android:icon="@drawable/test_white"
         android:title="@string/test"
-        app:showAsAction="always"
-        app:actionViewClass="android.widget.ImageView" />
+        app:showAsAction="ifRoom"/>
+
+       <!-- app:actionViewClass="android.widget.ViewAnimator" />-->
     <item
         android:id="@+id/item_statistics"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"

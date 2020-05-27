@@ -78,7 +78,7 @@
     <string name="msg_first_cat_created">Well done!! Now, you can press on the category to add some words :)</string>
     <string name="successfully_created">successfully created</string>
     <string name="msg_first_btn_pressed">Press the button + in order to create a new category</string>
-    <string name="max_tests_today_reached">You have already made two tests today, try tomorrow!!  =)</string>
+    <string name="max_tests_today_reached">You have already made three tests today, try tomorrow!!  =)</string>
     <string name="add_more_words">Please add some more words in order to make a test</string>
     <string name="add_or_wait">Please add some more words or wait some days</string>
     <string name="add_more_words_statistics">Add some more words in order to display statistics</string>

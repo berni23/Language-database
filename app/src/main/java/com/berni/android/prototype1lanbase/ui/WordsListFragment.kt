@@ -63,12 +63,13 @@ class WordsListFragment : BaseFragment(), KodeinAware {
         super.onViewCreated(view, savedInstanceState)
 
 
-        (activity as AppCompatActivity).supportActionBar?.title = cat.catName
+
         navController = Navigation.findNavController(view)
         recycler_view_words.setHasFixedSize(true)
         viewModel = ViewModelProvider(this, viewModelFactory).get(MainViewModel::class.java)
 
 
+        (activity as AppCompatActivity).supportActionBar?.title = cat.catName
         if(firstView) {
 
            // resources.getString(R.string.last_added_on)
@@ -114,7 +115,6 @@ class WordsListFragment : BaseFragment(), KodeinAware {
                 lastAdditions = resources.getString(R.string.no_words_added_yet)
             }
             val stringLastAdditionDate = "${resources.getString(R.string.last_added_on)} $lastAdditionDate"
-
 
             text_view_numWords.text = " ${recycler_view_words.adapter?.itemCount?:0} ${resources.getString(R.string.words)}"
             lastAdditionDate?.let { text_view_lastDate.text = stringLastAdditionDate }

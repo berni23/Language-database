@@ -56,7 +56,7 @@ class StatisticsFragment : BaseFragment(), KodeinAware
        runBlocking(Dispatchers.Default) {
 
            catsNwords = viewModel.catsNWords()
-           counterAcquired = viewModel.counterAcquired()
+           counterAcquired = arrayListOf(viewModel.getNumAcquired(true),viewModel.getNumAcquired(false))
 
        }
 
@@ -107,10 +107,7 @@ class StatisticsFragment : BaseFragment(), KodeinAware
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
 
-        when (item.itemId) {
-
-            R.id.item_backToMainS1 -> {navController.popBackStack()}
-        }
+        when (item.itemId) {R.id.item_backToMainS1 -> {navController.popBackStack()} }
 
         return super.onOptionsItemSelected(item)
     }

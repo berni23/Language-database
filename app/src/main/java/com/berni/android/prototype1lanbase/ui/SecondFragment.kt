@@ -1,12 +1,17 @@
 package com.berni.android.prototype1lanbase.ui
 
+import android.app.AlertDialog
 import android.graphics.drawable.AnimationDrawable
 import android.os.Build
 import android.os.Bundle
 import android.view.*
+import android.widget.EditText
+import android.widget.LinearLayout
+import android.widget.TextView
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
+import androidx.cardview.widget.CardView
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -32,7 +37,9 @@ class SecondFragment : BaseFragment(),KodeinAware {
 
     override val kodein by closestKodein()
     private val viewModelFactory: ViewModelFactory by instance<ViewModelFactory>()
-    var firstWord  = true
+    private var firstWord  = true
+    private var notAcquired =0
+
     private lateinit var viewModel: MainViewModel
     private lateinit var cat: Cat
     private lateinit var navController: NavController
@@ -59,7 +66,12 @@ class SecondFragment : BaseFragment(),KodeinAware {
         navController = Navigation.findNavController(view)
         (activity as AppCompatActivity).supportActionBar?.title = cat.catName
         viewModel = ViewModelProvider(this, viewModelFactory).get(MainViewModel::class.java)
-        runBlocking(Dispatchers.Default){firstWord = viewModel.anyWord()}
+        runBlocking(Dispatchers.Default){
+
+            firstWord = viewModel.anyWord()
+            notAcquired = viewModel.getNumAcquired(false)
+
+        }
 
         if (firstWord)
 
@@ -78,76 +90,87 @@ class SecondFragment : BaseFragment(),KodeinAware {
 
         btn_save.setOnClickListener {
 
-            //TODO() http request for auto -completion of all the blanks except for the 'word'
-            // required blanks
 
-            val theWord = word_editText.text.toString().trim()
-            val translation1 = trans1_editText.text.toString().trim()
-            val date =  SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(Date())
+            if (notAcquired >= 10) {
+                AlertDialog.Builder(context).apply {
 
-            // optional blanks
+                    setPositiveButton("okay") { _, _ -> }
+                    this.setMessage("You already added 120 words, please make some tests in order to acquire them.")
 
-            var example1 : String? = ex1_editText.text.toString().trim()
-            var translationExample1 : String? = ex1Trans_editText.text.toString().trim()
-            var definition : String? = definition_editText.text.toString().trim()
-            if(example1!!.isEmpty()) {example1 =null}
-            if(translationExample1!!.isEmpty()) {translationExample1 =null}
-            if(definition!!.isEmpty()) {definition=null}
+                }.create().show()
+            } else {
 
-            if (theWord.isEmpty()) {
+                //TODO() http request for auto -completion of all the blanks except for the 'word'
+                // required blanks
 
-                word_editText.error =  resources.getString(R.string.word_required)
-                word_editText.requestFocus()
-                return@setOnClickListener
+                val theWord = word_editText.text.toString().trim()
+                val translation1 = trans1_editText.text.toString().trim()
+                val date = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(Date())
+
+                // optional blanks
+
+                var example1: String? = ex1_editText.text.toString().trim()
+                var translationExample1: String? = ex1Trans_editText.text.toString().trim()
+                var definition: String? = definition_editText.text.toString().trim()
+                if (example1!!.isEmpty()) {
+                    example1 = null
+                }
+                if (translationExample1!!.isEmpty()) {
+                    translationExample1 = null
+                }
+                if (definition!!.isEmpty()) {
+                    definition = null
+                }
+
+                if (theWord.isEmpty()) {
+
+                    word_editText.error = resources.getString(R.string.word_required)
+                    word_editText.requestFocus()
+                    return@setOnClickListener
+                }
+
+                if (translation1.isEmpty()) {
+
+                    trans1_editText.error = resources.getString(R.string.trans_required)
+                    trans1_editText.requestFocus()
+                    return@setOnClickListener
+
+                }
+
+                var bool = true
+                runBlocking(Dispatchers.Default) { bool = viewModel.validWordId(cat.catId.toString(), theWord) }
+
+                if (bool) {
+
+                    launch {
+
+                        val word = Word(theWord, translation1, example1, translationExample1, definition, date.toString(), cat.catId)
+                        viewModel.addWord(word)
+                    }
+                } else {
+
+                    word_editText.error = resources.getString(R.string.word_exists)
+                    word_editText.requestFocus()
+                    return@setOnClickListener
+                }
+
+                word_editText.text.clear()
+                trans1_editText.text.clear()
+                ex1_editText.text.clear()
+                definition_editText.text.clear()
+                ex1Trans_editText.text.clear()
+
+                if (firstWord) {
+
+                    val toast: Toast = Toast.makeText(context, resources.getString(R.string.S2_first_word_added), Toast.LENGTH_LONG
+                    )
+                    toast.setGravity(Gravity.CENTER, 0, 0)
+                    toast.show()
+
+                    arrSecond.rotation = -90F
+
+                } else { Toast.makeText(context, resources.getString(R.string.word_successfully_added), Toast.LENGTH_SHORT).show() }
             }
-
-            if (translation1.isEmpty()) {
-
-                trans1_editText.error =resources.getString(R.string.trans_required)
-                trans1_editText.requestFocus()
-                return@setOnClickListener
-
-            }
-
-             var bool = true
-            runBlocking(Dispatchers.Default) {bool = viewModel.validWordId(cat.catId.toString(),theWord) }
-
-            if(bool) {
-
-            launch{
-
-                val word = Word(theWord,translation1,example1,translationExample1,definition,date.toString(),cat.catId)
-
-               // TODO(Delete acquired date)
-
-                viewModel.addWord(word)
-             }
-            }
-
-            else {
-
-                  word_editText.error = resources.getString(R.string.word_exists)
-                  word_editText.requestFocus()
-                  return@setOnClickListener
-            }
-
-            word_editText.text.clear()
-            trans1_editText.text.clear()
-            ex1_editText.text.clear()
-            definition_editText.text.clear()
-            ex1Trans_editText.text.clear()
-
-            if(firstWord) {
-
-                val toast: Toast =  Toast.makeText(context, resources.getString(R.string.S2_first_word_added), Toast.LENGTH_LONG)
-                toast.setGravity(Gravity.CENTER, 0,0)
-                toast.show()
-
-                arrSecond.rotation= -90F
-
-            }
-
-            else {Toast.makeText(context,  resources.getString(R.string.word_successfully_added), Toast.LENGTH_SHORT).show() }
         }
     }
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
