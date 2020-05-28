@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Database</string>
+    <string name="app_name">Language /n Database</string>
     <string name="action_settings">Opcions</string>
     <string name="action_sortBy">ordena per</string>
     <string name="last_added">ordena per últim afegit</string>
@@ -54,14 +54,16 @@
     <string name="hi">Bones!</string>
     <string name="m1_tutorial">Sembla que és el teu primer com fent servir Language Database</string>
     <string name="m2_tutorial">Deixa\'m que te\'n expliqui el funcionament! :)</string>
-    <string name="tutorial_m3">Language Database és una app dissenyada per tal de guardar i practicar vocabulari creant grups de paraules, afegint-hi informació i fent tests</string>
+    <string name="tutorial_m3">Language Database és una app dissenyada per tal de guardar i practicar vocabulari creant grups de paraules, afegint-hi informació i fent tests.</string>
     <string name = "tutorial_m4"> Per a progressar de forma correcta, haurás de mantenir un equilibri entre afegir  paraules y realitzar tests. </string>
     <string name = "tutorial_m5">Cada paraula té dos estats: no adquirida o adquirida.</string>
     <string name = "tutorial_m6">Quan, al fer tests tradueeixis de forma correcta una paraula varies vegades en dies diferents, aquest pasará al estat de "adquirida"</string>
     <string name = "tutorial_m7">Podrás fer un test prement la opció "T" a la part superior dreta del menú</string>
     <string name = "tutorial_m8">En total, no pots tenir més de 120 paraules en l\'estat de "no adquirida", y per tant, hauràs d\'anar fent tests
      i afegint paraules de forma simultànea .</string>
-    <string name = "tutorial_m9"> Diverteix-te amb l\'aprenentatge!!</string>
+    <string name = "tutorial_m9"> Quan afegeixis una paraula, haurás de donar-ne també la traducció. De forma opcional, podrás també
+    donar una definició i un exemple d\'ús.</string>
+    <string name = "tutorial_m10"> Diverteix-te amb l\'aprenentatge!!</string>
     <string name="no_words_added">Cap paraula afegida</string>
     <string name="words">paraules</string>
     <string name="are_you_sure">N\'estás segur?</string>
@@ -128,7 +130,7 @@
     <string name="about_app">Sobre la app</string>
     <string name="about_app_text">Language Database és una app de idiomes la qual permet que l\'usuari guardi el seu propi vocabulari en llistes i pugui practicar\-lo</string>
     <string name="about_tests">Tests</string>
-    <string name="about_tests_text">La app disposa d\'un sistema de test la qual 15 paraules són seleccionades de forma aleatòria i l\'usuari n\'ha de proveïr latraducció correcta. Si la resposta és bona, la paraula no apareixerà als tests durant uns dies. Quan l\'usuari n\'ha donat la resposta correcta varies vegades,la paraula serà marcada com a adquirida \n i no apareixerà més als tests. A més, apareixerà de color gris a la llista de paraules.</string>
+    <string name="about_tests_text">La app disposa d\'un sistema de test la qual 15 paraules són seleccionades de forma aleatòria i l\'usuari n\'ha de proveïr la traducció correcta. Si la resposta és bona, la paraula no apareixerà als tests durant uns dies. Quan l\'usuari n\'ha donat la resposta correcta varies vegades,la paraula serà marcada com a adquirida \n i no apareixerà més als tests. A més, apareixerà de color gris a la llista de paraules.</string>
     <string name="about_word_groups">Grups de paraules</string>
     <string name="about_word_groups_text">L\'estructura de la app és similar a la de un bloc de notes, amb la diferència que aquesta app guarda les paraules a través d\' una base de dades, i per tant pots ordenar\-les, filtrar\-les, buscar paraulesconcretes o editar\-les. Cada paraula afegida té certes propietats com per exemple la traducció corresponent, definició, example i traducció del exemple, i són accessibles clicant sobre la paraula.</string>
     <string name="about_statistics">Estadístiques</string>
@@ -137,7 +139,7 @@
     <string name ="already_120">Ja has afegit 120 paraules. Fés alguns tests per tal de aprendre-les.</string>
     <string name ="all_words">Totes les paraules</string>
     <string name ="okay">Okay</string>
-    <string name="developed_by">Desarrollado por</string>
+    <string name="developed_by">Desenvolupat per</string>
     <string name="bernat_ferrer_emsisquer_studios">Bernat Ferrer, lead developer in Emsisquer Studios.</string>
 
 </resources>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Database</string>
+    <string name="app_name">Language Database</string>
     <string name="action_settings">Settings</string>
     <!-- Strings used for fragments for navigation -->
     <string name="next" translatable="false">Next</string>
@@ -67,8 +67,9 @@
     <string name = "tutorial_m7">You will be able to perform tests by clicking the "T" option in the superior right part of the menu.</string>
     <string name = "tutorial_m8">Overall, you can not have more than 120 words in the "not acquired" form, and hence, you will have to simultaneously
         keep doing tests and adding words.</string>
-    <string name = "tutorial_m9">
-      Enjoy the learning process!!</string>
+    <string name = "tutorial_m9"> When adding a new word, you wil have to fill out the fields "word" and "translation". You will
+    also have the option to give a definition and an example. </string>
+    <string name = "tutorial_m10">Enjoy the learning process!!</string>
     <string name="no_words_added">no words added</string>
     <string name="words">words</string>
     <string name="are_you_sure">Are you sure?</string>

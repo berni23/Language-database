@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
     <resources>
-        <string name="app_name">DatabaseTrial</string>
+        <string name="app_name">Language Database</string>
         <string name="action_settings">Opciones</string>
         <string name="action_sortBy">ordenar por</string>
         <string name="last_added">último añadido</string>
@@ -60,9 +60,10 @@ traducción para algunas palabras</string>
         <string name = "tutorial_m5">Cada palabra tiene dos estados: no adquirida o adquirida.</string>
         <string name = "tutorial_m6">Cuando traduzcas de forma correcta una palabra varias veces en distintos días al hacer un test, esta pasará al estado adquirida.</string>
         <string name = "tutorial_m7">Podrás hacer un test pulsando la opción "T" a la parte superior derecha del menú.</string>
-        <string name = "tutorial_m8">En total, no puedes tener más de 120 palabras en el estado "no adquirido", y por lo tanto, deberás ir haciendo tests y a
+        <string name = "tutorial_m8">En total, no puedes tener más de 120 palabras en el estado "no adquirido", y por lo tanto, deberás ir haciendo tests y
         añadiendo palabras de forma simultánea.</string>
-        <string name = "tutorial_m9"> Diviertete con el prendizaje!!</string>
+        <string name = "tutorial_m9">Cuando añadas una palabra, deberás rellenar los campos de "palabra" y "traducción, y de forma opcional podrás dar la definición y un ejemplo. </string>
+        <string name = "tutorial_m10"> Diviertete con el prendizaje!!</string>
         <string name="no_words_added">Ninguna palabra añadida</string>
         <string name="words">palabras</string>
         <string name="are_you_sure">Estás seguro?</string>
