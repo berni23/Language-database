@@ -10,12 +10,10 @@ import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import com.anychart.APIlib
 import com.anychart.AnyChart
-import com.anychart.AnyChartView
 import kotlinx.android.synthetic.main.fragment_statistics.*
 import com.anychart.chart.common.dataentry.DataEntry
 import com.anychart.chart.common.dataentry.ValueDataEntry
 import com.anychart.charts.Pie
-
 import com.berni.android.prototype1lanbase.R
 import com.berni.android.prototype1lanbase.db.CatWords
 import kotlinx.coroutines.Dispatchers

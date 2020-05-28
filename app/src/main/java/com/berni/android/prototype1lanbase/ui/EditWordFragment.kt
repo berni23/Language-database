@@ -11,9 +11,7 @@ import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import com.berni.android.prototype1lanbase.R
 import com.berni.android.prototype1lanbase.db.Word
-import com.berni.android.prototype1lanbase.wordId
 import kotlinx.android.synthetic.main.fragment_edit_word.*
-import kotlinx.android.synthetic.main.fragment_second.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import org.kodein.di.KodeinAware

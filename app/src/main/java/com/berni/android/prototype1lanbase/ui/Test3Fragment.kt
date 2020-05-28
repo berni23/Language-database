@@ -1,7 +1,6 @@
 package com.berni.android.prototype1lanbase.ui
 
 import android.annotation.SuppressLint
-import android.app.AlertDialog
 import android.content.Context
 import android.icu.text.SimpleDateFormat
 import android.icu.util.Calendar
@@ -18,7 +17,6 @@ import com.berni.android.prototype1lanbase.R
 import com.berni.android.prototype1lanbase.db.Test
 import com.berni.android.prototype1lanbase.db.Word
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 import org.kodein.di.KodeinAware
 import kotlinx.android.synthetic.main.fragment_test3.*
 import kotlinx.coroutines.runBlocking

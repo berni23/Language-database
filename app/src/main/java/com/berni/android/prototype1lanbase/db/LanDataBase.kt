@@ -2,8 +2,8 @@ package com.berni.android.prototype1lanbase.db
 
 import android.content.Context
 import androidx.room.*
-import androidx.room.migration.Migration
-import androidx.sqlite.db.SupportSQLiteDatabase
+//import androidx.room.migration.Migration
+//import androidx.sqlite.db.SupportSQLiteDatabase
 
 
 @Database(entities = [Word::class, Cat::class],version = 10, exportSchema = true)

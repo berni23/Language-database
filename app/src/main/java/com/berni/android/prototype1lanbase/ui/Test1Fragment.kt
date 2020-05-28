@@ -6,7 +6,6 @@ import com.berni.android.prototype1lanbase.R
 import com.berni.android.prototype1lanbase.db.Word
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.closestKodein
-import android.icu.util.Calendar
 import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.lifecycle.ViewModelProvider

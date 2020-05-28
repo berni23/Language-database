@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Language /n Database</string>
+    <string name="app_name">Language \n Database</string>
     <string name="action_settings">Opcions</string>
     <string name="action_sortBy">ordena per</string>
     <string name="last_added">ordena per últim afegit</string>

@@ -1,8 +1,8 @@
 package com.berni.android.prototype1lanbase.db
 
 import androidx.room.*
-import androidx.room.migration.Migration
-import androidx.sqlite.db.SupportSQLiteDatabase
+//import androidx.room.migration.Migration
+//import androidx.sqlite.db.SupportSQLiteDatabase
 import java.io.Serializable
 
 data class CatWords(

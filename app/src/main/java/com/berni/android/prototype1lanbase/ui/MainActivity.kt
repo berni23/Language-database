@@ -1,9 +1,8 @@
 package com.berni.android.prototype1lanbase.ui
 
-import android.content.Context
+
 import android.content.Intent
 import android.os.Bundle
-import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.berni.android.prototype1lanbase.R
@@ -11,7 +10,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.closestKodein
-import org.kodein.di.android.x.closestKodein
 import org.kodein.di.generic.instance
 
 

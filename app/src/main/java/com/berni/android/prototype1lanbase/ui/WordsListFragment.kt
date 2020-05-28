@@ -19,14 +19,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.berni.android.prototype1lanbase.*
 import com.berni.android.prototype1lanbase.db.Cat
 import com.berni.android.prototype1lanbase.db.Word
-import kotlinx.android.synthetic.main.fragment_test2.*
 import kotlinx.android.synthetic.main.fragment_words_list.*
 import kotlinx.coroutines.*
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.closestKodein
 import org.kodein.di.generic.instance
-import java.util.*
-import java.util.concurrent.TimeUnit
 
 /**
  * A simple [Fragment] subclass.
@@ -42,7 +39,6 @@ class WordsListFragment : BaseFragment(), KodeinAware {
     private var lastAdditionDate: String? = ""
     private var firstView = Tutorial.firstListWordView
     private lateinit var navController: NavController
-
 
     override val kodein by closestKodein()
     private val viewModelFactory: ViewModelFactory by instance<ViewModelFactory>()
