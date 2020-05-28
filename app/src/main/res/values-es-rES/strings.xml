@@ -7,7 +7,7 @@
         <string name="alphabetically">alfabeticamente</string>
         <string name="sort">ordenar</string>
         <string name="info">información</string>
-        <string name="last_additions">adiciones recientes:</string>
+        <string name="last_additions">adiciones recientes</string>
         <string name="last_added_on">ultima edición el</string>
         <string name="_40_words">40 palabras</string>
         <string name="first_added">añadidos recientemente</string>
@@ -29,7 +29,7 @@
         <string name="word">palabra</string>
         <string name="createdOn">creada el</string>
         <string name="ex1_editText">primer ejemplo</string>
-        <string name="translation_example">traducción del ejemplo</string>
+        <string name="translation_example">traducción del ejemplo (opcional)</string>
         <string name="definition_editText">definición (opcional)</string>
         <string name="hint_newCat">escribe el nombre del grupo</string>
         <string name="note">nota</string>
@@ -52,10 +52,17 @@ traducción para algunas palabras</string>
         <string name="words_not_acquired">palabras por aprender</string>
         <string name="not_acquired">no aprendidas aún</string>
         <string name="how_the_app_works">info sobre la app</string>
-        <string name="m2_tutorial">Deja que te enseñe como funciona! :)</string>
-        <string name="hi">Buenas !</string>
-        <string name="m1_tutorial">Parece que és la primera vez que usas Wos</string>
-        <string name="tutorial_m3">Wos consiste en una simple app donde puedes guardar tu propio vocabulario y practicar con él creando grupos de palabras, añadiendo información y realizando tests.</string>
+        <string name="hi">Buenas!</string>
+        <string name="m1_tutorial">Parece que és la primera vez que usas Language Database. </string>
+        <string name="m2_tutorial">Deja que te enseñe como funciona! :) </string>
+        <string name="tutorial_m3">Language database és una app donde puedes guardar tu propio vocabulario y practicar con él creando grupos de palabras, añadiendo información y realizando tests.</string>
+        <string name = "tutorial_m4"> Para progresar de forma correcta, deberás mantener un equilibrio entre añadir palabras y hacer tests. </string>
+        <string name = "tutorial_m5">Cada palabra tiene dos estados: no adquirida o adquirida.</string>
+        <string name = "tutorial_m6">Cuando traduzcas de forma correcta una palabra varias veces en distintos días al hacer un test, esta pasará al estado adquirida.</string>
+        <string name = "tutorial_m7">Podrás hacer un test pulsando la opción "T" a la parte superior derecha del menú.</string>
+        <string name = "tutorial_m8">En total, no puedes tener más de 120 palabras en el estado "no adquirido", y por lo tanto, deberás ir haciendo tests y a
+        añadiendo palabras de forma simultánea.</string>
+        <string name = "tutorial_m9"> Diviertete con el prendizaje!!</string>
         <string name="no_words_added">Ninguna palabra añadida</string>
         <string name="words">palabras</string>
         <string name="are_you_sure">Estás seguro?</string>
@@ -121,15 +128,15 @@ traducción para algunas palabras</string>
         <string name="press_for_n_daily_view">pulsa para ver el \n progreso diario</string>
         <string name="all_the_words_added_on_the_group">aquí puedes ver todas las palabras añadidas en el grupo</string>
 
-    <string name="about_app">Sobre la app:</string>
-    <string name="about_app_text">Wos es una app de idiomas que permite que el usuario guarde su propio vocabulario en listas y pueda practicarlo</string>
+    <string name="about_app">Sobre la app</string>
+    <string name="about_app_text">Language Database és una app de idiomas que permite que el usuario guarde su propio vocabulario en listas y pueda practicarlo .</string>
     <string name="about_tests">Tests:</string>
     <string name="about_tests_text">La app dispone de un sistema de tests, por el cual 15 palabras són seleccionadas de forma aleatoria y el usuario
         ha de dar la traducción correcta. Si la respuesta és acertada, la palabra no aparecerá en los tests durante unos días.
         Cuando el usuario haya dado la respuesta correcta varias veces,la palabra será marcada como adquirida, \n y no saldrá
         más en los tests. Además, aparecerá de color gris en la lista de palabras.</string>
 
-    <string name="about_word_groups">Grupos de palabras:</string>
+    <string name="about_word_groups">Grupos de palabras</string>
     <string name="about_word_groups_text">La estructura de la app es similar a la de un bloc de notas, con la diferéncia que
     esta app guarda las palabras usando una base de datos, y por tanto puedes ordenarlas, filtrarlas, buscar palabras
      en concreto o editarlas. Cada palabra añadida tiene ciertas propiedades como por ejemplo su traducción,
@@ -140,5 +147,8 @@ traducción para algunas palabras</string>
     así como cuantas te has aprendido ya vs cuantas quedan por aprender. Además,
     también puedes comprobar cuantas palabras añades diariamente o mensualmente.</string>
     <string name = "msg_firstView">Aquí puedes ver las palabras añadidas</string>
+    <string name = "already_120">Ya has añadido 120 palabras, haz algunos tests con tal de aprenderlas.</string>
     <string name = "all_words">Todas las palabras</string>
+    <string name="developed_by">Desenvolupat per </string>
+    <string name="bernat_ferrer_emsisquer_studios">Bernat Ferrer, developer in Emsisquer Studios</string>
 </resources>

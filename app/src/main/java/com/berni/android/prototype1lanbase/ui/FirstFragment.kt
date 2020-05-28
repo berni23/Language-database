@@ -181,9 +181,7 @@ class FirstFragment : BaseFragment(),KodeinAware {
 
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
 
-            override fun onQueryTextSubmit(query: String?): Boolean {
-                return false
-            }
+            override fun onQueryTextSubmit(query: String?): Boolean { return false }
 
             override fun onQueryTextChange(newText: String?): Boolean {
 
@@ -199,8 +197,7 @@ class FirstFragment : BaseFragment(),KodeinAware {
                     }
                 }
 
-                recycler_view_cats.layoutManager =
-                    StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
+                recycler_view_cats.layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
                 recycler_view_cats.adapter = CatAdapter(displayedCats, viewModel, coroutineContext)
                 return false
             }
@@ -210,7 +207,6 @@ class FirstFragment : BaseFragment(),KodeinAware {
         if (Test.number <= 3 && notAcquired > 120) {
 
             Log.i("timer","timer")
-
             timer1.start() }
 
         return super.onCreateOptionsMenu(menu, inflater)
@@ -262,18 +258,18 @@ class FirstFragment : BaseFragment(),KodeinAware {
 
                     } else {
 
+                        stopTimers()
                         AppCompatResources.getDrawable(requireContext(), R.drawable.test_white)
                             ?.setTint(argb(255, 255, 255, 255))
-                        action?.let { action!!.setIcon(R.drawable.test_white) }
+                        action?.let {action!!.setIcon(R.drawable.test_white) }
 
-                        stopTimers()
                         val bundle = bundleOf("listWords" to wordsForTest)
                         navController.navigate(R.id.actionTest1, bundle)
                     }
                 }
             }
 
-            R.id.item_all -> { navController.navigate(R.id.action_FirstFragment_to_allWordsFragment) }
+            R.id.item_all -> {navController.navigate(R.id.action_FirstFragment_to_allWordsFragment) }
             R.id.item_infoApp -> {
                 stopTimers()
                 navController.navigate(R.id.actionInfo)
@@ -313,8 +309,7 @@ class FirstFragment : BaseFragment(),KodeinAware {
 
     private val timerTestColor = object : CountDownTimer(2000000, 100) {
 
-        override fun onFinish() { timer1.start()}
-
+        override fun onFinish() {timer1.start()}
 
         override fun onTick(millisUntilFinished: Long) {
             a += 0.1F
@@ -329,15 +324,9 @@ class FirstFragment : BaseFragment(),KodeinAware {
 
     private val timer1 = object : CountDownTimer(1000, 2000) {
 
-        override fun onFinish() {
-
-        }
-
-        override fun onTick(millisUntilFinished: Long) {
-
-        }
+        override fun onFinish() {}
+        override fun onTick(millisUntilFinished: Long) {}
         // b = abs(255*kotlin.math.sin(a)).toInt()
-
     }
         private fun stopTimers() {
 

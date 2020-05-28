@@ -7,7 +7,7 @@
     <string name="alphabetically">alfabèticament</string>
     <string name="sort">ordenar</string>
     <string name="info">informació</string>
-    <string name="last_additions">ultims afegits:</string>
+    <string name="last_additions">ultims afegits</string>
     <string name="last_added_on">última addició al</string>
     <string name="_40_words">40 paraules</string>
     <string name="first_added">afegits recentment</string>
@@ -36,13 +36,13 @@
     <string name="no_example_provided">Cap exemple proveït</string>
     <string name="no_example_translation_provided">Cap traducció proveïda</string>
     <string name="no_definition_provided">Cap definició proveïda</string>
-    <string name="ready">Estic preparat !</string>
-    <string name="test">"test "</string>
+    <string name="ready">Estic preparat!</string>
+    <string name="test">test</string>
     <string name="score1">excel·lent!</string>
     <string name="score2">fantástic</string>
     <string name="score3">molt bé!</string>
     <string name="score4">bona feina!</string>
-    <string name="score5">Segueix practicant !</string>
+    <string name="score5">Segueix practicant!</string>
     <string name="info_before_test">Prem el botó quan estiguis llest. Disposarás de 15 minuts per escriura la traducció correcta per a algunes paraules</string>
     <string name="back">tornar</string>
     <string name="statistics">estadístiques</string>
@@ -51,10 +51,17 @@
     <string name="words_not_acquired">paraules per aprendre</string>
     <string name="not_acquired">encara no apreses</string>
     <string name="how_the_app_works">funcionament de la app</string>
-    <string name="m2_tutorial">Deixa\'m que te\'n expliqui el funcionament! :)</string>
     <string name="hi">Bones!</string>
-    <string name="m1_tutorial">Sembla que és el teu primer com fent servir WoS</string>
-    <string name="tutorial_m3">"Wos és una app dissenyada per tal de guardar i practicar vocabulari creant grups de paraules, afegint-hi informació i fent tests. "</string>
+    <string name="m1_tutorial">Sembla que és el teu primer com fent servir Language Database</string>
+    <string name="m2_tutorial">Deixa\'m que te\'n expliqui el funcionament! :)</string>
+    <string name="tutorial_m3">Language Database és una app dissenyada per tal de guardar i practicar vocabulari creant grups de paraules, afegint-hi informació i fent tests</string>
+    <string name = "tutorial_m4"> Per a progressar de forma correcta, haurás de mantenir un equilibri entre afegir  paraules y realitzar tests. </string>
+    <string name = "tutorial_m5">Cada paraula té dos estats: no adquirida o adquirida.</string>
+    <string name = "tutorial_m6">Quan, al fer tests tradueeixis de forma correcta una paraula varies vegades en dies diferents, aquest pasará al estat de "adquirida"</string>
+    <string name = "tutorial_m7">Podrás fer un test prement la opció "T" a la part superior dreta del menú</string>
+    <string name = "tutorial_m8">En total, no pots tenir més de 120 paraules en l\'estat de "no adquirida", y per tant, hauràs d\'anar fent tests
+     i afegint paraules de forma simultànea .</string>
+    <string name = "tutorial_m9"> Diverteix-te amb l\'aprenentatge!!</string>
     <string name="no_words_added">Cap paraula afegida</string>
     <string name="words">paraules</string>
     <string name="are_you_sure">N\'estás segur?</string>
@@ -74,10 +81,10 @@
     <string name="successfully_created">creada amb éxit</string>
     <string name="msg_first_btn_pressed">Prem el botó + per tal de crear un nou grup</string>
     <string name="max_tests_today_reached">Ja has fet tres tests avui, prova-ho demà :)</string>
-    <string name="add_more_words">"Si us plau, afegeix més paraules per tal de fer un test "</string>
+    <string name="add_more_words">Si us plau, afegeix més paraules per tal de fer un test</string>
     <string name="add_or_wait">Si us plau, afegeix més paraules o espera uns dies</string>
     <string name="add_more_words_statistics">Afegeix més paraules per tal de visualitzar estadístiques</string>
-    <string name="S2_first_word">escriu una paraula en la llengua que vols aprendre, i la traducció corresponent</string>
+    <string name="S2_first_word">escriu una paraula en la llengua que vols aprendre i la traducció corresponent</string>
     <string name="word_required">es necessita una paraula</string>
     <string name="trans_required">es necessita una traducció</string>
     <string name="word_exists">la paraula ja existeix</string>
@@ -89,7 +96,7 @@
     <string name="sorting_first_added">primers afegits</string>
     <string name="filtering_ex">filtrant paraules amb exemple</string>
     <string name="filtering_no_ex">filtrant paraules sense exemple</string>
-    <string name="sorting_length">ordenant paraules per tamany-</string>
+    <string name="sorting_length">ordenant paraules per tamany</string>
     <string name="filtering_definition">filtrant paraules amb definició</string>
     <string name="filtering_no_definition">filtrant paraules sense definició</string>
     <string name="filtering_acquired">filtrant paraules ja apreses</string>
@@ -117,16 +124,20 @@
     <string name="number_of_words_monthly_added_n_last_6_active_months">nombre de paraules afegides mensualment</string>
     <string name="number_of_words_monthly_acquired_n_last_6_active_months">nombre de palabras adquirides mensualment</string>
     <string name="press_for_n_daily_view">prem per \n veure\'n el progrés diari</string>
-    <string name="all_the_words_added_on_the_group">aqui pots veure totes les paraules afegides al grup .</string>
+    <string name="all_the_words_added_on_the_group">aqui pots veure totes les paraules afegides al grup.</string>
     <string name="about_app">Sobre la app</string>
-    <string name="about_app_text">Wos és una app de idiomes la qual permet que l\'usuari guardi el seu propi vocabulari en llistes i pugui practicar\-lo</string>
-    <string name="about_tests">Tests:</string>
+    <string name="about_app_text">Language Database és una app de idiomes la qual permet que l\'usuari guardi el seu propi vocabulari en llistes i pugui practicar\-lo</string>
+    <string name="about_tests">Tests</string>
     <string name="about_tests_text">La app disposa d\'un sistema de test la qual 15 paraules són seleccionades de forma aleatòria i l\'usuari n\'ha de proveïr latraducció correcta. Si la resposta és bona, la paraula no apareixerà als tests durant uns dies. Quan l\'usuari n\'ha donat la resposta correcta varies vegades,la paraula serà marcada com a adquirida \n i no apareixerà més als tests. A més, apareixerà de color gris a la llista de paraules.</string>
     <string name="about_word_groups">Grups de paraules</string>
     <string name="about_word_groups_text">L\'estructura de la app és similar a la de un bloc de notes, amb la diferència que aquesta app guarda les paraules a través d\' una base de dades, i per tant pots ordenar\-les, filtrar\-les, buscar paraulesconcretes o editar\-les. Cada paraula afegida té certes propietats com per exemple la traducció corresponent, definició, example i traducció del exemple, i són accessibles clicant sobre la paraula.</string>
     <string name="about_statistics">Estadístiques</string>
     <string name="about_statistics_text">A la part superior dreta del menú trobarás l\'item estadístiques, a on pots veure la distribució de paraules per grup, així com quantes n\'has aprés vs quantes queden per aprendre. A més,també pots comprovar quantes paraules afegeixes diariament o mensualment.</string>
-    <string name = "msg_firstView">Aqui pots veure les paraules afegides</string>
-    <string name = "all_words">Totes les paraules</string>
+    <string name ="msg_firstView">Aqui pots veure les paraules afegides</string>
+    <string name ="already_120">Ja has afegit 120 paraules. Fés alguns tests per tal de aprendre-les.</string>
+    <string name ="all_words">Totes les paraules</string>
+    <string name ="okay">Okay</string>
+    <string name="developed_by">Desarrollado por</string>
+    <string name="bernat_ferrer_emsisquer_studios">Bernat Ferrer,developer in Emsisquer Studios</string>
 
 </resources>

@@ -1,5 +1,6 @@
 package com.berni.android.prototype1lanbase.ui
 
+import android.app.ActionBar
 import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -7,12 +8,13 @@ import android.os.Bundle
 import android.util.AttributeSet
 import android.view.View
 import androidx.core.content.ContextCompat.startActivity
+import androidx.core.view.marginTop
 import com.berni.android.prototype1lanbase.R
 import kotlinx.android.synthetic.main.activity_tutorial.*
 
 class TutorialActivity : AppCompatActivity() {
 
-    var msg: Boolean = true
+    var msg:Int = 0
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_tutorial)
@@ -21,18 +23,58 @@ class TutorialActivity : AppCompatActivity() {
 
         btn_tutorial_next.setOnClickListener {
 
-            if (msg) {
+            if (msg==0) {
 
-                msg = false
-                val string: String = getString(R.string.tutorial_m3)
-                tutorial_t1.text = string
+                msg++
+                tutorial_t1.text = resources.getString(R.string.tutorial_m3)
                 tutorial_t2.text = ""
                 tutorial_t3.text = ""
 
-            } else {
+            }
+            else if (msg==1)
+
+            {
+                msg++
+
+                tutorial_t1.text = resources.getString(R.string.tutorial_m4)
+                tutorial_t2.text = resources.getString(R.string.tutorial_m5)
+
+            }
+
+            else if (msg==2)
+
+            {
+                msg++
+                tutorial_t1.text = resources.getString(R.string.tutorial_m6)
+                tutorial_t2.text = resources.getString(R.string.tutorial_m7)
+
+            }
+
+            else if (msg==3) {
+
+                msg++
+
+                tutorial_t1.text = resources.getString(R.string.tutorial_m8)
+                tutorial_t2.text = ""
+
+            }
+
+            else if(msg==4)
+
+            {
+                msg++
+                tutorial_t1.text = ""
+                tutorial_t3.text = resources.getString(R.string.tutorial_m9)
+                tutorial_t3.textSize= 30F
+
+            }
+
+            else {
+
                 Tutorial.firstTime = false
                 val intent = Intent(this, MainActivity::class.java)
                 startActivity(intent)
+
             }
         }
     }

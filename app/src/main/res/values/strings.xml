@@ -60,6 +60,15 @@
     <string name="hi">HI!</string>
     <string name="m1_tutorial">It seems it\'s your first time using WoS</string>
     <string name="tutorial_m3">This is a basic language app, where you can store and practice with your own vocabulary by creating groups of words, adding info and testing them \n \n let\'s get started!!</string>
+
+    <string name = "tutorial_m4"> In order to make progress, you will have to maintain an equilibrium between adding words and making tests. </string>
+    <string name = "tutorial_m5">Each word can have two states: acquired or not acquired.</string>
+    <string name = "tutorial_m6">Whenever you correctly translate a word inside a test, several times in different days,it will change to "acquired"</string>
+    <string name = "tutorial_m7">You will be able to perform tests by clicking the "T" option in the superior right part of the menu.</string>
+    <string name = "tutorial_m8">Overall, you can not have more than 120 words in the "not acquired" form, and hence, you will have to simultaneously
+        keep doing tests and adding words.</string>
+    <string name = "tutorial_m9">
+      Enjoy the learning process!!</string>
     <string name="no_words_added">no words added</string>
     <string name="words">words</string>
     <string name="are_you_sure">Are you sure?</string>
@@ -78,7 +87,7 @@
     <string name="msg_first_cat_created">Well done!! Now, you can press on the category to add some words :)</string>
     <string name="successfully_created">successfully created</string>
     <string name="msg_first_btn_pressed">Press the button + in order to create a new category</string>
-    <string name="max_tests_today_reached">You have already made three tests today, try tomorrow!!  =)</string>
+    <string name="max_tests_today_reached">You have already made three tests today, try tomorrow!! =)</string>
     <string name="add_more_words">Please add some more words in order to make a test</string>
     <string name="add_or_wait">Please add some more words or wait some days</string>
     <string name="add_more_words_statistics">Add some more words in order to display statistics</string>
@@ -86,7 +95,7 @@
     <string name="word_required">word required</string>
     <string name="trans_required">translation required </string>
     <string name="word_exists">word already exists</string>
-    <string name="S2_first_word_added">you got your first word =) , \n \n press the upper right option menu to see it displayed</string>
+    <string name="S2_first_word_added">you got your first word =), \n \n press the upper right option menu to see it displayed</string>
     <string name="word_successfully_added">word successfully added</string>
     <string name="no_words_added_yet">no words added yet</string>
     <string name="sorting_alphabet">sorting by alphabetic order..</string>
@@ -121,18 +130,21 @@
     <string name="press_for_n_monthly_view">press for \n monthly view</string>
     <string name="number_of_words_monthly_added_n_last_6_active_months">number of words monthly added</string>
     <string name="number_of_words_monthly_acquired_n_last_6_active_months">number of words monthly acquired</string>
-
     <string name="number_of_words_daily_acquired_last_100_active_days">number of words daily acquired</string>
     <string name="press_for_n_daily_view">press for \n daily view</string>
     <string name="all_the_words_added_on_the_group">here you have all the added words on the group</string>
-    <string name ="about_app">About the app:</string>
-    <string name="about_app_text">Wos is a basic language app that allows the user to store its own vocabulary lists and practise with it .</string>
-    <string name="about_tests">Tests:</string>
-    <string name="about_tests_text">The app disposes of a system of tests for which up to 15 word are randomly picked and the user has to provide the correct translation. If the user answer is right, the word will not\nappear in the tests again for some days. When the user has repeatedly answered with the right translation, the word will be marked as acquired, \nand will no longer appear on the test. On top of that, it will appear as grey in the words list.</string>
+    <string name ="about_app">About the app</string>
+    <string name="about_app_text">Language Database is an app that allows the user to store its own vocabulary lists and practise with it .</string>
+    <string name="about_tests">Tests</string>
+    <string name="about_tests_text">The app  has system of tests for which some words are randomly picked and the user has to provide the correct translation. If the user answer is right, the word will not\nappear in the tests again for some days. When the user has repeatedly answered with the right translation, the word will be marked as acquired, \nand will no longer appear on the test. On top of that, it will appear as grey in the words list.</string>
     <string name="about_word_groups">Word groups:</string>
     <string name="about_word_groups_text">The structure of this app is similar to a notes app, with the difference that this up handles the words using a database, and hence you can perform actions like sorting, filtering searching and editing words. Each added word will poses certain properties, like translation, definition,example and example translation, and are accessible by clicking on top of the word.</string>
     <string name="about_statistics">Statistics</string>
     <string name="about_statistics_text">On the top right menu of the main screen, you will find an statistics option where you can see the distribution of word per group, as well as how many are still to be learnt. On top of that, you can also check the number of words added per day or month.</string>
     <string name = "msg_firstView">Here you can see the added words</string>
+    <string name = "already_120">You already added 120 words, please make some tests in order to acquire them.</string>
     <string name = "all_words">All words</string>
+    <string name = "okay" translatable="false">Okay</string>
+    <string name="developed_by">Developed by</string>
+    <string name="bernat_ferrer_emsisquer_studios">Bernat Ferrer, developer in Emsisquer Studios .</string>
 </resources>

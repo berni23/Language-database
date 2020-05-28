@@ -91,11 +91,11 @@ class SecondFragment : BaseFragment(),KodeinAware {
         btn_save.setOnClickListener {
 
 
-            if (notAcquired >= 10) {
+            if (notAcquired >= 120) {
                 AlertDialog.Builder(context).apply {
 
-                    setPositiveButton("okay") { _, _ -> }
-                    this.setMessage("You already added 120 words, please make some tests in order to acquire them.")
+                    setPositiveButton(resources.getString(R.string.okay)) { _, _ -> }
+                    this.setMessage(resources.getString(R.string.already_120))
 
                 }.create().show()
             } else {
@@ -112,15 +112,10 @@ class SecondFragment : BaseFragment(),KodeinAware {
                 var example1: String? = ex1_editText.text.toString().trim()
                 var translationExample1: String? = ex1Trans_editText.text.toString().trim()
                 var definition: String? = definition_editText.text.toString().trim()
-                if (example1!!.isEmpty()) {
-                    example1 = null
-                }
-                if (translationExample1!!.isEmpty()) {
-                    translationExample1 = null
-                }
-                if (definition!!.isEmpty()) {
-                    definition = null
-                }
+                if (example1!!.isEmpty()) { example1 = null }
+
+                if (translationExample1!!.isEmpty()) {translationExample1 = null }
+                if (definition!!.isEmpty()) { definition = null }
 
                 if (theWord.isEmpty()) {
 
@@ -162,14 +157,13 @@ class SecondFragment : BaseFragment(),KodeinAware {
 
                 if (firstWord) {
 
-                    val toast: Toast = Toast.makeText(context, resources.getString(R.string.S2_first_word_added), Toast.LENGTH_LONG
-                    )
+                    val toast: Toast = Toast.makeText(context, resources.getString(R.string.S2_first_word_added), Toast.LENGTH_LONG)
                     toast.setGravity(Gravity.CENTER, 0, 0)
                     toast.show()
 
                     arrSecond.rotation = -90F
 
-                } else { Toast.makeText(context, resources.getString(R.string.word_successfully_added), Toast.LENGTH_SHORT).show() }
+                } else {Toast.makeText(context, resources.getString(R.string.word_successfully_added), Toast.LENGTH_SHORT).show() }
             }
         }
     }
@@ -188,9 +182,7 @@ class SecondFragment : BaseFragment(),KodeinAware {
                navController.navigate(R.id.actionWordsList, bundle)
            }
 
-               R.id.item_back -> {
-                   navController.popBackStack()
-               }
+               R.id.item_back -> {navController.popBackStack()}
            }
        return super.onOptionsItemSelected(item)
    }

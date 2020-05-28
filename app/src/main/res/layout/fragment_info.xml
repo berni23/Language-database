@@ -95,6 +95,27 @@
             android:fontFamily="@font/lato_regular"
             android:text="@string/about_statistics_text"/>
 
+        <TextView
+            android:id="@+id/textView8"
+            android:layout_width="300dp"
+            android:layout_marginTop="20dp"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/lato_bold"
+            android:textSize="25sp"
+            android:text="@string/developed_by"/>
+
+
+        <TextView
+            android:id="@+id/textView9"
+            android:layout_width="300dp"
+            android:layout_marginTop="20dp"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/lato_regular"
+            android:text="@string/bernat_ferrer_emsisquer_studios"/>
+
+
+
+
 
 
 
