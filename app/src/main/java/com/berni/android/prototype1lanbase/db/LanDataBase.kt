@@ -6,7 +6,7 @@ import androidx.room.*
 //import androidx.sqlite.db.SupportSQLiteDatabase
 
 
-@Database(entities = [Word::class, Cat::class],version = 10, exportSchema = true)
+@Database(entities = [Word::class, Cat::class],version = 1, exportSchema = true)
 
 abstract class LanDataBase : RoomDatabase() {
 
