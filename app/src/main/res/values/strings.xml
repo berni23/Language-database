@@ -58,7 +58,7 @@
     <string name="how_the_app_works">how the app works</string>
     <string name="m2_tutorial">Let me explain you how it works! \n:)</string>
     <string name="hi">HI!</string>
-    <string name="m1_tutorial">It seems it\'s your first time using WoS</string>
+    <string name="m1_tutorial">It seems it\'s your first time using Language Database</string>
     <string name="tutorial_m3">This is a basic language app, where you can store and practice with your own vocabulary by creating groups of words, adding info and testing them \n \n let\'s get started!!</string>
 
     <string name = "tutorial_m4"> In order to make progress, you will have to maintain an equilibrium between adding words and making tests. </string>
@@ -146,5 +146,5 @@
     <string name = "all_words">All words</string>
     <string name = "okay" translatable="false">Okay</string>
     <string name="developed_by">Developed by</string>
-    <string name="bernat_ferrer_emsisquer_studios">Bernat Ferrer, developer in Emsisquer Studios .</string>
+    <string name="bernat_ferrer_emsisquer_studios">Bernat Ferrer, lead developer in Emsisquer Studios.</string>
 </resources>

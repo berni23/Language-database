@@ -149,6 +149,6 @@ traducción para algunas palabras</string>
     <string name = "msg_firstView">Aquí puedes ver las palabras añadidas</string>
     <string name = "already_120">Ya has añadido 120 palabras, haz algunos tests con tal de aprenderlas.</string>
     <string name = "all_words">Todas las palabras</string>
-    <string name="developed_by">Desenvolupat per </string>
-    <string name="bernat_ferrer_emsisquer_studios">Bernat Ferrer, developer in Emsisquer Studios</string>
+    <string name="developed_by">Desarrollado por</string>
+    <string name="bernat_ferrer_emsisquer_studios">Bernat Ferrer, lead developer in Emsisquer Studios.</string>
 </resources>
