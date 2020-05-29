@@ -34,16 +34,16 @@
     <string name="hint_newCat">escriu el nom del grup</string>
     <string name="note">nota</string>
     <string name="no_example_provided">Cap exemple proveït</string>
-    <string name="no_example_translation_provided">Cap traducció proveïda</string>
+    <string name="no_example_translation_provided">Cap traducció del exemple proveïda</string>
     <string name="no_definition_provided">Cap definició proveïda</string>
     <string name="ready">Estic preparat!</string>
     <string name="test">test</string>
     <string name="score1">excel·lent!</string>
-    <string name="score2">fantástic</string>
+    <string name="score2">fantástic!</string>
     <string name="score3">molt bé!</string>
     <string name="score4">bona feina!</string>
     <string name="score5">Segueix practicant!</string>
-    <string name="info_before_test">Prem el botó quan estiguis llest. Disposarás de 15 minuts per escriura la traducció correcta per a algunes paraules</string>
+    <string name="info_before_test">Prem el botó quan estiguis llest. Disposarás de 15 minuts per escriure la traducció correcta per a algunes paraules</string>
     <string name="back">tornar</string>
     <string name="statistics">estadístiques</string>
     <string name="show_all_words">mostrar totes les paraules</string>
@@ -52,24 +52,24 @@
     <string name="not_acquired">encara no apreses</string>
     <string name="how_the_app_works">funcionament de la app</string>
     <string name="hi">Bones!</string>
-    <string name="m1_tutorial">Sembla que és el teu primer com fent servir Language Database</string>
+    <string name="m1_tutorial">Sembla que és el teu primer com fent servir Language Database.</string>
     <string name="m2_tutorial">Deixa\'m que te\'n expliqui el funcionament! :)</string>
-    <string name="tutorial_m3">Language Database és una app dissenyada per tal de guardar i practicar vocabulari creant grups de paraules, afegint-hi informació i fent tests.</string>
-    <string name = "tutorial_m4"> Per a progressar de forma correcta, haurás de mantenir un equilibri entre afegir  paraules y realitzar tests. </string>
-    <string name = "tutorial_m5">Cada paraula té dos estats: no adquirida o adquirida.</string>
-    <string name = "tutorial_m6">Quan, al fer tests tradueeixis de forma correcta una paraula varies vegades en dies diferents, aquest pasará al estat de "adquirida"</string>
-    <string name = "tutorial_m7">Podrás fer un test prement la opció "T" a la part superior dreta del menú</string>
+    <string name="tutorial_m3">Language Database és una app dissenyada per tal de guardar i practicar vocabulari creant grups de paraules, afegint-hi informació i realitzant tests.</string>
+    <string name = "tutorial_m4">Per a progressar de forma correcta, haurás de mantenir un equilibri entre afegir paraules y realitzar tests. </string>
+    <string name = "tutorial_m5">Cada paraula té dos estats: adquirida o no adquirida.</string>
+    <string name = "tutorial_m6">Quan al fer tests,  tradueeixis de forma correcta una paraula varies vegades en dies diferents, aquesta pasará al estat de "adquirida".</string>
+    <string name = "tutorial_m7">Podrás fer un test prement la opció "T" a la part superior dreta del menú.</string>
     <string name = "tutorial_m8">En total, no pots tenir més de 120 paraules en l\'estat de "no adquirida", y per tant, hauràs d\'anar fent tests
-     i afegint paraules de forma simultànea .</string>
+     i afegint paraules de forma simultànea.</string>
     <string name = "tutorial_m9"> Quan afegeixis una paraula, haurás de donar-ne també la traducció. De forma opcional, podrás també
-    donar una definició i un exemple d\'ús.</string>
+    donar una definició i un exemple d\'ús. Tota aquesta informació podrá ser editada més endavant.</string>
     <string name = "tutorial_m10"> Diverteix-te amb l\'aprenentatge!!</string>
     <string name="no_words_added">Cap paraula afegida</string>
     <string name="words">paraules</string>
     <string name="are_you_sure">N\'estás segur?</string>
-    <string name="you_cannot_undo">no podrás desfer aquesta operació</string>
+    <string name="you_cannot_undo">No podrás desfer aquesta operació.</string>
     <string name="yes">Si</string>
-    <string name="deleting_cat">esborrant la categoría</string>
+    <string name="deleting_cat">esborrant la categoría..</string>
     <string name="no">No</string>
     <string name="edit_cat">editar nom del grup</string>
     <string name="modify">modificar</string>
@@ -79,20 +79,20 @@
     <string name="cat_required">categoría necessária</string>
     <string name="cat_already_exists">aquesta categoría ja existeix</string>
     <string name="cat_name_rejected">nom rebutjat</string>
-    <string name="msg_first_cat_created">Ben fet! Ara pots premer a la categoría per tal d\'afegir paraules</string>
+    <string name="msg_first_cat_created">Ben fet! Ara pots premer a la categoría per tal d\'afegir paraules.</string>
     <string name="successfully_created">creada amb éxit</string>
-    <string name="msg_first_btn_pressed">Prem el botó + per tal de crear un nou grup</string>
+    <string name="msg_first_btn_pressed">Prem el botó "+" per tal de crear un nou grup.</string>
     <string name="max_tests_today_reached">Ja has fet tres tests avui, prova-ho demà :)</string>
-    <string name="add_more_words">Si us plau, afegeix més paraules per tal de fer un test</string>
-    <string name="add_or_wait">Si us plau, afegeix més paraules o espera uns dies</string>
-    <string name="add_more_words_statistics">Afegeix més paraules per tal de visualitzar estadístiques</string>
-    <string name="S2_first_word">escriu una paraula en la llengua que vols aprendre i la traducció corresponent</string>
+    <string name="add_more_words">Si us plau, afegeix més paraules per tal de fer un test.</string>
+    <string name="add_or_wait">Si us plau, afegeix més paraules o espera uns dies.</string>
+    <string name="add_more_words_statistics">Afegeix més paraules per tal de visualitzar les estadístiques.</string>
+    <string name="S2_first_word">Escriu una paraula en la llengua que vols aprendre i la traducció corresponent.</string>
     <string name="word_required">es necessita una paraula</string>
     <string name="trans_required">es necessita una traducció</string>
     <string name="word_exists">la paraula ja existeix</string>
-    <string name="S2_first_word_added">Ja tens la teva primera paraula =) \n, prem el botó de dalt a la dreta per visualitzar-la</string>
+    <string name="S2_first_word_added">Ja tens la teva primera paraula =) \n, prem el botó de dalt a la dreta per visualitzar-la.</string>
     <string name="word_successfully_added">paraula afegida amb éxit</string>
-    <string name="word_successfully_added_warning">paraula afegida amb éxit, prova de fer algun test =)  </string>
+    <string name="word_successfully_added_warning">paraula afegida amb éxit, prova de fer algun test =)</string>
     <string name="no_words_added_yet">cap paraula afegida</string>
     <string name="sorting_alphabet">ordenar alfabéticament</string>
     <string name="sorting_last_added">afegits recentment</string>
@@ -103,21 +103,21 @@
     <string name="filtering_definition">filtrant paraules amb definició</string>
     <string name="filtering_no_definition">filtrant paraules sense definició</string>
     <string name="filtering_acquired">filtrant paraules ja apreses</string>
-    <string name="filtering_not_acquired">filtrant paraules no apreses encara</string>
-    <string name="msg_timerToast1">selecciona una de les opcions per buscar, filtrar i ordenar algunes paraules</string>
-    <string name="msg_timerToast2">prem la paraula per veure\'n la informació corresponent</string>
-    <string name="msg_timerToast3">amb la icona del menú a la dreta de cada paraula podrás editar o afegir informació</string>
+    <string name="filtering_not_acquired">filtrant paraules per aprendre</string>
+    <string name="msg_timerToast1">selecciona una de les opcions per buscar, filtrar i ordenar algunes paraules.</string>
+    <string name="msg_timerToast2">Prem la paraula per veure\'n la informació corresponent.</string>
+    <string name="msg_timerToast3">Amb la icona del menú a la dreta de cada paraula podrás editar o afegir informació.</string>
     <string name="added_on">afegit al</string>
     <string name="edit_info">editar info</string>
     <string name="editing_word_properties">editant la informació</string>
     <string name="lets_do_it">Som-hi!</string>
-    <string name="answer_can_not_be_blank">Has de donar una resposta vàlida</string>
-    <string name="test_will_be_canceled">el test serà cancel·lat i s\'en perdrà el progrés</string>
+    <string name="answer_can_not_be_blank">Has de donar una resposta vàlida.</string>
+    <string name="test_will_be_canceled">El test serà cancel·lat i s\'en perdrà el progrés.</string>
     <string name="time_up">fi del temps!</string>
     <string name="menu_edit_or_delete_word">menu per editar o borrar la paraula</string>
-    <string name="write_the_correct_translation">escriu-ne la traducció correcte</string>
+    <string name="write_the_correct_translation">Escriu-ne la traducció correcta.</string>
     <string name="timer">temps</string>
-    <string name="msg1_statistics1">Prem sobre el gráfic per veure més informació</string>
+    <string name="msg1_statistics1">Prem sobre el gráfic per veure més informació.</string>
     <string name="number_of_words_n_per_group">nombre de paraules \n per grup</string>
     <string name="click_for_n_time_progress">clicar per veure \n el teu progrés</string>
     <string name="words_acquired_vs_yet_to_n_be_learnt">paraules afegides vs paraules per afegir</string>
@@ -125,17 +125,26 @@
     <string name="number_of_words_daily_acquired_last_100_active_days">nombre de paraules adquirides diàriament</string>
     <string name="press_for_n_monthly_view">prem per \n veure el progrés mensual</string>
     <string name="number_of_words_monthly_added_n_last_6_active_months">nombre de paraules afegides mensualment</string>
-    <string name="number_of_words_monthly_acquired_n_last_6_active_months">nombre de palabras adquirides mensualment</string>
-    <string name="press_for_n_daily_view">prem per \n veure\'n el progrés diari</string>
+    <string name="number_of_words_monthly_acquired_n_last_6_active_months">nombre de paraules adquirides mensualment</string>
+<string name="press_for_n_daily_view">prem per \n veure\'n el progrés diari</string>
     <string name="all_the_words_added_on_the_group">aqui pots veure totes les paraules afegides al grup.</string>
     <string name="about_app">Sobre la app</string>
-    <string name="about_app_text">Language Database és una app de idiomes la qual permet que l\'usuari guardi el seu propi vocabulari en llistes i pugui practicar\-lo</string>
+    <string name="about_app_text">Language Database és una app de idiomes la qual permet que l\'usuari guardi el seu propi
+vocabulari en llistes i pugui practicar\-lo</string>
     <string name="about_tests">Tests</string>
-    <string name="about_tests_text">La app disposa d\'un sistema de test la qual 15 paraules són seleccionades de forma aleatòria i l\'usuari n\'ha de proveïr la traducció correcta. Si la resposta és bona, la paraula no apareixerà als tests durant uns dies. Quan l\'usuari n\'ha donat la resposta correcta varies vegades,la paraula serà marcada com a adquirida \n i no apareixerà més als tests. A més, apareixerà de color gris a la llista de paraules.</string>
+    <string name="about_tests_text">La app disposa d\'un sistema de tests,  amb el qual fins a 15 paraules són
+seleccionades de forma aleatòria i l\'usuari n\'ha de proveïr la traducció correcta. Si la resposta és bona, la paraula no apareixerà als tests durant uns dies.
+Si l\'usuari n\'ha donat la resposta correcta varies vegades, la paraula serà marcada com a adquirida \n i no apareixerà més als tests.
+A més, apareixerà de color gris a la llista de paraules.</string>
     <string name="about_word_groups">Grups de paraules</string>
-    <string name="about_word_groups_text">L\'estructura de la app és similar a la de un bloc de notes, amb la diferència que aquesta app guarda les paraules a través d\' una base de dades, i per tant pots ordenar\-les, filtrar\-les, buscar paraulesconcretes o editar\-les. Cada paraula afegida té certes propietats com per exemple la traducció corresponent, definició, example i traducció del exemple, i són accessibles clicant sobre la paraula.</string>
+    <string name="about_word_groups_text">L\'estructura de la app és similar a la de un bloc de notes,
+amb la diferència que aquesta app guarda les paraules a través d\' una base de dades, i per tant pots ordenar\-les, filtrar\-les,
+buscar paraules concretes o editar\-les. Cada paraula afegida té certes propietats, com per exemple la traducció corresponent, definició, example i
+traducció del exemple, i són accessibles clicant sobre la paraula.</string>
     <string name="about_statistics">Estadístiques</string>
-    <string name="about_statistics_text">A la part superior dreta del menú trobarás l\'item estadístiques, a on pots veure la distribució de paraules per grup, així com quantes n\'has aprés vs quantes queden per aprendre. A més,també pots comprovar quantes paraules afegeixes diariament o mensualment.</string>
+    <string name="about_statistics_text">A la part superior dreta del menú trobarás l\'item estadístiques,
+a on pots veure la distribució de paraules per grup, així com quantes n\'has aprés vs quantes queden per aprendre.
+A més,també pots comprovar quantes paraules afegeixes diariament o mensualment.</string>
     <string name ="msg_firstView">Aqui pots veure les paraules afegides</string>
     <string name ="already_120">Ja has afegit 120 paraules. Fés alguns tests per tal de aprendre-les.</string>
     <string name ="all_words">Totes les paraules</string>

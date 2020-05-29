@@ -59,7 +59,6 @@ class FirstFragment : BaseFragment(),KodeinAware {
     private var action: MenuItem? = null
     private lateinit var viewModel: MainViewModel
     private lateinit var navController: NavController
-
     //private var color: Int = Color.argb(255, 255, 0,0)
     override fun onCreateView(
 
@@ -170,8 +169,6 @@ class FirstFragment : BaseFragment(),KodeinAware {
             toast.show()
         }
     }
-
-
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.menu_main, menu)
         val searchView: SearchView = menu.findItem(R.id.item_search).actionView as SearchView
@@ -283,6 +280,8 @@ class FirstFragment : BaseFragment(),KodeinAware {
                 if (counter < 10) { Toast.makeText(context, resources.getString(R.string.add_more_words_statistics), Toast.LENGTH_SHORT).show()
                 } else {
 
+
+
                     stopTimers()
                     navController.navigate(R.id.actionStatistics)
                 }
@@ -313,7 +312,6 @@ class FirstFragment : BaseFragment(),KodeinAware {
     private val timerTestColor = object : CountDownTimer(2000000, 100) {
 
         override fun onFinish() {timer1.start()}
-
         override fun onTick(millisUntilFinished: Long) {
             a += 0.1F
             b = abs(255 * kotlin.math.sin(a)).toInt()

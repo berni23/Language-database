@@ -37,7 +37,7 @@
     <string name="definition_editText">definition (optional)</string>
     <string name="hint_newCat">write the new category name</string>
     <string name="note">Note</string>
-    <string name="no_example_provided">No example provided</string>
+    <string name="no_example_provided">no example provided</string>
     <string name="no_example_translation_provided">no example translation provided</string>
     <string name="no_definition_provided">no definition provided</string>
     <string name="ready">I\'m Ready!!</string>
@@ -47,7 +47,7 @@
     <string name="score2">awesome!</string>
     <string name="score3">well done!</string>
     <string name="score4">good job!</string>
-    <string name="score5"> Keep practising!</string>
+    <string name="score5">Keep practising!</string>
     <string name="info_before_test">Press the button once you feel confident. You will dispose of 15 minutes to write the correct translation for some words</string>
     <string name="back">back</string>
     <string name="statistics">statistics</string>
@@ -59,23 +59,22 @@
     <string name="m2_tutorial">Let me explain you how it works! \n:)</string>
     <string name="hi">HI!</string>
     <string name="m1_tutorial">It seems it\'s your first time using Language Database</string>
-    <string name="tutorial_m3">This is a basic language app, where you can store and practice with your own vocabulary by creating groups of words, adding info and testing them \n \n let\'s get started!!</string>
-
-    <string name = "tutorial_m4"> In order to make progress, you will have to maintain an equilibrium between adding words and making tests. </string>
+    <string name=  "tutorial_m3">This is a basic language app, where you can store and practice with your own vocabulary by creating groups of words, adding info and testing it. \n \n let\'s get started!!</string>
+    <string name = "tutorial_m4">In order to make progress, you will have to maintain an equilibrium between adding words and making tests. </string>
     <string name = "tutorial_m5">Each word can have two states: acquired or not acquired.</string>
-    <string name = "tutorial_m6">Whenever you correctly translate a word inside a test, several times in different days,it will change to "acquired"</string>
+    <string name = "tutorial_m6">Whenever you correctly translate a word several times in different days,its status will change to "acquired"</string>
     <string name = "tutorial_m7">You will be able to perform tests by clicking the "T" option in the superior right part of the menu.</string>
-    <string name = "tutorial_m8">Overall, you can not have more than words in the "not acquired" form, and hence, you will have to simultaneously
+    <string name = "tutorial_m8">Overall, you can not have more than 120 words in the "not acquired" form, and hence, you will have to simultaneously
         keep doing tests and adding words.</string>
-    <string name = "tutorial_m9"> When adding a new word, you wil have to fill out the fields "word" and "translation". You will
-    also have the option to give a definition and an example. </string>
+    <string name = "tutorial_m9">When adding a new word, you wil have to fill out the fields "word" and "translation". You will
+    also have the option to provide a definition and an example. All this information can be edited later on. </string>
     <string name = "tutorial_m10">Enjoy the learning process!!</string>
     <string name="no_words_added">no words added</string>
     <string name="words">words</string>
     <string name="are_you_sure">Are you sure?</string>
-    <string name="you_cannot_undo">you cannot undo this operation</string>
+    <string name="you_cannot_undo">You cannot undo this operation</string>
     <string name="yes">Yes</string>
-    <string name="deleting_cat">deleting category</string>
+    <string name="deleting_cat">deleting category..</string>
     <string name="no">No</string>
     <string name="edit_cat">edit category name</string>
     <string name="modify">modify</string>
@@ -85,21 +84,20 @@
     <string name="cat_required">category required</string>
     <string name="cat_already_exists">category already exists</string>
     <string name="cat_name_rejected">category name rejected</string>
-    <string name="msg_first_cat_created">Well done!! Now, you can press on the category to add some words :)</string>
+    <string name="msg_first_cat_created">Well done!! You can now press on the category to add some words :)</string>
     <string name="successfully_created">successfully created</string>
-    <string name="msg_first_btn_pressed">Press the button + in order to create a new category</string>
+    <string name="msg_first_btn_pressed">Press the button "+" in order to create a new category</string>
     <string name="max_tests_today_reached">You have already made three tests today, try tomorrow!! =)</string>
     <string name="add_more_words">Please add some more words in order to make a test</string>
     <string name="add_or_wait">Please add some more words or wait some days</string>
     <string name="add_more_words_statistics">Add some more words in order to display statistics</string>
-    <string name="S2_first_word">write a word in the language you want to learn and its corresponding translation "</string>
+    <string name="S2_first_word">write a word in the language you want to learn and its corresponding translation. </string>
     <string name="word_required">word required</string>
     <string name="trans_required">translation required </string>
     <string name="word_exists">word already exists</string>
-    <string name="S2_first_word_added">you got your first word =), \n \n press the upper right option menu to see it displayed</string>
-    <string name="word_successfully_added">word successfully added</string>
-    <string name="word_successfully_added_warning">word successfully added, its time to try a test =) </string>
-
+    <string name="S2_first_word_added">you got your first word =),\n \n press the upper right option menu to see it displayed.</string>
+    <string name="word_successfully_added">word successfully added.</string>
+    <string name="word_successfully_added_warning">word successfully added, its time to try a test =)</string>
     <string name="no_words_added_yet">no words added yet</string>
     <string name="sorting_alphabet">sorting by alphabetic order..</string>
     <string name="sorting_last_added">sorting by last added..</string>
@@ -111,21 +109,21 @@
     <string name="filtering_no_definition">filtering words without definition..</string>
     <string name="filtering_acquired">filtering words already acquired..</string>
     <string name="filtering_not_acquired">filtering words not acquired..</string>
-    <string name="msg_timerToast1">select one of the menu options for searching, filtering and sorting some words</string>
-    <string name="msg_timerToast2">Press the word to see it\'s information displayed</string>
-    <string name="msg_timerToast3">with the menu item on the right of each  word you will be able to edit it or add information .</string>
+    <string name="msg_timerToast1">Select one of the menu options for searching, filtering and sorting some words.</string>
+    <string name="msg_timerToast2">Press the word to see it\'s information displayed.</string>
+    <string name="msg_timerToast3">With the menu item on the right of each word you will be able to edit it or add information.</string>
     <string name="added_on">added on</string>
     <string name="edit_info">edit info</string>
     <string name="editing_word_properties">editing word properties..</string>
-    <string name="lets_do_it">let\'s do it!</string>
+    <string name="lets_do_it">Let\'s do it!</string>
     <string name="answer_can_not_be_blank">answer can\'t be blank</string>
-    <string name="test_will_be_canceled">the test will be canceled and the progress lost</string>
+    <string name="test_will_be_canceled">The test will be canceled and the progress lost.</string>
     <string name="time_up">time\'s up!</string>
     <string name="arrow_tutorial" translatable="false">arrow tutorial</string>
     <string name="menu_edit_or_delete_word">menu edit or delete word</string>
     <string name="write_the_correct_translation">write the correct translation</string>
     <string name="timer">timer</string>
-    <string name="msg1_statistics1">Press the charts to get more information about them </string>
+    <string name="msg1_statistics1">Press the charts to get more information about them. </string>
     <string name="number_of_words_n_per_group">Number of words \n per group</string>
     <string name="click_for_n_time_progress">click for \n time progress</string>
     <string name="words_acquired_vs_yet_to_n_be_learnt">words acquired vs yet to \n be learnt</string>
@@ -137,17 +135,19 @@
     <string name="press_for_n_daily_view">press for \n daily view</string>
     <string name="all_the_words_added_on_the_group">here you have all the added words on the group</string>
     <string name ="about_app">About the app</string>
-    <string name="about_app_text">Language Database is an app that allows the user to store its own vocabulary lists and practise with it .</string>
+    <string name="about_app_text">Language Database (LDB) is an app that allows the user to store its own vocabulary lists and practise with it .</string>
     <string name="about_tests">Tests</string>
-    <string name="about_tests_text">The app  has system of tests for which some words are randomly picked and the user has to provide the correct translation. If the user answer is right, the word will not\nappear in the tests again for some days. When the user has repeatedly answered with the right translation, the word will be marked as acquired, \nand will no longer appear on the test. On top of that, it will appear as grey in the words list.</string>
+    <string name="about_tests_text">The app has a system of tests for which some words are randomly picked and the user has to provide the correct translation. If the answer is right, the word will not \n appear in the tests again for some days. When the user has repeatedly answered with the right translation, the word will be marked as acquired, \n and it will no longer appear on the test. On top of that, it will appear with a grey color in the words list.</string>
     <string name="about_word_groups">Word groups:</string>
-    <string name="about_word_groups_text">The structure of this app is similar to a notes app, with the difference that this up handles the words using a database, and hence you can perform actions like sorting, filtering searching and editing words. Each added word will poses certain properties, like translation, definition,example and example translation, and are accessible by clicking on top of the word.</string>
+    <string name="about_word_groups_text">The structure of this app is similar to a notes app, with the difference that LDB handles the words using a database, and hence you can perform actions like sorting, filtering searching and editing words.
+Each added word will posses certain properties, like translation, definition, example and example translation. Those accessible by clicking on top of the word.</string>
     <string name="about_statistics">Statistics</string>
-    <string name="about_statistics_text">On the top right menu of the main screen, you will find an statistics option where you can see the distribution of word per group, as well as how many are still to be learnt. On top of that, you can also check the number of words added per day or month.</string>
-    <string name = "msg_firstView">Here you can see the added words</string>
-    <string name = "already_120">You already added 120 words, please make some tests in order to acquire them.</string>
-    <string name = "all_words">All words</string>
-    <string name = "okay" translatable="false">Okay</string>
+    <string name="about_statistics_text">On the top right menu of the main screen, you will find an statistics option where you can see the distribution of words per group, as well as how many are yet to be acquired. On top of that,
+you can also check the number of words added per day or month.</string>
+    <string name ="msg_firstView">Here you can see the added words.</string>
+    <string name ="already_120">You already added 120 words, please make some tests in order to acquire them.</string>
+    <string name ="all_words">All words</string>
+    <string name ="okay" translatable="false">Okay</string>
     <string name="developed_by">Developed by</string>
     <string name="bernat_ferrer_emsisquer_studios">Bernat Ferrer, lead developer in Emsisquer Studios.</string>
 </resources>
