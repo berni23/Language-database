@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
     <resources>
-        <string name="app_name">Language \n Database</string>
+        <string name="app_name">LDB</string>
         <string name="action_settings">Opciones</string>
         <string name="action_sortBy">ordenar por</string>
         <string name="last_added">último añadido</string>
         <string name="alphabetically">alfabeticamente</string>
         <string name="sort">ordenar</string>
         <string name="info">información</string>
-        <string name="last_additions">adiciones recientes</string>
-        <string name="last_added_on">ultima edición el</string>
+        <string name="last_additions">adiciones recientes:</string>
+        <string name="last_added_on">última edición el</string>
         <string name="_40_words">40 palabras</string>
         <string name="first_added">añadidos recientemente</string>
         <string name="translation">traducción</string>
@@ -92,6 +92,7 @@ traducción para algunas palabras</string>
         <string name="word_exists">Esta palabra ya existe</string>
         <string name="S2_first_word_added">Ya tienes tu primera palabra =), \n \n pulsa la opcón situada arriba a la derecha para verla</string>
         <string name="word_successfully_added">Palabra creada con éxito</string>
+        <string name="word_successfully_added_warning">Palabra creada con éxito, prueba de hacer algún test =) </string>
         <string name="no_words_added_yet">Ningua palabra añadida aún</string>
         <string name="sorting_alphabet">ordenar por orden alfabético</string>
         <string name="sorting_last_added">ordenar por últimos añadidos</string>

@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Language \n Database</string>
+    <string name="app_name">LDB</string>
     <string name="action_settings">Opcions</string>
     <string name="action_sortBy">ordena per</string>
     <string name="last_added">ordena per últim afegit</string>
     <string name="alphabetically">alfabèticament</string>
     <string name="sort">ordenar</string>
     <string name="info">informació</string>
-    <string name="last_additions">ultims afegits</string>
+    <string name="last_additions">ultims afegits:</string>
     <string name="last_added_on">última addició al</string>
     <string name="_40_words">40 paraules</string>
     <string name="first_added">afegits recentment</string>
@@ -92,6 +92,7 @@
     <string name="word_exists">la paraula ja existeix</string>
     <string name="S2_first_word_added">Ja tens la teva primera paraula =) \n, prem el botó de dalt a la dreta per visualitzar-la</string>
     <string name="word_successfully_added">paraula afegida amb éxit</string>
+    <string name="word_successfully_added_warning">paraula afegida amb éxit, prova de fer algun test =)  </string>
     <string name="no_words_added_yet">cap paraula afegida</string>
     <string name="sorting_alphabet">ordenar alfabéticament</string>
     <string name="sorting_last_added">afegits recentment</string>

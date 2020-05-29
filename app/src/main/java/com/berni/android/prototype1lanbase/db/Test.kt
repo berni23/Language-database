@@ -13,9 +13,12 @@ object Test {
     }
     var number:    Int = 0
     var acquired : Int = 0
+    var warningTest: Int = 0
     var time = android.icu.util.Calendar.DATE
 
-    var tiime = android.icu.util.Calendar.getInstance()}
+    //var tiime = android.icu.util.Calendar.getInstance()
+
+}
 
 
 

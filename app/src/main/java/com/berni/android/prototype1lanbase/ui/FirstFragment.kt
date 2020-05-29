@@ -29,6 +29,7 @@ import com.berni.android.prototype1lanbase.db.CatWords
 import com.berni.android.prototype1lanbase.db.Test
 import com.berni.android.prototype1lanbase.db.Word
 import com.berni.android.prototype1lanbase.hideKeyboard
+import com.berni.android.prototype1lanbase.limitNotAcquired
 import kotlinx.android.synthetic.main.fragment_first.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -204,7 +205,7 @@ class FirstFragment : BaseFragment(),KodeinAware {
         })
         //AppCompatResources.getDrawable(requireContext(), R.drawable.ic_test_black_24dp)?.setTint(color)
 
-        if (Test.number <= 3 && notAcquired > 120) {
+        if (Test.number <= 3 && notAcquired > limitNotAcquired) {
 
             Log.i("timer","timer")
             timer1.start() }
@@ -269,7 +270,9 @@ class FirstFragment : BaseFragment(),KodeinAware {
                 }
             }
 
-            R.id.item_all -> {navController.navigate(R.id.action_FirstFragment_to_allWordsFragment) }
+            R.id.item_all -> {
+                stopTimers()
+                navController.navigate(R.id.action_FirstFragment_to_allWordsFragment) }
             R.id.item_infoApp -> {
                 stopTimers()
                 navController.navigate(R.id.actionInfo)

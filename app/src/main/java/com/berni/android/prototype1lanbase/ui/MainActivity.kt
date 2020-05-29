@@ -16,6 +16,9 @@ import org.kodein.di.generic.instance
 class MainActivity : AppCompatActivity(),KodeinAware {
 
          override val kodein by closestKodein()
+
+         val limitNotAcquired = 120
+
          private val viewModelFactory: ViewModelFactory by instance<ViewModelFactory>()
 
         override fun onCreate(savedInstanceState: Bundle?) {

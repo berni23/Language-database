@@ -2,44 +2,54 @@ package com.berni.android.prototype1lanbase
 
 import android.app.Activity
 import android.content.Context
-import android.icu.text.TimeZoneFormat.getInstance
-import android.os.Build
 import android.view.View
 import android.view.inputmethod.InputMethodManager
-import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import com.berni.android.prototype1lanbase.db.Word
-import java.time.ZonedDateTime
 import java.util.*
-import java.util.Calendar.getInstance
-import java.util.Currency.getInstance
 
-// generate  word id, so words have to be unique within the same category but
-// can be duplicated if in different categories .
 
-fun wordId( catNum:String, wordName: String) : String{
+/** Set of functions and variables used throughout the different packages
 
-    return  wordName.plus(catNum)
-}
+-----------------------------------
+-----------------------------------
+1 - variables
+-----------------------------------
+-----------------------------------
+**/
 
-// fun for hiding keyboard
+
+
+var limitNotAcquired = 120  // change the number on every translation in strings folder as well
+var limitWarning = 24
+
+
+/**
+-----------------------------------
+-----------------------------------
+  2 - Hide and show Keyboard
+-----------------------------------
+-----------------------------------
+**/
 
 fun Fragment.hideKeyboard() {
     view?.let { activity?.hideKeyboard(it) }
 }
 
-fun Activity.hideKeyboard() {
-    hideKeyboard(currentFocus ?: View(this))
-}
 
 fun Context.hideKeyboard(view: View) {
     val inputMethodManager = getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
     inputMethodManager.hideSoftInputFromWindow(view.windowToken, 0)
 }
 
+/**
+-----------------------------------
+-----------------------------------
+3 - Filtering and sorting functions
+-----------------------------------
+-----------------------------------
 
-// tools for filtering and sorting Words List Fragment
-
+**/
 
  fun filterNoExample(toFilter: List<Word>): List<Word> {
 
@@ -131,8 +141,11 @@ fun sortByLength(displayedWords: List<Word>) : List<Word> {
     return displayed.sortedBy {it.wordName.length}
 
 }
+
+
 //number of months between two dates
 
+/**
 @RequiresApi(Build.VERSION_CODES.O)
 fun monthsBetweenDates(startDate: ZonedDateTime?, endDate: ZonedDateTime?): Int {
 
@@ -142,3 +155,20 @@ fun monthsBetweenDates(startDate: ZonedDateTime?, endDate: ZonedDateTime?): Int 
     return monthsBetween
 }
 
+ object LocalDateTimeConverter {
+@RequiresApi(Build.VERSION_CODES.O)
+@TypeConverter
+fun toDate(dateString: String?): LocalDateTime? {
+return if (dateString == null) {
+null
+} else {
+LocalDateTime.parse(dateString)
+}
+}
+
+@TypeConverter
+fun toDateString(date: LocalDateTime?): String? {
+return date?.toString()
+}
+}
+ **/

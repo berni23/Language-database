@@ -14,7 +14,10 @@ import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import com.berni.android.prototype1lanbase.R
 import com.berni.android.prototype1lanbase.db.Cat
+import com.berni.android.prototype1lanbase.db.Test
 import com.berni.android.prototype1lanbase.db.Word
+import com.berni.android.prototype1lanbase.limitNotAcquired
+import com.berni.android.prototype1lanbase.limitWarning
 import kotlinx.android.synthetic.main.fragment_second.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -85,7 +88,7 @@ class SecondFragment : BaseFragment(),KodeinAware {
         btn_save.setOnClickListener {
 
 
-            if (notAcquired >= 120) {
+            if (notAcquired >= limitNotAcquired) {
                 AlertDialog.Builder(context).apply {
 
                     setPositiveButton(resources.getString(R.string.okay)) { _, _ -> }
@@ -106,10 +109,10 @@ class SecondFragment : BaseFragment(),KodeinAware {
                 var example1: String? = ex1_editText.text.toString().trim()
                 var translationExample1: String? = ex1Trans_editText.text.toString().trim()
                 var definition: String? = definition_editText.text.toString().trim()
-                if (example1!!.isEmpty()) { example1 = null }
+                if (example1!!.isEmpty()) {example1 = null}
 
-                if (translationExample1!!.isEmpty()) {translationExample1 = null }
-                if (definition!!.isEmpty()) { definition = null }
+                if (translationExample1!!.isEmpty()) {translationExample1 = null}
+                if (definition!!.isEmpty()) {definition = null}
 
                 if (theWord.isEmpty()) {
 
@@ -127,7 +130,7 @@ class SecondFragment : BaseFragment(),KodeinAware {
                 }
 
                 var bool = true
-                runBlocking(Dispatchers.Default) { bool = viewModel.validWordId(cat.catId.toString(), theWord) }
+                runBlocking(Dispatchers.Default) { bool = viewModel.validWordId(cat.catId.toString(),theWord)}
 
                 if (bool) {
 
@@ -136,6 +139,8 @@ class SecondFragment : BaseFragment(),KodeinAware {
                         val word = Word(theWord, translation1, example1, translationExample1, definition, date.toString(), cat.catId)
                         viewModel.addWord(word)
                     }
+
+                    Test.warningTest++
                 } else {
 
                     word_editText.error = resources.getString(R.string.word_exists)
@@ -154,10 +159,13 @@ class SecondFragment : BaseFragment(),KodeinAware {
                     val toast: Toast = Toast.makeText(context, resources.getString(R.string.S2_first_word_added), Toast.LENGTH_LONG)
                     toast.setGravity(Gravity.CENTER, 0, 0)
                     toast.show()
-
                     arrSecond.rotation = -90F
+                }
 
-                } else {Toast.makeText(context, resources.getString(R.string.word_successfully_added), Toast.LENGTH_SHORT).show() }
+                else if(Test.warningTest>limitWarning)
+                {Toast.makeText(context, resources.getString(R.string.word_successfully_added_warning), Toast.LENGTH_LONG).show() }
+
+                else {Toast.makeText(context, resources.getString(R.string.word_successfully_added), Toast.LENGTH_SHORT).show() }
             }
         }
     }
@@ -181,23 +189,7 @@ class SecondFragment : BaseFragment(),KodeinAware {
        return super.onOptionsItemSelected(item)
    }
 
-   /*** object LocalDateTimeConverter {
-        @RequiresApi(Build.VERSION_CODES.O)
-        @TypeConverter
-        fun toDate(dateString: String?): LocalDateTime? {
-            return if (dateString == null) {
-                null
-            } else {
-                LocalDateTime.parse(dateString)
-            }
-        }
 
-        @TypeConverter
-        fun toDateString(date: LocalDateTime?): String? {
-            return date?.toString()
-        }
-    }
-   **/
 }
 
 
