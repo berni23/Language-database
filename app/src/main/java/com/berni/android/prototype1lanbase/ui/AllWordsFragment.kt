@@ -68,7 +68,7 @@ class AllWordsFragment : BaseFragment(), KodeinAware {
 
             runBlocking(Dispatchers.Default){
 
-                displayedWords =  it.reversed()
+                displayedWords =  it
                 recycler_view_words.adapter = WordAdapter(displayedWords,viewModel,listOf<CountDownTimer>(),this.coroutineContext)
 
             }

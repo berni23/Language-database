@@ -45,6 +45,7 @@ import kotlin.math.abs
 /**
  * A simple [Fragment] subclass as the default destination in the navigation.
  */
+
 class FirstFragment : BaseFragment(),KodeinAware {
 
     override val kodein by closestKodein()

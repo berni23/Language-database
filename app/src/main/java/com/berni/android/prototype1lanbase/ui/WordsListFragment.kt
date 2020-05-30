@@ -59,7 +59,6 @@ class WordsListFragment : BaseFragment(), KodeinAware {
         super.onViewCreated(view, savedInstanceState)
 
 
-
         navController = Navigation.findNavController(view)
         recycler_view_words.setHasFixedSize(true)
         viewModel = ViewModelProvider(this, viewModelFactory).get(MainViewModel::class.java)
@@ -102,8 +101,7 @@ class WordsListFragment : BaseFragment(), KodeinAware {
             lastAdditionDate = displayedWords.getOrNull(0)?.date
             var lastAdditions =  resources.getString(R.string.last_additions)
             lastAdded.forEach {
-                if (it?.wordName != null) {
-                    lastAdditions += " ${it.wordName},"
+                if (it?.wordName != null) { lastAdditions += " ${it.wordName},"
                 }
             }
             lastAdditions = lastAdditions.dropLast(1)  // drop the last comma of the string
@@ -113,7 +111,7 @@ class WordsListFragment : BaseFragment(), KodeinAware {
             val stringLastAdditionDate = "${resources.getString(R.string.last_added_on)} $lastAdditionDate"
 
             text_view_numWords.text = " ${recycler_view_words.adapter?.itemCount?:0} ${resources.getString(R.string.words)}"
-            lastAdditionDate?.let { text_view_lastDate.text = stringLastAdditionDate }
+            lastAdditionDate?.let {text_view_lastDate.text = stringLastAdditionDate }
             text_view_last_additions.text = lastAdditions
 
         })
