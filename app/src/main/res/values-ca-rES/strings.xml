@@ -150,6 +150,7 @@ A més,també pots comprovar quantes paraules afegeixes diariament o mensualment
     <string name ="all_words">Totes les paraules</string>
     <string name ="okay">Okay</string>
     <string name="developed_by">Desenvolupat per</string>
+    <string name="no_word_acquired_yet">Cap paraula adquirida</string>
     <string name="bernat_ferrer_emsisquer_studios">Bernat Ferrer, lead developer in Emsisquer Studios.</string>
 
 </resources>

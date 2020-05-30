@@ -59,18 +59,18 @@ class Statistics3Fragment : BaseFragment(),KodeinAware {
 
         }
 
-        Log.println(Log.INFO,"acquired",daysAcquired.toString())
+        //Log.println(Log.INFO,"acquired",daysAcquired.toString())
         APIlib.getInstance().setActiveAnyChartView(lineChart)
         val lineDays = AnyChart.line()
         val dataDays = arrayDays(sortDays(days))
-
 
         lineDays.line(dataDays)
         lineChart.setChart(lineDays)
 
         if (daysAcquired.isNotEmpty()) {
 
-            labelsG1.visibility = View.VISIBLE
+            NoChartAcquired.visibility = View.INVISIBLE
+            //labelsG1.visibility = View.VISIBLE
             APIlib.getInstance().setActiveAnyChartView(lineChart2)
             val lineDays2 = AnyChart.line()
             val dataDays2 = arrayDays(sortDays(daysAcquired))
@@ -116,7 +116,6 @@ class Statistics3Fragment : BaseFragment(),KodeinAware {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
 
         when (item.itemId) {R.id.item_backS3 -> { navController.popBackStack() } }
-
 
         return super.onOptionsItemSelected(item)
     }

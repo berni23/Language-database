@@ -33,6 +33,36 @@
     </androidx.appcompat.widget.LinearLayoutCompat>
 
     <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/HNoAc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent='0.8' />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/VNoAc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.5" />
+
+    <TextView
+        android:id="@+id/NoChartAcquired"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="7dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="7dp"
+        android:layout_marginBottom="5dp"
+        app:layout_constraintBottom_toBottomOf="@id/HNoAc"
+        app:layout_constraintEnd_toEndOf="@id/VNoAc"
+        app:layout_constraintStart_toStartOf="@id/VNoAc"
+        app:layout_constraintTop_toTopOf="@id/HNoAc"
+        android:fontFamily="@font/lato_light_italic"
+        android:textSize="15sp"
+        android:text="@string/no_word_acquired_yet" />
+
+    <androidx.constraintlayout.widget.Guideline
         android:id="@+id/Hrect2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -60,7 +90,6 @@
 
         <TextView
             android:id="@+id/labelsG1"
-            android:visibility="invisible"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="7dp"
@@ -69,6 +98,7 @@
             android:layout_marginBottom="5dp"
             android:fontFamily="@font/lato_light_italic"
             android:text="@string/number_of_words_daily_acquired_last_100_active_days" />
+
 
     </androidx.cardview.widget.CardView>
 

@@ -65,7 +65,7 @@ class Statistics4Fragment : BaseFragment(),KodeinAware {
         if(dateAcquired.isNotEmpty())
 
         {
-            labelsG4.visibility = View.VISIBLE
+            NoChartAcquired.visibility = View.INVISIBLE
             APIlib.getInstance().setActiveAnyChartView(lineChart4)
             val lineMonths2 = AnyChart.line()
             val dataMonths2 = arrayMonths(sortMonths(dateAcquired))

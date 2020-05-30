@@ -35,7 +35,6 @@ class InfoFragment : Fragment() {
     }
         // mandatory fields
 
-
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.menu_edit_words, menu)
         menu.findItem(R.id.item_backEditToWordsList).setIcon(R.drawable.ic_arrow_back_black_24dp)
