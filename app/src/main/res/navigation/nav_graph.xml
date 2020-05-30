@@ -42,6 +42,10 @@
             app:destination="@id/statisticsFragment" />
         <action
             android:id="@+id/actionInfo"
+            app:enterAnim="@anim/animate_in_out_enter"
+            app:exitAnim="@anim/animate_in_out_exit"
+            app:popExitAnim="@anim/animate_out_in_exit"
+            app:popEnterAnim="@anim/animate_out_in_enter"
             app:destination="@id/infoFragment" />
 
     </fragment>

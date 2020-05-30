@@ -137,7 +137,7 @@
     <string name ="about_app">About the app</string>
     <string name="about_app_text">Language Database (LDB) is an app that allows the user to store its own vocabulary lists and practise with it .</string>
     <string name="about_tests">Tests</string>
-    <string name="about_tests_text">The app has a system of tests for which some words are randomly picked and the user has to provide the correct translation. If the answer is right, the word will not \n appear in the tests again for some days. When the user has repeatedly answered with the right translation, the word will be marked as acquired, \n and it will no longer appear on the test. On top of that, it will appear with a grey color in the words list.</string>
+    <string name="about_tests_text">The app has a system of tests for which some words are randomly picked and the user has to provide the correct translation. If the answer is right, the word will not appear in the tests again for some days. When the user has repeatedly answered with the right translation, the word will be marked as acquired, \n and it will no longer appear on the test. On top of that, it will appear with a grey color in the words list.</string>
     <string name="about_word_groups">Word groups:</string>
     <string name="about_word_groups_text">The structure of this app is similar to a notes app, with the difference that LDB handles the words using a database, and hence you can perform actions like sorting, filtering searching and editing words.
 Each added word will posses certain properties, like translation, definition, example and example translation. Those accessible by clicking on top of the word.</string>

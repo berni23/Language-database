@@ -133,10 +133,9 @@ traducción para algunas palabras</string>
 
     <string name="about_app">Sobre la app</string>
     <string name="about_app_text">Language Database és una app de idiomas que permite que el usuario guarde su propio vocabulario en listas y pueda practicarlo. </string>
-    <string name="about_tests">Tests</string>
-    <string name="about_tests_text">La app dispone de un sistema de tests, por el cual hasta 15 palabras són seleccionadas de forma aleatoria y el usuario
+    <string name="about_tests_text">La app dispone de un sistema de tests por el cual hasta 15 palabras són seleccionadas de forma aleatoria y el usuario
       debe introducir la traducción correcta. Si la respuesta és acertada, la palabra no aparecerá en los tests durante unos días.
-        Cuando el usuario haya dado la respuesta correcta varias veces, la palabra será marcada como adquirida\n y no saldrá
+        Cuando el usuario haya dado la respuesta correcta varias veces, la palabra será marcada como adquirida y no saldrá
         más en los tests. Además, aparecerá de color gris en la lista de palabras.</string>
 
     <string name="about_word_groups">Grupos de palabras</string>

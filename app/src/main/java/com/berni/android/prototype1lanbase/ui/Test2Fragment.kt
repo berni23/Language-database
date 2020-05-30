@@ -6,6 +6,7 @@ import android.content.Context
 import android.media.MediaPlayer
 import android.os.Bundle
 import android.os.CountDownTimer
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -63,10 +64,11 @@ class Test2Fragment : BaseFragment(){
                 return@setOnClickListener
             }
 
-            val question = pickedWords[i].wordName.trim().toLowerCase(Locale.ROOT)
+            val question = pickedWords[i].trans1.trim().toLowerCase(Locale.ROOT)
             val answer = wordTest_editext.text.trim().toString().toLowerCase(Locale.ROOT)
 
-            if (question == answer) {
+            if (question==answer) {
+
 
                 mediaPlayer.start()
                 resultTest.add(true)
@@ -134,10 +136,8 @@ class Test2Fragment : BaseFragment(){
             val diff = pickedWords.size -resultTest.size
 
             if (diff >0) {
-                for (i in 1..diff) {
 
-                    resultTest.add(false)
-                }
+                for (i in 1..diff) { resultTest.add(false) }
             }
             val bundle = bundleOf("pickedWords" to pickedWords, "resultTest" to resultTest)
             navController.navigate(R.id.actionTestFinished, bundle)

@@ -124,17 +124,17 @@
     <string name="number_of_words_daily_added_n_last_100_active_days">nombre de paraules afegides diàriament</string>
     <string name="number_of_words_daily_acquired_last_100_active_days">nombre de paraules adquirides diàriament</string>
     <string name="press_for_n_monthly_view">prem per \n veure el progrés mensual</string>
-    <string name="number_of_words_monthly_added_n_last_6_active_months">nombre de paraules afegides mensualment</string>
-    <string name="number_of_words_monthly_acquired_n_last_6_active_months">nombre de paraules adquirides mensualment</string>
+    <string name="number_of_words_monthly_added_n_last_6_active_months">nª de paraules afegides al mes</string>
+    <string name="number_of_words_monthly_acquired_n_last_6_active_months">nª de paraules adquirides al mes</string>
 <string name="press_for_n_daily_view">prem per \n veure\'n el progrés diari</string>
     <string name="all_the_words_added_on_the_group">aqui pots veure totes les paraules afegides al grup.</string>
     <string name="about_app">Sobre la app</string>
     <string name="about_app_text">Language Database és una app de idiomes la qual permet que l\'usuari guardi el seu propi
 vocabulari en llistes i pugui practicar\-lo</string>
     <string name="about_tests">Tests</string>
-    <string name="about_tests_text">La app disposa d\'un sistema de tests,  amb el qual fins a 15 paraules són
+    <string name="about_tests_text">La app disposa d\'un sistema de tests, amb el qual fins a 15 paraules són
 seleccionades de forma aleatòria i l\'usuari n\'ha de proveïr la traducció correcta. Si la resposta és bona, la paraula no apareixerà als tests durant uns dies.
-Si l\'usuari n\'ha donat la resposta correcta varies vegades, la paraula serà marcada com a adquirida \n i no apareixerà més als tests.
+Si l\'usuari n\'ha donat la resposta correcta varies vegades, la paraula serà marcada com a adquirida i no apareixerà més als tests.
 A més, apareixerà de color gris a la llista de paraules.</string>
     <string name="about_word_groups">Grups de paraules</string>
     <string name="about_word_groups_text">L\'estructura de la app és similar a la de un bloc de notes,

@@ -98,7 +98,7 @@ class AllWordsFragment : BaseFragment(), KodeinAware {
             // editing the corresponding info to the textviews
 
             text_view_numWords.text = " ${recycler_view_words.adapter?.itemCount?:0} ${resources.getString(R.string.words)}"
-            lastAdditionDate?.let { text_view_lastDate.text = stringLastAdditionDate }
+            lastAdditionDate?.let {text_view_lastDate.text = stringLastAdditionDate }
             text_view_last_additions.text = lastAdditions
 
         })
