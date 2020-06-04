@@ -37,6 +37,7 @@ class Test1Fragment : BaseFragment(),KodeinAware {
         setHasOptionsMenu(true)
         return inflater.inflate(R.layout.fragment_test1, container, false)}
 
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
         super.onViewCreated(view, savedInstanceState)
