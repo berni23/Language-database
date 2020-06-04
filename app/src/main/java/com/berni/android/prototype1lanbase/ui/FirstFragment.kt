@@ -78,6 +78,7 @@ class FirstFragment : BaseFragment(),KodeinAware {
         (activity as AppCompatActivity).supportActionBar?.title = "Language Database"
         navController = Navigation.findNavController(view)
         recycler_view_cats.setHasFixedSize(true)
+        stopTimers()
         viewModel = ViewModelProvider(this, viewModelFactory).get(MainViewModel::class.java)
         runBlocking(Dispatchers.Default) {
 
@@ -280,9 +281,6 @@ class FirstFragment : BaseFragment(),KodeinAware {
                 runBlocking(Dispatchers.Default) { counter = viewModel.counterWords() }
                 if (counter < 10) { Toast.makeText(context, resources.getString(R.string.add_more_words_statistics), Toast.LENGTH_SHORT).show()
                 } else {
-
-
-
                     stopTimers()
                     navController.navigate(R.id.actionStatistics)
                 }
@@ -312,7 +310,7 @@ class FirstFragment : BaseFragment(),KodeinAware {
 
     private val timerTestColor = object : CountDownTimer(2000000, 100) {
 
-        override fun onFinish() {timer1.start()}
+        override fun onFinish() {}
         override fun onTick(millisUntilFinished: Long) {
             a += 0.1F
             b = abs(255 * kotlin.math.sin(a)).toInt()
@@ -322,23 +320,25 @@ class FirstFragment : BaseFragment(),KodeinAware {
            // Log.i("infoTag", "tick")
         }
 
-    }
+    }.start()
 
     private val timer1 = object : CountDownTimer(1000, 2000) {
 
-        override fun onFinish() {}
+        override fun onFinish() {timerTestColor.start()}
         override fun onTick(millisUntilFinished: Long) {}
-        // b = abs(255*kotlin.math.sin(a)).toInt()
+
     }
-        private fun stopTimers() {
+         fun stopTimers() {
 
             timer1.cancel()
             timerTestColor.cancel()
+            AppCompatResources.getDrawable(requireContext(), R.drawable.test_white)?.setTint(argb(255, 255, 255, 255))
 
         }
+
+
+
 }
-
-
 
 
 

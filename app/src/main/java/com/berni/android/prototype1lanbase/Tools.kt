@@ -33,7 +33,7 @@ var limitWarning = 24
 **/
 
 fun Fragment.hideKeyboard() {
-    view?.let { activity?.hideKeyboard(it) }
+    view?.let {activity?.hideKeyboard(it)}
 }
 
 

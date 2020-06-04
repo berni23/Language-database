@@ -18,6 +18,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import kotlin.coroutines.CoroutineContext
+import com.berni.android.prototype1lanbase.ui.FirstFragment.*
 
 class CatAdapter(private val cats: List<CatWords>, private val viewModel: MainViewModel, override val coroutineContext: CoroutineContext
 ) : RecyclerView.Adapter<CatAdapter.CatViewHolder>(),
@@ -67,6 +68,8 @@ class CatAdapter(private val cats: List<CatWords>, private val viewModel: MainVi
         holder.view.setOnClickListener {
 
             val bundle = bundleOf("categoryName" to cats[position].cat)
+
+
             findNavController(it).navigate(R.id.actionAddCat, bundle)
         }
 
