@@ -141,6 +141,8 @@ class SecondFragment : BaseFragment(),KodeinAware {
                     }
 
                     Test.warningTest++
+
+
                 } else {
 
                     word_editText.error = resources.getString(R.string.word_exists)
