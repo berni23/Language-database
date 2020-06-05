@@ -68,8 +68,29 @@
 
             -->
 
-
     </androidx.cardview.widget.CardView>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/VguideNext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.82" />
+
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/VguideBack"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.17" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/HguideNext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.87" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
 
@@ -79,15 +100,30 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="510dp"
         android:layout_marginStart="220dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="parent"
-        app:layout_constraintStart_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/HguideNext"
+        app:layout_constraintEnd_toStartOf="@id/VguideNext"
+        app:layout_constraintStart_toEndOf="@id/VguideNext"
+        app:layout_constraintTop_toTopOf="@id/HguideNext"
+
         android:alpha = "0.5"/>
 
-   <!-- <include
-        android:id = "@+id/toolbar"
-        layout = "@layout/toolbar"/>-->
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+
+        android:layout_width="wrap_content"
+        android:id="@+id/btn_tutorial_back"
+        android:src ="@drawable/ic_arrow_back_black_24dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="510dp"
+        android:layout_marginStart="220dp"
+        app:layout_constraintBottom_toBottomOf="@id/HguideNext"
+        app:layout_constraintEnd_toStartOf="@id/VguideBack"
+        app:layout_constraintStart_toEndOf="@id/VguideBack"
+        app:layout_constraintTop_toTopOf="@id/HguideNext"
+
+        android:alpha = "0.5"/>
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 
