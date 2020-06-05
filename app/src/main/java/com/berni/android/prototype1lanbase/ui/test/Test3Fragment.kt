@@ -1,4 +1,4 @@
-package com.berni.android.prototype1lanbase.ui
+package com.berni.android.prototype1lanbase.ui.test
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -16,6 +16,9 @@ import androidx.navigation.Navigation
 import com.berni.android.prototype1lanbase.R
 import com.berni.android.prototype1lanbase.db.Test
 import com.berni.android.prototype1lanbase.db.Word
+import com.berni.android.prototype1lanbase.ui.BaseFragment
+import com.berni.android.prototype1lanbase.ui.viewmodel.MainViewModel
+import com.berni.android.prototype1lanbase.ui.viewmodel.ViewModelFactory
 import kotlinx.coroutines.Dispatchers
 import org.kodein.di.KodeinAware
 import kotlinx.android.synthetic.main.fragment_test3.*

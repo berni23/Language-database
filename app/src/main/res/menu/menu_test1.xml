@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="com.berni.android.prototype1lanbase.ui.Test1Fragment"
+    tools:context="com.berni.android.prototype1lanbase.ui.test.Test1Fragment"
     android:id="@+id/menu_test1">
 
     <item

@@ -30,6 +30,10 @@ import com.berni.android.prototype1lanbase.db.Test
 import com.berni.android.prototype1lanbase.db.Word
 import com.berni.android.prototype1lanbase.hideKeyboard
 import com.berni.android.prototype1lanbase.limitNotAcquired
+import com.berni.android.prototype1lanbase.ui.adapter.CatAdapter
+import com.berni.android.prototype1lanbase.ui.tutorial.Tutorial
+import com.berni.android.prototype1lanbase.ui.viewmodel.MainViewModel
+import com.berni.android.prototype1lanbase.ui.viewmodel.ViewModelFactory
 import kotlinx.android.synthetic.main.fragment_first.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -92,7 +96,12 @@ class FirstFragment : BaseFragment(),KodeinAware {
             _allCats = it
             displayedCats = _allCats as MutableList<CatWords>
             recycler_view_cats.layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
-            recycler_view_cats.adapter = CatAdapter(it, viewModel, this.coroutineContext)
+            recycler_view_cats.adapter =
+                CatAdapter(
+                    it,
+                    viewModel,
+                    this.coroutineContext
+                )
         })
 
         btn_add.setOnClickListener {
@@ -198,7 +207,12 @@ class FirstFragment : BaseFragment(),KodeinAware {
                 }
 
                 recycler_view_cats.layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
-                recycler_view_cats.adapter = CatAdapter(displayedCats, viewModel, coroutineContext)
+                recycler_view_cats.adapter =
+                    CatAdapter(
+                        displayedCats,
+                        viewModel,
+                        coroutineContext
+                    )
                 return false
             }
         })
@@ -335,8 +349,6 @@ class FirstFragment : BaseFragment(),KodeinAware {
             AppCompatResources.getDrawable(requireContext(), R.drawable.test_white)?.setTint(argb(255, 255, 255, 255))
 
         }
-
-
 
 }
 

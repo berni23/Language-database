@@ -16,9 +16,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.berni.android.prototype1lanbase.*
 import com.berni.android.prototype1lanbase.db.Word
 import com.berni.android.prototype1lanbase.ui.BaseFragment
-import com.berni.android.prototype1lanbase.ui.MainViewModel
-import com.berni.android.prototype1lanbase.ui.ViewModelFactory
-import com.berni.android.prototype1lanbase.ui.WordAdapter
+import com.berni.android.prototype1lanbase.ui.viewmodel.MainViewModel
+import com.berni.android.prototype1lanbase.ui.viewmodel.ViewModelFactory
+import com.berni.android.prototype1lanbase.ui.adapter.WordAdapter
 import kotlinx.android.synthetic.main.fragment_words_list.*
 import kotlinx.coroutines.*
 import org.kodein.di.KodeinAware
@@ -69,7 +69,13 @@ class AllWordsFragment : BaseFragment(), KodeinAware {
             runBlocking(Dispatchers.Default){
 
                 displayedWords =  it
-                recycler_view_words.adapter = WordAdapter(displayedWords,viewModel,listOf<CountDownTimer>(),this.coroutineContext)
+                recycler_view_words.adapter =
+                    WordAdapter(
+                        displayedWords,
+                        viewModel,
+                        listOf<CountDownTimer>(),
+                        this.coroutineContext
+                    )
 
             }
 
@@ -122,7 +128,13 @@ class AllWordsFragment : BaseFragment(), KodeinAware {
                 }
 
                 displayedWords1 = newWordsList
-                recycler_view_words.adapter = WordAdapter(displayedWords1,viewModel,listOf<CountDownTimer>(),coroutineContext)
+                recycler_view_words.adapter =
+                    WordAdapter(
+                        displayedWords1,
+                        viewModel,
+                        listOf<CountDownTimer>(),
+                        coroutineContext
+                    )
                 return false
             }
         })
@@ -212,7 +224,13 @@ class AllWordsFragment : BaseFragment(), KodeinAware {
             }
         }
 
-        recycler_view_words.adapter = WordAdapter(displayedWords1,viewModel,listOf<CountDownTimer>(),coroutineContext)
+        recycler_view_words.adapter =
+            WordAdapter(
+                displayedWords1,
+                viewModel,
+                listOf<CountDownTimer>(),
+                coroutineContext
+            )
         return super.onOptionsItemSelected(item)
     }
 }

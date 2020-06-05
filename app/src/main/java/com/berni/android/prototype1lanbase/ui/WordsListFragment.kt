@@ -19,6 +19,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.berni.android.prototype1lanbase.*
 import com.berni.android.prototype1lanbase.db.Cat
 import com.berni.android.prototype1lanbase.db.Word
+import com.berni.android.prototype1lanbase.ui.adapter.WordAdapter
+import com.berni.android.prototype1lanbase.ui.tutorial.Tutorial
+import com.berni.android.prototype1lanbase.ui.viewmodel.MainViewModel
+import com.berni.android.prototype1lanbase.ui.viewmodel.ViewModelFactory
 import kotlinx.android.synthetic.main.fragment_words_list.*
 import kotlinx.coroutines.*
 import org.kodein.di.KodeinAware
@@ -84,7 +88,13 @@ class WordsListFragment : BaseFragment(), KodeinAware {
            runBlocking(Dispatchers.Default){
 
                displayedWords =  it.reversed()
-               recycler_view_words.adapter = WordAdapter(displayedWords,viewModel,listOf(timerToast,timerToast2,timerToast3),this.coroutineContext)
+               recycler_view_words.adapter =
+                   WordAdapter(
+                       displayedWords,
+                       viewModel,
+                       listOf(timerToast, timerToast2, timerToast3),
+                       this.coroutineContext
+                   )
 
            }
 
@@ -135,7 +145,13 @@ class WordsListFragment : BaseFragment(), KodeinAware {
                         newWordsList.add(it)
                     }
                 }
-                recycler_view_words.adapter = WordAdapter(newWordsList,viewModel,listOf(timerToast,timerToast2,timerToast3),coroutineContext)
+                recycler_view_words.adapter =
+                    WordAdapter(
+                        newWordsList,
+                        viewModel,
+                        listOf(timerToast, timerToast2, timerToast3),
+                        coroutineContext
+                    )
                 return false
             }
 
@@ -226,7 +242,13 @@ class WordsListFragment : BaseFragment(), KodeinAware {
             }
         }
 
-        recycler_view_words.adapter = WordAdapter(displayedWords1,viewModel,listOf(timerToast,timerToast2,timerToast3),coroutineContext)
+        recycler_view_words.adapter =
+            WordAdapter(
+                displayedWords1,
+                viewModel,
+                listOf(timerToast, timerToast2, timerToast3),
+                coroutineContext
+            )
         return super.onOptionsItemSelected(item)
     }
 

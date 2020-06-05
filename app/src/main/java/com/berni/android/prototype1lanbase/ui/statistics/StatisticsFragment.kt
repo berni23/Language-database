@@ -1,4 +1,4 @@
-package com.berni.android.prototype1lanbase.ui
+package com.berni.android.prototype1lanbase.ui.statistics
 
 import android.os.Bundle
 import android.view.*
@@ -16,6 +16,9 @@ import com.anychart.chart.common.dataentry.ValueDataEntry
 import com.anychart.charts.Pie
 import com.berni.android.prototype1lanbase.R
 import com.berni.android.prototype1lanbase.db.CatWords
+import com.berni.android.prototype1lanbase.ui.BaseFragment
+import com.berni.android.prototype1lanbase.ui.viewmodel.MainViewModel
+import com.berni.android.prototype1lanbase.ui.viewmodel.ViewModelFactory
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
 import org.kodein.di.KodeinAware

@@ -1,4 +1,4 @@
-package com.berni.android.prototype1lanbase.ui
+package com.berni.android.prototype1lanbase.ui.viewmodel
 
 
 import androidx.lifecycle.LiveData

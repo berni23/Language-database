@@ -1,4 +1,4 @@
-package com.berni.android.prototype1lanbase.ui
+package com.berni.android.prototype1lanbase.ui.test
 
 import android.annotation.SuppressLint
 import android.app.AlertDialog
@@ -6,7 +6,6 @@ import android.content.Context
 import android.media.MediaPlayer
 import android.os.Bundle
 import android.os.CountDownTimer
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,6 +17,7 @@ import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import com.berni.android.prototype1lanbase.R
 import com.berni.android.prototype1lanbase.db.Word
+import com.berni.android.prototype1lanbase.ui.BaseFragment
 import kotlinx.android.synthetic.main.fragment_test2.*
 import java.util.*
 import java.util.concurrent.TimeUnit

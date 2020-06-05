@@ -1,4 +1,4 @@
-package com.berni.android.prototype1lanbase.ui
+package com.berni.android.prototype1lanbase.ui.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
@@ -12,7 +12,9 @@ class ViewModelFactory(private val Repos: Repository): ViewModelProvider.NewInst
 
     @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-        return MainViewModel(Repos) as T
+        return MainViewModel(
+            Repos
+        ) as T
     }
 
 }

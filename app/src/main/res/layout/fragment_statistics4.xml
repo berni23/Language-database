@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".ui.Statistics3Fragment"
+    tools:context=".ui.statistics.Statistics3Fragment"
     android:id="@+id/frameLayout4">
 
     <androidx.appcompat.widget.LinearLayoutCompat
@@ -93,7 +93,6 @@
             android:layout_width="wrap_content"
             android:fontFamily="@font/lato_light_italic"
             android:text = "@string/number_of_words_monthly_added_n_last_6_active_months"
-            android:visibility="invisible"
             android:layout_marginTop="5dp"
             android:layout_marginBottom="5dp"
             android:layout_marginStart="7dp"

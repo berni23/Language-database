@@ -1,10 +1,11 @@
-package com.berni.android.prototype1lanbase.ui
+package com.berni.android.prototype1lanbase.ui.tutorial
 
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.berni.android.prototype1lanbase.R
+import com.berni.android.prototype1lanbase.ui.MainActivity
 import kotlinx.android.synthetic.main.activity_tutorial.*
 
 class TutorialActivity : AppCompatActivity() {
@@ -22,14 +23,11 @@ class TutorialActivity : AppCompatActivity() {
         btn_tutorial_back.setOnClickListener { messages(-1) }
     }
 
-    override fun onBackPressed() {
-        finish()
-    }
+    override fun onBackPressed() { finish() }
 
    private fun messages(count:Int) {
 
     if (msg == 0) {
-
 
         if (count>0) {
 
@@ -41,6 +39,7 @@ class TutorialActivity : AppCompatActivity() {
         }
 
     } else if (msg == 1) {
+
 
         msg+=count
         tutorial_t1.text = resources.getString(R.string.tutorial_m4)
@@ -73,8 +72,6 @@ class TutorialActivity : AppCompatActivity() {
         tutorial_t3.textSize = 30F
 
     }
-
-        //else if (msg<0) { msg=0 }
 
      else {
 

@@ -1,4 +1,4 @@
-package com.berni.android.prototype1lanbase.ui
+package com.berni.android.prototype1lanbase.ui.adapter
 
 import android.annotation.SuppressLint
 import android.app.AlertDialog
@@ -13,6 +13,7 @@ import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.berni.android.prototype1lanbase.R
 import com.berni.android.prototype1lanbase.db.Word
+import com.berni.android.prototype1lanbase.ui.viewmodel.MainViewModel
 import kotlinx.android.synthetic.main.adapter_word.view.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -27,7 +28,9 @@ class WordAdapter(private val words: List<Word>, private val viewModel: MainView
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): WordViewHolder {
 
-        return WordViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.adapter_word,parent,false))
+        return WordViewHolder(
+            LayoutInflater.from(parent.context).inflate(R.layout.adapter_word, parent, false)
+        )
 
     }
 

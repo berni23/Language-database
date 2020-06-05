@@ -11,6 +11,8 @@ import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import com.berni.android.prototype1lanbase.R
 import com.berni.android.prototype1lanbase.db.Word
+import com.berni.android.prototype1lanbase.ui.viewmodel.MainViewModel
+import com.berni.android.prototype1lanbase.ui.viewmodel.ViewModelFactory
 import kotlinx.android.synthetic.main.fragment_edit_word.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

@@ -2,7 +2,6 @@ package com.berni.android.prototype1lanbase.ui
 
 import android.app.AlertDialog
 import android.graphics.drawable.AnimationDrawable
-import android.os.Build
 import android.os.Bundle
 import android.view.*
 import android.widget.Toast
@@ -18,6 +17,8 @@ import com.berni.android.prototype1lanbase.db.Test
 import com.berni.android.prototype1lanbase.db.Word
 import com.berni.android.prototype1lanbase.limitNotAcquired
 import com.berni.android.prototype1lanbase.limitWarning
+import com.berni.android.prototype1lanbase.ui.viewmodel.MainViewModel
+import com.berni.android.prototype1lanbase.ui.viewmodel.ViewModelFactory
 import kotlinx.android.synthetic.main.fragment_second.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

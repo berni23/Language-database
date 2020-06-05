@@ -123,7 +123,7 @@
 
     <fragment
         android:id="@+id/testFragment1"
-        android:name="com.berni.android.prototype1lanbase.ui.Test1Fragment"
+        android:name="com.berni.android.prototype1lanbase.ui.test.Test1Fragment"
         android:label="fragment_test1"
         tools:layout="@layout/fragment_test1" >
 
@@ -140,7 +140,7 @@
 
     <fragment
         android:id="@+id/test2Fragment"
-        android:name="com.berni.android.prototype1lanbase.ui.Test2Fragment"
+        android:name="com.berni.android.prototype1lanbase.ui.test.Test2Fragment"
         android:label="fragment_test2"
         tools:layout="@layout/fragment_test2">
 
@@ -166,7 +166,7 @@
 
     <fragment
         android:id="@+id/test3Fragment"
-        android:name="com.berni.android.prototype1lanbase.ui.Test3Fragment"
+        android:name="com.berni.android.prototype1lanbase.ui.test.Test3Fragment"
         android:label="fragment_test3"
         tools:layout="@layout/fragment_test3" >
         <action
@@ -208,10 +208,9 @@
     </fragment>
 
 
-
     <fragment
         android:id="@+id/statisticsFragment"
-        android:name="com.berni.android.prototype1lanbase.ui.StatisticsFragment"
+        android:name="com.berni.android.prototype1lanbase.ui.statistics.StatisticsFragment"
         android:label="fragment_statistics"
         tools:layout="@layout/fragment_statistics" >
 
@@ -230,7 +229,7 @@
     </fragment>
     <fragment
         android:id="@+id/statistics3Fragment"
-        android:name="com.berni.android.prototype1lanbase.ui.Statistics3Fragment"
+        android:name="com.berni.android.prototype1lanbase.ui.statistics.Statistics3Fragment"
         android:label="fragment_statistics3"
         tools:layout="@layout/fragment_statistics3" >
         <action
@@ -242,7 +241,7 @@
     </fragment>
     <fragment
         android:id="@+id/statistics4Fragment"
-        android:name="com.berni.android.prototype1lanbase.ui.Statistics4Fragment"
+        android:name="com.berni.android.prototype1lanbase.ui.statistics.Statistics4Fragment"
         android:label="Statistics4Fragment" >
         <action
             android:id="@+id/actionBackToMainS4"

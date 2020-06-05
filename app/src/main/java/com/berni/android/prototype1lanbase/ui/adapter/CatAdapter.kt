@@ -1,4 +1,4 @@
-package com.berni.android.prototype1lanbase.ui
+package com.berni.android.prototype1lanbase.ui.adapter
 
 import android.annotation.SuppressLint
 import android.app.AlertDialog
@@ -18,14 +18,16 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import kotlin.coroutines.CoroutineContext
-import com.berni.android.prototype1lanbase.ui.FirstFragment.*
+import com.berni.android.prototype1lanbase.ui.viewmodel.MainViewModel
 
 class CatAdapter(private val cats: List<CatWords>, private val viewModel: MainViewModel, override val coroutineContext: CoroutineContext
 ) : RecyclerView.Adapter<CatAdapter.CatViewHolder>(),
     View.OnCreateContextMenuListener, CoroutineScope {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CatViewHolder {
-        return CatViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.adapter_cat, parent, false))
+        return CatViewHolder(
+            LayoutInflater.from(parent.context).inflate(R.layout.adapter_cat, parent, false)
+        )
 
     }
 
