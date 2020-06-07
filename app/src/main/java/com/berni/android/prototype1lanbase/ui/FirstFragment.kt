@@ -40,6 +40,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.closestKodein
+import org.kodein.di.generic.contextFinder
 import org.kodein.di.generic.instance
 import java.text.SimpleDateFormat
 import java.util.*
@@ -72,7 +73,7 @@ class FirstFragment : BaseFragment(),KodeinAware {
 
     ): View? {
 
-        setHasOptionsMenu(true)
+
         return inflater.inflate(R.layout.fragment_first, container, false)
     }
 
@@ -80,6 +81,7 @@ class FirstFragment : BaseFragment(),KodeinAware {
         super.onViewCreated(view, savedInstanceState)
 
         (activity as AppCompatActivity).supportActionBar?.title = "Language Database"
+        setHasOptionsMenu(true)
         navController = Navigation.findNavController(view)
         recycler_view_cats.setHasFixedSize(true)
         stopTimers()
@@ -96,20 +98,14 @@ class FirstFragment : BaseFragment(),KodeinAware {
             _allCats = it
             displayedCats = _allCats as MutableList<CatWords>
             recycler_view_cats.layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
-            recycler_view_cats.adapter =
-                CatAdapter(
-                    it,
-                    viewModel,
-                    this.coroutineContext
-                )
+            recycler_view_cats.adapter = CatAdapter(it, viewModel, this.coroutineContext)
         })
 
         btn_add.setOnClickListener {
             editText_newCat.text.clear()
             editText_newCat.requestFocus()
             newCatName = null
-            val imm: InputMethodManager? =
-                getSystemService<InputMethodManager>(it.context, InputMethodManager::class.java)
+            val imm: InputMethodManager? = getSystemService<InputMethodManager>(it.context, InputMethodManager::class.java)
             imm!!.showSoftInput(editText_newCat, InputMethodManager.SHOW_IMPLICIT)
             recycler_view_newCat.visibility = View.VISIBLE
 
@@ -156,11 +152,12 @@ class FirstFragment : BaseFragment(),KodeinAware {
                 toast.show()
                 arr.y = 100F
                 arr.rotation = 180F
-            } else {
-                Toast.makeText(context, " ${resources.getString(R.string.category)} $newCatName" + "  ${resources.getString(
-                        R.string.successfully_created
-                    )}", Toast.LENGTH_SHORT).show()
             }
+
+            else { Toast.makeText(context, " ${resources.getString(R.string.category)} $newCatName" + "  ${resources.getString(
+                        R.string.successfully_created
+                    )}", Toast.LENGTH_SHORT).show() }
+
             hideKeyboard()
         }
 
@@ -324,17 +321,19 @@ class FirstFragment : BaseFragment(),KodeinAware {
 
     private val timerTestColor = object : CountDownTimer(2000000, 100) {
 
-        override fun onFinish() {}
+        override fun onFinish() {
+
+        }
         override fun onTick(millisUntilFinished: Long) {
             a += 0.1F
             b = abs(255 * kotlin.math.sin(a)).toInt()
             // Log.i("infoTag",b.toString())
-            AppCompatResources.getDrawable(requireContext(), R.drawable.test_white)?.setTint(argb(255, 255, b, b))
+            AppCompatResources.getDrawable(context!!,R.drawable.test_white)?.setTint(argb(255, 255, b, b))
             action?.let { action!!.setIcon(R.drawable.test_white) }
            // Log.i("infoTag", "tick")
         }
 
-    }.start()
+    }
 
     private val timer1 = object : CountDownTimer(1000, 2000) {
 
