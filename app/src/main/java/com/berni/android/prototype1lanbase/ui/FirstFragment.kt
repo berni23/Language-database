@@ -40,7 +40,6 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.closestKodein
-import org.kodein.di.generic.contextFinder
 import org.kodein.di.generic.instance
 import java.text.SimpleDateFormat
 import java.util.*
@@ -72,7 +71,6 @@ class FirstFragment : BaseFragment(),KodeinAware {
         savedInstanceState: Bundle?
 
     ): View? {
-
 
         return inflater.inflate(R.layout.fragment_first, container, false)
     }
@@ -154,7 +152,7 @@ class FirstFragment : BaseFragment(),KodeinAware {
                 arr.rotation = 180F
             }
 
-            else { Toast.makeText(context, " ${resources.getString(R.string.category)} $newCatName" + "  ${resources.getString(
+            else {Toast.makeText(context, " ${resources.getString(R.string.category)} $newCatName" + "  ${resources.getString(
                         R.string.successfully_created
                     )}", Toast.LENGTH_SHORT).show() }
 
@@ -231,7 +229,6 @@ class FirstFragment : BaseFragment(),KodeinAware {
                 var _allWords = listOf<Word>()
                 viewModel = ViewModelProvider(this, viewModelFactory).get(MainViewModel::class.java)
                 runBlocking(Dispatchers.Default) { _allWords = viewModel.getAllWords() }
-                //Test.number = 0 //  temporary
                 Test.setCounter()
                 val wordsNotAcquired = _allWords.filter { !it.acquired } // words yet to be acquired by user's memory
                 var wordsForTest = listOf<Word>()
@@ -270,10 +267,8 @@ class FirstFragment : BaseFragment(),KodeinAware {
                     } else {
 
                         stopTimers()
-                        AppCompatResources.getDrawable(requireContext(), R.drawable.test_white)
-                            ?.setTint(argb(255, 255, 255, 255))
+                        AppCompatResources.getDrawable(requireContext(), R.drawable.test_white)?.setTint(argb(255, 255, 255, 255))
                         action?.let {action!!.setIcon(R.drawable.test_white) }
-
                         val bundle = bundleOf("listWords" to wordsForTest)
                         navController.navigate(R.id.actionTest1, bundle)
                     }
@@ -327,10 +322,9 @@ class FirstFragment : BaseFragment(),KodeinAware {
         override fun onTick(millisUntilFinished: Long) {
             a += 0.1F
             b = abs(255 * kotlin.math.sin(a)).toInt()
-            // Log.i("infoTag",b.toString())
             AppCompatResources.getDrawable(context!!,R.drawable.test_white)?.setTint(argb(255, 255, b, b))
             action?.let { action!!.setIcon(R.drawable.test_white) }
-           // Log.i("infoTag", "tick")
+
         }
 
     }
@@ -341,7 +335,7 @@ class FirstFragment : BaseFragment(),KodeinAware {
         override fun onTick(millisUntilFinished: Long) {}
 
     }
-         fun stopTimers() {
+         private fun stopTimers() {
 
             timer1.cancel()
             timerTestColor.cancel()
