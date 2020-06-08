@@ -155,7 +155,6 @@ class FirstFragment : BaseFragment(),KodeinAware {
             else {Toast.makeText(context, " ${resources.getString(R.string.category)} $newCatName" + "  ${resources.getString(
                         R.string.successfully_created
                     )}", Toast.LENGTH_SHORT).show() }
-
             hideKeyboard()
         }
 
@@ -202,12 +201,7 @@ class FirstFragment : BaseFragment(),KodeinAware {
                 }
 
                 recycler_view_cats.layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
-                recycler_view_cats.adapter =
-                    CatAdapter(
-                        displayedCats,
-                        viewModel,
-                        coroutineContext
-                    )
+                recycler_view_cats.adapter = CatAdapter(displayedCats, viewModel, coroutineContext)
                 return false
             }
         })

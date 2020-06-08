@@ -1,6 +1,7 @@
 package com.berni.android.prototype1lanbase.ui
 
 import android.annotation.SuppressLint
+import android.content.ClipData
 import android.content.Context
 import android.os.Bundle
 import android.os.CountDownTimer
@@ -23,11 +24,13 @@ import com.berni.android.prototype1lanbase.ui.adapter.WordAdapter
 import com.berni.android.prototype1lanbase.ui.tutorial.Tutorial
 import com.berni.android.prototype1lanbase.ui.viewmodel.MainViewModel
 import com.berni.android.prototype1lanbase.ui.viewmodel.ViewModelFactory
-import kotlinx.android.synthetic.main.fragment_words_list.*
-import kotlinx.coroutines.*
+import kotlinx.android.synthetic.main.fragment_all_words.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.runBlocking
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.closestKodein
 import org.kodein.di.generic.instance
+
 
 /**
  * A simple [Fragment] subclass.
@@ -55,7 +58,7 @@ class WordsListFragment : BaseFragment(), KodeinAware {
 
         setHasOptionsMenu(true)
         cat = arguments?.get("cat") as Cat
-        return inflater.inflate(R.layout.fragment_words_list, container, false)
+        return inflater.inflate(R.layout.fragment_all_words, container, false)
     }
 
     @SuppressLint("SetTextI18n")
@@ -63,12 +66,13 @@ class WordsListFragment : BaseFragment(), KodeinAware {
         super.onViewCreated(view, savedInstanceState)
 
 
+        (activity as AppCompatActivity).supportActionBar?.title = cat.catName
+        activity?.window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_NOTHING)
+
         navController = Navigation.findNavController(view)
         recycler_view_words.setHasFixedSize(true)
         viewModel = ViewModelProvider(this, viewModelFactory).get(MainViewModel::class.java)
 
-
-        (activity as AppCompatActivity).supportActionBar?.title = cat.catName
         if(firstView) {
 
            // resources.getString(R.string.last_added_on)
@@ -131,6 +135,9 @@ class WordsListFragment : BaseFragment(), KodeinAware {
         inflater.inflate(R.menu.menu_words, menu)
 
         val searchView: SearchView = menu.findItem(R.id.item_search).actionView as SearchView
+
+        searchView.maxWidth = android.R.attr.width
+
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 return false
@@ -139,19 +146,8 @@ class WordsListFragment : BaseFragment(), KodeinAware {
             override fun onQueryTextChange(newText: String?): Boolean {
                 val newWordsList = mutableListOf<Word>()
 
-                displayedWords1.forEach {
-
-                    if (it.wordName.startsWith(newText!!)) {
-                        newWordsList.add(it)
-                    }
-                }
-                recycler_view_words.adapter =
-                    WordAdapter(
-                        newWordsList,
-                        viewModel,
-                        listOf(timerToast, timerToast2, timerToast3),
-                        coroutineContext
-                    )
+                displayedWords1.forEach { if (it.wordName.startsWith(newText!!)) { newWordsList.add(it) } }
+                recycler_view_words.adapter = WordAdapter(newWordsList, viewModel, listOf(timerToast, timerToast2, timerToast3), coroutineContext)
                 return false
             }
 

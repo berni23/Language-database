@@ -2,6 +2,8 @@ package com.berni.android.prototype1lanbase
 
 import android.app.Activity
 import android.content.Context
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import androidx.fragment.app.Fragment
@@ -140,6 +142,22 @@ fun sortByLength(displayedWords: List<Word>) : List<Word> {
 
     val displayed = displayedWords.toTypedArray()
     return displayed.sortedBy {it.wordName.length}
+
+}
+
+// disable visibility items when using searchbar
+
+
+fun setItemsVisibility(menu: Menu, no: MenuItem, bool: Boolean) {
+
+    val size = menu.size()-1
+    for  (i in  0..size) {
+
+        val item =  menu.getItem(i)
+
+        if ( item!=no) { item.isVisible = bool }
+
+    }
 
 }
 

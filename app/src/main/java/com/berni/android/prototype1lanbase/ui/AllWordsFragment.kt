@@ -1,4 +1,3 @@
-
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.os.CountDownTimer
@@ -16,14 +15,16 @@ import androidx.recyclerview.widget.RecyclerView
 import com.berni.android.prototype1lanbase.*
 import com.berni.android.prototype1lanbase.db.Word
 import com.berni.android.prototype1lanbase.ui.BaseFragment
+import com.berni.android.prototype1lanbase.ui.adapter.WordAdapter
 import com.berni.android.prototype1lanbase.ui.viewmodel.MainViewModel
 import com.berni.android.prototype1lanbase.ui.viewmodel.ViewModelFactory
-import com.berni.android.prototype1lanbase.ui.adapter.WordAdapter
-import kotlinx.android.synthetic.main.fragment_words_list.*
-import kotlinx.coroutines.*
+import kotlinx.android.synthetic.main.fragment_all_words.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.runBlocking
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.closestKodein
 import org.kodein.di.generic.instance
+
 
 /**
  * A simple [Fragment] subclass.
@@ -69,13 +70,7 @@ class AllWordsFragment : BaseFragment(), KodeinAware {
             runBlocking(Dispatchers.Default){
 
                 displayedWords =  it
-                recycler_view_words.adapter =
-                    WordAdapter(
-                        displayedWords,
-                        viewModel,
-                        listOf<CountDownTimer>(),
-                        this.coroutineContext
-                    )
+                recycler_view_words.adapter = WordAdapter(displayedWords, viewModel, listOf<CountDownTimer>(), this.coroutineContext)
 
             }
 
@@ -90,15 +85,9 @@ class AllWordsFragment : BaseFragment(), KodeinAware {
 
             lastAdditionDate = displayedWords.getOrNull(0)?.date
             var lastAdditions =  resources.getString(R.string.last_additions)
-            lastAdded.forEach {
-                if (it?.wordName != null) {
-                    lastAdditions += " ${it.wordName},"
-                }
-            }
+            lastAdded.forEach { if (it?.wordName != null) { lastAdditions += " ${it.wordName}," } }
             lastAdditions = lastAdditions.dropLast(1)  // drop the last comma of the string
-            if (lastAdded.elementAt(0)?.wordName == null) {
-                lastAdditions =  resources.getString(R.string.no_words_added_yet)
-            }
+            if (lastAdded.elementAt(0)?.wordName == null) { lastAdditions =  resources.getString(R.string.no_words_added_yet) }
             val stringLastAdditionDate = "${resources.getString(R.string.last_added_on)} $lastAdditionDate"
 
             // editing the corresponding info to the textviews
@@ -113,31 +102,30 @@ class AllWordsFragment : BaseFragment(), KodeinAware {
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.menu_words, menu)
 
-        val searchView: SearchView = menu.findItem(R.id.item_search).actionView as SearchView
+        val searchItem = menu.findItem(R.id.item_search)
+
+        val searchView: SearchView = searchItem.actionView as SearchView
+
+        searchView.setOnSearchClickListener { setItemsVisibility(menu, searchItem, false) }
+
+        searchView.setOnCloseListener { setItemsVisibility(menu, searchItem, true)
+            false
+        }
+
+
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-            override fun onQueryTextSubmit(query: String?): Boolean {
-                return false
-            }
+            override fun onQueryTextSubmit(query: String?): Boolean { return false }
 
             override fun onQueryTextChange(newText: String?): Boolean {
                 val newWordsList = mutableListOf<Word>()
 
-                displayedWords1.forEach {
-
-                    if (it.wordName.startsWith(newText!!)) { newWordsList.add(it) }
-                }
-
+                displayedWords1.forEach { if (it.wordName.startsWith(newText!!)) { newWordsList.add(it) } }
                 displayedWords1 = newWordsList
-                recycler_view_words.adapter =
-                    WordAdapter(
-                        displayedWords1,
-                        viewModel,
-                        listOf<CountDownTimer>(),
-                        coroutineContext
-                    )
+                recycler_view_words.adapter =WordAdapter(displayedWords1, viewModel, listOf<CountDownTimer>(), coroutineContext)
                 return false
             }
         })
+
 
         return super.onCreateOptionsMenu(menu, inflater)
     }
@@ -224,15 +212,11 @@ class AllWordsFragment : BaseFragment(), KodeinAware {
             }
         }
 
-        recycler_view_words.adapter =
-            WordAdapter(
-                displayedWords1,
-                viewModel,
-                listOf<CountDownTimer>(),
-                coroutineContext
-            )
+        recycler_view_words.adapter = WordAdapter(displayedWords1, viewModel, listOf<CountDownTimer>(), coroutineContext)
         return super.onOptionsItemSelected(item)
     }
+
 }
+
 
 
