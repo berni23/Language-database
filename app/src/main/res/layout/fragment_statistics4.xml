@@ -32,7 +32,6 @@
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 
-
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/HNoAc"
         android:layout_width="wrap_content"
@@ -92,7 +91,7 @@
             android:id="@+id/labelsG4"
             android:layout_width="wrap_content"
             android:fontFamily="@font/lato_light_italic"
-            android:text = "@string/number_of_words_monthly_added_n_last_6_active_months"
+            android:text = "@string/number_of_words_monthly_acquired_n_last_6_active_months"
             android:layout_marginTop="5dp"
             android:layout_marginBottom="5dp"
             android:layout_marginStart="7dp"

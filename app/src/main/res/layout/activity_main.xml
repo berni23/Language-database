@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:windowSoftInputMode="adjustResize"
     tools:context=".ui.MainActivity">
 
     <com.google.android.material.appbar.AppBarLayout
@@ -17,8 +18,5 @@
     <include
         android:id = "@+id/toolbar"
         layout = "@layout/toolbar"/>
-
-
-
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

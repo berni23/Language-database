@@ -6,6 +6,7 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.view.inputmethod.InputMethodManager
+import androidx.core.content.ContextCompat.getSystemService
 import androidx.fragment.app.Fragment
 import com.berni.android.prototype1lanbase.db.Word
 import java.util.*
@@ -38,11 +39,26 @@ fun Fragment.hideKeyboard() {
     view?.let {activity?.hideKeyboard(it)}
 }
 
+/**
+ * fun Fragment.showKeyboard() {
+
+    view?.let{activity?.showKeyboard(it)}
+}
+
+**/
 
 fun Context.hideKeyboard(view: View) {
     val inputMethodManager = getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
     inputMethodManager.hideSoftInputFromWindow(view.windowToken, 0)
 }
+
+fun Context.showKeyboard(view: View) {
+    val inputMethodManager = getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
+    inputMethodManager.showSoftInput(view, 0)
+}
+
+
+
 
 /**
 -----------------------------------
@@ -191,3 +207,6 @@ return date?.toString()
 }
 }
  **/
+
+
+

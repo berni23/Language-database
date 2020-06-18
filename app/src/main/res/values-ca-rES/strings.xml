@@ -55,11 +55,11 @@
     <string name="m1_tutorial">Sembla que és el teu primer com fent servir Language Database.</string>
     <string name="m2_tutorial">Deixa\'m que te\'n expliqui el funcionament! :)</string>
     <string name="tutorial_m3">Language Database és una app dissenyada per tal de guardar i practicar vocabulari creant grups de paraules, afegint-hi informació i realitzant tests.</string>
-    <string name = "tutorial_m4">Per a progressar de forma correcta, haurás de mantenir un equilibri entre afegir paraules y realitzar tests. </string>
+    <string name = "tutorial_m4">Per a progressar de forma correcta, haurás de mantenir un equilibri entre afegir paraules i realitzar tests. </string>
     <string name = "tutorial_m5">Cada paraula té dos estats: adquirida o no adquirida.</string>
     <string name = "tutorial_m6">Quan al fer tests,  tradueeixis de forma correcta una paraula varies vegades en dies diferents, aquesta pasará al estat de "adquirida".</string>
     <string name = "tutorial_m7">Podrás fer un test prement la opció "T" a la part superior dreta del menú.</string>
-    <string name = "tutorial_m8">En total, no pots tenir més de 120 paraules en l\'estat de "no adquirida", y per tant, hauràs d\'anar fent tests
+    <string name = "tutorial_m8">En total, no pots tenir més de 120 paraules en l\'estat de "no adquirida", i per tant, hauràs d\'anar fent tests
      i afegint paraules de forma simultànea.</string>
     <string name = "tutorial_m9"> Quan afegeixis una paraula, haurás de donar-ne també la traducció. De forma opcional, podrás també
     donar una definició i un exemple d\'ús. Tota aquesta informació podrá ser editada més endavant.</string>

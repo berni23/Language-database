@@ -65,10 +65,11 @@ class TutorialActivity : AppCompatActivity() {
 
     } else if (msg == 5) {
 
+
         msg += count
         tutorial_t1.text = ""
-        tutorial_t2.text = ""
-        tutorial_t3.text = resources.getString(R.string.tutorial_m10)
+        tutorial_t3.text = ""
+        tutorial_t2.text = resources.getString(R.string.tutorial_m10)
         tutorial_t3.textSize = 30F
 
     }

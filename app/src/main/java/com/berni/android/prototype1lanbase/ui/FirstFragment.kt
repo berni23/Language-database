@@ -30,6 +30,7 @@ import com.berni.android.prototype1lanbase.db.Test
 import com.berni.android.prototype1lanbase.db.Word
 import com.berni.android.prototype1lanbase.hideKeyboard
 import com.berni.android.prototype1lanbase.limitNotAcquired
+import com.berni.android.prototype1lanbase.setItemsVisibility
 import com.berni.android.prototype1lanbase.ui.adapter.CatAdapter
 import com.berni.android.prototype1lanbase.ui.tutorial.Tutorial
 import com.berni.android.prototype1lanbase.ui.viewmodel.MainViewModel
@@ -176,11 +177,20 @@ class FirstFragment : BaseFragment(),KodeinAware {
     }
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.menu_main, menu)
-        val searchView: SearchView = menu.findItem(R.id.item_search).actionView as SearchView
-        action = menu.findItem(R.id.item_test)
 
-        //if (action == null) {  Log.i("infoTag","nullMenu") }
-        //else{ Log.i("infoTag","NotnullMenu") }
+        val testItem = menu.findItem(R.id.item_test)
+
+        action = testItem
+
+        val searchItem = menu.findItem(R.id.item_search)
+        val searchView: SearchView = searchItem.actionView as SearchView
+
+        searchView.setOnSearchClickListener { setItemsVisibility(menu, searchItem, false) }
+
+        searchView.setOnCloseListener { setItemsVisibility(menu, searchItem, true)
+            false
+        }
+
 
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
 

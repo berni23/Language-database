@@ -1,7 +1,6 @@
 package com.berni.android.prototype1lanbase.ui
 
 import android.annotation.SuppressLint
-import android.content.ClipData
 import android.content.Context
 import android.os.Bundle
 import android.os.CountDownTimer
@@ -58,6 +57,7 @@ class WordsListFragment : BaseFragment(), KodeinAware {
 
         setHasOptionsMenu(true)
         cat = arguments?.get("cat") as Cat
+
         return inflater.inflate(R.layout.fragment_all_words, container, false)
     }
 
@@ -134,9 +134,17 @@ class WordsListFragment : BaseFragment(), KodeinAware {
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.menu_words, menu)
 
-        val searchView: SearchView = menu.findItem(R.id.item_search).actionView as SearchView
 
-        searchView.maxWidth = android.R.attr.width
+        val searchItem = menu.findItem(R.id.item_search)
+
+        val searchView: SearchView = searchItem.actionView as SearchView
+
+        searchView.setOnSearchClickListener { setItemsVisibility(menu, searchItem, false) }
+
+        searchView.setOnCloseListener { setItemsVisibility(menu, searchItem, true)
+            false
+        }
+
 
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {

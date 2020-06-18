@@ -1,22 +1,24 @@
 package com.berni.android.prototype1lanbase.ui
 
+import android.app.Activity
 import android.app.AlertDialog
+import android.content.Context
 import android.graphics.drawable.AnimationDrawable
 import android.os.Bundle
 import android.view.*
+import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat.getSystemService
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
-import com.berni.android.prototype1lanbase.R
+import com.berni.android.prototype1lanbase.*
 import com.berni.android.prototype1lanbase.db.Cat
 import com.berni.android.prototype1lanbase.db.Test
 import com.berni.android.prototype1lanbase.db.Word
-import com.berni.android.prototype1lanbase.limitNotAcquired
-import com.berni.android.prototype1lanbase.limitWarning
 import com.berni.android.prototype1lanbase.ui.viewmodel.MainViewModel
 import com.berni.android.prototype1lanbase.ui.viewmodel.ViewModelFactory
 import kotlinx.android.synthetic.main.fragment_second.*
@@ -28,6 +30,7 @@ import org.kodein.di.android.x.closestKodein
 import org.kodein.di.generic.instance
 import java.text.SimpleDateFormat
 import java.util.*
+
 
 /**
  * A simple [Fragment] subclass as the second destination in the navigation.
@@ -54,6 +57,7 @@ class SecondFragment : BaseFragment(),KodeinAware {
         savedInstanceState: Bundle?
     ): View? {
 
+
         setHasOptionsMenu(true)
         return inflater.inflate(R.layout.fragment_second, container, false)
     }
@@ -62,6 +66,9 @@ class SecondFragment : BaseFragment(),KodeinAware {
         super.onViewCreated(view, savedInstanceState)
 
         navController = Navigation.findNavController(view)
+
+        word_editText.requestFocus()
+
         (activity as AppCompatActivity).supportActionBar?.title = cat.catName
         viewModel = ViewModelProvider(this, viewModelFactory).get(MainViewModel::class.java)
         runBlocking(Dispatchers.Default){
@@ -98,7 +105,8 @@ class SecondFragment : BaseFragment(),KodeinAware {
                 }.create().show()
             } else {
 
-                //TODO() http request for auto -completion of all the blanks except for the 'word'
+                //TODO() http request for auto -completion of all the blanks except for the 'word' //
+
                 // required blanks
 
                 val theWord = word_editText.text.toString().trim()
@@ -184,10 +192,14 @@ class SecondFragment : BaseFragment(),KodeinAware {
            R.id.item_toWordsList -> {
 
                val bundle = bundleOf("cat" to cat)
+               hideKeyboard()
                navController.navigate(R.id.actionWordsList, bundle)
            }
 
-               R.id.item_back -> {navController.popBackStack()}
+               R.id.item_back -> {
+
+                   hideKeyboard()
+                   navController.popBackStack()}
            }
        return super.onOptionsItemSelected(item)
    }

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:windowSoftInputMode="adjustResize"
+    android:windowSoftInputMode="adjustPan"
     tools:context=".ui.SecondFragment">
 
     <androidx.constraintlayout.widget.Guideline
@@ -213,20 +213,6 @@
         </LinearLayout>
     </ScrollView>
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-
-        android:id="@+id/edit_btn_save"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:clickable="true"
-        android:focusable="true"
-        android:src="@drawable/ic_save_black_24dp"
-        app:backgroundTint="@color/colorButton3"
-        app:layout_constraintBottom_toBottomOf="@id/HguideBtn"
-        app:layout_constraintEnd_toStartOf="@id/VguideBtn"
-        app:layout_constraintStart_toEndOf="@id/VguideBtn"
-        app:layout_constraintTop_toTopOf="@id/HguideBtn"/>
-
     <!--tools:context=".ui.EditWordFragment">-->
 
     <TextView
@@ -245,5 +231,19 @@
         app:layout_constraintStart_toEndOf="@id/VguideBtn"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+
+        android:id="@+id/edit_btn_save"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:focusable="true"
+        android:src="@drawable/ic_save_black_24dp"
+        app:backgroundTint="@color/colorButton3"
+        app:layout_constraintBottom_toBottomOf="@id/HguideBtn"
+        app:layout_constraintEnd_toStartOf="@id/VguideBtn"
+        app:layout_constraintStart_toEndOf="@id/VguideBtn"
+        app:layout_constraintTop_toTopOf="@id/HguideBtn"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
