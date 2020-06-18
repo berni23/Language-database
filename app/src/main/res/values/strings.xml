@@ -58,7 +58,7 @@
     <string name="how_the_app_works">How the app works</string>
     <string name="m2_tutorial">Let me explain you how it works! \n:)</string>
     <string name="hi">HI!</string>
-    <string name="m1_tutorial">It seems it\'s your first time using Language Database</string>
+    <string name="m1_tutorial">It seems it\'s your first time using Language Database.</string>
     <string name=  "tutorial_m3">This is a basic language app, where you can store and practice with your own vocabulary by creating groups of words, adding info and testing it. \n \n let\'s get started!!</string>
     <string name = "tutorial_m4">In order to make progress, you will have to maintain an equilibrium between adding words and making tests. </string>
     <string name = "tutorial_m5">Each word can have two states: acquired or not acquired.</string>
