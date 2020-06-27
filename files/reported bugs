@@ -1,6 +1,14 @@
 
 
 
-1 -  spanish string " diviertete con el prendizaje!"
 
+1 - Button "save" not always pushed up on keyboard on. Stops being pushed up when coming back from wordsListFragment, 
 
+    similar happens whenperforming a test.
+    
+    
+    
+2- For some phones is difficult or even not possible to gain focus on the example edit text box for the second fragment.
+    
+    
+    

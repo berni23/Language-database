@@ -10,6 +10,7 @@ import com.berni.android.prototype1lanbase.ui.tutorial.Tutorial
 import com.berni.android.prototype1lanbase.ui.tutorial.TutorialActivity
 import com.berni.android.prototype1lanbase.ui.viewmodel.MainViewModel
 import com.berni.android.prototype1lanbase.ui.viewmodel.ViewModelFactory
+import com.jakewharton.threetenabp.AndroidThreeTen
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
 import org.kodein.di.KodeinAware
@@ -20,12 +21,11 @@ import org.kodein.di.generic.instance
 class MainActivity : AppCompatActivity(),KodeinAware {
 
          override val kodein by closestKodein()
-
          val limitNotAcquired = 120
-
          private val viewModelFactory: ViewModelFactory by instance<ViewModelFactory>()
+         override fun onCreate(savedInstanceState: Bundle?) {
 
-        override fun onCreate(savedInstanceState: Bundle?) {
+        AndroidThreeTen.init( this)
         super.onCreate(savedInstanceState)
         var bool : Boolean = Tutorial.firstTime
         val viewModel = ViewModelProvider(this, viewModelFactory).get(MainViewModel::class.java)

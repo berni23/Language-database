@@ -1,11 +1,17 @@
 package com.berni.android.prototype1lanbase.db
 
+import org.threeten.bp.LocalDateTime
+import org.threeten.bp.ZoneId
+
 
 object Test {
 
+
+
+
     fun setCounter() {
 
-         val time2 =  android.icu.util.Calendar.DATE
+         val time2 =   LocalDateTime.now(ZoneId.of("Europe/Paris"))
 
          if(time!=time2)   {
             time = time2
@@ -16,7 +22,7 @@ object Test {
     var acquired :    Int = 0
     var warningTest:  Int = 0
 
-    var time = android.icu.util.Calendar.DATE
+    var time = LocalDateTime.now(ZoneId.of("Europe/Paris"))
     //var tiime = android.icu.util.Calendar.getInstance()
 
 }

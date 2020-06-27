@@ -1,6 +1,8 @@
 package com.berni.android.prototype1lanbase.db
 
 import androidx.room.*
+import org.threeten.bp.LocalDateTime
+import org.threeten.bp.ZoneId
 //import androidx.room.migration.Migration
 //import androidx.sqlite.db.SupportSQLiteDatabase
 import java.io.Serializable
@@ -66,7 +68,7 @@ data class Word  (
     @ColumnInfo(name ="lvl" )
     var lvl:Int = 0,
     @ColumnInfo(name  ="lastOK")
-    var lastOk: Int = 10
+    var lastOk: String? = null
 
 
 ):Serializable {

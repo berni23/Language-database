@@ -19,12 +19,16 @@ import com.berni.android.prototype1lanbase.db.Word
 import com.berni.android.prototype1lanbase.ui.BaseFragment
 import com.berni.android.prototype1lanbase.ui.viewmodel.MainViewModel
 import com.berni.android.prototype1lanbase.ui.viewmodel.ViewModelFactory
+import com.jakewharton.threetenabp.AndroidThreeTen
 import kotlinx.coroutines.Dispatchers
 import org.kodein.di.KodeinAware
 import kotlinx.android.synthetic.main.fragment_test3.*
 import kotlinx.coroutines.runBlocking
 import org.kodein.di.android.x.closestKodein
 import org.kodein.di.generic.instance
+import org.threeten.bp.LocalDateTime
+import org.threeten.bp.ZoneId
+import org.threeten.bp.format.DateTimeFormatter
 import java.util.*
 
 /**
@@ -34,11 +38,12 @@ class Test3Fragment : BaseFragment(),KodeinAware {
 
     override val kodein by closestKodein()
     private val viewModelFactory: ViewModelFactory by instance<ViewModelFactory>()
+    private val formatter: DateTimeFormatter = DateTimeFormatter.ISO_DATE_TIME
     private lateinit var viewModel: MainViewModel
     private lateinit var result: List<Boolean>
     private lateinit var testWords: List<Word>
     private lateinit var navController: NavController
-    private var today = Calendar.DATE
+    private var today = LocalDateTime.now(ZoneId.of("Europe/Paris"))
     private val currentDate: String = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(java.util.Date())
     private var i = 0
     private var correct: Int = 0
@@ -75,7 +80,10 @@ class Test3Fragment : BaseFragment(),KodeinAware {
                     it.acquiredDate =currentDate
                 }
 
-                it.lastOk = today
+                it.lastOk = LocalDateTime.now(ZoneId.of("Europe/Paris")).format(formatter)
+
+
+                //SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(Date())
                // it.acquired=true // temp code, just to check how some  views  get displayed on word acquired, delete when using app .
                 viewModel.updateWord(it)
                 it.test = !result[i] && it.lvl == 0

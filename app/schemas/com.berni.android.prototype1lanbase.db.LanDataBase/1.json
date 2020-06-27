@@ -2,11 +2,11 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "9e12811fe6532aea5abe3396ebb497d2",
+    "identityHash": "48ac93330e9c1b4c17fe8a0f8e788ca6",
     "entities": [
       {
         "tableName": "Word",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`wordId` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `wordName` TEXT NOT NULL, `translation` TEXT NOT NULL, `example` TEXT, `translation example` TEXT, `definition` TEXT, `date` TEXT NOT NULL, `catParent` INTEGER, `acquired` INTEGER NOT NULL, `acquiredDate` TEXT, `test` INTEGER NOT NULL, `lvl` INTEGER NOT NULL, `lastOK` INTEGER NOT NULL)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`wordId` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `wordName` TEXT NOT NULL, `translation` TEXT NOT NULL, `example` TEXT, `translation example` TEXT, `definition` TEXT, `date` TEXT NOT NULL, `catParent` INTEGER, `acquired` INTEGER NOT NULL, `acquiredDate` TEXT, `test` INTEGER NOT NULL, `lvl` INTEGER NOT NULL, `lastOK` TEXT)",
         "fields": [
           {
             "fieldPath": "wordId",
@@ -83,8 +83,8 @@
           {
             "fieldPath": "lastOk",
             "columnName": "lastOK",
-            "affinity": "INTEGER",
-            "notNull": true
+            "affinity": "TEXT",
+            "notNull": false
           }
         ],
         "primaryKey": {
@@ -132,7 +132,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '9e12811fe6532aea5abe3396ebb497d2')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '48ac93330e9c1b4c17fe8a0f8e788ca6')"
     ]
   }
 }

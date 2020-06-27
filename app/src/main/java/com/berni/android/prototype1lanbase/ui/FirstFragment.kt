@@ -4,7 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.Color.argb
 import android.graphics.drawable.AnimationDrawable
-import android.icu.util.Calendar
+import android.os.Build
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.util.Log
@@ -13,6 +13,7 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.SearchView
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.content.ContextCompat.getSystemService
@@ -42,9 +43,15 @@ import kotlinx.coroutines.runBlocking
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.closestKodein
 import org.kodein.di.generic.instance
+import org.threeten.bp.LocalDateTime
+import org.threeten.bp.LocalDateTime.now
+import org.threeten.bp.ZoneId
+import org.threeten.bp.format.DateTimeFormatter
+import org.threeten.bp.temporal.ChronoUnit
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.math.abs
+import kotlin.time.ExperimentalTime
 
 
 /**
@@ -65,6 +72,7 @@ class FirstFragment : BaseFragment(),KodeinAware {
     private var action: MenuItem? = null
     private lateinit var viewModel: MainViewModel
     private lateinit var navController: NavController
+    private val formatter: DateTimeFormatter = DateTimeFormatter.ISO_DATE_TIME
     //private var color: Int = Color.argb(255, 255, 0,0)
     override fun onCreateView(
 
@@ -195,7 +203,6 @@ class FirstFragment : BaseFragment(),KodeinAware {
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
 
             override fun onQueryTextSubmit(query: String?): Boolean { return false }
-
             override fun onQueryTextChange(newText: String?): Boolean {
 
                 if (newText.isNullOrEmpty()) { displayedCats = _allCats as MutableList<CatWords> }
@@ -225,6 +232,8 @@ class FirstFragment : BaseFragment(),KodeinAware {
         return super.onCreateOptionsMenu(menu, inflater)
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
+    @ExperimentalTime
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
 
         when (item.itemId) {
@@ -253,7 +262,14 @@ class FirstFragment : BaseFragment(),KodeinAware {
                     runBlocking(Dispatchers.Default) {
                         testFalse.forEach {
 
-                            val diff = Calendar.DATE - it.lastOk
+                            val eDate: LocalDateTime =now(ZoneId.of("Europe/Paris"))
+                            
+                            val dateTime = LocalDateTime.parse(it.lastOk, formatter)
+                            val diff: Long = ChronoUnit.DAYS.between(dateTime,eDate)
+
+                            Log.i("diff",diff.toString())
+                            Log.i("lastOk",it.lastOk.toString())
+
                             if (it.lvl == 1 && diff >= 3) { it.test = true }
                             else if (it.lvl == 2 && diff >= 7) { it.test = true }
                             viewModel.updateWord(it)

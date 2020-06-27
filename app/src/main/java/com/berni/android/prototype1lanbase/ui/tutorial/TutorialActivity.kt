@@ -21,7 +21,6 @@ class TutorialActivity : AppCompatActivity() {
         setContentView(R.layout.activity_tutorial)
         setSupportActionBar(findViewById(R.id.toolbar))
         supportActionBar?.title = " Language Database"
-
         tutorial_t2.textSize = 20F
 
         btn_tutorial_next.setOnClickListener { messages(1 ) }
@@ -69,8 +68,6 @@ class TutorialActivity : AppCompatActivity() {
         msg+=count
         tutorial_t1.text = resources.getString(R.string.tutorial_m9)
         tutorial_t2.visibility = GONE
-
-
 
     } else if (msg == 5) {
 
