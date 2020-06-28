@@ -43,7 +43,6 @@ class Test3Fragment : BaseFragment(),KodeinAware {
     private lateinit var result: List<Boolean>
     private lateinit var testWords: List<Word>
     private lateinit var navController: NavController
-    private var today = LocalDateTime.now(ZoneId.of("Europe/Paris"))
     private val currentDate: String = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(java.util.Date())
     private var i = 0
     private var correct: Int = 0
@@ -81,7 +80,6 @@ class Test3Fragment : BaseFragment(),KodeinAware {
                 }
 
                 it.lastOk = LocalDateTime.now(ZoneId.of("Europe/Paris")).format(formatter)
-
 
                 //SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(Date())
                // it.acquired=true // temp code, just to check how some  views  get displayed on word acquired, delete when using app .

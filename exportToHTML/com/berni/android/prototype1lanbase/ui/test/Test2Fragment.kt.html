@@ -1,0 +1,171 @@
+<html>
+<head>
+<title>Test2Fragment.kt</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #000080; font-weight: bold;}
+.s1 { color: #000000;}
+.s2 { color: #808080; font-style: italic;}
+.s3 { color: #008000; font-weight: bold;}
+.s4 { color: #0000ff;}
+</style>
+</head>
+<body bgcolor="#ffffff">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#c0c0c0" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+Test2Fragment.kt</font>
+</center></td></tr></table>
+<pre><span class="s0">package </span>com.berni.android.prototype1lanbase.ui.test
+
+import android.annotation.SuppressLint
+import android.app.AlertDialog
+import android.content.Context
+import android.media.MediaPlayer
+import android.os.Bundle
+import android.os.CountDownTimer
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
+import androidx.core.os.bundleOf
+import androidx.fragment.app.Fragment
+import androidx.navigation.NavController
+import androidx.navigation.Navigation
+import com.berni.android.prototype1lanbase.R
+import com.berni.android.prototype1lanbase.db.Word
+import com.berni.android.prototype1lanbase.ui.BaseFragment
+import kotlinx.android.synthetic.main.fragment_test2.*
+import java.util.*
+import java.util.concurrent.TimeUnit
+
+<span class="s2">/**</span>
+ <span class="s2">* A simple [Fragment] subclass.</span>
+ <span class="s2">*/</span>
+
+<span class="s0">class </span>Test2Fragment : BaseFragment(){
+
+    private <span class="s0">var </span>pickedWords = listOf&lt;Word&gt;()
+    private <span class="s0">var </span>resultTest = arrayListOf&lt;Boolean&gt;()
+    private lateinit <span class="s0">var </span>mediaPlayer: MediaPlayer
+    private lateinit <span class="s0">var </span>navController: NavController
+
+
+    override <span class="s0">fun </span>onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+
+        pickedWords = arguments?.get(<span class="s3">&quot;pickedWords&quot;</span>) <span class="s0">as </span>ArrayList&lt;Word&gt;
+        <span class="s0">return </span>inflater.inflate(R.layout.fragment_test2, container, <span class="s0">false</span>)
+    }
+
+    @SuppressLint(<span class="s3">&quot;SetTextI18n&quot;</span>)
+    override <span class="s0">fun </span>onViewCreated(view: View, savedInstanceState: Bundle?) {
+        <span class="s0">super</span>.onViewCreated(view, savedInstanceState)
+
+        timer.start()
+        mediaPlayer = MediaPlayer.create(context,R.raw.success)
+        navController = Navigation.findNavController(view)
+        wordTest_textView.text = pickedWords[<span class="s4">0</span>].wordName
+        <span class="s0">val </span>len = pickedWords.size
+        wordTest_editext.text.clear()
+        <span class="s0">var </span>i: Int = <span class="s4">0</span>
+
+        counterTest_textView.text = <span class="s3">&quot; 0/</span><span class="s0">$</span>len<span class="s3">&quot;</span>
+        btn_nextTestWord.setOnClickListener {
+
+            <span class="s0">if </span>(wordTest_editext.text.isEmpty()) {
+                wordTest_editext.error = resources.getString(R.string.answer_can_not_be_blank)
+                wordTest_editext.requestFocus()
+                <span class="s0">return</span>@setOnClickListener
+            }
+
+            <span class="s0">val </span>question = pickedWords[i].trans1.trim().toLowerCase(Locale.ROOT)
+            <span class="s0">val </span>answer = wordTest_editext.text.trim().toString().toLowerCase(Locale.ROOT)
+
+            <span class="s0">if </span>(question==answer) {
+
+
+                mediaPlayer.start()
+                resultTest.add(<span class="s0">true</span>)
+                <span class="s0">if </span>(pickedWords[i].lvl==<span class="s4">2</span>){
+
+                    Toast.makeText(context,<span class="s3">&quot;Congrats!!, word acquired!!&quot;</span>,Toast.LENGTH_SHORT).show()
+                }
+            }
+            <span class="s0">else </span>{resultTest.add(<span class="s0">false</span>)}
+
+
+            i++
+            <span class="s0">if </span>(i == len) {
+
+                <span class="s0">val </span>bundle = bundleOf(<span class="s3">&quot;pickedWords&quot; </span>to pickedWords, <span class="s3">&quot;resultTest&quot; </span>to resultTest)
+                navController.navigate(R.id.actionTestFinished, bundle)
+                timer.cancel()
+
+            } <span class="s0">else </span>{
+                counterTest_textView.text = <span class="s3">&quot; </span><span class="s0">$</span>i<span class="s3">/</span><span class="s0">$</span>len<span class="s3">&quot;</span>
+                wordTest_textView.text = pickedWords[i].wordName
+                wordTest_editext.text.clear()
+            }
+        }
+    }
+
+    override <span class="s0">fun </span>onAttach(context: Context) {
+        <span class="s0">super</span>.onAttach(context)
+        <span class="s0">val </span>callback: OnBackPressedCallback = <span class="s0">object </span>: OnBackPressedCallback(
+            <span class="s0">true </span><span class="s2">// default to enabled</span>
+        ) {
+            override <span class="s0">fun </span>handleOnBackPressed() {
+
+               <span class="s2">// var bool: Boolean? = true</span>
+                AlertDialog.Builder(activity!!).apply {
+                    setTitle(resources.getString(R.string.are_you_sure))
+                    setMessage(resources.getString(R.string.test_will_be_canceled))
+                    setPositiveButton(resources.getString(R.string.yes)) { _, _ -&gt;
+
+                        navController.navigate(R.id.actionCancelTest)
+                        timer.cancel()
+                    }
+                    setNegativeButton(resources.getString(R.string.no)) { _, _ -&gt; }
+                }.create().show()
+            }
+        }
+        requireActivity().onBackPressedDispatcher.addCallback(
+            <span class="s0">this</span>,  <span class="s2">// LifecycleOwner</span>
+            callback
+        )
+    }
+
+    private <span class="s0">val </span>timer = <span class="s0">object</span>: CountDownTimer(<span class="s4">900000</span>,<span class="s4">1000</span>) {
+        override <span class="s0">fun </span>onTick(millis: Long) {
+
+            timerTest_textView.let{timerTest_textView.text =  String.format(<span class="s3">&quot;%02d : %02d &quot;</span>,
+                TimeUnit.MILLISECONDS.toMinutes(millis),
+                TimeUnit.MILLISECONDS.toSeconds(millis) -
+                        TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(millis)))}
+        }
+
+        override <span class="s0">fun </span>onFinish() {
+
+            Toast.makeText(context,resources.getString(R.string.time_up),Toast.LENGTH_SHORT).show()
+            <span class="s0">val </span>diff = pickedWords.size -resultTest.size
+
+            <span class="s0">if </span>(diff &gt;<span class="s4">0</span>) {
+
+                <span class="s0">for </span>(i <span class="s0">in </span><span class="s4">1</span>..diff) { resultTest.add(<span class="s0">false</span>) }
+            }
+            <span class="s0">val </span>bundle = bundleOf(<span class="s3">&quot;pickedWords&quot; </span>to pickedWords, <span class="s3">&quot;resultTest&quot; </span>to resultTest)
+            navController.navigate(R.id.actionTestFinished, bundle)
+
+        }
+    }
+
+}
+
+
+</pre>
+</body>
+</html>

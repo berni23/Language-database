@@ -213,3 +213,33 @@ return date?.toString()
 
 
 
+//MIGRATION DATABASE
+
+/** private val MIGRATION_9_10 = object : Migration(9, 10) {
+override fun migrate(database: SupportSQLiteDatabase) {
+database.execSQL("""
+CREATE TABLE new_Cat (
+catName TEXT,
+catDate TEXT,
+catId INTEGER PRIMARY KEY NOT NULL,
+tag TEXT NOT NULL DEFAULT ''
+
+""".trimIndent())
+database.execSQL("""
+INSERT INTO new_Cat (catName, catDate, catId,tag)
+SELECT catName, catDate,catId, tag FROM Cat
+""".trimIndent())
+database.execSQL("DROP TABLE Cat")
+database.execSQL("ALTER TABLE new_Cat RENAME TO Cat")
+}
+}**/
+
+/**private val MIGRATION_9_10 = object : Migration(1, 2) {
+override fun migrate(database: SupportSQLiteDatabase) {
+database.execSQL(
+"ALTER TABLE WORD ADD COLUMN tag TEXT NOT NULL DEFAULT ''"
+)
+
+}
+}**/
+

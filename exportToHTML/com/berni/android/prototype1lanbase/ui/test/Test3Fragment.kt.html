@@ -1,0 +1,153 @@
+<html>
+<head>
+<title>Test3Fragment.kt</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #000080; font-weight: bold;}
+.s1 { color: #000000;}
+.s2 { color: #808080; font-style: italic;}
+.s3 { color: #008000; font-weight: bold;}
+.s4 { color: #0000ff;}
+</style>
+</head>
+<body bgcolor="#ffffff">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#c0c0c0" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+Test3Fragment.kt</font>
+</center></td></tr></table>
+<pre><span class="s0">package </span>com.berni.android.prototype1lanbase.ui.test
+
+import android.annotation.SuppressLint
+import android.content.Context
+import android.icu.text.SimpleDateFormat
+import android.icu.util.Calendar
+import android.os.Bundle
+import androidx.fragment.app.Fragment
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.activity.OnBackPressedCallback
+import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.NavController
+import androidx.navigation.Navigation
+import com.berni.android.prototype1lanbase.R
+import com.berni.android.prototype1lanbase.db.Test
+import com.berni.android.prototype1lanbase.db.Word
+import com.berni.android.prototype1lanbase.ui.BaseFragment
+import com.berni.android.prototype1lanbase.ui.viewmodel.MainViewModel
+import com.berni.android.prototype1lanbase.ui.viewmodel.ViewModelFactory
+import com.jakewharton.threetenabp.AndroidThreeTen
+import kotlinx.coroutines.Dispatchers
+import org.kodein.di.KodeinAware
+import kotlinx.android.synthetic.main.fragment_test3.*
+import kotlinx.coroutines.runBlocking
+import org.kodein.di.android.x.closestKodein
+import org.kodein.di.generic.instance
+import org.threeten.bp.LocalDateTime
+import org.threeten.bp.ZoneId
+import org.threeten.bp.format.DateTimeFormatter
+import java.util.*
+
+<span class="s2">/**</span>
+ <span class="s2">* A simple [Fragment] subclass.</span>
+ <span class="s2">*/</span>
+<span class="s0">class </span>Test3Fragment : BaseFragment(),KodeinAware {
+
+    override <span class="s0">val </span>kodein by closestKodein()
+    private <span class="s0">val </span>viewModelFactory: ViewModelFactory by instance&lt;ViewModelFactory&gt;()
+    private <span class="s0">val </span>formatter: DateTimeFormatter = DateTimeFormatter.ISO_DATE_TIME
+    private lateinit <span class="s0">var </span>viewModel: MainViewModel
+    private lateinit <span class="s0">var </span>result: List&lt;Boolean&gt;
+    private lateinit <span class="s0">var </span>testWords: List&lt;Word&gt;
+    private lateinit <span class="s0">var </span>navController: NavController
+    private <span class="s0">val </span>currentDate: String = SimpleDateFormat(<span class="s3">&quot;dd/MM/yyyy&quot;</span>, Locale.getDefault()).format(java.util.Date())
+    private <span class="s0">var </span>i = <span class="s4">0</span>
+    private <span class="s0">var </span>correct: Int = <span class="s4">0</span>
+
+
+    override <span class="s0">fun </span>onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+
+        result = arguments?.get(<span class="s3">&quot;resultTest&quot;</span>) <span class="s0">as </span>List&lt;Boolean&gt;
+        testWords = arguments?.get(<span class="s3">&quot;pickedWords&quot;</span>) <span class="s0">as </span>List&lt;Word&gt;
+        <span class="s0">return </span>inflater.inflate(R.layout.fragment_test3, container, <span class="s0">false</span>)
+    }
+
+    @SuppressLint(<span class="s3">&quot;SetTextI18n&quot;</span>)
+    override <span class="s0">fun </span>onViewCreated(view: View, savedInstanceState: Bundle?) {
+        <span class="s0">super</span>.onViewCreated(view, savedInstanceState)
+
+        navController = Navigation.findNavController(view)
+        viewModel = ViewModelProvider(<span class="s0">this</span>, viewModelFactory).get(MainViewModel::<span class="s0">class</span>.java)
+        runBlocking(Dispatchers.Default) {
+
+            testWords.forEach {
+
+                <span class="s0">if </span>(result[i]) {
+                    it.lvl += <span class="s4">1 </span><span class="s2">// uncomment when using app</span>
+                    it.test = <span class="s0">false</span>
+                    correct += <span class="s4">1</span>
+
+                }
+                <span class="s0">if </span>(it.lvl &gt;= <span class="s4">3</span>) {
+                    it.acquired = <span class="s0">true</span>
+                    it.acquiredDate =currentDate
+                }
+
+                it.lastOk = LocalDateTime.now(ZoneId.of(<span class="s3">&quot;Europe/Paris&quot;</span>)).format(formatter)
+
+                <span class="s2">//SimpleDateFormat(&quot;dd/MM/yyyy&quot;, Locale.getDefault()).format(Date())</span>
+               <span class="s2">// it.acquired=true // temp code, just to check how some  views  get displayed on word acquired, delete when using app .</span>
+                viewModel.updateWord(it)
+                it.test = !result[i] &amp;&amp; it.lvl == <span class="s4">0</span>
+                i++
+
+            }
+        }
+
+        Test.number += <span class="s4">1</span>
+        progressbar.progress = correct
+        progressbar.max = result.size
+        ratioTestFinished.text = <span class="s3">&quot;</span><span class="s0">$</span>correct<span class="s3">/</span><span class="s0">${</span>result.size<span class="s0">}</span><span class="s3">&quot;</span>
+
+        msg()
+
+        btn_backToMain.setOnClickListener { <span class="s0">if </span>(i == result.size) { navController.navigate(R.id.actionBackToMainTestFinished) } }
+    }
+
+    override <span class="s0">fun </span>onAttach(context: Context) {
+        <span class="s0">super</span>.onAttach(context)
+        <span class="s0">val </span>callback: OnBackPressedCallback = <span class="s0">object </span>: OnBackPressedCallback(
+            <span class="s0">true</span>
+        ) {
+            override <span class="s0">fun </span>handleOnBackPressed() {
+                navController.navigate(R.id.actionBackToMainTestFinished)
+            }
+        }
+        requireActivity().onBackPressedDispatcher.addCallback(
+            <span class="s0">this</span>,  <span class="s2">// LifecycleOwner</span>
+            callback
+        )
+    }
+
+    private <span class="s0">fun </span>msg() {
+
+        <span class="s0">var </span>text = resources.getString(R.string.score5)
+        <span class="s0">val </span>ratio: Double = correct.toDouble()/result.size.toDouble()
+        <span class="s0">when </span>{
+            ratio==<span class="s4">1.0  </span>-&gt;  {text = resources.getString(R.string.score1) }
+            ratio&gt;=<span class="s4">0.9  </span>-&gt;  {text = resources.getString(R.string.score2) }
+            ratio&gt;=<span class="s4">0.7  </span>-&gt;  {text = resources.getString(R.string.score3) }
+            ratio &gt;=<span class="s4">0.5 </span>-&gt;  {text = resources.getString(R.string.score4) }
+        }
+
+        msgTestFinished.text = text
+
+    }
+}
+</pre>
+</body>
+</html>

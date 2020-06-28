@@ -1,0 +1,92 @@
+<html>
+<head>
+<title>MainViewModel.kt</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #000080; font-weight: bold;}
+.s1 { color: #000000;}
+.s2 { color: #808080; font-style: italic;}
+</style>
+</head>
+<body bgcolor="#ffffff">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#c0c0c0" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+MainViewModel.kt</font>
+</center></td></tr></table>
+<pre><span class="s0">package </span>com.berni.android.prototype1lanbase.ui.viewmodel
+
+
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.ViewModel
+import com.berni.android.prototype1lanbase.db.Cat
+import com.berni.android.prototype1lanbase.db.CatWords
+import com.berni.android.prototype1lanbase.db.Repository
+import com.berni.android.prototype1lanbase.db.Word
+
+<span class="s2">// Main view model for everything related with accessing or updating database</span>
+
+<span class="s0">class </span>MainViewModel(private <span class="s0">val </span>repos: Repository ) : ViewModel() {
+
+    suspend <span class="s0">fun </span>addCat(cat: Cat) = repos.addCat(cat)
+
+    suspend <span class="s0">fun </span>addWord(word: Word) = repos.addWord(word)
+
+    suspend <span class="s0">fun </span>updateWord(word: Word) = repos.updateWord(word)
+
+    suspend <span class="s0">fun </span>updateCat(oldName: String, newName: String) = repos.updateCat(oldName, newName)
+
+    suspend <span class="s0">fun </span>getAllWords(): MutableList&lt;Word&gt; { <span class="s0">return </span>repos.getAllWords() }
+
+    suspend <span class="s0">fun </span>orderDays(): MutableList&lt;String&gt; {<span class="s0">return </span>repos.orderDates()}
+
+    suspend <span class="s0">fun </span>orderAcquired(): MutableList&lt;String&gt; {<span class="s0">return </span>repos.orderAcquired()}
+
+    suspend <span class="s0">fun </span>counterWords() : Int {<span class="s0">return </span>repos.counterWords()}
+
+    <span class="s0">fun </span>deleteWordsInCat(currentCatId: Int) = repos.deleteWordsInCat(currentCatId)
+
+    <span class="s0">fun </span>deleteCat(currentCat: Cat) = repos.deleteCat(currentCat)
+
+    <span class="s0">fun </span>anyCat() = repos.anyCat()
+
+    <span class="s0">fun </span>anyWord() = repos.anyWord()
+
+    <span class="s0">fun </span>deleteWord(currentWord: Word) = repos.deleteWord(currentWord)
+
+    <span class="s0">fun </span>wordsInCat(currentCatId: Int) = repos.wordsInCat(currentCatId)
+
+    <span class="s0">fun </span>validCatName(catName: String): Boolean { <span class="s0">return </span>repos.validCatName(catName).isEmpty() }
+
+    <span class="s0">fun </span>validWordId(catName: String, wordName: String): Boolean { <span class="s0">return </span>repos.validWordId(catName, wordName).isEmpty() }
+
+    <span class="s0">val </span>allCats: LiveData&lt;List&lt;Cat&gt;&gt; = repos.getAllCats()
+
+    <span class="s0">val </span>allWords: LiveData&lt;List&lt;Word&gt;&gt; = repos.getAllWordsLive()
+
+    suspend <span class="s0">fun </span>wordsForTest(): List&lt;Word&gt; = repos.wordsForTest()
+
+    <span class="s0">fun </span>catsWithWords(): LiveData&lt;List&lt;CatWords&gt;&gt; = repos.catsWithWords()
+
+    <span class="s0">fun </span>catsNWords(): MutableList&lt;CatWords&gt; = repos.catsNwords()
+
+    <span class="s0">fun </span>getNumAcquired(bool:Boolean) : Int = repos.getNumAcquired(bool)
+
+   <span class="s2">/** suspend fun counterAcquired(): List&lt;Int&gt; {</span>
+
+        <span class="s2">val words = repos.getAllWords()</span>
+        <span class="s2">var int1 = 0</span>
+        <span class="s2">var int2 = 0</span>
+
+        <span class="s2">words.forEach {</span>
+
+            <span class="s2">if (it.acquired) { int1++ }</span>
+            <span class="s2">else { int2++ }</span>
+        <span class="s2">}</span>
+        <span class="s2">return listOf(int1, int2)</span>
+    <span class="s2">}**/</span>
+}
+
+</pre>
+</body>
+</html>

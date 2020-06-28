@@ -1,6 +1,8 @@
 package com.berni.android.prototype1lanbase.db
 
 import androidx.room.*
+import androidx.room.migration.Migration
+import androidx.sqlite.db.SupportSQLiteDatabase
 import org.threeten.bp.LocalDateTime
 import org.threeten.bp.ZoneId
 //import androidx.room.migration.Migration
@@ -32,15 +34,9 @@ data class Cat(
     //@ColumnInfo(name="tag")
    // var tag:String = "hi"
 
-):Serializable
+):Serializable{
 
-   /** { val MIGRATION_9_10 = object : Migration(9, 10) {
-        override fun migrate(database: SupportSQLiteDatabase) {
-            database.execSQL(
-                "ALTER TABLE Song ADD COLUMN tag TEXT NOT NULL DEFAULT ''")
         }
-    }
-   }**/
 
 
 @Entity
@@ -48,11 +44,11 @@ data class Word  (
 
     @ColumnInfo(name  = "wordName")
     val wordName: String,
-    @ColumnInfo(name  = "translation")
+    @ColumnInfo(name  = "trans1")
     val trans1: String,
-    @ColumnInfo(name  = "example")
+    @ColumnInfo(name  = "ex1")
     val ex1: String?,
-    @ColumnInfo(name = "translation example")
+    @ColumnInfo(name = "trans_ex1")
     val trans_ex1: String?,
     @ColumnInfo(name = "definition")
     val definition: String?,
@@ -62,12 +58,13 @@ data class Word  (
     val catParent: Int? = 0,
     @ColumnInfo(name = "acquired")
     var acquired:Boolean  =false,
+    @ColumnInfo(name = "acquiredDate")
     var acquiredDate: String? = null,
     @ColumnInfo(name = "test")
     var test : Boolean = true,
     @ColumnInfo(name ="lvl" )
-    var lvl:Int = 0,
-    @ColumnInfo(name  ="lastOK")
+    var lvl:Int =0,
+    @ColumnInfo(name  ="lastOk")
     var lastOk: String? = null
 
 

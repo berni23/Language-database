@@ -1,0 +1,134 @@
+<html>
+<head>
+<title>StatisticsFragment.kt</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #000080; font-weight: bold;}
+.s1 { color: #000000;}
+.s2 { color: #808080; font-style: italic;}
+.s3 { color: #0000ff;}
+</style>
+</head>
+<body bgcolor="#ffffff">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#c0c0c0" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+StatisticsFragment.kt</font>
+</center></td></tr></table>
+<pre><span class="s0">package </span>com.berni.android.prototype1lanbase.ui.statistics
+
+import android.os.Bundle
+import android.view.*
+import androidx.fragment.app.Fragment
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.NavController
+import androidx.navigation.Navigation
+import com.anychart.APIlib
+import com.anychart.AnyChart
+import kotlinx.android.synthetic.main.fragment_statistics.*
+import com.anychart.chart.common.dataentry.DataEntry
+import com.anychart.chart.common.dataentry.ValueDataEntry
+import com.anychart.charts.Pie
+import com.berni.android.prototype1lanbase.R
+import com.berni.android.prototype1lanbase.db.CatWords
+import com.berni.android.prototype1lanbase.ui.BaseFragment
+import com.berni.android.prototype1lanbase.ui.viewmodel.MainViewModel
+import com.berni.android.prototype1lanbase.ui.viewmodel.ViewModelFactory
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.runBlocking
+import org.kodein.di.KodeinAware
+import org.kodein.di.android.x.closestKodein
+import org.kodein.di.generic.instance
+
+<span class="s2">/**</span>
+ <span class="s2">* A simple [Fragment] subclass.</span>
+ <span class="s2">*/</span>
+<span class="s0">class </span>StatisticsFragment : BaseFragment(), KodeinAware
+
+{
+    override <span class="s0">val </span>kodein by closestKodein()
+    private <span class="s0">val </span>viewModelFactory: ViewModelFactory by instance&lt;ViewModelFactory&gt;()
+    private lateinit <span class="s0">var </span>viewModel: MainViewModel
+    private lateinit <span class="s0">var </span>catsNwords :List&lt;CatWords&gt;
+    private lateinit <span class="s0">var </span>counterAcquired: List&lt;Int&gt;
+    private lateinit <span class="s0">var </span>navController: NavController
+    private <span class="s0">var </span>numWords: Int = <span class="s3">0</span>
+
+    override <span class="s0">fun </span>onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+
+        setHasOptionsMenu(<span class="s0">true</span>)
+        <span class="s0">return </span>inflater.inflate(R.layout.fragment_statistics, container, <span class="s0">false</span>)
+    }
+
+    override <span class="s0">fun </span>onViewCreated(view: View, savedInstanceState: Bundle?) {
+        <span class="s0">super</span>.onViewCreated(view, savedInstanceState)
+
+        navController = Navigation.findNavController(view)
+        (activity <span class="s0">as </span>AppCompatActivity).supportActionBar?.title = resources.getString(R.string.statistics)
+        viewModel = ViewModelProvider(<span class="s0">this</span>, viewModelFactory).get(MainViewModel::<span class="s0">class</span>.java)
+       runBlocking(Dispatchers.Default) {
+
+           catsNwords = viewModel.catsNWords()
+           counterAcquired = arrayListOf(viewModel.getNumAcquired(<span class="s0">true</span>),viewModel.getNumAcquired(<span class="s0">false</span>))
+
+       }
+
+        btnTimeProgress.setOnClickListener{ navController.navigate(R.id.actionTimeLine) }
+        pieChartAcquired()
+        setupPieChart()
+        Toast.makeText(context,resources.getString(R.string.msg1_statistics1),Toast.LENGTH_LONG).show()
+    }
+
+    private <span class="s0">fun </span>setupPieChart() {
+
+        APIlib.getInstance().setActiveAnyChartView(pieChart)
+        <span class="s0">val </span>pie: Pie = AnyChart.pie()
+        pie.legend(<span class="s0">false</span>)
+        <span class="s0">val </span>dataEntries = ArrayList&lt;DataEntry&gt;()
+
+        catsNwords.forEach{
+
+            <span class="s0">val </span>length = it.words.size
+            dataEntries.add(ValueDataEntry(it.cat.catName,length))
+            numWords+=length
+        }
+
+        pie.data(dataEntries)
+        pieChart.setChart(pie)
+        <span class="s2">//statistics_numWords.text = &quot;$numWords words added&quot;</span>
+       <span class="s2">// statistics_numWordsAk.text = &quot;${counterAcquired[0]} words acquired&quot;</span>
+
+    }
+
+    private <span class="s0">fun </span>pieChartAcquired() {
+
+        APIlib.getInstance().setActiveAnyChartView(pieChartAcquired)
+        <span class="s0">val </span>pie2: Pie = AnyChart.pie()
+        pie2.legend(<span class="s0">false</span>)
+        <span class="s0">val </span>dataEntries = ArrayList&lt;DataEntry&gt;()
+        dataEntries.add(ValueDataEntry(resources.getString(R.string.words_acquired),counterAcquired[<span class="s3">0</span>]))
+        dataEntries.add(ValueDataEntry(resources.getString(R.string.words_not_acquired),counterAcquired[<span class="s3">1</span>]))
+        pie2.data(dataEntries)
+        pieChartAcquired.setChart(pie2)
+
+    }
+
+    override <span class="s0">fun </span>onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.menu_s1, menu)
+        <span class="s0">return super</span>.onCreateOptionsMenu(menu, inflater)
+    }
+
+    override <span class="s0">fun </span>onOptionsItemSelected(item: MenuItem): Boolean {
+
+        <span class="s0">when </span>(item.itemId) {R.id.item_backToMainS1 -&gt; {navController.popBackStack()} }
+
+        <span class="s0">return super</span>.onOptionsItemSelected(item)
+    }
+}</pre>
+</body>
+</html>

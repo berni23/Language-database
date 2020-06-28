@@ -1,0 +1,393 @@
+<html>
+<head>
+<title>FirstFragment.kt</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #000080; font-weight: bold;}
+.s1 { color: #000000;}
+.s2 { color: #808080; font-style: italic;}
+.s3 { color: #0000ff;}
+.s4 { color: #008000; font-weight: bold;}
+</style>
+</head>
+<body bgcolor="#ffffff">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#c0c0c0" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+FirstFragment.kt</font>
+</center></td></tr></table>
+<pre><span class="s0">package </span>com.berni.android.prototype1lanbase.ui
+
+import android.content.Context
+import android.content.Intent
+import android.graphics.Color.argb
+import android.graphics.drawable.AnimationDrawable
+import android.os.Build
+import android.os.Bundle
+import android.os.CountDownTimer
+import android.util.Log
+import android.view.*
+import android.view.inputmethod.InputMethodManager
+import android.widget.SearchView
+import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
+import androidx.annotation.RequiresApi
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.content.res.AppCompatResources
+import androidx.core.content.ContextCompat.getSystemService
+import androidx.core.os.bundleOf
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.NavController
+import androidx.navigation.Navigation
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
+import com.berni.android.prototype1lanbase.R
+import com.berni.android.prototype1lanbase.db.Cat
+import com.berni.android.prototype1lanbase.db.CatWords
+import com.berni.android.prototype1lanbase.db.Test
+import com.berni.android.prototype1lanbase.db.Word
+import com.berni.android.prototype1lanbase.hideKeyboard
+import com.berni.android.prototype1lanbase.limitNotAcquired
+import com.berni.android.prototype1lanbase.setItemsVisibility
+import com.berni.android.prototype1lanbase.ui.adapter.CatAdapter
+import com.berni.android.prototype1lanbase.ui.tutorial.Tutorial
+import com.berni.android.prototype1lanbase.ui.viewmodel.MainViewModel
+import com.berni.android.prototype1lanbase.ui.viewmodel.ViewModelFactory
+import kotlinx.android.synthetic.main.fragment_first.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
+import org.kodein.di.KodeinAware
+import org.kodein.di.android.x.closestKodein
+import org.kodein.di.generic.instance
+import org.threeten.bp.LocalDateTime
+import org.threeten.bp.LocalDateTime.now
+import org.threeten.bp.ZoneId
+import org.threeten.bp.format.DateTimeFormatter
+import org.threeten.bp.temporal.ChronoUnit
+import java.text.SimpleDateFormat
+import java.util.*
+import kotlin.math.abs
+import kotlin.time.ExperimentalTime
+
+
+<span class="s2">/**</span>
+ <span class="s2">* A simple [Fragment] subclass as the default destination in the navigation.</span>
+ <span class="s2">*/</span>
+
+<span class="s0">class </span>FirstFragment : BaseFragment(),KodeinAware {
+
+    override <span class="s0">val </span>kodein by closestKodein()
+    private <span class="s0">val </span>viewModelFactory: ViewModelFactory by instance&lt;ViewModelFactory&gt;()
+    private <span class="s0">var </span>firstCat: Boolean = <span class="s0">true</span>
+    private <span class="s0">var </span>notAcquired: Int = <span class="s3">0</span>
+    private <span class="s0">var </span>newCatName: String? = <span class="s0">null</span>
+    private <span class="s0">var </span>_allCats = listOf&lt;CatWords&gt;()
+    private <span class="s0">var </span>displayedCats = mutableListOf&lt;CatWords&gt;()
+    private <span class="s0">var </span>b: Int = <span class="s3">0</span>
+    private <span class="s0">var </span>a: Float = <span class="s3">0.0F</span>
+    private <span class="s0">var </span>action: MenuItem? = <span class="s0">null</span>
+    private lateinit <span class="s0">var </span>viewModel: MainViewModel
+    private lateinit <span class="s0">var </span>navController: NavController
+    private <span class="s0">val </span>formatter: DateTimeFormatter = DateTimeFormatter.ISO_DATE_TIME
+    <span class="s2">//private var color: Int = Color.argb(255, 255, 0,0)</span>
+    override <span class="s0">fun </span>onCreateView(
+
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+
+    ): View? {
+
+        <span class="s0">return </span>inflater.inflate(R.layout.fragment_first, container, <span class="s0">false</span>)
+    }
+
+    override <span class="s0">fun </span>onViewCreated(view: View, savedInstanceState: Bundle?) {
+        <span class="s0">super</span>.onViewCreated(view, savedInstanceState)
+
+        (activity <span class="s0">as </span>AppCompatActivity).supportActionBar?.title = <span class="s4">&quot;Language Database&quot;</span>
+        setHasOptionsMenu(<span class="s0">true</span>)
+        navController = Navigation.findNavController(view)
+        recycler_view_cats.setHasFixedSize(<span class="s0">true</span>)
+        stopTimers()
+        viewModel = ViewModelProvider(<span class="s0">this</span>, viewModelFactory).get(MainViewModel::<span class="s0">class</span>.java)
+        runBlocking(Dispatchers.Default) {
+
+            firstCat = viewModel.anyCat()
+            notAcquired = viewModel.getNumAcquired(<span class="s0">false</span>)
+
+
+
+        }
+
+
+
+        Log.i(<span class="s4">&quot;notAcquired&quot;</span>,notAcquired.toString())
+        viewModel.catsWithWords().observe(viewLifecycleOwner, Observer&lt;List&lt;CatWords&gt;&gt; {
+            _allCats = it
+            displayedCats = _allCats <span class="s0">as </span>MutableList&lt;CatWords&gt;
+            recycler_view_cats.layoutManager = StaggeredGridLayoutManager(<span class="s3">2</span>, StaggeredGridLayoutManager.VERTICAL)
+            recycler_view_cats.adapter = CatAdapter(it, viewModel, <span class="s0">this</span>.coroutineContext)
+        })
+
+        btn_add.setOnClickListener {
+            editText_newCat.text.clear()
+            editText_newCat.requestFocus()
+            newCatName = <span class="s0">null</span>
+            <span class="s0">val </span>imm: InputMethodManager? = getSystemService&lt;InputMethodManager&gt;(it.context, InputMethodManager::<span class="s0">class</span>.java)
+            imm!!.showSoftInput(editText_newCat, InputMethodManager.SHOW_IMPLICIT)
+            recycler_view_newCat.visibility = View.VISIBLE
+
+        }
+
+        btnCancel.setOnClickListener { recycler_view_newCat.visibility = View.GONE }
+        btnCreate.setOnClickListener {
+
+            newCatName = editText_newCat.text.toString().trim()
+            <span class="s0">val </span>currentDate: String = SimpleDateFormat(<span class="s4">&quot;dd/MM/yyyy&quot;</span>, Locale.getDefault()).format(Date())
+            <span class="s0">if </span>(newCatName!!.isEmpty()) {
+
+                editText_newCat.error = resources.getString(R.string.cat_required)
+                editText_newCat.requestFocus()
+                <span class="s0">return</span>@setOnClickListener
+            }
+
+            <span class="s0">var </span>bool = <span class="s0">true</span>
+            runBlocking(Dispatchers.Default) { bool = viewModel.validCatName(newCatName!!) }
+
+            <span class="s0">if </span>(bool) {
+
+                launch(Dispatchers.Default) {
+                    <span class="s0">val </span>cat = Cat(newCatName!!, currentDate)
+                    viewModel.addCat(cat)
+                }
+
+            } <span class="s0">else </span>{
+                editText_newCat.error = resources.getString(R.string.cat_already_exists)
+                editText_newCat.requestFocus()
+                Toast.makeText(context, resources.getString(R.string.cat_name_rejected), Toast.LENGTH_SHORT).show()
+                <span class="s0">return</span>@setOnClickListener
+            }
+
+            recycler_view_newCat.visibility = View.GONE
+            editText_newCat.text.clear()
+
+            <span class="s0">if </span>(firstCat) {
+
+                <span class="s0">val </span>toast: Toast = Toast.makeText(context, resources.getString(R.string.msg_first_cat_created), Toast.LENGTH_LONG)
+                toast.setGravity(Gravity.CENTER, <span class="s3">0</span>, <span class="s3">0</span>)
+                Tutorial.firstCat = <span class="s0">false</span>
+                firstCat = <span class="s0">false</span>
+                toast.show()
+                arr.y = <span class="s3">100F</span>
+                arr.rotation = <span class="s3">180F</span>
+            }
+
+            <span class="s0">else </span>{Toast.makeText(context, <span class="s4">&quot; </span><span class="s0">${</span>resources.getString(R.string.category)<span class="s0">} $</span>newCatName<span class="s4">&quot; </span>+ <span class="s4">&quot;  </span><span class="s0">${</span>resources.getString(
+                        R.string.successfully_created
+                    )<span class="s0">}</span><span class="s4">&quot;</span>, Toast.LENGTH_SHORT).show() }
+            hideKeyboard()
+        }
+
+        recycler_view_newCat.visibility = View.GONE
+
+        <span class="s0">if </span>(firstCat) {
+
+            <span class="s0">val </span>anim1: AnimationDrawable
+            arr.apply {
+                setBackgroundResource(R.drawable.anim_arrow)
+                anim1 = background <span class="s0">as </span>AnimationDrawable
+            }
+
+            anim1.start()
+            <span class="s0">val </span>toast: Toast = Toast.makeText(context, resources.getString(R.string.msg_first_btn_pressed), Toast.LENGTH_LONG)
+            toast.setGravity(Gravity.CENTER, <span class="s3">0</span>, <span class="s3">0</span>)
+            toast.show()
+        }
+    }
+    override <span class="s0">fun </span>onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.menu_main, menu)
+
+        <span class="s0">val </span>testItem = menu.findItem(R.id.item_test)
+
+        action = testItem
+
+        <span class="s0">val </span>searchItem = menu.findItem(R.id.item_search)
+        <span class="s0">val </span>searchView: SearchView = searchItem.actionView <span class="s0">as </span>SearchView
+
+        searchView.setOnSearchClickListener { setItemsVisibility(menu, searchItem, <span class="s0">false</span>) }
+
+        searchView.setOnCloseListener { setItemsVisibility(menu, searchItem, <span class="s0">true</span>)
+            <span class="s0">false</span>
+        }
+
+
+        searchView.setOnQueryTextListener(<span class="s0">object </span>: SearchView.OnQueryTextListener {
+
+            override <span class="s0">fun </span>onQueryTextSubmit(query: String?): Boolean { <span class="s0">return false </span>}
+            override <span class="s0">fun </span>onQueryTextChange(newText: String?): Boolean {
+
+                <span class="s0">if </span>(newText.isNullOrEmpty()) { displayedCats = _allCats <span class="s0">as </span>MutableList&lt;CatWords&gt; }
+                <span class="s0">else </span>{
+
+                    displayedCats = mutableListOf&lt;CatWords&gt;()
+                    _allCats.forEach {
+
+                        <span class="s0">if </span>(it.cat.catName.startsWith(newText.trim())) {
+                            displayedCats.add(it)
+                        }
+                    }
+                }
+
+                recycler_view_cats.layoutManager = StaggeredGridLayoutManager(<span class="s3">2</span>, StaggeredGridLayoutManager.VERTICAL)
+                recycler_view_cats.adapter = CatAdapter(displayedCats, viewModel, coroutineContext)
+                <span class="s0">return false</span>
+            }
+        })
+        <span class="s2">//AppCompatResources.getDrawable(requireContext(), R.drawable.ic_test_black_24dp)?.setTint(color)</span>
+
+        <span class="s0">if </span>(Test.number &lt;= <span class="s3">3 </span>&amp;&amp; notAcquired &gt; limitNotAcquired) {
+
+            Log.i(<span class="s4">&quot;timer&quot;</span>,<span class="s4">&quot;timer&quot;</span>)
+            timer1.start() }
+
+        <span class="s0">return super</span>.onCreateOptionsMenu(menu, inflater)
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    @ExperimentalTime
+    override <span class="s0">fun </span>onOptionsItemSelected(item: MenuItem): Boolean {
+
+        <span class="s0">when </span>(item.itemId) {
+            R.id.item_test -&gt; {
+
+                <span class="s0">var </span>_allWords = listOf&lt;Word&gt;()
+                viewModel = ViewModelProvider(<span class="s0">this</span>, viewModelFactory).get(MainViewModel::<span class="s0">class</span>.java)
+                runBlocking(Dispatchers.Default) { _allWords = viewModel.getAllWords() }
+                Test.setCounter()
+                <span class="s0">val </span>wordsNotAcquired = _allWords.filter { !it.acquired } <span class="s2">// words yet to be acquired by user's memory</span>
+                <span class="s0">var </span>wordsForTest = listOf&lt;Word&gt;()
+
+                <span class="s0">if </span>(Test.number &gt;= <span class="s3">3</span>) {
+
+                    <span class="s0">val </span>message = resources.getString(R.string.max_tests_today_reached)
+                    Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
+
+                } <span class="s0">else if </span>(_allWords.size &lt;= <span class="s3">5</span>) {
+
+                    <span class="s0">val </span>message = resources.getString(R.string.add_more_words)
+                    Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
+
+                } <span class="s0">else </span>{
+
+                    <span class="s0">val </span>testFalse = wordsNotAcquired.filter { !it.test }
+                    runBlocking(Dispatchers.Default) {
+                        testFalse.forEach {
+
+                            <span class="s0">val </span>eDate: LocalDateTime =now(ZoneId.of(<span class="s4">&quot;Europe/Paris&quot;</span>))
+                            
+                            <span class="s0">val </span>dateTime = LocalDateTime.parse(it.lastOk, formatter)
+                            <span class="s0">val </span>diff: Long = ChronoUnit.DAYS.between(dateTime,eDate)
+
+                            Log.i(<span class="s4">&quot;diff&quot;</span>,diff.toString())
+                            Log.i(<span class="s4">&quot;lastOk&quot;</span>,it.lastOk.toString())
+
+                            <span class="s0">if </span>(it.lvl == <span class="s3">1 </span>&amp;&amp; diff &gt;= <span class="s3">3</span>) { it.test = <span class="s0">true </span>}
+                            <span class="s0">else if </span>(it.lvl == <span class="s3">2 </span>&amp;&amp; diff &gt;= <span class="s3">7</span>) { it.test = <span class="s0">true </span>}
+                            viewModel.updateWord(it)
+                        }
+                    }
+
+                    viewModel = ViewModelProvider(<span class="s0">this</span>, viewModelFactory).get(MainViewModel::<span class="s0">class</span>.java)
+                    runBlocking(Dispatchers.Default) { wordsForTest = viewModel.wordsForTest() }
+
+                    <span class="s0">if </span>(wordsForTest.size &lt;= <span class="s3">5</span>) {
+
+                        <span class="s0">val </span>message = resources.getString(R.string.add_or_wait)
+                        Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
+
+                    } <span class="s0">else </span>{
+
+                        stopTimers()
+                        AppCompatResources.getDrawable(requireContext(), R.drawable.test_white)?.setTint(argb(<span class="s3">255</span>, <span class="s3">255</span>, <span class="s3">255</span>, <span class="s3">255</span>))
+                        action?.let {action!!.setIcon(R.drawable.test_white) }
+                        <span class="s0">val </span>bundle = bundleOf(<span class="s4">&quot;listWords&quot; </span>to wordsForTest)
+                        navController.navigate(R.id.actionTest1, bundle)
+                    }
+                }
+            }
+
+            R.id.item_all -&gt; {
+                stopTimers()
+                navController.navigate(R.id.action_FirstFragment_to_allWordsFragment) }
+            R.id.item_infoApp -&gt; {
+                stopTimers()
+                navController.navigate(R.id.actionInfo)
+            }
+            R.id.item_statistics -&gt; {
+                <span class="s0">var </span>counter = <span class="s3">0</span>
+                runBlocking(Dispatchers.Default) { counter = viewModel.counterWords() }
+                <span class="s0">if </span>(counter &lt; <span class="s3">10</span>) { Toast.makeText(context, resources.getString(R.string.add_more_words_statistics), Toast.LENGTH_SHORT).show()
+                } <span class="s0">else </span>{
+                    stopTimers()
+                    navController.navigate(R.id.actionStatistics)
+                }
+            }
+        }
+
+        <span class="s0">return super</span>.onOptionsItemSelected(item)
+    }
+
+    override <span class="s0">fun </span>onAttach(context: Context) {
+        <span class="s0">super</span>.onAttach(context)
+        <span class="s0">val </span>callback: OnBackPressedCallback = <span class="s0">object </span>: OnBackPressedCallback(
+            <span class="s0">true</span>
+        ) {
+            override <span class="s0">fun </span>handleOnBackPressed() {
+                <span class="s0">val </span>intent = Intent(Intent.ACTION_MAIN)
+                intent.addCategory(Intent.CATEGORY_HOME)
+                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+                startActivity(intent)
+            }
+        }
+        requireActivity().onBackPressedDispatcher.addCallback(
+            <span class="s0">this</span>,  <span class="s2">// LifecycleOwner</span>
+            callback
+        )
+    }
+
+    private <span class="s0">val </span>timerTestColor = <span class="s0">object </span>: CountDownTimer(<span class="s3">2000000</span>, <span class="s3">100</span>) {
+
+        override <span class="s0">fun </span>onFinish() {
+
+        }
+        override <span class="s0">fun </span>onTick(millisUntilFinished: Long) {
+            a += <span class="s3">0.1F</span>
+            b = abs(<span class="s3">255 </span>* kotlin.math.sin(a)).toInt()
+            AppCompatResources.getDrawable(context!!,R.drawable.test_white)?.setTint(argb(<span class="s3">255</span>, <span class="s3">255</span>, b, b))
+            action?.let { action!!.setIcon(R.drawable.test_white) }
+
+        }
+
+    }
+
+    private <span class="s0">val </span>timer1 = <span class="s0">object </span>: CountDownTimer(<span class="s3">1000</span>, <span class="s3">2000</span>) {
+
+        override <span class="s0">fun </span>onFinish() {timerTestColor.start()}
+        override <span class="s0">fun </span>onTick(millisUntilFinished: Long) {}
+
+    }
+         private <span class="s0">fun </span>stopTimers() {
+
+            timer1.cancel()
+            timerTestColor.cancel()
+            AppCompatResources.getDrawable(requireContext(), R.drawable.test_white)?.setTint(argb(<span class="s3">255</span>, <span class="s3">255</span>, <span class="s3">255</span>, <span class="s3">255</span>))
+
+        }
+}
+
+
+
+</pre>
+</body>
+</html>

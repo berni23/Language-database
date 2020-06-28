@@ -1,0 +1,79 @@
+<html>
+<head>
+<title>MainActivity.kt</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #000080; font-weight: bold;}
+.s1 { color: #000000;}
+.s2 { color: #0000ff;}
+.s3 { color: #008000; font-weight: bold;}
+</style>
+</head>
+<body bgcolor="#ffffff">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#c0c0c0" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+MainActivity.kt</font>
+</center></td></tr></table>
+<pre><span class="s0">package </span>com.berni.android.prototype1lanbase.ui
+
+
+import android.content.Intent
+import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
+import com.berni.android.prototype1lanbase.R
+import com.berni.android.prototype1lanbase.ui.tutorial.Tutorial
+import com.berni.android.prototype1lanbase.ui.tutorial.TutorialActivity
+import com.berni.android.prototype1lanbase.ui.viewmodel.MainViewModel
+import com.berni.android.prototype1lanbase.ui.viewmodel.ViewModelFactory
+import com.jakewharton.threetenabp.AndroidThreeTen
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.runBlocking
+import org.kodein.di.KodeinAware
+import org.kodein.di.android.closestKodein
+import org.kodein.di.generic.instance
+
+
+<span class="s0">class </span>MainActivity : AppCompatActivity(),KodeinAware {
+
+         override <span class="s0">val </span>kodein by closestKodein()
+         <span class="s0">val </span>limitNotAcquired = <span class="s2">120</span>
+         private <span class="s0">val </span>viewModelFactory: ViewModelFactory by instance&lt;ViewModelFactory&gt;()
+         override <span class="s0">fun </span>onCreate(savedInstanceState: Bundle?) {
+
+        AndroidThreeTen.init( <span class="s0">this</span>)
+        <span class="s0">super</span>.onCreate(savedInstanceState)
+        <span class="s0">var </span>bool : Boolean = Tutorial.firstTime
+        <span class="s0">val </span>viewModel = ViewModelProvider(<span class="s0">this</span>, viewModelFactory).get(MainViewModel::<span class="s0">class</span>.java)
+        runBlocking(Dispatchers.Default) {
+
+            <span class="s0">val </span>bool2 = viewModel.anyCat()
+            <span class="s0">if </span>(!bool2) { bool = <span class="s0">false </span>}
+        }
+
+        <span class="s0">if </span>(bool){
+
+            <span class="s0">val </span>intent = Intent(<span class="s0">this</span>, TutorialActivity::<span class="s0">class</span>.java)
+            startActivity(intent)
+        }
+
+        <span class="s0">else </span>{
+
+            setContentView(R.layout.activity_main)
+            setSupportActionBar(findViewById(R.id.toolbar))
+            supportActionBar?.title = <span class="s3">&quot;Language Database&quot;</span>
+        }
+    }
+    }
+
+
+
+
+
+
+
+
+</pre>
+</body>
+</html>

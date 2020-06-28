@@ -1,0 +1,234 @@
+<html>
+<head>
+<title>SecondFragment.kt</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #000080; font-weight: bold;}
+.s1 { color: #000000;}
+.s2 { color: #808080; font-style: italic;}
+.s3 { color: #0000ff;}
+.s4 { color: #008000; font-weight: bold;}
+</style>
+</head>
+<body bgcolor="#ffffff">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#c0c0c0" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+SecondFragment.kt</font>
+</center></td></tr></table>
+<pre><span class="s0">package </span>com.berni.android.prototype1lanbase.ui
+
+import android.app.Activity
+import android.app.AlertDialog
+import android.content.Context
+import android.graphics.drawable.AnimationDrawable
+import android.os.Bundle
+import android.view.*
+import android.view.inputmethod.InputMethodManager
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat.getSystemService
+import androidx.core.os.bundleOf
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.NavController
+import androidx.navigation.Navigation
+import com.berni.android.prototype1lanbase.*
+import com.berni.android.prototype1lanbase.db.Cat
+import com.berni.android.prototype1lanbase.db.Test
+import com.berni.android.prototype1lanbase.db.Word
+import com.berni.android.prototype1lanbase.ui.viewmodel.MainViewModel
+import com.berni.android.prototype1lanbase.ui.viewmodel.ViewModelFactory
+import kotlinx.android.synthetic.main.fragment_second.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
+import org.kodein.di.KodeinAware
+import org.kodein.di.android.x.closestKodein
+import org.kodein.di.generic.instance
+import java.text.SimpleDateFormat
+import java.util.*
+
+
+<span class="s2">/**</span>
+ <span class="s2">* A simple [Fragment] subclass as the second destination in the navigation.</span>
+ <span class="s2">*/</span>
+<span class="s0">class </span>SecondFragment : BaseFragment(),KodeinAware {
+
+    override <span class="s0">val </span>kodein by closestKodein()
+    private <span class="s0">val </span>viewModelFactory: ViewModelFactory by instance&lt;ViewModelFactory&gt;()
+    private <span class="s0">var </span>firstWord  = <span class="s0">true</span>
+    private <span class="s0">var </span>notAcquired =<span class="s3">0</span>
+
+    private lateinit <span class="s0">var </span>viewModel: MainViewModel
+    private lateinit <span class="s0">var </span>cat: Cat
+    private lateinit <span class="s0">var </span>navController: NavController
+
+    override <span class="s0">fun </span>onCreate(savedInstanceState: Bundle?) {
+        <span class="s0">super</span>.onCreate(savedInstanceState)
+        cat= arguments?.get(<span class="s4">&quot;categoryName&quot;</span>) <span class="s0">as </span>Cat
+
+    }
+
+    override <span class="s0">fun </span>onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+
+
+        setHasOptionsMenu(<span class="s0">true</span>)
+        <span class="s0">return </span>inflater.inflate(R.layout.fragment_second, container, <span class="s0">false</span>)
+    }
+
+    override <span class="s0">fun </span>onViewCreated(view: View, savedInstanceState: Bundle?) {
+        <span class="s0">super</span>.onViewCreated(view, savedInstanceState)
+
+        navController = Navigation.findNavController(view)
+
+        word_editText.requestFocus()
+
+        (activity <span class="s0">as </span>AppCompatActivity).supportActionBar?.title = cat.catName
+        viewModel = ViewModelProvider(<span class="s0">this</span>, viewModelFactory).get(MainViewModel::<span class="s0">class</span>.java)
+        runBlocking(Dispatchers.Default){
+
+            firstWord = viewModel.anyWord()
+            notAcquired = viewModel.getNumAcquired(<span class="s0">false</span>)
+
+        }
+
+        <span class="s0">if </span>(firstWord)
+
+        {
+            <span class="s0">val </span>toast: Toast = Toast.makeText(context, resources.getString(R.string.S2_first_word),Toast.LENGTH_LONG)
+            toast.setGravity(Gravity.CENTER, <span class="s3">0</span>,<span class="s3">0</span>)
+            toast.show()
+
+            <span class="s0">val </span>anim1: AnimationDrawable
+            arrSecond.apply {
+                setBackgroundResource(R.drawable.anim_arrow)
+                anim1 = background <span class="s0">as </span>AnimationDrawable
+            }
+            anim1.start()
+        }
+
+        btn_save.setOnClickListener {
+
+
+            <span class="s0">if </span>(notAcquired &gt;= limitNotAcquired) {
+                AlertDialog.Builder(context).apply {
+
+                    setPositiveButton(resources.getString(R.string.okay)) { _, _ -&gt; }
+                    <span class="s0">this</span>.setMessage(resources.getString(R.string.already_120))
+
+                }.create().show()
+            } <span class="s0">else </span>{
+
+                <span class="s2">//TODO() http request for auto -completion of all the blanks except for the 'word' //</span>
+
+                <span class="s2">// required blanks</span>
+
+                <span class="s0">val </span>theWord = word_editText.text.toString().trim()
+                <span class="s0">val </span>translation1 = trans1_editText.text.toString().trim()
+                <span class="s0">val </span>date = SimpleDateFormat(<span class="s4">&quot;dd/MM/yyyy&quot;</span>, Locale.getDefault()).format(Date())
+
+                <span class="s2">// optional blanks</span>
+
+                <span class="s0">var </span>example1: String? = ex1_editText.text.toString().trim()
+                <span class="s0">var </span>translationExample1: String? = ex1Trans_editText.text.toString().trim()
+                <span class="s0">var </span>definition: String? = definition_editText.text.toString().trim()
+                <span class="s0">if </span>(example1!!.isEmpty()) {example1 = <span class="s0">null</span>}
+
+                <span class="s0">if </span>(translationExample1!!.isEmpty()) {translationExample1 = <span class="s0">null</span>}
+                <span class="s0">if </span>(definition!!.isEmpty()) {definition = <span class="s0">null</span>}
+
+                <span class="s0">if </span>(theWord.isEmpty()) {
+
+                    word_editText.error = resources.getString(R.string.word_required)
+                    word_editText.requestFocus()
+                    <span class="s0">return</span>@setOnClickListener
+                }
+
+                <span class="s0">if </span>(translation1.isEmpty()) {
+
+                    trans1_editText.error = resources.getString(R.string.trans_required)
+                    trans1_editText.requestFocus()
+                    <span class="s0">return</span>@setOnClickListener
+
+                }
+
+                <span class="s0">var </span>bool = <span class="s0">true</span>
+                runBlocking(Dispatchers.Default) { bool = viewModel.validWordId(cat.catId.toString(),theWord)}
+
+                <span class="s0">if </span>(bool) {
+
+                    launch {
+
+                        <span class="s0">val </span>word = Word(theWord, translation1, example1, translationExample1, definition, date.toString(), cat.catId)
+                        viewModel.addWord(word)
+                    }
+
+                    Test.warningTest++
+
+
+                } <span class="s0">else </span>{
+
+                    word_editText.error = resources.getString(R.string.word_exists)
+                    word_editText.requestFocus()
+                    <span class="s0">return</span>@setOnClickListener
+                }
+
+                word_editText.text.clear()
+                trans1_editText.text.clear()
+                ex1_editText.text.clear()
+                definition_editText.text.clear()
+                ex1Trans_editText.text.clear()
+
+                <span class="s0">if </span>(firstWord) {
+
+                    <span class="s0">val </span>toast: Toast = Toast.makeText(context, resources.getString(R.string.S2_first_word_added), Toast.LENGTH_LONG)
+                    toast.setGravity(Gravity.CENTER, <span class="s3">0</span>, <span class="s3">0</span>)
+                    toast.show()
+                    arrSecond.rotation = -<span class="s3">90F</span>
+                }
+
+                <span class="s0">else if</span>(Test.warningTest&gt;limitWarning)
+                {Toast.makeText(context, resources.getString(R.string.word_successfully_added_warning), Toast.LENGTH_LONG).show() }
+
+                <span class="s0">else </span>{Toast.makeText(context, resources.getString(R.string.word_successfully_added), Toast.LENGTH_SHORT).show() }
+            }
+        }
+    }
+    override <span class="s0">fun </span>onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+
+        <span class="s0">super</span>.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.menu_fragment_second, menu)
+    }
+
+   override <span class="s0">fun </span>onOptionsItemSelected(item: MenuItem): Boolean {
+
+       <span class="s0">when </span>(item.itemId) {
+           R.id.item_toWordsList -&gt; {
+
+               <span class="s0">val </span>bundle = bundleOf(<span class="s4">&quot;cat&quot; </span>to cat)
+               hideKeyboard()
+               navController.navigate(R.id.actionWordsList, bundle)
+           }
+
+               R.id.item_back -&gt; {
+
+                   hideKeyboard()
+                   navController.popBackStack()}
+           }
+       <span class="s0">return super</span>.onOptionsItemSelected(item)
+   }
+
+
+}
+
+
+
+
+
+</pre>
+</body>
+</html>

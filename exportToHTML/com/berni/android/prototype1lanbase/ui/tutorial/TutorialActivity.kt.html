@@ -1,0 +1,115 @@
+<html>
+<head>
+<title>TutorialActivity.kt</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #000080; font-weight: bold;}
+.s1 { color: #000000;}
+.s2 { color: #0000ff;}
+.s3 { color: #008000; font-weight: bold;}
+</style>
+</head>
+<body bgcolor="#ffffff">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#c0c0c0" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+TutorialActivity.kt</font>
+</center></td></tr></table>
+<pre><span class="s0">package </span>com.berni.android.prototype1lanbase.ui.tutorial
+
+
+import android.content.Intent
+import android.opengl.Visibility
+import androidx.appcompat.app.AppCompatActivity
+import android.os.Bundle
+import android.view.View.GONE
+import android.view.View.VISIBLE
+import com.berni.android.prototype1lanbase.R
+import com.berni.android.prototype1lanbase.ui.MainActivity
+import kotlinx.android.synthetic.main.activity_tutorial.*
+
+<span class="s0">class </span>TutorialActivity : AppCompatActivity() {
+
+    <span class="s0">var </span>msg: Int = <span class="s2">0</span>
+
+    override <span class="s0">fun </span>onCreate(savedInstanceState: Bundle?) {
+
+        <span class="s0">super</span>.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_tutorial)
+        setSupportActionBar(findViewById(R.id.toolbar))
+        supportActionBar?.title = <span class="s3">&quot; Language Database&quot;</span>
+        tutorial_t2.textSize = <span class="s2">20F</span>
+
+        btn_tutorial_next.setOnClickListener { messages(<span class="s2">1 </span>) }
+        btn_tutorial_back.setOnClickListener { messages(-<span class="s2">1</span>) }
+    }
+
+    override <span class="s0">fun </span>onBackPressed() { finish() }
+
+   private <span class="s0">fun </span>messages(count:Int) {
+
+    <span class="s0">if </span>(msg == <span class="s2">0</span>) {
+
+        <span class="s0">if </span>(count&gt;<span class="s2">0</span>) {
+
+            msg += count
+            tutorial_t1.text = resources.getString(R.string.tutorial_m3)
+            tutorial_t2.visibility = GONE
+            tutorial_t3.visibility = GONE
+
+        }
+
+    } <span class="s0">else if </span>(msg == <span class="s2">1</span>) {
+
+
+        msg+=count
+        tutorial_t1.text = resources.getString(R.string.tutorial_m4)
+        tutorial_t2.visibility = VISIBLE
+        tutorial_t2.text = resources.getString(R.string.tutorial_m5)
+
+
+    } <span class="s0">else if </span>(msg == <span class="s2">2</span>) {
+        msg+=count
+        tutorial_t1.text = resources.getString(R.string.tutorial_m6)
+        tutorial_t2.text = resources.getString(R.string.tutorial_m7)
+
+    } <span class="s0">else if </span>(msg == <span class="s2">3</span>) {
+
+        msg+=count
+
+        tutorial_t1.text = resources.getString(R.string.tutorial_m8)
+        tutorial_t2.visibility = GONE
+
+    } <span class="s0">else if </span>(msg == <span class="s2">4</span>) {
+
+        msg+=count
+        tutorial_t1.text = resources.getString(R.string.tutorial_m9)
+        tutorial_t2.visibility = GONE
+
+    } <span class="s0">else if </span>(msg == <span class="s2">5</span>) {
+
+
+        msg += count
+
+        tutorial_t1.visibility = GONE
+        tutorial_t2.visibility = VISIBLE
+        tutorial_t2.text = resources.getString(R.string.tutorial_m10)
+        tutorial_t2.textSize = <span class="s2">30F</span>
+
+    }
+
+     <span class="s0">else </span>{
+
+        Tutorial.firstTime = <span class="s0">false</span>
+        <span class="s0">val </span>intent = Intent(<span class="s0">this</span>, MainActivity::<span class="s0">class</span>.java)
+        startActivity(intent)
+
+        }
+   }
+}
+
+
+
+</pre>
+</body>
+</html>

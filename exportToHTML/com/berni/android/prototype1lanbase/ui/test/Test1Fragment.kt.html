@@ -1,0 +1,102 @@
+<html>
+<head>
+<title>Test1Fragment.kt</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #000080; font-weight: bold;}
+.s1 { color: #000000;}
+.s2 { color: #808080; font-style: italic;}
+.s3 { color: #008000; font-weight: bold;}
+.s4 { color: #0000ff;}
+</style>
+</head>
+<body bgcolor="#ffffff">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#c0c0c0" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+Test1Fragment.kt</font>
+</center></td></tr></table>
+<pre><span class="s0">package </span>com.berni.android.prototype1lanbase.ui.test
+import android.os.Bundle
+import android.view.*
+import androidx.fragment.app.Fragment
+import com.berni.android.prototype1lanbase.R
+import com.berni.android.prototype1lanbase.db.Word
+import org.kodein.di.KodeinAware
+import org.kodein.di.android.x.closestKodein
+import android.widget.Toast
+import androidx.core.os.bundleOf
+import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.NavController
+import androidx.navigation.Navigation
+import com.berni.android.prototype1lanbase.ui.BaseFragment
+import com.berni.android.prototype1lanbase.ui.viewmodel.MainViewModel
+import com.berni.android.prototype1lanbase.ui.viewmodel.ViewModelFactory
+import org.kodein.di.generic.instance
+import kotlinx.android.synthetic.main.fragment_test1.*
+
+
+<span class="s2">/**</span>
+ <span class="s2">* A simple [Fragment] subclass.</span>
+ <span class="s2">*/</span>
+<span class="s0">class </span>Test1Fragment : BaseFragment(),KodeinAware {
+
+    override <span class="s0">val </span>kodein by closestKodein()
+
+    private lateinit <span class="s0">var </span>navController: NavController
+    private lateinit <span class="s0">var </span>viewModel: MainViewModel
+
+    private  <span class="s0">val </span>viewModelFactory: ViewModelFactory by instance&lt;ViewModelFactory&gt;()
+    private lateinit <span class="s0">var </span>wordsForTest: List&lt;Word&gt;
+
+    override <span class="s0">fun </span>onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+
+    ): View? {
+
+        setHasOptionsMenu(<span class="s0">true</span>)
+        <span class="s0">return </span>inflater.inflate(R.layout.fragment_test1, container, <span class="s0">false</span>)}
+
+
+    override <span class="s0">fun </span>onViewCreated(view: View, savedInstanceState: Bundle?) {
+
+        <span class="s0">super</span>.onViewCreated(view, savedInstanceState)
+        navController = Navigation.findNavController(view)
+        wordsForTest= arguments?.get(<span class="s3">&quot;listWords&quot;</span>) <span class="s0">as </span>List&lt;Word&gt;
+        viewModel = ViewModelProvider(<span class="s0">this</span>, viewModelFactory).get(MainViewModel::<span class="s0">class</span>.java)
+
+        <span class="s0">val </span>pickedWords = ranWords()
+        btn_testReady.setOnClickListener{
+
+            <span class="s0">val </span>bundle = bundleOf(<span class="s3">&quot;pickedWords&quot; </span>to pickedWords)
+            navController.navigate(R.id.actionStartTest, bundle)
+            Toast.makeText(context, resources.getString(R.string.lets_do_it), Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    private <span class="s0">fun </span>ranWords(): List&lt;Word&gt; {
+
+        <span class="s0">val </span>listTest = wordsForTest.shuffled()
+        <span class="s0">return if </span>(wordsForTest.size &gt;= <span class="s4">15</span>)  {listTest.subList(<span class="s4">0</span>,<span class="s4">15</span>).toList() }
+        <span class="s0">else  </span>{listTest}
+     }
+
+    override <span class="s0">fun </span>onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.menu_test1, menu)
+        <span class="s0">return super</span>.onCreateOptionsMenu(menu, inflater)
+    }
+
+    override <span class="s0">fun </span>onOptionsItemSelected(item: MenuItem): Boolean {
+
+        <span class="s0">when </span>(item.itemId) {R.id.item_backEditToWordsList -&gt; { navController.popBackStack() } }
+
+        <span class="s0">return super</span>.onOptionsItemSelected(item)
+    }
+
+}
+
+
+</pre>
+</body>
+</html>

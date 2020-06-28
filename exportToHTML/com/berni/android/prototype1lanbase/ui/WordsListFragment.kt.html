@@ -1,0 +1,348 @@
+<html>
+<head>
+<title>WordsListFragment.kt</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #000080; font-weight: bold;}
+.s1 { color: #000000;}
+.s2 { color: #808080; font-style: italic;}
+.s3 { color: #008000; font-weight: bold;}
+.s4 { color: #0000ff;}
+</style>
+</head>
+<body bgcolor="#ffffff">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#c0c0c0" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+WordsListFragment.kt</font>
+</center></td></tr></table>
+<pre><span class="s0">package </span>com.berni.android.prototype1lanbase.ui
+
+import android.annotation.SuppressLint
+import android.content.Context
+import android.os.Bundle
+import android.os.CountDownTimer
+import android.view.*
+import android.widget.SearchView
+import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
+import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.NavController
+import androidx.navigation.Navigation
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.berni.android.prototype1lanbase.*
+import com.berni.android.prototype1lanbase.db.Cat
+import com.berni.android.prototype1lanbase.db.Word
+import com.berni.android.prototype1lanbase.ui.adapter.WordAdapter
+import com.berni.android.prototype1lanbase.ui.tutorial.Tutorial
+import com.berni.android.prototype1lanbase.ui.viewmodel.MainViewModel
+import com.berni.android.prototype1lanbase.ui.viewmodel.ViewModelFactory
+import kotlinx.android.synthetic.main.fragment_all_words.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.runBlocking
+import org.kodein.di.KodeinAware
+import org.kodein.di.android.x.closestKodein
+import org.kodein.di.generic.instance
+
+
+<span class="s2">/**</span>
+ <span class="s2">* A simple [Fragment] subclass.</span>
+ <span class="s2">*/</span>
+<span class="s0">class </span>WordsListFragment : BaseFragment(), KodeinAware {
+
+    <span class="s2">//lateinit var navController: NavController</span>
+
+    private lateinit <span class="s0">var </span>cat: Cat
+    private lateinit <span class="s0">var </span>lastAdded: List&lt;Word?&gt;
+    private <span class="s0">var </span>displayedWords =  listOf&lt;Word&gt;()
+    private <span class="s0">var </span>displayedWords1 =  listOf&lt;Word&gt;()
+    private <span class="s0">var </span>lastAdditionDate: String? = <span class="s3">&quot;&quot;</span>
+    private <span class="s0">var </span>firstView = Tutorial.firstListWordView
+    private lateinit <span class="s0">var </span>navController: NavController
+
+    override <span class="s0">val </span>kodein by closestKodein()
+    private <span class="s0">val </span>viewModelFactory: ViewModelFactory by instance&lt;ViewModelFactory&gt;()
+    private lateinit <span class="s0">var </span>viewModel: MainViewModel
+
+    override <span class="s0">fun </span>onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+
+        setHasOptionsMenu(<span class="s0">true</span>)
+        cat = arguments?.get(<span class="s3">&quot;cat&quot;</span>) <span class="s0">as </span>Cat
+
+        <span class="s0">return </span>inflater.inflate(R.layout.fragment_all_words, container, <span class="s0">false</span>)
+    }
+
+    @SuppressLint(<span class="s3">&quot;SetTextI18n&quot;</span>)
+    override <span class="s0">fun </span>onViewCreated(view: View, savedInstanceState: Bundle?) {
+        <span class="s0">super</span>.onViewCreated(view, savedInstanceState)
+
+
+        (activity <span class="s0">as </span>AppCompatActivity).supportActionBar?.title = cat.catName
+        activity?.window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_NOTHING)
+
+        navController = Navigation.findNavController(view)
+        recycler_view_words.setHasFixedSize(<span class="s0">true</span>)
+        viewModel = ViewModelProvider(<span class="s0">this</span>, viewModelFactory).get(MainViewModel::<span class="s0">class</span>.java)
+
+        <span class="s0">if</span>(firstView) {
+
+           <span class="s2">// resources.getString(R.string.last_added_on)</span>
+            <span class="s0">val </span>toast: Toast =  Toast.makeText(context, resources.getString(R.string.msg_firstView), Toast.LENGTH_LONG)
+            toast.setGravity(Gravity.CENTER, <span class="s4">0</span>,<span class="s4">0</span>)
+            toast.show()
+
+            timerToast.start()
+
+        }
+
+        <span class="s2">// observe if the words within the category suffer any change (like edition or deletion)</span>
+
+        viewModel.wordsInCat(cat.catId).observe(viewLifecycleOwner, Observer&lt;List&lt;Word&gt;&gt; {
+        recycler_view_words.layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, <span class="s0">false</span>)
+
+           runBlocking(Dispatchers.Default){
+
+               displayedWords =  it.reversed()
+               recycler_view_words.adapter =
+                   WordAdapter(
+                       displayedWords,
+                       viewModel,
+                       listOf(timerToast, timerToast2, timerToast3),
+                       <span class="s0">this</span>.coroutineContext
+                   )
+
+           }
+
+              displayedWords1 = displayedWords
+            <span class="s2">// setting up info for the info box in top of words list, several cases to be accounted for</span>
+
+            lastAdded = listOf(
+
+                displayedWords.getOrNull(<span class="s4">0</span>),
+                displayedWords.getOrNull(<span class="s4">1</span>),
+                displayedWords.getOrNull(<span class="s4">2</span>)
+            )
+
+            lastAdditionDate = displayedWords.getOrNull(<span class="s4">0</span>)?.date
+            <span class="s0">var </span>lastAdditions =  resources.getString(R.string.last_additions)
+            lastAdded.forEach {
+                <span class="s0">if </span>(it?.wordName != <span class="s0">null</span>) { lastAdditions += <span class="s3">&quot; </span><span class="s0">${</span>it.wordName<span class="s0">}</span><span class="s3">,&quot;</span>
+                }
+            }
+            lastAdditions = lastAdditions.dropLast(<span class="s4">1</span>)  <span class="s2">// drop the last comma of the string</span>
+            <span class="s0">if </span>(lastAdded.elementAt(<span class="s4">0</span>)?.wordName == <span class="s0">null</span>) {
+                lastAdditions = resources.getString(R.string.no_words_added_yet)
+            }
+            <span class="s0">val </span>stringLastAdditionDate = <span class="s3">&quot;</span><span class="s0">${</span>resources.getString(R.string.last_added_on)<span class="s0">} $</span>lastAdditionDate<span class="s3">&quot;</span>
+
+            text_view_numWords.text = <span class="s3">&quot; </span><span class="s0">${</span>recycler_view_words.adapter?.itemCount?:<span class="s4">0</span><span class="s0">} ${</span>resources.getString(R.string.words)<span class="s0">}</span><span class="s3">&quot;</span>
+            lastAdditionDate?.let {text_view_lastDate.text = stringLastAdditionDate }
+            text_view_last_additions.text = lastAdditions
+
+        })
+    }
+
+    override <span class="s0">fun </span>onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.menu_words, menu)
+
+
+        <span class="s0">val </span>searchItem = menu.findItem(R.id.item_search)
+
+        <span class="s0">val </span>searchView: SearchView = searchItem.actionView <span class="s0">as </span>SearchView
+
+        searchView.setOnSearchClickListener { setItemsVisibility(menu, searchItem, <span class="s0">false</span>) }
+
+        searchView.setOnCloseListener { setItemsVisibility(menu, searchItem, <span class="s0">true</span>)
+            <span class="s0">false</span>
+        }
+
+
+        searchView.setOnQueryTextListener(<span class="s0">object </span>: SearchView.OnQueryTextListener {
+            override <span class="s0">fun </span>onQueryTextSubmit(query: String?): Boolean {
+                <span class="s0">return false</span>
+            }
+
+            override <span class="s0">fun </span>onQueryTextChange(newText: String?): Boolean {
+                <span class="s0">val </span>newWordsList = mutableListOf&lt;Word&gt;()
+
+                displayedWords1.forEach { <span class="s0">if </span>(it.wordName.startsWith(newText!!)) { newWordsList.add(it) } }
+                recycler_view_words.adapter = WordAdapter(newWordsList, viewModel, listOf(timerToast, timerToast2, timerToast3), coroutineContext)
+                <span class="s0">return false</span>
+            }
+
+        })
+
+        <span class="s0">return super</span>.onCreateOptionsMenu(menu, inflater)
+    }
+
+    override <span class="s0">fun </span>onOptionsItemSelected(item: MenuItem): Boolean {
+
+        <span class="s0">val </span>message: String?
+        <span class="s0">when </span>(item.itemId) {
+
+            R.id.item_backToSecond -&gt; {
+                navController.popBackStack()
+                stopTimers()
+            }
+
+            R.id.alphabetically -&gt; {
+
+                displayedWords1 = sortAlphabetically(displayedWords)
+                message =  resources.getString(R.string.sorting_alphabet)
+                Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
+            }
+
+            R.id.last_added -&gt; {
+
+                displayedWords1 = sortLastAdded(displayedWords)
+                message = resources.getString(R.string.sorting_last_added)
+                Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
+            }
+
+            R.id.first_added -&gt; {
+
+                displayedWords1 = sortFirstAdded(displayedWords)
+                message = resources.getString(R.string.sorting_first_added)
+                Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
+            }
+
+            R.id.withExample -&gt; {
+
+                displayedWords1 =  filterExample(displayedWords)
+                message = resources.getString(R.string.filtering_ex)
+                Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
+            }
+
+            R.id.noExample -&gt; {
+
+                displayedWords1 = filterNoExample(displayedWords)
+                message =  resources.getString(R.string.filtering_no_ex)
+                Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
+            }
+
+            R.id.byLength -&gt; {
+
+                displayedWords1 = sortByLength(displayedWords)
+                message =  resources.getString(R.string.sorting_length)
+                Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
+
+            }
+
+            R.id.withDefinition -&gt;{
+
+                displayedWords1 = filterDefinition(displayedWords)
+                message =  resources.getString(R.string.filtering_definition)
+                Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
+            }
+
+            R.id.noDefinition -&gt;{
+
+                displayedWords1 = filterNoDefinition(displayedWords)
+                message =  resources.getString(R.string.filtering_no_definition)
+                Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
+            }
+            R.id.acquired -&gt;{
+
+                displayedWords1 = filterAcquired(displayedWords)
+                message =  resources.getString(R.string.filtering_acquired)
+                Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
+            }
+
+            R.id.notAcquired -&gt;{
+
+                displayedWords1 = filterNotAcquired(displayedWords)
+                message =  resources.getString(R.string.filtering_not_acquired)
+                Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
+
+            }
+        }
+
+        recycler_view_words.adapter =
+            WordAdapter(
+                displayedWords1,
+                viewModel,
+                listOf(timerToast, timerToast2, timerToast3),
+                coroutineContext
+            )
+        <span class="s0">return super</span>.onOptionsItemSelected(item)
+    }
+
+    <span class="s2">/** also, for the sorting and filtering not to be applied but rather activated, the filters</span>
+        <span class="s2">can  perform the same way and the sorting can start with initial data and pass the first</span>
+        <span class="s2">X elements, where x = size of filtered list</span>
+<span class="s2">**/</span>
+
+    private <span class="s0">val </span>timerToast = <span class="s0">object</span>: CountDownTimer(<span class="s4">5000</span>,<span class="s4">5000</span>) {
+
+        override <span class="s0">fun </span>onFinish() {
+
+            <span class="s0">val </span>toast: Toast =  Toast.makeText(context, resources.getString(R.string.msg_timerToast1), Toast.LENGTH_LONG)
+            toast.setGravity(Gravity.CENTER, <span class="s4">0</span>,<span class="s4">0</span>)
+            toast.show()
+            timerToast2.start()
+
+        }
+
+        override <span class="s0">fun </span>onTick(millisUntilFinished: Long) {}
+    }
+
+    private <span class="s0">val </span>timerToast2 = <span class="s0">object</span>: CountDownTimer(<span class="s4">5000</span>,<span class="s4">5000</span>) {
+        
+        override <span class="s0">fun </span>onFinish() {
+
+            <span class="s0">val </span>toast: Toast =  Toast.makeText(context,resources.getString(R.string.msg_timerToast2), Toast.LENGTH_LONG)
+            toast.setGravity(Gravity.CENTER, <span class="s4">0</span>,<span class="s4">0</span>)
+            toast.show()
+            timerToast3.start()
+        }
+        override <span class="s0">fun </span>onTick(millisUntilFinished: Long) {}
+    }
+
+    private <span class="s0">val </span>timerToast3 = <span class="s0">object</span>: CountDownTimer(<span class="s4">5000</span>,<span class="s4">5000</span>) {
+
+        override <span class="s0">fun </span>onFinish() {
+
+            <span class="s0">val </span>toast: Toast =  Toast.makeText(context, resources.getString(R.string.msg_timerToast3), Toast.LENGTH_LONG)
+            toast.setGravity(Gravity.CENTER, <span class="s4">0</span>,<span class="s4">0</span>)
+            toast.show()
+
+            firstView = <span class="s0">false</span>
+            Tutorial.firstListWordView = <span class="s0">false</span>
+        }
+        override <span class="s0">fun </span>onTick(millisUntilFinished: Long) {}
+    }
+
+
+    private <span class="s0">fun </span>stopTimers() {
+
+        timerToast.cancel()
+        timerToast2.cancel()
+        timerToast3.cancel()
+    }
+
+    override <span class="s0">fun </span>onAttach(context: Context) {
+        <span class="s0">super</span>.onAttach(context)
+        <span class="s0">val </span>callback: OnBackPressedCallback = <span class="s0">object </span>: OnBackPressedCallback(
+            <span class="s0">true </span><span class="s2">// default to enabled</span>
+        ) {
+            override <span class="s0">fun </span>handleOnBackPressed() {
+
+                navController.popBackStack()
+                stopTimers()
+            }
+        }
+        requireActivity().onBackPressedDispatcher.addCallback(
+            <span class="s0">this</span>,  <span class="s2">// LifecycleOwner</span>
+            callback
+        )
+    }
+}</pre>
+</body>
+</html>

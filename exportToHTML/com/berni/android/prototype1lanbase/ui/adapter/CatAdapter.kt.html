@@ -1,0 +1,168 @@
+<html>
+<head>
+<title>CatAdapter.kt</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #000080; font-weight: bold;}
+.s1 { color: #000000;}
+.s2 { color: #008000; font-weight: bold;}
+.s3 { color: #808080; font-style: italic;}
+.s4 { color: #0000ff;}
+</style>
+</head>
+<body bgcolor="#ffffff">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#c0c0c0" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+CatAdapter.kt</font>
+</center></td></tr></table>
+<pre><span class="s0">package </span>com.berni.android.prototype1lanbase.ui.adapter
+
+import android.annotation.SuppressLint
+import android.app.AlertDialog
+import android.view.*
+import android.view.ContextMenu.ContextMenuInfo
+import android.widget.EditText
+import android.widget.LinearLayout
+import android.widget.Toast
+import androidx.core.os.bundleOf
+import androidx.navigation.Navigation.findNavController
+import androidx.recyclerview.widget.RecyclerView
+import com.berni.android.prototype1lanbase.R
+import com.berni.android.prototype1lanbase.db.CatWords
+import kotlinx.android.synthetic.main.adapter_cat.view.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
+import kotlin.coroutines.CoroutineContext
+import com.berni.android.prototype1lanbase.ui.viewmodel.MainViewModel
+
+<span class="s0">class </span>CatAdapter(private <span class="s0">val </span>cats: List&lt;CatWords&gt;, private <span class="s0">val </span>viewModel: MainViewModel, override <span class="s0">val </span>coroutineContext: CoroutineContext
+) : RecyclerView.Adapter&lt;CatAdapter.CatViewHolder&gt;(),
+    View.OnCreateContextMenuListener, CoroutineScope {
+
+    override <span class="s0">fun </span>onCreateViewHolder(parent: ViewGroup, viewType: Int): CatViewHolder {
+        <span class="s0">return </span>CatViewHolder(
+            LayoutInflater.from(parent.context).inflate(R.layout.adapter_cat, parent, <span class="s0">false</span>)
+        )
+
+    }
+
+    override <span class="s0">fun </span>onCreateContextMenu(menu: ContextMenu, v: View?, menuInfo: ContextMenuInfo?) {
+        MenuInflater(v?.context).inflate(R.menu.menu_cat, menu)
+    }
+
+    override <span class="s0">fun </span>getItemCount() = cats.size
+    @SuppressLint(<span class="s2">&quot;SetTextI18n&quot;</span>)
+    override <span class="s0">fun </span>onBindViewHolder(holder: CatViewHolder, position: Int) {
+
+       <span class="s3">// var wordNames  = mutableListOf&lt;String&gt;()</span>
+        <span class="s0">val </span>lastAdded: List&lt;String?&gt;
+        <span class="s0">val </span>numWords: Int
+
+        holder.view.text_view_title.text = cats[position].cat.catName
+        <span class="s0">val </span>wordNames = cats[position].words.sortedBy {it.wordId }.reversed()
+
+         lastAdded = listOf(
+
+            wordNames.getOrNull(<span class="s4">0</span>)?.wordName,
+            wordNames.getOrNull(<span class="s4">1</span>)?.wordName,
+            wordNames.getOrNull(<span class="s4">2</span>)?.wordName
+         )
+
+        numWords = wordNames.size
+        <span class="s0">var </span>lastAdditions =holder.itemView.context.getString(R.string.last_additions)
+        <span class="s0">if </span>(lastAdded.elementAt(<span class="s4">0</span>)== <span class="s0">null</span>) {
+            holder.view.text_view_last_additions.text =  holder.itemView.context.getString(R.string.no_words_added)
+            holder.view.text_view_numWords.text = <span class="s2">&quot;&quot; </span>}
+
+        <span class="s0">else </span>{
+            lastAdded.forEach {<span class="s0">if </span>(it != <span class="s0">null</span>)  lastAdditions += <span class="s2">&quot; </span><span class="s0">${</span>it<span class="s0">}</span><span class="s2">,&quot; </span>}
+            lastAdditions = lastAdditions.dropLast(<span class="s4">1</span>)  <span class="s3">// drop the last comma of the string</span>
+            holder.view.text_view_last_additions.text = lastAdditions
+            holder.view.text_view_numWords.text=<span class="s2">&quot; </span><span class="s0">$</span>numWords <span class="s0">${</span>holder.itemView.context.getString(R.string.words)<span class="s0">}</span><span class="s2">&quot;</span>
+        }
+
+        holder.view.text_view_date.text =  <span class="s2">&quot; </span><span class="s0">${</span>holder.itemView.context.getString(R.string.createdOn)<span class="s0">} ${</span>cats[position].cat.catDate<span class="s0">}</span><span class="s2">&quot;</span>
+        holder.view.setOnClickListener {
+
+            <span class="s0">val </span>bundle = bundleOf(<span class="s2">&quot;categoryName&quot; </span>to cats[position].cat)
+
+
+            findNavController(it).navigate(R.id.actionAddCat, bundle)
+        }
+
+        holder.view.setOnCreateContextMenuListener { menu: ContextMenu?, v: View?, _: ContextMenuInfo? -&gt;
+            menu?.add(holder.itemView.context.getString(R.string.delete))?.setOnMenuItemClickListener {
+
+                AlertDialog.Builder(v?.context).apply {
+                    setTitle(holder.itemView.context.getString(R.string.are_you_sure))
+                    setMessage(holder.itemView.context.getString(R.string.you_cannot_undo))
+                    setPositiveButton(holder.itemView.context.getString(R.string.yes)) { _, _ -&gt;
+
+                        launch(Dispatchers.Default){
+                            viewModel.deleteWordsInCat(cats[position].cat.catId)
+                            viewModel.deleteCat(cats[position].cat)
+                        }
+                     Toast.makeText(v?.context, <span class="s2">&quot;</span><span class="s0">${</span>holder.itemView.context.getString(R.string.deleting_cat)<span class="s0">} ${</span>cats[position].cat.catName<span class="s0">}</span><span class="s2">..&quot;</span>, Toast.LENGTH_SHORT).show()
+                    }
+
+                    setNegativeButton(holder.itemView.context.getString(R.string.no)) { _, _ -&gt;
+
+                    }}.create().show()
+
+                <span class="s0">true</span>
+            }
+            menu?.add(holder.itemView.context.getString(R.string.rename))?.setOnMenuItemClickListener {
+
+                AlertDialog.Builder(v?.context).apply {
+
+                    <span class="s0">val </span>input = EditText(context)
+                    <span class="s0">val </span>lp = LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT)
+
+                    input.layoutParams = lp
+                    <span class="s0">this</span>.setView(input)
+
+                    setTitle(holder.itemView.context.getString(R.string.edit_cat))
+                    setPositiveButton(holder.itemView.context.getString(R.string.modify)) { _, _ -&gt;
+
+                        <span class="s0">val </span>renamed = input.text.toString().trim()
+                        <span class="s0">if </span>(renamed.isEmpty()) {
+
+                            input.error = holder.itemView.context.getString(R.string.new_name_required)
+                            input.requestFocus()
+                            <span class="s0">return</span>@setPositiveButton
+                        }
+
+                        <span class="s0">var </span>bool = <span class="s0">true</span>
+                        runBlocking(Dispatchers.Default){bool = viewModel.validCatName(renamed) }
+                        <span class="s0">if</span>(bool) {launch(Dispatchers.Default){viewModel.updateCat(cats[position].cat.catName,renamed) }  }
+
+                        <span class="s0">else</span>
+
+                        {
+                            input.error = holder.itemView.context.getString(R.string.name_already_exists)
+                            input.requestFocus()
+                            <span class="s0">return</span>@setPositiveButton
+                        }
+                    }
+                    setNegativeButton(holder.itemView.context.getString(R.string.cancel)) { _, _ -&gt;
+
+                    }}.create().show()
+
+                holder.view.text_view_title.isFocusable = <span class="s0">true</span>
+                holder.view.text_view_title.isFocusableInTouchMode = <span class="s0">true</span>
+
+                Toast.makeText(v?.context, holder.itemView.context.getString(R.string.renaming), Toast.LENGTH_SHORT).show()
+                <span class="s0">true</span>
+            }
+        }
+    }
+    <span class="s0">class </span>CatViewHolder(<span class="s0">val </span>view: View) : RecyclerView.ViewHolder(view)
+}
+
+
+</pre>
+</body>
+</html>

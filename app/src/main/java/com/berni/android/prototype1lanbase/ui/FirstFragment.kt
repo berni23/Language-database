@@ -98,7 +98,11 @@ class FirstFragment : BaseFragment(),KodeinAware {
             firstCat = viewModel.anyCat()
             notAcquired = viewModel.getNumAcquired(false)
 
+
+
         }
+
+
 
         Log.i("notAcquired",notAcquired.toString())
         viewModel.catsWithWords().observe(viewLifecycleOwner, Observer<List<CatWords>> {
@@ -362,7 +366,6 @@ class FirstFragment : BaseFragment(),KodeinAware {
             AppCompatResources.getDrawable(requireContext(), R.drawable.test_white)?.setTint(argb(255, 255, 255, 255))
 
         }
-
 }
 
 
