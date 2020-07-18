@@ -31,31 +31,32 @@
             <TextView
                 android:id="@+id/text_view_word"
                 android:singleLine="true"
-                android:fontFamily = "@font/dancing_regular"
+                android:fontFamily = "@font/lato_light"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
                 android:layout_marginEnd = "10dp"
                 android:layout_margin="20dp"
                 android:text="@string/note"
-                android:textColor="#616161"
                 android:textSize="18sp"
                 android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/text_view_translation"
                 android:singleLine="true"
-                android:fontFamily = "@font/dancing_regular"
+                android:fontFamily = "@font/lato_light"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="20dp"
                 android:text="@string/note"
-                android:textColor="#8C9EFF"
                 android:textSize="18sp"
                 android:textStyle="bold" />
 
-        </LinearLayout>
+           <!-- android:textColor= "#1EC3D8"-->
 
+            <!--android:textColor="#8C9EFF"-->
+
+        </LinearLayout>
 
         <ImageView
             android:contentDescription="@string/menu_edit_or_delete_word"

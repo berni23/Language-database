@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".ui.SecondFragment">
 
-
     <com.google.android.material.floatingactionbutton.FloatingActionButton
 
         android:id="@+id/btn_save"

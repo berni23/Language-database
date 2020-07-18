@@ -99,7 +99,6 @@ class WordsListFragment : BaseFragment(), KodeinAware {
                        listOf(timerToast, timerToast2, timerToast3),
                        this.coroutineContext
                    )
-
            }
 
               displayedWords1 = displayedWords
@@ -134,17 +133,12 @@ class WordsListFragment : BaseFragment(), KodeinAware {
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.menu_words, menu)
 
-
         val searchItem = menu.findItem(R.id.item_search)
-
         val searchView: SearchView = searchItem.actionView as SearchView
-
         searchView.setOnSearchClickListener { setItemsVisibility(menu, searchItem, false) }
-
         searchView.setOnCloseListener { setItemsVisibility(menu, searchItem, true)
             false
         }
-
 
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
@@ -154,7 +148,7 @@ class WordsListFragment : BaseFragment(), KodeinAware {
             override fun onQueryTextChange(newText: String?): Boolean {
                 val newWordsList = mutableListOf<Word>()
 
-                displayedWords1.forEach { if (it.wordName.startsWith(newText!!)) { newWordsList.add(it) } }
+                displayedWords1.forEach { if (it.wordName.startsWith(newText!!) || it.wordName.startsWith(newText.toLowerCase()) ) { newWordsList.add(it) } }
                 recycler_view_words.adapter = WordAdapter(newWordsList, viewModel, listOf(timerToast, timerToast2, timerToast3), coroutineContext)
                 return false
             }
@@ -271,10 +265,8 @@ class WordsListFragment : BaseFragment(), KodeinAware {
             timerToast2.start()
 
         }
-
         override fun onTick(millisUntilFinished: Long) {}
     }
-
     private val timerToast2 = object: CountDownTimer(5000,5000) {
         
         override fun onFinish() {
@@ -300,7 +292,6 @@ class WordsListFragment : BaseFragment(), KodeinAware {
         }
         override fun onTick(millisUntilFinished: Long) {}
     }
-
 
     private fun stopTimers() {
 

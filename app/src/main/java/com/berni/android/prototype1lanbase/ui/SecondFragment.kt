@@ -95,7 +95,6 @@ class SecondFragment : BaseFragment(),KodeinAware {
 
         btn_save.setOnClickListener {
 
-
             if (notAcquired >= limitNotAcquired) {
                 AlertDialog.Builder(context).apply {
 
@@ -150,7 +149,6 @@ class SecondFragment : BaseFragment(),KodeinAware {
                     }
 
                     Test.warningTest++
-
 
                 } else {
 

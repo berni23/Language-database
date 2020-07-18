@@ -38,7 +38,7 @@ abstract class LanDataBase : RoomDatabase() {
         private val LOCK = Any()
         operator fun invoke(context: Context) = instance ?: synchronized(LOCK) {
 
-            instance ?: buildDataBase(context).also { instance = it }
+            instance ?: buildDataBase(context).also {instance = it }
         }
 
         private fun buildDataBase(context: Context) =
