@@ -1,6 +1,7 @@
 # LDB - LANGUAGE DATABASE
 
-![alt text](https://gitlab.com/berni23/prototypedatabase2/-/blob/master/app/src/main/res/mipmap-hdpi/ic_launcher.png)
+
+![alt text](https://gitlab.com/berni23/prototypedatabase2/-/blob/master/app/src/main/ic_launcher-playstore.png)
 
 app/src/main/res/mipmap-hdpi/ic_launcher.png
 
