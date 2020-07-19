@@ -1,7 +1,8 @@
 # LDB - LANGUAGE DATABASE
 
-![alt text](https://gitlab.com/berni23/prototypedatabase2/-/blob/master/app/src/main/res/mipmap-hdpi/ic_launcher.png?raw=true)
+![alt text](https://gitlab.com/berni23/prototypedatabase2/-/blob/master/app/src/main/res/mipmap-hdpi/ic_launcher.png)
 
+app/src/main/res/mipmap-hdpi/ic_launcher.png
 
 Android App for acquiring new vocabulary by storing, classifying, filtering and testing words. Similar
 
