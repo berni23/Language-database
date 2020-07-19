@@ -3,7 +3,7 @@
 
 ## Welcome to the LDB repository!! 
 
- #### LDB is an app for android software design in order to acquire new vocabulary of your target language.
+ #### LDB is an app for android software designed in order to acquire new vocabulary of your target language.
  
 
 With LDB, you will be able to store, classify, change and test your own words, phrases and examples you have captured in your daily life 
