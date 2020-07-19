@@ -15,20 +15,18 @@ to mantain the knowledge over time .
 
 <br><br><br>
 
-<img src="files/screenshots/cats.jpeg" width="300" />
+<img src="files/screenshots/cats.jpeg"  width="270" />
 
-<img src="files/screenshots/words.jpeg" width="300"/>
+<img src="files/screenshots/words.jpeg"  width="270"/>
 
-<img src="files/screenshots/list.jpeg" width="300"/>
+<img src="files/screenshots/list.jpeg" width="270"/>
 
 
 
 <br><br><br>
 
-
-<img src="files/screenshots/statistics.jpeg" width="300"/>
-
-<img src = "files/screenshots/test.jpeg" width = "300"/>
+<img src="files/screenshots/statistics.jpeg"  width="270"/>
+<img src = "files/screenshots/test1.jpeg"  width="270"/>
 
 
 
