@@ -3,11 +3,16 @@
 
 ## Welcome to the LDB repository!! 
 
-### Android App for storing vocabulary , testing it  and much more
+ #### LDB is an app for android software design in order to acquire new vocabulary of your target language.
+ 
 
-Android App for acquiring new vocabulary by storing, classifying, filtering and testing words.   With LDB you wil be able to
+With LDB, you will be able to store, classify, change and test your own words, phrases and examples you have captured in your daily life 
 
-store your own words and its corresponding translation, track your improvement, classify the vocabulary, adding examples and much more
+and you want to retain. With its minimalistic design and test algorithm, it will be easy for you to not only to learn new words but also
+
+to mantain the knowledge over time . 
+
+
 
 
 
