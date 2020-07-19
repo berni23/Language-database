@@ -22,11 +22,12 @@ to mantain the knowledge over time .
 <img src="files/screenshots/list.jpeg" width="270"/>
 
 
-
 <br><br><br>
 
-<img src="files/screenshots/statistics.jpeg"  width="270"/>
 <img src = "files/screenshots/test1.jpeg"  width="270"/>
+<img src="files/screenshots/statistics.jpeg"  width="270"/>
+<img src="files/screenshots/statistics2.jpeg"  width="270"/>
+
 
 
 
