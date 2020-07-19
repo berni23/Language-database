@@ -13,7 +13,16 @@ and you want to retain. With its minimalistic design and test algorithm, it will
 to mantain the knowledge over time . 
 
 
+<div style:display:flex;>
 <img src="files/screenshots/cats.jpeg" width="300" />
+
+<img src="files/screenshots/cats.jpeg" width="300" />
+
+
+
+</div>
+
+
 
 
 
