@@ -1,10 +1,30 @@
 # LDB - LANGUAGE DATABASE ![alt text](app/src/main/res/mipmap-mdpi/ic_launcher.png)
 
 
+## Welcome to the LDB repository!! 
 
-Android App for acquiring new vocabulary by storing, classifying, filtering and testing words.   With LDB you wil be able to
+ #### LDB is an app for android software design in order to acquire new vocabulary of your target language.
+ 
 
-store your own words and its corresponding translation, track your improvement, classify the vocabulary, adding examples and much more
+With LDB, you will be able to store, classify, change and test your own words, phrases and examples you have captured in your daily life 
+
+and you want to retain. With its minimalistic design and test algorithm, it will be easy for you to not only to learn new words but also
+
+to mantain the knowledge over time . 
+
+
+<div style:display:flex;>
+<img src="files/screenshots/cats.jpeg" width="300" />
+
+<img src="files/screenshots/cats.jpeg" width="300" />
+
+
+
+</div>
+
+
+
+
 
 
 
