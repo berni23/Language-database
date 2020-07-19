@@ -1,4 +1,4 @@
-# LDB - LANGUAGE DATABASE# ![alt text](app/src/main/res/mipmap-mdpi/ic_launcher.png)
+# LDB - LANGUAGE DATABASE ![alt text](app/src/main/res/mipmap-mdpi/ic_launcher.png)
 
 (https://gitlab.com/berni23/prototypedatabase2/-/blob/master/app/src/main/ic_launcher-playstore.png)
 
