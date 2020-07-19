@@ -87,7 +87,7 @@ class FirstFragment : BaseFragment(),KodeinAware {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        (activity as AppCompatActivity).supportActionBar?.title = "Language Database"
+        (activity as AppCompatActivity).supportActionBar?.title = "LDB"
         setHasOptionsMenu(true)
         navController = Navigation.findNavController(view)
         recycler_view_cats.setHasFixedSize(true)

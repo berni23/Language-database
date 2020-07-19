@@ -70,14 +70,13 @@
                 android:id="@+id/textView_displayWord"
                 android:textColor="#616161"
                 android:textSize="18sp"
-                android:textStyle="bold"
                 android:background="@android:color/transparent"
                 android:layout_marginHorizontal="10dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/dancing_regular"
+                android:fontFamily="@font/lato_regular"
                 android:autofillHints="word"
-                android:text = "@string/word"
+                android:text = "Word"
                 android:hint="@string/word"
                 android:maxLines="1"
                 android:layout_marginBottom="20dp"
@@ -95,16 +94,15 @@
 
             <TextView
                 android:id="@+id/textView_displayTranslation"
-                android:fontFamily="@font/dancing_regular"
+                android:fontFamily="@font/lato_regular"
                 android:background="@android:color/transparent"
                 android:layout_marginHorizontal="10dp"
                 android:layout_marginBottom="20dp"
-                android:textColor="@color/textColorTrans3"
+                android:textColor="@color/colorButton3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:autofillHints="translation"
                 android:text = "@string/translation"
-                android:textStyle="bold"
                 android:hint="@string/translation"
                 android:maxLines="1"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
@@ -130,9 +128,8 @@
 
                 <TextView
                     android:id="@+id/textView_displayEx1"
-                    android:fontFamily="@font/dancing_regular"
+                    android:fontFamily="@font/lato_regular"
                     android:textColor="@color/textColor3"
-                    android:textStyle="bold"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
@@ -164,9 +161,8 @@
 
                 <TextView
                     android:id="@+id/textView_displayEx1Translation"
-                    android:fontFamily="@font/dancing_regular"
-                    android:textColor="@color/textColorTrans3"
-                    android:textStyle="bold"
+                    android:fontFamily="@font/lato_regular"
+                    android:textColor="@color/colorButton3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
@@ -200,6 +196,7 @@
                 <TextView
                     android:id="@+id/textView_displayDefinition"
                     android:fontFamily="@font/lato_regular"
+                    android:textColor="@color/textColor3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"

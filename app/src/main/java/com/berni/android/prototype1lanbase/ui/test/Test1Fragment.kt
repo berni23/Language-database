@@ -7,6 +7,7 @@ import com.berni.android.prototype1lanbase.db.Word
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.closestKodein
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.bundleOf
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
@@ -44,6 +45,8 @@ class Test1Fragment : BaseFragment(),KodeinAware {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
         super.onViewCreated(view, savedInstanceState)
+
+        (activity as AppCompatActivity).supportActionBar?.title = "Test"
         navController = Navigation.findNavController(view)
         wordsForTest= arguments?.get("listWords") as List<Word>
         viewModel = ViewModelProvider(this, viewModelFactory).get(MainViewModel::class.java)

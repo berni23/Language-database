@@ -37,6 +37,7 @@ class DisplayWordFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
         super.onViewCreated(view, savedInstanceState)
+
         navController = Navigation.findNavController(view)
         (activity as AppCompatActivity).supportActionBar?.title = word.wordName
 

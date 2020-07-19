@@ -52,7 +52,7 @@ class WordAdapter(private val words: List<Word>, private val viewModel: MainView
 
         else {
             holder.view.text_view_word.setTextColor(ContextCompat.getColor(holder.view.context, R.color.colorWord3))
-            holder.view.text_view_translation.setTextColor(ContextCompat.getColor(holder.view.context,  R.color.blue))
+            holder.view.text_view_translation.setTextColor(ContextCompat.getColor(holder.view.context,  R.color.colorButton3))
         }
 
         holder.view.edit_word.setOnClickListener {

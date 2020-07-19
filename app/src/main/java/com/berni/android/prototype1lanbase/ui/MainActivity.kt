@@ -45,7 +45,7 @@ class MainActivity : AppCompatActivity(),KodeinAware {
 
             setContentView(R.layout.activity_main)
             setSupportActionBar(findViewById(R.id.toolbar))
-            supportActionBar?.title = "Language Database"
+            supportActionBar?.title = "LDB"
         }
     }
     }
