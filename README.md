@@ -12,7 +12,7 @@ and you want to retain. With its minimalistic design and test algorithm, it will
 
 to mantain the knowledge over time . 
 
-![alt text](files/screenshots/cats.jpeg=20x100)
+![alt text](files/screenshots/cats.jpeg=250x)
 
 
 
