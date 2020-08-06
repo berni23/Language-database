@@ -116,7 +116,7 @@
     <string name="edit_info">Edit info</string>
     <string name="editing_word_properties">Editing word properties..</string>
     <string name="lets_do_it">Let\'s do it!</string>
-    <string name="answer_can_not_be_blank">Answer can\'t be blank</string>
+    <string name="answer_can_not_be_blank">Answer can\'t be blank</string>git config --global alias.tree "log --graph --decorate --pretty=oneline --abbrev-commit"
     <string name="test_will_be_canceled">The test will be canceled and the progress lost.</string>
     <string name="time_up">Time\'s up!</string>
     <string name="arrow_tutorial" translatable="false">arrow tutorial</string>

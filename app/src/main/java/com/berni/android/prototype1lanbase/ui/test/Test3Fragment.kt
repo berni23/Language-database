@@ -47,7 +47,6 @@ class Test3Fragment : BaseFragment(),KodeinAware {
     private var i = 0
     private var correct: Int = 0
 
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -125,8 +124,9 @@ class Test3Fragment : BaseFragment(),KodeinAware {
             ratio>=0.7  ->  {text = resources.getString(R.string.score3) }
             ratio >=0.5 ->  {text = resources.getString(R.string.score4) }
         }
-
         msgTestFinished.text = text
 
     }
+
+
 }

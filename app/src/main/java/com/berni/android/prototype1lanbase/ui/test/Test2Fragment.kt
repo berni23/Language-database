@@ -3,9 +3,12 @@ package com.berni.android.prototype1lanbase.ui.test
 import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.content.Context
+import android.content.Context.MODE_PRIVATE
+import android.content.SharedPreferences
 import android.media.MediaPlayer
 import android.os.Bundle
 import android.os.CountDownTimer
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -32,7 +35,9 @@ class Test2Fragment : BaseFragment(){
     private var resultTest = arrayListOf<Boolean>()
     private lateinit var mediaPlayer: MediaPlayer
     private lateinit var navController: NavController
-
+    private var MILLIS_PASSED:Long = 0
+    var millisInFuture:Long = 900000
+    var millisLeft:Long= millisInFuture
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -43,10 +48,15 @@ class Test2Fragment : BaseFragment(){
         return inflater.inflate(R.layout.fragment_test2, container, false)
     }
 
+
     @SuppressLint("SetTextI18n")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        /*if (savedInstanceState != null) {
+            millisPassed = savedInstanceState.getLong("millisPassed")
+        }
+         */
         timer.start()
         mediaPlayer = MediaPlayer.create(context,R.raw.success)
         navController = Navigation.findNavController(view)
@@ -54,7 +64,6 @@ class Test2Fragment : BaseFragment(){
         val len = pickedWords.size
         wordTest_editext.text.clear()
         var i: Int = 0
-
         counterTest_textView.text = " 0/$len"
         btn_nextTestWord.setOnClickListener {
 
@@ -66,9 +75,7 @@ class Test2Fragment : BaseFragment(){
 
             val question = pickedWords[i].trans1.trim().toLowerCase(Locale.ROOT)
             val answer = wordTest_editext.text.trim().toString().toLowerCase(Locale.ROOT)
-
             if (question==answer) {
-
 
                 mediaPlayer.start()
                 resultTest.add(true)
@@ -78,7 +85,6 @@ class Test2Fragment : BaseFragment(){
                 }
             }
             else {resultTest.add(false)}
-
 
             i++
             if (i == len) {
@@ -121,30 +127,74 @@ class Test2Fragment : BaseFragment(){
         )
     }
 
-    private val timer = object: CountDownTimer(900000,1000) {
+    val timer = object: CountDownTimer(millisInFuture,1000) {
         override fun onTick(millis: Long) {
-
-            timerTest_textView.let{timerTest_textView.text =  String.format("%02d : %02d ",
-                TimeUnit.MILLISECONDS.toMinutes(millis),
-                TimeUnit.MILLISECONDS.toSeconds(millis) -
-                        TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(millis)))}
+            millisLeft = millis
+            timerTest_textView.let {
+                timerTest_textView.text = String.format(
+                    "%02d : %02d ",
+                    TimeUnit.MILLISECONDS.toMinutes(millis),
+                    TimeUnit.MILLISECONDS.toSeconds(millis) -
+                            TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(millis))
+                )
+            }
         }
 
         override fun onFinish() {
 
-            Toast.makeText(context,resources.getString(R.string.time_up),Toast.LENGTH_SHORT).show()
-            val diff = pickedWords.size -resultTest.size
+            Toast.makeText(context, resources.getString(R.string.time_up), Toast.LENGTH_SHORT)
+                .show()
+            val diff = pickedWords.size - resultTest.size
 
-            if (diff >0) {
+            if (diff > 0) {
 
-                for (i in 1..diff) { resultTest.add(false) }
+                for (i in 1..diff) {
+                    resultTest.add(false)
+                }
             }
             val bundle = bundleOf("pickedWords" to pickedWords, "resultTest" to resultTest)
             navController.navigate(R.id.actionTestFinished, bundle)
 
         }
+
     }
 
-}
+    /*override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+
+        outState.putLong("millisPassed",millisPassed)
+
+    }
+
+     */
+
+    override fun onStop(){
+        super.onStop()
+        var prefs : SharedPreferences? = activity?.getSharedPreferences("prefs", MODE_PRIVATE)
+        var editor : SharedPreferences.Editor? = prefs?.edit()
+        editor?.putLong("millisLeft",millisLeft);
+        var date = Date().time
+        editor?.putLong("epoch",date)
+        editor?.apply()
+    }
+
+    override fun onStart(){
+
+        super.onStart()
+        var prefs : SharedPreferences? = activity?.getSharedPreferences("prefs", MODE_PRIVATE)
+        var millisPassed = Date().time - prefs!!.getLong("epoch",0)
+        millisInFuture = prefs!!.getLong("millisLeft",millisInFuture) - millisPassed
+
+        if(millisInFuture<0){
+            millisInFuture = 100
+        }
+        Log.i("millisInFuture",millisInFuture.toString())
+        timer.onTick(millisInFuture)
+
+    }
+    }
+
+
+
 
 

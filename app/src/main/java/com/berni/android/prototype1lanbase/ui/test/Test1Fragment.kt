@@ -41,7 +41,6 @@ class Test1Fragment : BaseFragment(),KodeinAware {
         setHasOptionsMenu(true)
         return inflater.inflate(R.layout.fragment_test1, container, false)}
 
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
         super.onViewCreated(view, savedInstanceState)
@@ -73,9 +72,7 @@ class Test1Fragment : BaseFragment(),KodeinAware {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-
         when (item.itemId) {R.id.item_backEditToWordsList -> { navController.popBackStack() } }
-
         return super.onOptionsItemSelected(item)
     }
 
