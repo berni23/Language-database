@@ -15,23 +15,20 @@ to mantain the knowledge over time .
 
 <br><br><br>
 
+<div style = "display:inline">
 <img src="files/screenshots/cats.jpeg"  width="270" />
-
 <img src="files/screenshots/words.jpeg"  width="270"/>
-
 <img src="files/screenshots/list.jpeg" width="270"/>
-
-
-<br><br><br>
+</div>
+<br><br>
+<div style = "display:inline">
 
 <img src = "files/screenshots/test1.jpeg"  width="270"/>
 <img src="files/screenshots/statistics.jpeg"  width="270"/>
 <img src="files/screenshots/statistics2.jpeg"  width="270"/>
 
 
-
-
-
+<div>
 
 
 
