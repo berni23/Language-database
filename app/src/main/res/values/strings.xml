@@ -149,6 +149,6 @@ you can also check the number of words added per day or month.</string>
     <string name ="all_words">All words</string>
     <string name ="okay" translatable="false">Okay</string>
     <string name="developed_by">Developed by</string>
-    <string name="bernat_ferrer_emsisquer_studios">Bernat Ferrer, lead developer in Emsisquer Studios.To report an issue, please send an email to  emsisquer@gmail.com</string>
+    <string name="bernat_ferrer_emsisquer_studios">Bernat Ferrer, lead developer in Emsisquer Studios. \n \n To report an issue, please send an email to  emsisquer@gmail.com</string>
     <string name="no_word_acquired_yet">No words acquired yet</string>
 </resources>

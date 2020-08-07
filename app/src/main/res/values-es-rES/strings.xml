@@ -151,5 +151,5 @@ traducción para algunas palabras</string>
     <string name = "all_words">Todas las palabras</string>
     <string name="developed_by">Desarrollado por</string>
     <string name="no_word_acquired_yet">Ninguna palabra adquirida todavia</string>
-    <string name="bernat_ferrer_emsisquer_studios">Bernat Ferrer, lead developer in Emsisquer Studios. Para comunicar un error, por favor envie un mensaje a emsisquer@gmail.com</string>
+    <string name="bernat_ferrer_emsisquer_studios">Bernat Ferrer, lead developer in Emsisquer Studios. \n \n Para comunicar un error, por favor envie un mensaje a emsisquer@gmail.com</string>
 </resources>
