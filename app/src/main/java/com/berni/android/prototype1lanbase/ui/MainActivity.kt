@@ -2,13 +2,10 @@ package com.berni.android.prototype1lanbase.ui
 
 
 import android.content.Intent
-import android.content.SharedPreferences
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.berni.android.prototype1lanbase.R
-import com.berni.android.prototype1lanbase.db.Test.time
 import com.berni.android.prototype1lanbase.ui.tutorial.Tutorial
 import com.berni.android.prototype1lanbase.ui.tutorial.TutorialActivity
 import com.berni.android.prototype1lanbase.ui.viewmodel.MainViewModel
@@ -19,12 +16,8 @@ import kotlinx.coroutines.runBlocking
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.closestKodein
 import org.kodein.di.generic.instance
-import com.berni.android.prototype1lanbase.ui.test.Test2Fragment
-import kotlin.concurrent.timer
-
 
 class MainActivity : AppCompatActivity(),KodeinAware {
-
 
     override val kodein by closestKodein()
     val limitNotAcquired = 120
@@ -39,7 +32,6 @@ class MainActivity : AppCompatActivity(),KodeinAware {
             myFragment = supportFragmentManager.getFragment(savedInstanceState, "Test2Fragment");
 
         }
-
 
         */
 

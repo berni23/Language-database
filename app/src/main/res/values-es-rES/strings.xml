@@ -123,7 +123,6 @@ traducción para algunas palabras</string>
         <string name="words_acquired_vs_yet_to_n_be_learnt">Palabras aprendidas vs \n pendientes de aprender</string>
         <string name="number_of_words_daily_added_n_last_100_active_days"> nº de palabras añadidas por día </string>
         <string name="number_of_words_daily_acquired_last_100_active_days">nª de palabras adquiridas por día </string>
-
         <string name="press_for_n_monthly_view">Pulsa para ver el \n progreso mensual</string>
         <string name="number_of_words_monthly_added_n_last_6_active_months">nº de palabras añadidas mensualmente</string>
         <string name="number_of_words_monthly_acquired_n_last_6_active_months">nº de palabras adquiridas mensualmente</string>
@@ -152,5 +151,5 @@ traducción para algunas palabras</string>
     <string name = "all_words">Todas las palabras</string>
     <string name="developed_by">Desarrollado por</string>
     <string name="no_word_acquired_yet">Ninguna palabra adquirida todavia</string>
-    <string name="bernat_ferrer_emsisquer_studios">Bernat Ferrer, lead developer in Emsisquer Studios.</string>
+    <string name="bernat_ferrer_emsisquer_studios">Bernat Ferrer, lead developer in Emsisquer Studios. Para comunicar un error, por favor envie un mensaje a emsisquer@gmail.com</string>
 </resources>

@@ -24,7 +24,6 @@ import com.berni.android.prototype1lanbase.ui.BaseFragment
 import kotlinx.android.synthetic.main.fragment_test2.*
 import java.util.*
 import java.util.concurrent.TimeUnit
-
 /**
  * A simple [Fragment] subclass.
  */
@@ -47,7 +46,6 @@ class Test2Fragment : BaseFragment(){
         pickedWords = arguments?.get("pickedWords") as ArrayList<Word>
         return inflater.inflate(R.layout.fragment_test2, container, false)
     }
-
 
     @SuppressLint("SetTextI18n")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -139,7 +137,6 @@ class Test2Fragment : BaseFragment(){
                 )
             }
         }
-
         override fun onFinish() {
 
             Toast.makeText(context, resources.getString(R.string.time_up), Toast.LENGTH_SHORT)
@@ -156,7 +153,6 @@ class Test2Fragment : BaseFragment(){
             navController.navigate(R.id.actionTestFinished, bundle)
 
         }
-
     }
 
     /*override fun onSaveInstanceState(outState: Bundle) {
@@ -165,7 +161,6 @@ class Test2Fragment : BaseFragment(){
         outState.putLong("millisPassed",millisPassed)
 
     }
-
      */
 
     override fun onStop(){
