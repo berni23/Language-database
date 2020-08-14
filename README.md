@@ -14,7 +14,7 @@ and you want to retain. With its minimalistic design and test algorithm, it will
 
 <br>
 
-## Screenshots
+## Inside view
 
 <div style = "display:inline">
 <img src="files/screenshots/cats.jpeg"  width="250" />
@@ -44,6 +44,8 @@ Web
 https://play.google.com/apps/testing/com.berni.android.prototype1lanbase
 
 
+## Initial design
 
+https://www.figma.com/file/P0yRZO7FUfdGh5rrbOMTyC/LanguageDatabase?node-id=47%3A19
 
 
