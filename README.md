@@ -29,6 +29,12 @@ and you want to retain. With its minimalistic design and test algorithm, it will
 <img src="files/screenshots/statistics2.jpeg"  width="250"/>
 <div>
 
+
+
+## Initial design
+
+https://www.figma.com/file/P0yRZO7FUfdGh5rrbOMTyC/LanguageDatabase?node-id=47%3A19
+
 ## Testing
 
 If you wish to become a tester, please go to one of the two following links
@@ -43,9 +49,5 @@ Web
 
 https://play.google.com/apps/testing/com.berni.android.prototype1lanbase
 
-
-## Initial design
-
-https://www.figma.com/file/P0yRZO7FUfdGh5rrbOMTyC/LanguageDatabase?node-id=47%3A19
 
 
