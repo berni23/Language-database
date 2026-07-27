@@ -13,13 +13,13 @@ import com.berni.android.prototype1lanbase.ui.viewmodel.ViewModelFactory
 import com.jakewharton.threetenabp.AndroidThreeTen
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
-import org.kodein.di.KodeinAware
-import org.kodein.di.android.closestKodein
-import org.kodein.di.generic.instance
+import org.kodein.di.DIAware
+import org.kodein.di.android.closestDI
+import org.kodein.di.instance
 
-class MainActivity : AppCompatActivity(),KodeinAware {
+class MainActivity : AppCompatActivity(),DIAware {
 
-    override val kodein by closestKodein()
+    override val di by closestDI()
     val limitNotAcquired = 120
     private val viewModelFactory: ViewModelFactory by instance<ViewModelFactory>()
 

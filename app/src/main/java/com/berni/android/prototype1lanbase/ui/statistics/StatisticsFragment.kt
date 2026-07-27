@@ -10,34 +10,36 @@ import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import com.anychart.APIlib
 import com.anychart.AnyChart
-import kotlinx.android.synthetic.main.fragment_statistics.*
 import com.anychart.chart.common.dataentry.DataEntry
 import com.anychart.chart.common.dataentry.ValueDataEntry
 import com.anychart.charts.Pie
 import com.berni.android.prototype1lanbase.R
+import com.berni.android.prototype1lanbase.databinding.FragmentStatisticsBinding
 import com.berni.android.prototype1lanbase.db.CatWords
 import com.berni.android.prototype1lanbase.ui.BaseFragment
 import com.berni.android.prototype1lanbase.ui.viewmodel.MainViewModel
 import com.berni.android.prototype1lanbase.ui.viewmodel.ViewModelFactory
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
-import org.kodein.di.KodeinAware
-import org.kodein.di.android.x.closestKodein
-import org.kodein.di.generic.instance
+import org.kodein.di.DIAware
+import org.kodein.di.android.x.closestDI
+import org.kodein.di.instance
 
 /**
  * A simple [Fragment] subclass.
  */
-class StatisticsFragment : BaseFragment(), KodeinAware
+class StatisticsFragment : BaseFragment(), DIAware
 
 {
-    override val kodein by closestKodein()
+    override val di by closestDI()
     private val viewModelFactory: ViewModelFactory by instance<ViewModelFactory>()
     private lateinit var viewModel: MainViewModel
     private lateinit var catsNwords :List<CatWords>
     private lateinit var counterAcquired: List<Int>
     private lateinit var navController: NavController
     private var numWords: Int = 0
+    private var _binding: FragmentStatisticsBinding? = null
+    private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -45,7 +47,13 @@ class StatisticsFragment : BaseFragment(), KodeinAware
     ): View? {
 
         setHasOptionsMenu(true)
-        return inflater.inflate(R.layout.fragment_statistics, container, false)
+        _binding = FragmentStatisticsBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -61,7 +69,7 @@ class StatisticsFragment : BaseFragment(), KodeinAware
 
        }
 
-        btnTimeProgress.setOnClickListener{ navController.navigate(R.id.actionTimeLine) }
+        binding.btnTimeProgress.setOnClickListener{ navController.navigate(R.id.actionTimeLine) }
         pieChartAcquired()
         setupPieChart()
         Toast.makeText(context,resources.getString(R.string.msg1_statistics1),Toast.LENGTH_LONG).show()
@@ -69,7 +77,7 @@ class StatisticsFragment : BaseFragment(), KodeinAware
 
     private fun setupPieChart() {
 
-        APIlib.getInstance().setActiveAnyChartView(pieChart)
+        APIlib.getInstance().setActiveAnyChartView(binding.pieChart)
         val pie: Pie = AnyChart.pie()
         pie.legend(false)
         val dataEntries = ArrayList<DataEntry>()
@@ -82,7 +90,7 @@ class StatisticsFragment : BaseFragment(), KodeinAware
         }
 
         pie.data(dataEntries)
-        pieChart.setChart(pie)
+        binding.pieChart.setChart(pie)
         //statistics_numWords.text = "$numWords words added"
        // statistics_numWordsAk.text = "${counterAcquired[0]} words acquired"
 
@@ -90,14 +98,14 @@ class StatisticsFragment : BaseFragment(), KodeinAware
 
     private fun pieChartAcquired() {
 
-        APIlib.getInstance().setActiveAnyChartView(pieChartAcquired)
+        APIlib.getInstance().setActiveAnyChartView(binding.pieChartAcquired)
         val pie2: Pie = AnyChart.pie()
         pie2.legend(false)
         val dataEntries = ArrayList<DataEntry>()
         dataEntries.add(ValueDataEntry(resources.getString(R.string.words_acquired),counterAcquired[0]))
         dataEntries.add(ValueDataEntry(resources.getString(R.string.words_not_acquired),counterAcquired[1]))
         pie2.data(dataEntries)
-        pieChartAcquired.setChart(pie2)
+        binding.pieChartAcquired.setChart(pie2)
 
     }
 

@@ -11,8 +11,8 @@ import androidx.core.os.bundleOf
 import androidx.navigation.Navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.berni.android.prototype1lanbase.R
+import com.berni.android.prototype1lanbase.databinding.AdapterCatBinding
 import com.berni.android.prototype1lanbase.db.CatWords
-import kotlinx.android.synthetic.main.adapter_cat.view.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -26,7 +26,7 @@ class CatAdapter(private val cats: List<CatWords>, private val viewModel: MainVi
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CatViewHolder {
         return CatViewHolder(
-            LayoutInflater.from(parent.context).inflate(R.layout.adapter_cat, parent, false)
+            AdapterCatBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         )
 
     }
@@ -43,7 +43,7 @@ class CatAdapter(private val cats: List<CatWords>, private val viewModel: MainVi
         val lastAdded: List<String?>
         val numWords: Int
 
-        holder.view.text_view_title.text = cats[position].cat.catName
+        holder.binding.textViewTitle.text = cats[position].cat.catName
         val wordNames = cats[position].words.sortedBy {it.wordId }.reversed()
 
          lastAdded = listOf(
@@ -56,18 +56,18 @@ class CatAdapter(private val cats: List<CatWords>, private val viewModel: MainVi
         numWords = wordNames.size
         var lastAdditions =holder.itemView.context.getString(R.string.last_additions)
         if (lastAdded.elementAt(0)== null) {
-            holder.view.text_view_last_additions.text =  holder.itemView.context.getString(R.string.no_words_added)
-            holder.view.text_view_numWords.text = "" }
+            holder.binding.textViewLastAdditions.text =  holder.itemView.context.getString(R.string.no_words_added)
+            holder.binding.textViewNumWords.text = "" }
 
         else {
             lastAdded.forEach {if (it != null)  lastAdditions += " ${it}," }
             lastAdditions = lastAdditions.dropLast(1)  // drop the last comma of the string
-            holder.view.text_view_last_additions.text = lastAdditions
-            holder.view.text_view_numWords.text=" $numWords ${holder.itemView.context.getString(R.string.words)}"
+            holder.binding.textViewLastAdditions.text = lastAdditions
+            holder.binding.textViewNumWords.text=" $numWords ${holder.itemView.context.getString(R.string.words)}"
         }
 
-        holder.view.text_view_date.text =  " ${holder.itemView.context.getString(R.string.createdOn)} ${cats[position].cat.catDate}"
-        holder.view.setOnClickListener {
+        holder.binding.textViewDate.text =  " ${holder.itemView.context.getString(R.string.createdOn)} ${cats[position].cat.catDate}"
+        holder.binding.root.setOnClickListener {
 
             val bundle = bundleOf("categoryName" to cats[position].cat)
 
@@ -75,7 +75,7 @@ class CatAdapter(private val cats: List<CatWords>, private val viewModel: MainVi
             findNavController(it).navigate(R.id.actionAddCat, bundle)
         }
 
-        holder.view.setOnCreateContextMenuListener { menu: ContextMenu?, v: View?, _: ContextMenuInfo? ->
+        holder.binding.root.setOnCreateContextMenuListener { menu: ContextMenu?, v: View?, _: ContextMenuInfo? ->
             menu?.add(holder.itemView.context.getString(R.string.delete))?.setOnMenuItemClickListener {
 
                 AlertDialog.Builder(v?.context).apply {
@@ -133,15 +133,15 @@ class CatAdapter(private val cats: List<CatWords>, private val viewModel: MainVi
 
                     }}.create().show()
 
-                holder.view.text_view_title.isFocusable = true
-                holder.view.text_view_title.isFocusableInTouchMode = true
+                holder.binding.textViewTitle.isFocusable = true
+                holder.binding.textViewTitle.isFocusableInTouchMode = true
 
                 Toast.makeText(v?.context, holder.itemView.context.getString(R.string.renaming), Toast.LENGTH_SHORT).show()
                 true
             }
         }
     }
-    class CatViewHolder(val view: View) : RecyclerView.ViewHolder(view)
+    class CatViewHolder(val binding: AdapterCatBinding) : RecyclerView.ViewHolder(binding.root)
 }
 
 

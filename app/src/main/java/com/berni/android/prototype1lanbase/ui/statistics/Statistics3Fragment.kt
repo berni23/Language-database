@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.util.Log
 import android.view.*
 import androidx.activity.OnBackPressedCallback
-import kotlinx.android.synthetic.main.fragment_statistics3.*
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
@@ -15,27 +14,30 @@ import com.anychart.AnyChart
 import com.anychart.chart.common.dataentry.DataEntry
 import com.anychart.chart.common.dataentry.ValueDataEntry
 import com.berni.android.prototype1lanbase.R
+import com.berni.android.prototype1lanbase.databinding.FragmentStatistics3Binding
 import com.berni.android.prototype1lanbase.ui.BaseFragment
 import com.berni.android.prototype1lanbase.ui.viewmodel.MainViewModel
 import com.berni.android.prototype1lanbase.ui.viewmodel.ViewModelFactory
 import com.jakewharton.threetenabp.AndroidThreeTen
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
-import org.kodein.di.KodeinAware
-import org.kodein.di.android.x.closestKodein
-import org.kodein.di.generic.instance
+import org.kodein.di.DIAware
+import org.kodein.di.android.x.closestDI
+import org.kodein.di.instance
 import org.threeten.bp.LocalDate
 import org.threeten.bp.format.DateTimeFormatter
 import org.threeten.bp.temporal.ChronoUnit
 import java.lang.Math.abs
 import kotlin.collections.ArrayList
 
-class Statistics3Fragment : BaseFragment(),KodeinAware {
+class Statistics3Fragment : BaseFragment(),DIAware {
 
-    override val kodein by closestKodein()
+    override val di by closestDI()
     private val viewModelFactory: ViewModelFactory by instance<ViewModelFactory>()
     private lateinit var navController: NavController
     private lateinit var viewModel: MainViewModel
+    private var _binding: FragmentStatistics3Binding? = null
+    private val binding get() = _binding!!
 
     override fun onCreateView(
 
@@ -44,7 +46,13 @@ class Statistics3Fragment : BaseFragment(),KodeinAware {
     ): View? {
 
         setHasOptionsMenu(true)
-        return inflater.inflate(R.layout.fragment_statistics3, container, false)
+        _binding = FragmentStatistics3Binding.inflate(inflater, container, false)
+        return binding.root
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -63,25 +71,25 @@ class Statistics3Fragment : BaseFragment(),KodeinAware {
         }
 
         //Log.println(Log.INFO,"acquired",daysAcquired.toString())
-        APIlib.getInstance().setActiveAnyChartView(lineChart)
+        APIlib.getInstance().setActiveAnyChartView(binding.lineChart)
         val lineDays = AnyChart.line()
         val dataDays = arrayDays(sortDays(days))
 
         lineDays.line(dataDays)
-        lineChart.setChart(lineDays)
+        binding.lineChart.setChart(lineDays)
 
         if (daysAcquired.isNotEmpty()) {
 
-            NoChartAcquired.visibility = View.INVISIBLE
+            binding.NoChartAcquired.visibility = View.INVISIBLE
             //labelsG1.visibility = View.VISIBLE
-            APIlib.getInstance().setActiveAnyChartView(lineChart2)
+            APIlib.getInstance().setActiveAnyChartView(binding.lineChart2)
             val lineDays2 = AnyChart.line()
             val dataDays2 = arrayDays(sortDays(daysAcquired))
             lineDays2.data(dataDays2)
-            lineChart2.setChart(lineDays2)
+            binding.lineChart2.setChart(lineDays2)
         }
         //lineChart.setChart(lineDays2)
-        changeGraphs.setOnClickListener {navController.navigate(R.id.actionMonthlyView)}
+        binding.changeGraphs.setOnClickListener {navController.navigate(R.id.actionMonthlyView)}
         super.onViewCreated(view, savedInstanceState)
 
     }

@@ -11,7 +11,7 @@ import com.berni.android.prototype1lanbase.db.Repository
 class ViewModelFactory(private val Repos: Repository): ViewModelProvider.NewInstanceFactory()  {
 
     @Suppress("UNCHECKED_CAST")
-    override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+    override fun <T : ViewModel> create(modelClass: Class<T>): T {
         return MainViewModel(
             Repos
         ) as T

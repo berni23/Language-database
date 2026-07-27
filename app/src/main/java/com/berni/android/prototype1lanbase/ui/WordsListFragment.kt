@@ -19,22 +19,22 @@ import androidx.recyclerview.widget.RecyclerView
 import com.berni.android.prototype1lanbase.*
 import com.berni.android.prototype1lanbase.db.Cat
 import com.berni.android.prototype1lanbase.db.Word
+import com.berni.android.prototype1lanbase.databinding.FragmentAllWordsBinding
 import com.berni.android.prototype1lanbase.ui.adapter.WordAdapter
 import com.berni.android.prototype1lanbase.ui.tutorial.Tutorial
 import com.berni.android.prototype1lanbase.ui.viewmodel.MainViewModel
 import com.berni.android.prototype1lanbase.ui.viewmodel.ViewModelFactory
-import kotlinx.android.synthetic.main.fragment_all_words.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
-import org.kodein.di.KodeinAware
-import org.kodein.di.android.x.closestKodein
-import org.kodein.di.generic.instance
+import org.kodein.di.DIAware
+import org.kodein.di.android.x.closestDI
+import org.kodein.di.instance
 
 
 /**
  * A simple [Fragment] subclass.
  */
-class WordsListFragment : BaseFragment(), KodeinAware {
+class WordsListFragment : BaseFragment(), DIAware {
 
     //lateinit var navController: NavController
 
@@ -46,9 +46,11 @@ class WordsListFragment : BaseFragment(), KodeinAware {
     private var firstView = Tutorial.firstListWordView
     private lateinit var navController: NavController
 
-    override val kodein by closestKodein()
+    override val di by closestDI()
     private val viewModelFactory: ViewModelFactory by instance<ViewModelFactory>()
     private lateinit var viewModel: MainViewModel
+    private var _binding: FragmentAllWordsBinding? = null
+    private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -58,7 +60,13 @@ class WordsListFragment : BaseFragment(), KodeinAware {
         setHasOptionsMenu(true)
         cat = arguments?.get("cat") as Cat
 
-        return inflater.inflate(R.layout.fragment_all_words, container, false)
+        _binding = FragmentAllWordsBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
     @SuppressLint("SetTextI18n")
@@ -70,7 +78,7 @@ class WordsListFragment : BaseFragment(), KodeinAware {
         activity?.window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_NOTHING)
 
         navController = Navigation.findNavController(view)
-        recycler_view_words.setHasFixedSize(true)
+        binding.recyclerViewWords.setHasFixedSize(true)
         viewModel = ViewModelProvider(this, viewModelFactory).get(MainViewModel::class.java)
 
         if(firstView) {
@@ -87,12 +95,12 @@ class WordsListFragment : BaseFragment(), KodeinAware {
         // observe if the words within the category suffer any change (like edition or deletion)
 
         viewModel.wordsInCat(cat.catId).observe(viewLifecycleOwner, Observer<List<Word>> {
-        recycler_view_words.layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
+        binding.recyclerViewWords.layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
 
            runBlocking(Dispatchers.Default){
 
                displayedWords =  it.reversed()
-               recycler_view_words.adapter =
+               binding.recyclerViewWords.adapter =
                    WordAdapter(
                        displayedWords,
                        viewModel,
@@ -123,9 +131,9 @@ class WordsListFragment : BaseFragment(), KodeinAware {
             }
             val stringLastAdditionDate = "${resources.getString(R.string.last_added_on)} $lastAdditionDate"
 
-            text_view_numWords.text = " ${recycler_view_words.adapter?.itemCount?:0} ${resources.getString(R.string.words)}"
-            lastAdditionDate?.let {text_view_lastDate.text = stringLastAdditionDate }
-            text_view_last_additions.text = lastAdditions
+            binding.textViewNumWords.text = " ${binding.recyclerViewWords.adapter?.itemCount?:0} ${resources.getString(R.string.words)}"
+            lastAdditionDate?.let {binding.textViewLastDate.text = stringLastAdditionDate }
+            binding.textViewLastAdditions.text = lastAdditions
 
         })
     }
@@ -148,8 +156,8 @@ class WordsListFragment : BaseFragment(), KodeinAware {
             override fun onQueryTextChange(newText: String?): Boolean {
                 val newWordsList = mutableListOf<Word>()
 
-                displayedWords1.forEach { if (it.wordName.startsWith(newText!!) || it.wordName.startsWith(newText.toLowerCase()) ) { newWordsList.add(it) } }
-                recycler_view_words.adapter = WordAdapter(newWordsList, viewModel, listOf(timerToast, timerToast2, timerToast3), coroutineContext)
+                displayedWords1.forEach { if (it.wordName.startsWith(newText!!) || it.wordName.startsWith(newText.lowercase()) ) { newWordsList.add(it) } }
+                binding.recyclerViewWords.adapter = WordAdapter(newWordsList, viewModel, listOf(timerToast, timerToast2, timerToast3), coroutineContext)
                 return false
             }
 
@@ -240,7 +248,7 @@ class WordsListFragment : BaseFragment(), KodeinAware {
             }
         }
 
-        recycler_view_words.adapter =
+        binding.recyclerViewWords.adapter =
             WordAdapter(
                 displayedWords1,
                 viewModel,

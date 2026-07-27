@@ -11,23 +11,25 @@ import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import com.berni.android.prototype1lanbase.R
 import com.berni.android.prototype1lanbase.db.Word
+import com.berni.android.prototype1lanbase.databinding.FragmentEditWordBinding
 import com.berni.android.prototype1lanbase.ui.viewmodel.MainViewModel
 import com.berni.android.prototype1lanbase.ui.viewmodel.ViewModelFactory
-import kotlinx.android.synthetic.main.fragment_edit_word.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import org.kodein.di.KodeinAware
-import org.kodein.di.android.x.closestKodein
-import org.kodein.di.generic.instance
+import org.kodein.di.DIAware
+import org.kodein.di.android.x.closestDI
+import org.kodein.di.instance
 
 /**
  * A simple [Fragment] subclass.
  */
-class EditWordFragment : BaseFragment(), KodeinAware {
+class EditWordFragment : BaseFragment(), DIAware {
 
-    override val kodein by closestKodein()
+    override val di by closestDI()
 
     private val viewModelFactory: ViewModelFactory by instance<ViewModelFactory>()
+    private var _binding: FragmentEditWordBinding? = null
+    private val binding get() = _binding!!
     private lateinit var viewModel: MainViewModel
     private lateinit var word: Word
     private lateinit var navController: NavController
@@ -43,7 +45,13 @@ class EditWordFragment : BaseFragment(), KodeinAware {
     ): View? {
 
         setHasOptionsMenu(true)
-        return inflater.inflate(R.layout.fragment_edit_word, container, false)
+        _binding = FragmentEditWordBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
     @SuppressLint("SetTextI18n")
@@ -56,37 +64,37 @@ class EditWordFragment : BaseFragment(), KodeinAware {
 
         // mandatory fields
 
-        editWord_editText.setText(word.wordName)
-        editTrans1_editText.setText(word.trans1)
-        editDate.setText("${resources.getString(R.string.added_on)} ${word.date}")
+        binding.editWordEditText.setText(word.wordName)
+        binding.editTrans1EditText.setText(word.trans1)
+        binding.editDate.setText("${resources.getString(R.string.added_on)} ${word.date}")
 
         //optional fields
 
-        editEx1_editText.setText(word.ex1 ?: "")
-        editEx1Trans_editText.setText(word.trans_ex1 ?: "")
-        editDefinition_editText.setText(word.definition ?: "")
+        binding.editEx1EditText.setText(word.ex1 ?: "")
+        binding.editEx1TransEditText.setText(word.trans_ex1 ?: "")
+        binding.editDefinitionEditText.setText(word.definition ?: "")
 
-        edit_btn_save.setOnClickListener {
+        binding.editBtnSave.setOnClickListener {
 
             val catId = word.catParent!!
-            val name = editWord_editText.text?.toString()?.trim()
-            val trans = editTrans1_editText.text?.toString()?.trim()
-            val ex = editEx1_editText.text?.toString()?.trim()
-            val transEx = editEx1Trans_editText.text?.toString()?.trim()
-            val def = editDefinition_editText.text?.toString()?.trim()
+            val name = binding.editWordEditText.text?.toString()?.trim()
+            val trans = binding.editTrans1EditText.text?.toString()?.trim()
+            val ex = binding.editEx1EditText.text?.toString()?.trim()
+            val transEx = binding.editEx1TransEditText.text?.toString()?.trim()
+            val def = binding.editDefinitionEditText.text?.toString()?.trim()
 
             if (name!!.isEmpty()) {
 
-                editWord_editText.error = resources.getString(R.string.word_required)
-                editWord_editText.requestFocus()
+                binding.editWordEditText.error = resources.getString(R.string.word_required)
+                binding.editWordEditText.requestFocus()
                 return@setOnClickListener
 
             }
 
             if (trans!!.isEmpty()) {
 
-                editTrans1_editText.error =resources.getString(R.string.trans_required)
-                editTrans1_editText.requestFocus()
+                binding.editTrans1EditText.error =resources.getString(R.string.trans_required)
+                binding.editTrans1EditText.requestFocus()
                 return@setOnClickListener
 
             }
