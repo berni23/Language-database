@@ -147,7 +147,7 @@ fun sortFirstAdded(displayedWords: List<Word>) : List<Word>{ return displayedWor
 fun sortAlphabetically(displayedWords: List<Word>) : List<Word>{
 
     val displayed = displayedWords.toTypedArray()
-    return displayed.sortedBy {it.wordName.toLowerCase(Locale.ROOT) }
+    return displayed.sortedBy {it.wordName.lowercase(Locale.ROOT) }
 
 }
 

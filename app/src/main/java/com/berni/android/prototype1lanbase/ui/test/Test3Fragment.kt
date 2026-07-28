@@ -14,6 +14,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import com.berni.android.prototype1lanbase.R
+import com.berni.android.prototype1lanbase.databinding.FragmentTest3Binding
 import com.berni.android.prototype1lanbase.db.Test
 import com.berni.android.prototype1lanbase.db.Word
 import com.berni.android.prototype1lanbase.ui.BaseFragment
@@ -21,11 +22,10 @@ import com.berni.android.prototype1lanbase.ui.viewmodel.MainViewModel
 import com.berni.android.prototype1lanbase.ui.viewmodel.ViewModelFactory
 import com.jakewharton.threetenabp.AndroidThreeTen
 import kotlinx.coroutines.Dispatchers
-import org.kodein.di.KodeinAware
-import kotlinx.android.synthetic.main.fragment_test3.*
+import org.kodein.di.DIAware
 import kotlinx.coroutines.runBlocking
-import org.kodein.di.android.x.closestKodein
-import org.kodein.di.generic.instance
+import org.kodein.di.android.x.closestDI
+import org.kodein.di.instance
 import org.threeten.bp.LocalDateTime
 import org.threeten.bp.ZoneId
 import org.threeten.bp.format.DateTimeFormatter
@@ -34,9 +34,9 @@ import java.util.*
 /**
  * A simple [Fragment] subclass.
  */
-class Test3Fragment : BaseFragment(),KodeinAware {
+class Test3Fragment : BaseFragment(),DIAware {
 
-    override val kodein by closestKodein()
+    override val di by closestDI()
     private val viewModelFactory: ViewModelFactory by instance<ViewModelFactory>()
     private val formatter: DateTimeFormatter = DateTimeFormatter.ISO_DATE_TIME
     private lateinit var viewModel: MainViewModel
@@ -46,6 +46,8 @@ class Test3Fragment : BaseFragment(),KodeinAware {
     private val currentDate: String = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(java.util.Date())
     private var i = 0
     private var correct: Int = 0
+    private var _binding: FragmentTest3Binding? = null
+    private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -54,7 +56,13 @@ class Test3Fragment : BaseFragment(),KodeinAware {
 
         result = arguments?.get("resultTest") as List<Boolean>
         testWords = arguments?.get("pickedWords") as List<Word>
-        return inflater.inflate(R.layout.fragment_test3, container, false)
+        _binding = FragmentTest3Binding.inflate(inflater, container, false)
+        return binding.root
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
     @SuppressLint("SetTextI18n")
@@ -90,13 +98,13 @@ class Test3Fragment : BaseFragment(),KodeinAware {
         }
 
         Test.number += 1
-        progressbar.progress = correct
-        progressbar.max = result.size
-        ratioTestFinished.text = "$correct/${result.size}"
+        binding.progressbar.progress = correct
+        binding.progressbar.max = result.size
+        binding.ratioTestFinished.text = "$correct/${result.size}"
 
         msg()
 
-        btn_backToMain.setOnClickListener { if (i == result.size) { navController.navigate(R.id.actionBackToMainTestFinished) } }
+        binding.btnBackToMain.setOnClickListener { if (i == result.size) { navController.navigate(R.id.actionBackToMainTestFinished) } }
     }
 
     override fun onAttach(context: Context) {
@@ -124,7 +132,7 @@ class Test3Fragment : BaseFragment(),KodeinAware {
             ratio>=0.7  ->  {text = resources.getString(R.string.score3) }
             ratio >=0.5 ->  {text = resources.getString(R.string.score4) }
         }
-        msgTestFinished.text = text
+        binding.msgTestFinished.text = text
 
     }
 

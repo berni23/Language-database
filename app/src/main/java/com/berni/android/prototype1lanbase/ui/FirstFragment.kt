@@ -32,17 +32,17 @@ import com.berni.android.prototype1lanbase.db.Word
 import com.berni.android.prototype1lanbase.hideKeyboard
 import com.berni.android.prototype1lanbase.limitNotAcquired
 import com.berni.android.prototype1lanbase.setItemsVisibility
+import com.berni.android.prototype1lanbase.databinding.FragmentFirstBinding
 import com.berni.android.prototype1lanbase.ui.adapter.CatAdapter
 import com.berni.android.prototype1lanbase.ui.tutorial.Tutorial
 import com.berni.android.prototype1lanbase.ui.viewmodel.MainViewModel
 import com.berni.android.prototype1lanbase.ui.viewmodel.ViewModelFactory
-import kotlinx.android.synthetic.main.fragment_first.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
-import org.kodein.di.KodeinAware
-import org.kodein.di.android.x.closestKodein
-import org.kodein.di.generic.instance
+import org.kodein.di.DIAware
+import org.kodein.di.android.x.closestDI
+import org.kodein.di.instance
 import org.threeten.bp.LocalDateTime
 import org.threeten.bp.LocalDateTime.now
 import org.threeten.bp.ZoneId
@@ -58,10 +58,12 @@ import kotlin.time.ExperimentalTime
  * A simple [Fragment] subclass as the default destination in the navigation.
  */
 
-class FirstFragment : BaseFragment(),KodeinAware {
+class FirstFragment : BaseFragment(),DIAware {
 
-    override val kodein by closestKodein()
+    override val di by closestDI()
     private val viewModelFactory: ViewModelFactory by instance<ViewModelFactory>()
+    private var _binding: FragmentFirstBinding? = null
+    private val binding get() = _binding!!
     private var firstCat: Boolean = true
     private var notAcquired: Int = 0
     private var newCatName: String? = null
@@ -81,7 +83,13 @@ class FirstFragment : BaseFragment(),KodeinAware {
 
     ): View? {
 
-        return inflater.inflate(R.layout.fragment_first, container, false)
+        _binding = FragmentFirstBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -90,7 +98,7 @@ class FirstFragment : BaseFragment(),KodeinAware {
         (activity as AppCompatActivity).supportActionBar?.title = "LDB"
         setHasOptionsMenu(true)
         navController = Navigation.findNavController(view)
-        recycler_view_cats.setHasFixedSize(true)
+        binding.recyclerViewCats.setHasFixedSize(true)
         stopTimers()
         viewModel = ViewModelProvider(this, viewModelFactory).get(MainViewModel::class.java)
         runBlocking(Dispatchers.Default) {
@@ -108,29 +116,29 @@ class FirstFragment : BaseFragment(),KodeinAware {
         viewModel.catsWithWords().observe(viewLifecycleOwner, Observer<List<CatWords>> {
             _allCats = it
             displayedCats = _allCats as MutableList<CatWords>
-            recycler_view_cats.layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
-            recycler_view_cats.adapter = CatAdapter(it, viewModel, this.coroutineContext)
+            binding.recyclerViewCats.layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
+            binding.recyclerViewCats.adapter = CatAdapter(it, viewModel, this.coroutineContext)
         })
 
-        btn_add.setOnClickListener {
-            editText_newCat.text.clear()
-            editText_newCat.requestFocus()
+        binding.btnAdd.setOnClickListener {
+            binding.editTextNewCat.text.clear()
+            binding.editTextNewCat.requestFocus()
             newCatName = null
             val imm: InputMethodManager? = getSystemService<InputMethodManager>(it.context, InputMethodManager::class.java)
-            imm!!.showSoftInput(editText_newCat, InputMethodManager.SHOW_IMPLICIT)
-            recycler_view_newCat.visibility = View.VISIBLE
+            imm!!.showSoftInput(binding.editTextNewCat, InputMethodManager.SHOW_IMPLICIT)
+            binding.recyclerViewNewCat.visibility = View.VISIBLE
 
         }
 
-        btnCancel.setOnClickListener { recycler_view_newCat.visibility = View.GONE }
-        btnCreate.setOnClickListener {
+        binding.btnCancel.setOnClickListener { binding.recyclerViewNewCat.visibility = View.GONE }
+        binding.btnCreate.setOnClickListener {
 
-            newCatName = editText_newCat.text.toString().trim()
+            newCatName = binding.editTextNewCat.text.toString().trim()
             val currentDate: String = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(Date())
             if (newCatName!!.isEmpty()) {
 
-                editText_newCat.error = resources.getString(R.string.cat_required)
-                editText_newCat.requestFocus()
+                binding.editTextNewCat.error = resources.getString(R.string.cat_required)
+                binding.editTextNewCat.requestFocus()
                 return@setOnClickListener
             }
 
@@ -145,14 +153,14 @@ class FirstFragment : BaseFragment(),KodeinAware {
                 }
 
             } else {
-                editText_newCat.error = resources.getString(R.string.cat_already_exists)
-                editText_newCat.requestFocus()
+                binding.editTextNewCat.error = resources.getString(R.string.cat_already_exists)
+                binding.editTextNewCat.requestFocus()
                 Toast.makeText(context, resources.getString(R.string.cat_name_rejected), Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
-            recycler_view_newCat.visibility = View.GONE
-            editText_newCat.text.clear()
+            binding.recyclerViewNewCat.visibility = View.GONE
+            binding.editTextNewCat.text.clear()
 
             if (firstCat) {
 
@@ -161,8 +169,8 @@ class FirstFragment : BaseFragment(),KodeinAware {
                 Tutorial.firstCat = false
                 firstCat = false
                 toast.show()
-                arr.y = 100F
-                arr.rotation = 180F
+                binding.arr.y = 100F
+                binding.arr.rotation = 180F
             }
 
             else {Toast.makeText(context, " ${resources.getString(R.string.category)} $newCatName" + "  ${resources.getString(
@@ -171,12 +179,12 @@ class FirstFragment : BaseFragment(),KodeinAware {
             hideKeyboard()
         }
 
-        recycler_view_newCat.visibility = View.GONE
+        binding.recyclerViewNewCat.visibility = View.GONE
 
         if (firstCat) {
 
             val anim1: AnimationDrawable
-            arr.apply {
+            binding.arr.apply {
                 setBackgroundResource(R.drawable.anim_arrow)
                 anim1 = background as AnimationDrawable
             }
@@ -221,8 +229,8 @@ class FirstFragment : BaseFragment(),KodeinAware {
                     }
                 }
 
-                recycler_view_cats.layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
-                recycler_view_cats.adapter = CatAdapter(displayedCats, viewModel, coroutineContext)
+                binding.recyclerViewCats.layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
+                binding.recyclerViewCats.adapter = CatAdapter(displayedCats, viewModel, coroutineContext)
                 return false
             }
         })

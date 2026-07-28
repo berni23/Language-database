@@ -3,9 +3,10 @@ import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
 import com.berni.android.prototype1lanbase.R
+import com.berni.android.prototype1lanbase.databinding.FragmentTest1Binding
 import com.berni.android.prototype1lanbase.db.Word
-import org.kodein.di.KodeinAware
-import org.kodein.di.android.x.closestKodein
+import org.kodein.di.DIAware
+import org.kodein.di.android.x.closestDI
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.bundleOf
@@ -15,22 +16,23 @@ import androidx.navigation.Navigation
 import com.berni.android.prototype1lanbase.ui.BaseFragment
 import com.berni.android.prototype1lanbase.ui.viewmodel.MainViewModel
 import com.berni.android.prototype1lanbase.ui.viewmodel.ViewModelFactory
-import org.kodein.di.generic.instance
-import kotlinx.android.synthetic.main.fragment_test1.*
+import org.kodein.di.instance
 
 
 /**
  * A simple [Fragment] subclass.
  */
-class Test1Fragment : BaseFragment(),KodeinAware {
+class Test1Fragment : BaseFragment(),DIAware {
 
-    override val kodein by closestKodein()
+    override val di by closestDI()
 
     private lateinit var navController: NavController
     private lateinit var viewModel: MainViewModel
 
     private  val viewModelFactory: ViewModelFactory by instance<ViewModelFactory>()
     private lateinit var wordsForTest: List<Word>
+    private var _binding: FragmentTest1Binding? = null
+    private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -39,7 +41,14 @@ class Test1Fragment : BaseFragment(),KodeinAware {
     ): View? {
 
         setHasOptionsMenu(true)
-        return inflater.inflate(R.layout.fragment_test1, container, false)}
+        _binding = FragmentTest1Binding.inflate(inflater, container, false)
+        return binding.root
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
@@ -51,7 +60,7 @@ class Test1Fragment : BaseFragment(),KodeinAware {
         viewModel = ViewModelProvider(this, viewModelFactory).get(MainViewModel::class.java)
 
         val pickedWords = ranWords()
-        btn_testReady.setOnClickListener{
+        binding.btnTestReady.setOnClickListener{
 
             val bundle = bundleOf("pickedWords" to pickedWords)
             navController.navigate(R.id.actionStartTest, bundle)

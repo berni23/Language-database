@@ -19,9 +19,9 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import com.berni.android.prototype1lanbase.R
+import com.berni.android.prototype1lanbase.databinding.FragmentTest2Binding
 import com.berni.android.prototype1lanbase.db.Word
 import com.berni.android.prototype1lanbase.ui.BaseFragment
-import kotlinx.android.synthetic.main.fragment_test2.*
 import java.util.*
 import java.util.concurrent.TimeUnit
 /**
@@ -37,6 +37,8 @@ class Test2Fragment : BaseFragment(){
     private var MILLIS_PASSED:Long = 0
     var millisInFuture:Long = 900000
     var millisLeft:Long= millisInFuture
+    private var _binding: FragmentTest2Binding? = null
+    private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -44,7 +46,13 @@ class Test2Fragment : BaseFragment(){
     ): View? {
 
         pickedWords = arguments?.get("pickedWords") as ArrayList<Word>
-        return inflater.inflate(R.layout.fragment_test2, container, false)
+        _binding = FragmentTest2Binding.inflate(inflater, container, false)
+        return binding.root
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
     @SuppressLint("SetTextI18n")
@@ -58,21 +66,21 @@ class Test2Fragment : BaseFragment(){
         timer.start()
         mediaPlayer = MediaPlayer.create(context,R.raw.success)
         navController = Navigation.findNavController(view)
-        wordTest_textView.text = pickedWords[0].wordName
+        binding.wordTestTextView.text = pickedWords[0].wordName
         val len = pickedWords.size
-        wordTest_editext.text.clear()
+        binding.wordTestEditext.text.clear()
         var i: Int = 0
-        counterTest_textView.text = " 0/$len"
-        btn_nextTestWord.setOnClickListener {
+        binding.counterTestTextView.text = " 0/$len"
+        binding.btnNextTestWord.setOnClickListener {
 
-            if (wordTest_editext.text.isEmpty()) {
-                wordTest_editext.error = resources.getString(R.string.answer_can_not_be_blank)
-                wordTest_editext.requestFocus()
+            if (binding.wordTestEditext.text.isEmpty()) {
+                binding.wordTestEditext.error = resources.getString(R.string.answer_can_not_be_blank)
+                binding.wordTestEditext.requestFocus()
                 return@setOnClickListener
             }
 
-            val question = pickedWords[i].trans1.trim().toLowerCase(Locale.ROOT)
-            val answer = wordTest_editext.text.trim().toString().toLowerCase(Locale.ROOT)
+            val question = pickedWords[i].trans1.trim().lowercase(Locale.ROOT)
+            val answer = binding.wordTestEditext.text.trim().toString().lowercase(Locale.ROOT)
             if (question==answer) {
 
                 mediaPlayer.start()
@@ -92,9 +100,9 @@ class Test2Fragment : BaseFragment(){
                 timer.cancel()
 
             } else {
-                counterTest_textView.text = " $i/$len"
-                wordTest_textView.text = pickedWords[i].wordName
-                wordTest_editext.text.clear()
+                binding.counterTestTextView.text = " $i/$len"
+                binding.wordTestTextView.text = pickedWords[i].wordName
+                binding.wordTestEditext.text.clear()
             }
         }
     }
@@ -128,8 +136,8 @@ class Test2Fragment : BaseFragment(){
     val timer = object: CountDownTimer(millisInFuture,1000) {
         override fun onTick(millis: Long) {
             millisLeft = millis
-            timerTest_textView.let {
-                timerTest_textView.text = String.format(
+            binding.timerTestTextView.let {
+                binding.timerTestTextView.text = String.format(
                     "%02d : %02d ",
                     TimeUnit.MILLISECONDS.toMinutes(millis),
                     TimeUnit.MILLISECONDS.toSeconds(millis) -

@@ -8,8 +8,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import com.berni.android.prototype1lanbase.R
+import com.berni.android.prototype1lanbase.databinding.FragmentDisplayWordBinding
 import com.berni.android.prototype1lanbase.db.Word
-import kotlinx.android.synthetic.main.fragment_display_word.*
 
 /**
  * A simple [Fragment] subclass.
@@ -18,6 +18,8 @@ class DisplayWordFragment : BaseFragment() {
 
     private lateinit var word: Word
     private lateinit var navController: NavController
+    private var _binding: FragmentDisplayWordBinding? = null
+    private val binding get() = _binding!!
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,7 +32,13 @@ class DisplayWordFragment : BaseFragment() {
     ): View? {
 
         setHasOptionsMenu(true)
-        return inflater.inflate(R.layout.fragment_display_word, container, false)
+        _binding = FragmentDisplayWordBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
     @SuppressLint("SetTextI18n")
@@ -43,15 +51,15 @@ class DisplayWordFragment : BaseFragment() {
 
         //mandatory fields
 
-        textView_displayWord.text = " ${word.wordName} "
-        textView_displayTranslation.text = " ${word.trans1} "
-        textView_displayDate.text = "${resources.getString(R.string.added_on)} ${word.date} "
+        binding.textViewDisplayWord.text = " ${word.wordName} "
+        binding.textViewDisplayTranslation.text = " ${word.trans1} "
+        binding.textViewDisplayDate.text = "${resources.getString(R.string.added_on)} ${word.date} "
 
         //optional fields
 
-       if (word.ex1!=null) { textView_displayEx1.text = " ${word.ex1} " }
-       if(word.trans_ex1!=null) { textView_displayEx1Translation.text = " ${word.trans_ex1} " }
-       if(word.definition!=null) { textView_displayDefinition.text = " ${word.definition} " }
+       if (word.ex1!=null) { binding.textViewDisplayEx1.text = " ${word.ex1} " }
+       if(word.trans_ex1!=null) { binding.textViewDisplayEx1Translation.text = " ${word.trans_ex1} " }
+       if(word.definition!=null) { binding.textViewDisplayDefinition.text = " ${word.definition} " }
 
     }
 

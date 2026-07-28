@@ -12,9 +12,9 @@ import androidx.core.os.bundleOf
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.berni.android.prototype1lanbase.R
+import com.berni.android.prototype1lanbase.databinding.AdapterWordBinding
 import com.berni.android.prototype1lanbase.db.Word
 import com.berni.android.prototype1lanbase.ui.viewmodel.MainViewModel
-import kotlinx.android.synthetic.main.adapter_word.view.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
@@ -29,7 +29,7 @@ class WordAdapter(private val words: List<Word>, private val viewModel: MainView
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): WordViewHolder {
 
         return WordViewHolder(
-            LayoutInflater.from(parent.context).inflate(R.layout.adapter_word, parent, false)
+            AdapterWordBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         )
 
     }
@@ -42,20 +42,20 @@ class WordAdapter(private val words: List<Word>, private val viewModel: MainView
 
         //  wordNameList?.add(words[position].wordName)
 
-        holder.view.text_view_word.text = " ${words[position].wordName} "  // adding space at the beginning and at the end to avoid text cut
-        holder.view.text_view_translation.text = " ${words[position].trans1} "
+        holder.binding.textViewWord.text = " ${words[position].wordName} "  // adding space at the beginning and at the end to avoid text cut
+        holder.binding.textViewTranslation.text = " ${words[position].trans1} "
 
         if (words[position].acquired) {
 
-            holder.view.text_view_word.setTextColor(ContextCompat.getColor(holder.view.context, R.color.colorHint3))
-            holder.view.text_view_translation.setTextColor(ContextCompat.getColor(holder.view.context, R.color.colorHint3))}
+            holder.binding.textViewWord.setTextColor(ContextCompat.getColor(holder.binding.root.context, R.color.colorHint3))
+            holder.binding.textViewTranslation.setTextColor(ContextCompat.getColor(holder.binding.root.context, R.color.colorHint3))}
 
         else {
-            holder.view.text_view_word.setTextColor(ContextCompat.getColor(holder.view.context, R.color.colorWord3))
-            holder.view.text_view_translation.setTextColor(ContextCompat.getColor(holder.view.context,  R.color.colorButton3))
+            holder.binding.textViewWord.setTextColor(ContextCompat.getColor(holder.binding.root.context, R.color.colorWord3))
+            holder.binding.textViewTranslation.setTextColor(ContextCompat.getColor(holder.binding.root.context,  R.color.colorButton3))
         }
 
-        holder.view.edit_word.setOnClickListener {
+        holder.binding.editWord.setOnClickListener {
 
             val popupMenu = PopupMenu(it.context,it)
             popupMenu.setOnMenuItemClickListener { item ->
@@ -100,7 +100,7 @@ class WordAdapter(private val words: List<Word>, private val viewModel: MainView
             popupMenu.show()
         }
 
-        holder.view.setOnClickListener{
+        holder.binding.root.setOnClickListener{
 
             val bundle = bundleOf("displayWord" to words[position])
             Navigation.findNavController(it).navigate(R.id.actionDisplayWord, bundle)
@@ -110,7 +110,7 @@ class WordAdapter(private val words: List<Word>, private val viewModel: MainView
         }
     }
 
-    class WordViewHolder(val view: View) : RecyclerView.ViewHolder(view)
+    class WordViewHolder(val binding: AdapterWordBinding) : RecyclerView.ViewHolder(binding.root)
     private fun stopTimers(){timers.forEach{it.cancel()}}
 
 }

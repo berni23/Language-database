@@ -14,22 +14,22 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.berni.android.prototype1lanbase.*
 import com.berni.android.prototype1lanbase.db.Word
+import com.berni.android.prototype1lanbase.databinding.FragmentAllWordsBinding
 import com.berni.android.prototype1lanbase.ui.BaseFragment
 import com.berni.android.prototype1lanbase.ui.adapter.WordAdapter
 import com.berni.android.prototype1lanbase.ui.viewmodel.MainViewModel
 import com.berni.android.prototype1lanbase.ui.viewmodel.ViewModelFactory
-import kotlinx.android.synthetic.main.fragment_all_words.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
-import org.kodein.di.KodeinAware
-import org.kodein.di.android.x.closestKodein
-import org.kodein.di.generic.instance
+import org.kodein.di.DIAware
+import org.kodein.di.android.x.closestDI
+import org.kodein.di.instance
 
 
 /**
  * A simple [Fragment] subclass.
  */
-class AllWordsFragment : BaseFragment(), KodeinAware {
+class AllWordsFragment : BaseFragment(), DIAware {
 
     //lateinit var navController: NavController
 
@@ -40,9 +40,11 @@ class AllWordsFragment : BaseFragment(), KodeinAware {
     private var lastAdditionDate: String? = ""
     private lateinit var navController: NavController
 
-    override val kodein by closestKodein()
+    override val di by closestDI()
     private val viewModelFactory: ViewModelFactory by instance<ViewModelFactory>()
     private lateinit var viewModel: MainViewModel
+    private var _binding: FragmentAllWordsBinding? = null
+    private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -50,7 +52,13 @@ class AllWordsFragment : BaseFragment(), KodeinAware {
     ): View? {
 
         setHasOptionsMenu(true)
-        return inflater.inflate(R.layout.fragment_all_words, container, false)
+        _binding = FragmentAllWordsBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
     @SuppressLint("SetTextI18n")
@@ -60,17 +68,17 @@ class AllWordsFragment : BaseFragment(), KodeinAware {
         (activity as AppCompatActivity).supportActionBar?.title =  resources.getString(R.string.all_words)
 
         navController = Navigation.findNavController(view)
-        recycler_view_words.setHasFixedSize(true)
+        binding.recyclerViewWords.setHasFixedSize(true)
         viewModel = ViewModelProvider(this, viewModelFactory).get(MainViewModel::class.java)
 
         viewModel.allWords.observe(viewLifecycleOwner, Observer<List<Word>> {
 
-            recycler_view_words.layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
+            binding.recyclerViewWords.layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
 
             runBlocking(Dispatchers.Default){
 
                 displayedWords =  it
-                recycler_view_words.adapter = WordAdapter(displayedWords, viewModel, listOf<CountDownTimer>(), this.coroutineContext)
+                binding.recyclerViewWords.adapter = WordAdapter(displayedWords, viewModel, listOf<CountDownTimer>(), this.coroutineContext)
 
             }
 
@@ -92,9 +100,9 @@ class AllWordsFragment : BaseFragment(), KodeinAware {
 
             // editing the corresponding info to the textviews
 
-            text_view_numWords.text = " ${recycler_view_words.adapter?.itemCount?:0} ${resources.getString(R.string.words)}"
-            lastAdditionDate?.let {text_view_lastDate.text = stringLastAdditionDate }
-            text_view_last_additions.text = lastAdditions
+            binding.textViewNumWords.text = " ${binding.recyclerViewWords.adapter?.itemCount?:0} ${resources.getString(R.string.words)}"
+            lastAdditionDate?.let {binding.textViewLastDate.text = stringLastAdditionDate }
+            binding.textViewLastAdditions.text = lastAdditions
 
         })
     }
@@ -121,7 +129,7 @@ class AllWordsFragment : BaseFragment(), KodeinAware {
 
                 displayedWords1.forEach { if (it.wordName.startsWith(newText!!)) { newWordsList.add(it) } }
                 displayedWords1 = newWordsList
-                recycler_view_words.adapter =WordAdapter(displayedWords1, viewModel, listOf<CountDownTimer>(), coroutineContext)
+                binding.recyclerViewWords.adapter = WordAdapter(displayedWords1, viewModel, listOf<CountDownTimer>(), coroutineContext)
                 return false
             }
         })
@@ -212,7 +220,7 @@ class AllWordsFragment : BaseFragment(), KodeinAware {
             }
         }
 
-        recycler_view_words.adapter = WordAdapter(displayedWords1, viewModel, listOf<CountDownTimer>(), coroutineContext)
+        binding.recyclerViewWords.adapter = WordAdapter(displayedWords1, viewModel, listOf<CountDownTimer>(), coroutineContext)
         return super.onOptionsItemSelected(item)
     }
 
